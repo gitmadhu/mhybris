@@ -44,3 +44,5 @@ config/licence/
 config/solr/embedded/solr.xml
 addons
 addonsrc
+
+bin/.DS_Store
