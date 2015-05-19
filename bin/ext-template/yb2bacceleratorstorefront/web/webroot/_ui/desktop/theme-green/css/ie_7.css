@@ -1,0 +1,85 @@
+@charset "utf-8";
+/* CSS Document */
+
+#header button.button {
+	width: auto;
+	padding: 3px 15px 0px 15px;
+	position: static;
+	}
+/*
+
+	Cart Modal
+*****************/
+.cart_popup .cart_modal_popup .prod_info {
+	width: auto;
+}
+
+
+/*
+	Header
+*****************/
+#cart_header {
+	background: url(../images/bg-gradient-header-cart-ie7.png) repeat-x center top transparent;
+}
+#cart_content {
+	min-width: 1px;
+	padding-right: 11px;
+}
+#header ul.language {
+	margin: 10px -10px 10px 0;
+}
+#header .search {
+	height: 28px;
+}
+#header .headerContent {
+	max-width: 750px;
+}
+
+#header input.button,
+#header button.button {
+ 	padding: 5px 15px;
+}
+/*
+	Home Page Media Banners
+*****************/
+.cms_disp-img_slot .disp-img .media a {
+	display: block; /* Resolves IE7 Empty Text Node issue */
+}
+.scroller {
+	height: 1%;
+}
+/*
+	Product Page Tabs
+*****************/
+#prod_tabs.ui-tabs .ui-tabs-nav li h2 a {
+	padding-left: 20px;
+}
+.nav_column .item .category a.dropdown {
+	margin-top: -15px;
+}
+.nav_column .item ul.facet_block span.remove a {
+	margin-top: -20px;
+	text-decoration: none;
+	padding-left: 2px;
+}
+.nav_column .item ul.facet_block span.remove a img {
+	text-decoration: none;
+}
+#cart_popup {
+	display: none;
+}
+#productDetailUpdateable .span-10 .scroller .title_holder, .item_container_holder .title_holder {
+	display: inline-block;
+	float: none;
+	max-width: 250px;
+}
+.scroller .title_holder h1, .item_container_holder .title_holder h1, .scroller .title_holder h2, .item_container_holder .title_holder h2 {
+	display: inline-block;
+	float: none;
+	max-width: 250px;
+}
+
+button.search .search-icon {
+	background: transparent url(../images/button/search-small.png) no-repeat 6px 0px;
+	display: block;
+}

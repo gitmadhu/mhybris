@@ -1,0 +1,69 @@
+# Import essential data for the Accelerator
+#
+# Localization zh
+# 
+
+$lang=zh
+
+# Languages
+UPDATE Language;isocode[unique=true];name[lang=$lang]
+;de;德语;
+;en;英语;
+;ja;日语;
+;zh;中文;
+
+
+# Currencies
+UPDATE Currency;isocode[unique=true];name[lang=$lang]
+;CAD;加拿大元;
+;EUR;欧元;
+;USD;美元;
+
+
+# Titles
+UPDATE Title;code[unique=true];name[lang=$lang]
+;dr;博士;
+;miss;小姐;
+;mr;先生;
+;mrs;夫人;
+;ms;女士;
+;rev;尊敬的;
+
+
+# Credit / Debit Cards
+UPDATE CreditCardType;code[unique=true];name[lang=$lang]
+;amex;American Express;
+;diners;Diner's Club;
+;maestro;Maestro;
+;master;Mastercard;
+;mastercard_eurocard;Mastercard/Eurocard;
+;switch;Switch;
+;visa;Visa;
+
+# DistanceUnits for Storelocator 
+UPDATE DistanceUnit;code[unique=true];name[lang=$lang]
+;km;公里;
+;miles;英里;
+
+# Media Formats
+UPDATE MediaFormat;qualifier[unique=true];name[lang=$lang];
+;1200Wx1200H;1200Wx1200H;
+;300Wx300H;300Wx300H;
+;30Wx30H;30Wx30H;
+;365Wx246H;365Wx246H;
+;515Wx515H;515Wx515H;
+;65Wx65H;65Wx65H;
+;96Wx96H;96Wx96H;
+
+# Tax & Tax Groups
+UPDATE UserTaxGroup;code[unique=true];name[lang=$lang]
+;ca-taxes;加拿大税费;
+;us-taxes;美国税费;
+
+UPDATE Tax;code[unique=true];name[lang=$lang]
+;ca-sales-tax-full;增值税;
+;us-sales-tax-full;增值税;
+
+UPDATE ProductTaxGroup;code[unique=true];name[lang=$lang]
+;ca-sales-tax-full;加拿大增值税;
+;us-sales-tax-full;美国增值税;

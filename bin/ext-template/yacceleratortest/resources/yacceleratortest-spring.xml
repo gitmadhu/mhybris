@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="yacceleratorTestDataSystemSetup" class="de.hybris.platform.yacceleratortest.setup.TestDataSystemSetup" parent="abstractCoreSystemSetup">
+		<property name="acceleratorTestOrderData" ref="acceleratorTestOrderData"/>
+	</bean>
+
+	<bean id="acceleratorTestOrderData" class="de.hybris.platform.yacceleratortest.orders.AcceleratorTestOrderData">
+		<property name="impersonationService" ref="impersonationService"/>
+		<property name="cmsAdminSiteService" ref="cmsAdminSiteService"/>
+		<property name="userService" ref="userService"/>
+		<property name="customerAccountService" ref="customerAccountService"/>
+		<property name="checkoutFacade" ref="checkoutFacade"/>
+		<property name="cartService" ref="cartService"/>
+		<property name="cartFacade" ref="cartFacade"/>
+		<property name="addressReversePopulator" ref="addressReversePopulator"/>
+		<property name="commerceCheckoutService" ref="commerceCheckoutService"/>
+		<property name="baseStoreSelectorStrategy" ref="baseStoreSelectorStrategy"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="i18nService" ref="commonI18NService"/>
+	</bean>
+
+</beans>

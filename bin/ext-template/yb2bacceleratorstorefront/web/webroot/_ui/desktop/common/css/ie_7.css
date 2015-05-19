@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+ 
+	Buttons
+*****************/
+button {
+	width: 0; /* IE table-cell margin fix */
+	overflow: visible;
+	height: auto;
+}
+.opaque {
+	filter: alpha(opacity = 40);
+	zoom: 1;
+	/* BA 25/05/2011 To trigger "hasLayout" in IE if no width or height is set */
+}
+
+/*
+
+	Navigation
+*****************/
+#nav_main {
+	z-index: 2000;
+}
+#nav_main ul {
+	z-index: 2000; /* BA.2011.05.11 added to fix IE7 menus appearing behind site components. The relatively positioned parent of the abs pos menu should be given a z-index that is higher than those of subequent positioned elements; there is a z-index of 100000000 on the child UL.*/
+	width: 300%;
+}
+#nav_main ul li {
+	position: relative;  /* BA.2011.05.11 added to fix IE7 sub menu alignment issues. The sub menus can now align left zero on the respective parent li */
+	float: left;
+}
+
+
+ul.Lb {
+	display: none;
+	width: 100%;
+}
+
+ul.Lb li{
+	float: none;
+	display: inline;
+}
+
+li.La:hover ul.Lb {
+	display: block;
+	left: 0;
+}
+li.La a:focus + ul.Lb {
+	display: block;
+}
+
+/*
+
+	Scroller
+*****************/
+.scroller,
+.item_container {
+	overflow: visible; /* added to resolve payment details page diver cols*/
+}

@@ -1,0 +1,17 @@
+# ImpEx for Importing Store / Point of Service Media
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+$storeName=
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$baseProduct=baseProduct(code, catalogVersion(catalog(id[default='$productCatalog']),version[default='Staged']))
+$media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+$medias=medias(code, $catalogVersion)
+$siteResource=jar:de.hybris.platform.yacceleratorinitialdata.setup.InitialDataSystemSetup&/yacceleratorinitialdata/import/store/$storeName
+
+# Create Media
+INSERT_UPDATE Media;mediaFormat(qualifier);;code[unique=true];$media;mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
+
+# Create Media Containers
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion

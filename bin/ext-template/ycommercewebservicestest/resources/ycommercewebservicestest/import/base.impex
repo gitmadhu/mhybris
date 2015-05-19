@@ -1,0 +1,100 @@
+# Import essential data for the ycommercewebservices tests
+#
+# Includes:
+# * Users
+# * Languages
+# * Currencies
+# * Titles
+# * Warehouses
+
+# Users
+$passwordEncoding=md5
+$defaultPassword=1234
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+INSERT_UPDATE Customer;uid[unique=true];groups(uid);password;name
+;democustomer;customergroup;1234;Demo Customer
+
+INSERT_UPDATE Employee;UID[unique=true];$setPassword;description;name;groups(uid)[mode=append];sessionLanguage(isocode);
+;customermanager;;Customer manager;Customer manager;customermanagergroup;en;
+
+
+# Languages
+INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
+;en;;;
+;de;en;;
+;ja;en;;
+;zh;en;;
+
+# Currencies
+INSERT_UPDATE Currency;isocode[unique=true];conversion;digits;symbol
+;GBP;1;2;£
+;EUR;1;2;€
+;USD;1,4;2;$
+;JPY;120;0;¥
+
+# Media formats
+INSERT_UPDATE MediaFormat;qualifier[unique=true]
+;1200Wx1200H
+;515Wx515H
+;365Wx246H
+;300Wx300H
+;96Wx96H
+;65Wx65H
+;30Wx30H
+
+# Media Folders
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
+
+# Titles
+INSERT_UPDATE Title;code[unique=true]
+;mr
+;mrs
+;miss
+;ms
+;dr
+;rev
+
+
+# Language
+$lang=en
+
+# Languages
+UPDATE Language;isocode[unique=true];name[lang=$lang]
+ ;de;"German"
+ ;en;"English"
+ ;ja;"Japanese"
+ ;zh;"Chinese"
+
+# Currencies
+UPDATE Currency;isocode[unique=true];name[lang=$lang]
+ ;EUR;"Euro"
+ ;GBP;"Pound"
+ ;JPY;"Japanese Yen"
+ ;USD;"US Dollar"
+
+# Titles
+UPDATE Title;code[unique=true];name[lang=$lang]
+ ;dr;"Dr."
+ ;miss;"Miss"
+ ;mr;"Mr"
+ ;mrs;"Mrs"
+ ;ms;"Ms"
+ ;rev;"Rev."
+
+# Credit / Debit Cards
+UPDATE CreditCardType;code[unique=true];name[lang=$lang]
+ ;amex;"American Express"
+ ;diners;"Diner's Club"
+ ;maestro;"Maestro"
+ ;master;"Mastercard"
+ ;mastercard_eurocard;"Mastercard/Eurocard"
+ ;switch;"Switch"
+ ;visa;"Visa"
+
+# DistanceUnits for Storelocator 
+UPDATE DistanceUnit;code[unique=true];name[lang=$lang]
+ ;km;"km"
+ ;miles;"miles"
+

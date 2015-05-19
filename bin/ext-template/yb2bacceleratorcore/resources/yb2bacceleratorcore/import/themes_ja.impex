@@ -1,0 +1,9 @@
+# Import Themes
+#
+# Localization ja
+#
+
+$lang=ja
+
+UPDATE SiteTheme;code[unique=true];name[lang=$lang]
+;green;緑色;

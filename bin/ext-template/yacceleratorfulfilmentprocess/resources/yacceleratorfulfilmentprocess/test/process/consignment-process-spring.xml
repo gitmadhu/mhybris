@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="test.sendConsignmentToWarehouseAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.test.actions.consignmentfulfilment.SendConsignmentToWarehouse"  parent="abstractAction"/>
+	<bean id="test.waitBeforeTransmissionAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.test.actions.consignmentfulfilment.WaitBeforeTransmission"  parent="abstractAction"/>
+	<bean id="test.receiveConsignmentStatusAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.test.actions.consignmentfulfilment.ReceiveConsignmentStatus"  parent="abstractAction"/>
+	<bean id="test.confirmConsignmentPickupAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.test.actions.consignmentfulfilment.ConfirmConsignmentPickup"  parent="abstractAction"/>
+	<bean id="test.sendDeliveryMessageAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.test.actions.consignmentfulfilment.SendDeliveryMessage"  parent="abstractAction"/>
+	<bean id="test.sendReadyForPickupMessageAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.test.actions.consignmentfulfilment.SendReadyForPickupMessage"  parent="abstractAction"/>
+	<bean id="test.sendPickedUpMessageAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.test.actions.consignmentfulfilment.SendPickedUpMessage"  parent="abstractAction"/>
+	<bean id="test.cancelConsignmentAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.test.actions.consignmentfulfilment.CancelConsignment"  parent="abstractAction"/>
+	<bean id="test.sendCancelMessageAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.test.actions.consignmentfulfilment.SendCancelMessage"  parent="abstractAction"/>
+	<bean id="test.subprocessEndAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.test.actions.consignmentfulfilment.SubprocessEnd"  parent="abstractAction"/>
+	<bean id="test.allowShipmentAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.test.actions.consignmentfulfilment.AllowShipment"  parent="abstractAction">
+		<property name="result" value="DELIVERY"></property>
+	</bean>
+
+</beans>

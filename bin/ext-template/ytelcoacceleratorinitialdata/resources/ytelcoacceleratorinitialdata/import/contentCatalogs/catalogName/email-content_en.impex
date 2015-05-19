@@ -1,0 +1,21 @@
+# ImpEx for Importing Email Content
+# English Localisation
+
+# Macros / Replacement Parameter definitions
+$contentCatalog=
+$storeName=
+
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$picture=media(code, $contentCV);
+$wideContent=CMSImageComponent,BannerComponent
+$jarResource=
+$siteResource=jar:de.hybris.platform.ytelcoacceleratorinitialdata.setup.InitialDataSystemSetup&/ytelcoacceleratorinitialdata/import/contentCatalogs/$contentCatalog
+
+# Language
+$lang=en
+
+# Media (media is not localizable so we must create a separate media per language)
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpg'];folder(qualifier)[default='images', forceWrite=true]
+
+# CMS Image Components
+UPDATE CMSImageComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]

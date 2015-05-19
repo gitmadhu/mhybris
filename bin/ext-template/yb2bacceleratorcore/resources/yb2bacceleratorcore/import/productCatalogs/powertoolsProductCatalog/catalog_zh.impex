@@ -1,0 +1,12 @@
+# 
+# Import the Product Catalog and Classification Catalog
+#
+# Localization zh
+#
+
+$lang=zh
+
+$productCatalog=powertoolsProductCatalog
+
+UPDATE Catalog;id[unique=true];name[lang=$lang]
+;$productCatalog;"电动工具产品目录";

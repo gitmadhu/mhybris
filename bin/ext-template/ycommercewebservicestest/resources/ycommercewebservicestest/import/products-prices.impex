@@ -1,0 +1,40 @@
+# ImpEx for Importing
+#% impex.setLocale( Locale.GERMAN ); 
+
+$productCatalog=wsTestProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+#$taxGroup=Europe1PriceFactory_PTG(code)[default=jp-vat-full]
+
+# Set product approval status to Approved only for those products that have prices.
+$approved=approvalstatus(code)[default='approved']
+
+UPDATE Product;code[unique=true];$prices;$approved;$catalogVersion
+;1377492;79,11 USD , 6740 JPY
+;1715477;6030,71 USD , 513810 JPY
+;2006139;231,12 USD , 19690 JPY
+;2053226;1538,7 USD , 131090 JPY
+;2053266;1391,34 USD , 118540 JPY
+;2053367;2410,42 USD , 205360 JPY
+;1382080;574,88 USD , 48970 JPY
+;1934406;452,88 USD , 38580 JPY
+;3557133;929,88 USD , 79220 JPY
+;1934793;99,85 USD , 8500 JPY
+;1934795;111,84 USD , 9520 JPY
+;137220;8,0 USD , 680 JPY
+;816780;1086,0 USD , 92520 JPY
+;872912a;10,0 USD , 850 JPY
+;1687508;149,71 USD , 12750 JPY
+;3555166;934,41 USD , 79610 JPY
+;4812254;927,89 USD , 79050 JPY
+;278688;137,96 USD , 11750 JPY
+;280916;8,2 USD , 690 JPY
+;1981415a;212,26 USD , 18080 JPY
+;3429337;11,12 USD , 940 JPY
+;1981412;164,53 USD , 14010 JPY
+;1981413;184,69 USD , 15730 JPY
+;1981414;193,03 USD , 16440 JPY
+;1225694;847,74 USD , 72220 JPY
+;2054947;1066,18 USD , 90830 JPY
+;3708646;968,89 USD , 82540 JPY
+;482105;149,69 USD , 12750 JPY

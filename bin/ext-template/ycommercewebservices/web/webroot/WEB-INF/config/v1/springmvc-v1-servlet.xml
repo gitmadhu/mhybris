@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2014 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<context:component-scan
+		base-package="de.hybris.platform.ycommercewebservices.v1, de.hybris.platform.ycommercewebservices.auth, de.hybris.platform.ycommercewebservices.context, de.hybris.platform.ycommercewebservices.conv, de.hybris.platform.ycommercewebservices.error, de.hybris.platform.ycommercewebservices.exceptions, de.hybris.platform.ycommercewebservices.filter, de.hybris.platform.ycommercewebservices.formatters, de.hybris.platform.ycommercewebservices.oauth2, de.hybris.platform.ycommercewebservices.populator, de.hybris.platform.ycommercewebservices.resolver, de.hybris.platform.ycommercewebservices.util.ws, de.hybris.platform.ycommercewebservices.validator, de.hybris.platform.ycommercewebservices.xstream"
+		scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver" />
+
+	<security:global-method-security secured-annotations="enabled" />
+
+	<!-- Load additional configuration -->
+	<import resource="validators-v1-spring.xml" />
+
+	<bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean id="cwsSearchQueryCodec" class="de.hybris.platform.ycommercewebservices.util.ws.impl.DefaultSearchQueryCodec" />
+
+	<bean id="addressDataErrorsPopulator" class="de.hybris.platform.ycommercewebservices.populator.AddressDataErrorsPopulator">
+		<constructor-arg>
+			<map>
+				<entry key="addressline1" value="line1" />
+				<entry key="addressline2" value="line2" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+</beans>

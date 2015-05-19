@@ -1,0 +1,10 @@
+#
+# Import the Powertools Content Catalog
+#
+# Localization de
+#
+$lang=de
+$contentCatalog=powertoolsContentCatalog
+
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang];
+ ;$contentCatalog;"Powertools-Inhaltskatalog";

@@ -1,0 +1,52 @@
+$productCatalog=telcoProductCatalog
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=supercategories(code, $catalogVersion)
+$approved=approvalstatus(code)[default='check']
+
+$catVer=catalogVersion(version[default='Staged'],catalog(id[default=$productCatalog]));
+$clSysVer=catalogVersion(version[default='$systemVersion'],catalog(id[default='$systemName']));
+# -------------------------------------;
+# telco classified products;
+# 1. assign class to category so that all ;
+#    contained products are automatically classified as such;
+UPDATE Category; $catVer[virtual=true,unique=true]; code[unique=true]; supercategories(code,$clSysVer)[mode=append];
+; smartphone ; mobilephoneclassification;
+; basicphone ; mobilephoneclassification;
+; tablet     ; mobilephoneclassification;
+; casesandcovers ; accessoryclassification;
+; bluetoothandwired ; accessoryclassification;
+; chargersanddocs ; accessoryclassification;
+; voiceplans ; serviceplanclassification
+; dataplans ; serviceplanclassification
+; smartphoneplans ; serviceplanclassification
+
+$feature1=@featurecompatibility[$clAttrModifiers];
+$feature2=@mobileplatform[$clAttrModifiers];
+$feature3=@storage[$clAttrModifiers];
+$feature4=@camera[$clAttrModifiers];
+$feature5=@gps[$clAttrModifiers];
+$feature6=@keyboard[$clAttrModifiers];
+$feature7=@formfactor[$clAttrModifiers];
+$feature8=@displayresolution[$clAttrModifiers];
+$feature9=@displaysize[$clAttrModifiers];
+$feature10=@touchscreen[$clAttrModifiers];
+$feature11=@color[$clAttrModifiers];
+$feature12=@depth[$clAttrModifiers];
+$feature13=@weight[$clAttrModifiers];
+$feature14=@height[$clAttrModifiers];
+$feature15=@width[$clAttrModifiers];
+$feature16=@bands[$clAttrModifiers];	
+# Accessory
+$feature17=@vendorcompatibility[$clAttrModifiers];
+
+# Insert Products
+INSERT_UPDATE Device;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;$approved;$catalogVersion
+;109058;smartphone;Nokia;CC-153D;pieces;
+
+													
+# Insert Product Classifications																																				
+							
+# devices															
+INSERT_UPDATE Device;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$feature9;$feature10;$feature11;$feature12;$feature13;$feature14;$feature15;$feature16;$catalogVersion
+;109058;feature_bt20,feature_usb1,feature_usb2;platform_symbian;2;TRUE;<ignore>;FALSE;<ignore>;800 X 600;10;FALSE;Brown;12;10;	9;	2;	band_lte;	

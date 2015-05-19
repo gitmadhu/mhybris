@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	   xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+
+	<!-- tenant scoped filter -->
+	<alias name="defaultStorefrontTenantDefaultFilterChainList" alias="storefrontTenantDefaultFilterChainList" />
+	<util:list id="defaultStorefrontTenantDefaultFilterChainList">
+		<!-- generic platform filters -->
+		<ref bean="log4jFilter"/>
+		<ref bean="storefrontSessionFilter"/>
+		<ref bean="addOnDevelopmentFilter"/>
+
+		<!-- filter to log the current request -->
+		<ref bean="requestLoggerFilter"/>
+
+		<!-- filter to setup the cms integration -->
+		<ref bean="cmsSiteFilter"/>
+
+		<!-- filter to initialize the storefront -->
+		<ref bean="storefrontFilter"/>
+
+        <!-- filter to handle url encoding attributes -->
+        <ref bean="urlEncoderFilter"/>
+
+		<!-- Security -->
+		<ref bean="springSecurityFilterChain"/>
+		<ref bean="cartRestorationFilter"/>
+
+		<!-- btg filters -->
+		<!-- Remove these filters to disable BTG integration. Also remove the BtgSegmentBeforeViewHandler -->
+		<ref bean="refererHeaderBtgFilter"/>
+		<ref bean="requestParamsBtgFilter"/>
+		<ref bean="productVisitedBtgFilter"/>
+		<ref bean="categoryVisitedBtgFilter"/>
+		<ref bean="btgSegmentFilter"/>	
+	</util:list>
+
+	<bean id="storefrontTenantFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain" >
+		<constructor-arg>
+			<ref bean="storefrontTenantDefaultFilterChainList" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="storefrontSessionFilter" class="de.hybris.platform.servicelayer.web.SessionFilter" >
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
+	<bean id="urlEncoderFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.UrlEncoderFilter" >
+		<property name="urlEncoderFacade" ref="urlEncoderFacade"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
+	<bean id="addOnDevelopmentFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.AcceleratorAddOnFilter" >
+		<property name="configurationService" ref="configurationService"/>
+	</bean>
+
+	<bean id="requestLoggerFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.RequestLoggerFilter"/>
+
+	<bean id="cmsSiteFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.cms.CMSSiteFilter" >
+		<property name="previewDataModelUrlResolver" ref="previewDataModelUrlResolver"/>
+		<property name="cmsSiteService" ref="cmsSiteService"/>
+		<property name="cmsPreviewService" ref="cmsPreviewService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="contextInformationLoader" ref="contextInformationLoader"/>
+		<property name="cmsPageContextService" ref="cmsPageContextService"/>
+	</bean>
+
+	<bean id="storefrontFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.StorefrontFilter" >
+		<property name="storeSessionFacade" ref="storeSessionFacade"/>
+		<property name="browseHistory" ref="browseHistory"/>
+		<property name="cookieGenerator" ref="sessionCookieGenerator"/>
+	</bean>
+	
+	<bean id="cartRestorationFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.CartRestorationFilter" >
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="cartFacade" ref="cartFacade"/>
+		<property name="cartRestoreCookieGenerator" ref="cartRestoreCookieGenerator"/>
+		<property name="userService" ref="userService"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
+	<alias name="defaultSessionCookieGenerator" alias="sessionCookieGenerator"/>
+	<bean id="defaultSessionCookieGenerator" class="de.hybris.platform.yb2bacceleratorstorefront.security.cookie.EnhancedCookieGenerator" >
+		<property name="cookieSecure" value="false"/>
+		<property name="cookieName" value="JSESSIONID"/>
+		<property name="cookieMaxAge" value="-1"/>
+		<property name="useDefaultPath" value="false"/>
+		<property name="httpOnly" value="true"/>
+	</bean>
+	
+	<alias name="defaultCartRestoreCookieGenerator" alias="cartRestoreCookieGenerator"/>
+	<bean id="defaultCartRestoreCookieGenerator" class="de.hybris.platform.yb2bacceleratorstorefront.security.cookie.CartRestoreCookieGenerator" >
+		<property name="cookieSecure" value="false"/>
+		<property name="cookieMaxAge" value="360000000"/>
+		<property name="useDefaultPath" value="false"/>
+		<property name="httpOnly" value="true"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+	</bean>
+
+	<!-- BTG filters -->
+	<bean id="abstractBtgFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.btg.AbstractBtgFilter" abstract="true" >
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="refererHeaderBtgFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.btg.RefererHeaderBtgFilter" parent="abstractBtgFilter"/>
+
+	<bean id="requestParamsBtgFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.btg.RequestParamsBtgFilter" parent="abstractBtgFilter"/>
+
+	<bean id="productVisitedBtgFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.btg.ProductVisitedBtgFilter" parent="abstractBtgFilter">
+		<property name="pkResolvingStrategy" ref="productPkResolvingStrategy"/>
+	</bean>
+
+	<bean id="categoryVisitedBtgFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.btg.CategoryVisitedBtgFilter" parent="abstractBtgFilter">
+		<property name="pkResolvingStrategy" ref="categoryPkResolvingStrategy"/>
+	</bean>
+
+	<bean id="btgSegmentFilter" class="de.hybris.platform.yb2bacceleratorstorefront.filters.btg.BTGSegmentFilter" >
+		<property name="btgSegmentStrategy" ref="btgSegmentStrategy"/>
+	</bean>
+
+</beans>

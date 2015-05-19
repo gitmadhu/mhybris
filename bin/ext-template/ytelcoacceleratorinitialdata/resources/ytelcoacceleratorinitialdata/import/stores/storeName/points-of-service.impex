@@ -1,0 +1,22 @@
+# ImpEx for Points of Service
+
+# Macros / Replacement Parameter definitions
+$storeUid=
+$productCatalog=
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$storeImage=storeImage(qualifier, $catalogVersion)
+$standardHours=
+
+INSERT_UPDATE OpeningSchedule;code[unique=true];
+;$standardHours;
+
+INSERT_UPDATE WeekdayOpeningDay;openingSchedule(code)[unique=true];dayOfWeek(code)[unique=true];openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm];
+
+INSERT_UPDATE PointOfService;name[unique=true];type(code);address(&addrID);$storeImage;openingSchedule(code);basestore(uid)[default=$storeUid];features(code)
+
+INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];town[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
+
+INSERT_UPDATE StoreLocatorFeature;code[unique=true]
+
+INSERT_UPDATE PointOfService;name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];$storeImage;openingSchedule(code);basestore(uid)[default=$storeUid];features(code)

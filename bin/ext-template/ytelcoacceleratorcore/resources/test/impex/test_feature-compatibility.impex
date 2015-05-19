@@ -1,0 +1,115 @@
+$catalog-id=testCatalog
+$catalog-version=Online
+
+$testCategory0-id=testCategory0
+$testCategory1-id=testCategory1
+
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default=$catalog-id:$catalog-version]
+$approved=approvalstatus(code)[default='approved']
+$supercategories=supercategories(code,catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version]))
+$categories=target(code, $catalogVersion)[unique=true]
+
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=de];name[lang=en];active;base;conversion;digits;symbol;;;;;;;;;;;;;;
+;USD;US-Dollar;US Dollar;true;false;1,38;2;$;;;;;;;;;;;;;;
+
+INSERT_UPDATE Catalog;id[unique=true];name[lang=de];name[lang=en];defaultCatalog;;;;;;;;;;;;;;;;;;
+;$catalog-id;$catalog-id;$catalog-id;true;;;;;;;;;;;;;;;;;;
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique=true]; version[unique=true]; active;defaultCurrency(isocode);;;;;;;;;;;;;;;;;;
+;$catalog-id;$catalog-version;true;USD;en;;;;;;;;;;;;;;;;;
+
+
+$systemName=TelcoClassification;
+$systemVersion=1.0;
+
+INSERT_UPDATE ClassificationSystem; id[unique=true]; name[lang=en];
+;$systemName;Telco ClassificationSystem;
+
+$classCatalogVersion=catalogversion(catalog(id[default=$systemName]),version[default=$systemVersion])
+$classSystemVersion=systemVersion(catalog(id[default=$systemName]),version[default=$systemVersion])[unique=true]
+$clAttrModifiers=system='TelcoClassification',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+$class=classificationClass(ClassificationClass.code,$classCatalogVersion)[unique=true]
+$attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
+$unit=unit(code,$classSystemVersion)
+
+INSERT_UPDATE ClassificationSystemversion; catalog(id)[unique=true] ; version[unique=true] ; active ; writeprincipals(uid); languages(isocode); inclPacking[virtual=true,default=true]; inclDuty[virtual=true,default=true]; inclFreight[virtual=true,default=true]; inclAssurance[virtual=true,default=true]
+;$systemName ;$systemVersion ;true ;employeegroup;en;
+
+INSERT_UPDATE ClassificationClass;$classCatalogVersion[unique=true];code[unique=true];allowedPrincipals(uid)[default='customergroup']
+;;compatibilityclassification
+;;accessoryclassification
+
+INSERT_UPDATE ClassificationAttribute;$classSystemVersion;code[unique=true]
+;;featurecompatibility
+;;vendorcompatibility
+INSERT_UPDATE ClassificationAttributeValue;code[unique=true];$classSystemVersion
+;feature_bt10
+;feature_bt20
+;feature_bt21
+;feature_usb1
+;feature_usb2
+;feature_microsd
+;feature_microsdhc
+
+
+INSERT_UPDATE ClassAttributeAssignment;$class;$attribute;position;$unit;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=false];attributeValues(code,$classSystemVersion)
+;compatibilityclassification;featurecompatibility;0;;enum;true;;;feature_bt10,feature_bt20,feature_bt21,feature_usb1,feature_usb2,feature_microsd,feature_microsdhc
+;accessoryclassification;vendorcompatibility;1;;string;true
+
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogversion
+;devices
+;accessories
+
+
+UPDATE Category; $catalogversion; code[unique=true]; supercategories(code,$classCatalogVersion)[mode=append]
+;; devices ;compatibilityclassification;
+;; accessories ; accessoryclassification, compatibilityclassification;
+
+$feature1=@featurecompatibility[$clAttrModifiers];
+# Accessory
+$feature17=@vendorcompatibility[$clAttrModifiers];
+
+
+INSERT_UPDATE Device;code[unique=true];$supercategories;manufacturerName;manufacturerAID;description[lang=en];unit(code)[default=pieces];ean;variantType(code);$catalogversion
+;109058;devices;Apple;MB496T/A;21.03.2009;;
+;009058;devices;Samsung;MBG4404;21.03.2009;;
+;Device1;devices;Samsung;MBG4404;21.03.2009;;
+;Device2;devices;Samsung;MBG4404;21.03.2009;;
+;Device3;devices;Samsung;MBG4404;21.03.2009;;
+
+INSERT_UPDATE Accessory;code[unique=true];$supercategories;manufacturerName;manufacturerAID;description[lang=en];unit(code)[default=pieces];ean;variantType(code);$catalogversion
+;109059;accessories;Apple;MB4d96T/A;21.03.2009;;
+;109060;accessories;Apple;MDFDDFF;21.03.2009;;
+;199919;accessories;Applie;SDFDSFD;21.03.2009;;
+;Accessory1;accessories;Apple;JKASDFKSDF;12.03.2009;;
+;Accessory2;accessories;Apple;JKASDFKSDF;12.03.2009;;
+;Accessory3;accessories;Apple;JKASDFKSDF;12.03.2009;;
+;Accessory4;accessories;Apple;JKASDFKSDF;12.03.2009;;
+;Accessory5;accessories;Apple;JKASDFKSDF;12.03.2009;;
+;Accessory6;accessories;Apple;JKASDFKSDF;12.03.2009;;
+;Accessory7;accessories;Apple;JKASDFKSDF;12.03.2009;;
+;Accessory8;accessories;Apple;JKASDFKSDF;12.03.2009;;
+
+UPDATE Device;code[unique=true];$feature1;$catalogversion
+;109058;feature_bt20,feature_usb1,feature_usb2;
+;009058;feature_usb2,feature_bt10;
+;Device1;feature_bt10;
+;Device2;feature_usb2;
+;Device3;feature_usb2,feature_bt20;
+
+UPDATE Accessory;code[unique=true];$feature1;$catalogversion
+;109059;feature_bt21,feature_usb1,feature_usb2;
+;199919;feature_microsd;
+;Accessory1;feature_bt10;
+;Accessory2;feature_bt20;
+;Accessory3;feature_usb1;
+;Accessory4;feature_usb2;
+;Accessory5;feature_bt10,feature_usb2;
+;Accessory6;feature_bt20,feature_usb1;
+;Accessory7;feature_usb1,feature_microsdhc;
+;Accessory8;feature_usb1,feature_microsdhc;
+
+UPDATE Accessory;code[unique=true];$feature17;$catalogversion
+;109060;Apple;
+;Accessory2;Nokia;
+

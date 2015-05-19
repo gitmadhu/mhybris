@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2014 hybris AG ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of hybris ~ ("Confidential Information"). You shall not disclose such Confidential 
+	~ Information and shall use it only in accordance with the terms of the ~ 
+	license agreement you entered into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security" xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/security/oauth2 
+     	http://www.springframework.org/schema/security/spring-security-oauth2.xsd">
+
+	<!-- Security OAuth2 -->
+
+	<import resource="v1/security-v1-spring.xml" />
+	<import resource="v2/security-v2-spring.xml" />
+
+	<beans>
+		<!-- This is the token endpoint, e.g. used for exhanging an authorization 
+			grant into an access token or for direct token response using the resource 
+			owner password grant. NOTICE: require the HTTPS channel for production! -->
+
+		<http xmlns="http://www.springframework.org/schema/security" entry-point-ref="oauthAuthenticationEntryPoint"
+			authentication-manager-ref="clientAuthenticationManager" create-session="stateless" pattern="/oauth/token">
+			<intercept-url pattern="/oauth/token" access="IS_AUTHENTICATED_FULLY" />
+			<!-- for PRODUCTION requires-channel="https" -->
+			<anonymous enabled="false" />
+			<http-basic entry-point-ref="oauthAuthenticationEntryPoint" />
+			<!-- include this only if you need to authenticate clients via request 
+				parameters -->
+			<custom-filter before="BASIC_AUTH_FILTER" ref="clientCredentialsTokenEndpointFilter" />
+			<access-denied-handler ref="oauthAccessDeniedHandler" />
+		</http>
+
+		<http access-denied-page="/login.jsp?authorization_error=true" disable-url-rewriting="true"
+			xmlns="http://www.springframework.org/schema/security">
+			<intercept-url pattern="/oauth/**" access="ROLE_CUSTOMERGROUP" />
+			<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+
+			<form-login authentication-failure-url="/login.jsp?authentication_error=true" default-target-url="/index.jsp"
+				login-page="/login.jsp" login-processing-url="/login.do" />
+			<logout logout-success-url="/index.jsp" logout-url="/logout.do" />
+			<anonymous />
+		</http>
+
+		<bean id="clientCredentialsTokenEndpointFilter" class="org.springframework.security.oauth2.provider.client.ClientCredentialsTokenEndpointFilter">
+			<property name="authenticationManager" ref="clientAuthenticationManager" />
+			<property name="authenticationEntryPoint" ref="oauthAuthenticationEntryPoint" />
+			<property name="filterProcessesUrl" value="/oauth/token" />
+		</bean>
+
+		<bean id="hybrisUserFilter" class="de.hybris.platform.ycommercewebservices.oauth2.HybrisOauth2UserFilter" />
+
+		<bean id="oauthAuthenticationEntryPoint" class="org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint">
+			<property name="realmName" value="hybris" />
+			<property name="exceptionRenderer" ref="oAuth2ExceptionRenderer" />
+		</bean>
+
+		<bean id="oauthAccessDeniedHandler" class="org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler">
+			<property name="exceptionRenderer" ref="oAuth2ExceptionRenderer" />
+		</bean>
+
+		<bean id="oAuth2ExceptionRenderer" class="de.hybris.platform.ycommercewebservices.oauth2.OAuth2ExceptionRenderer">
+			<property name="messageConverters" ref="messageConvertersV1" />
+			<property name="exceptionConverter" ref="exceptionConverter" />
+		</bean>
+
+		<alias alias="exceptionConverter" name="defaultExceptionConverter" />
+		<bean name="defaultExceptionConverter" class="de.hybris.platform.commercewebservicescommons.errors.converters.ExceptionConverter" />
+
+		<bean id="webSecurityAccessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+			<property name="decisionVoters">
+				<list>
+					<bean class="de.hybris.platform.ycommercewebservices.oauth2.OAuthClientVoter" />
+					<bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter" />
+					<bean id="authenticatedVoter" class="org.springframework.security.access.vote.AuthenticatedVoter" />
+				</list>
+			</property>
+		</bean>
+
+		<bean id="fixation" class="de.hybris.platform.servicelayer.security.spring.HybrisSessionFixationProtectionStrategy" />
+
+		<authentication-manager id="clientAuthenticationManager" xmlns="http://www.springframework.org/schema/security">
+			<authentication-provider user-service-ref="clientDetailsUserService" />
+		</authentication-manager>
+
+		<authentication-manager alias="authenticationManager" xmlns="http://www.springframework.org/schema/security">
+			<security:authentication-provider ref="coreAuthenticationProvider" />
+		</authentication-manager>
+
+		<bean id="coreAuthenticationProvider" class="de.hybris.platform.spring.security.CoreAuthenticationProvider">
+			<property name="userDetailsService" ref="coreUserDetailsService" />
+		</bean>
+
+		<bean id="coreUserDetailsService" class="de.hybris.platform.spring.security.CoreUserDetailsService" />
+
+		<bean id="clientDetailsUserService" class="org.springframework.security.oauth2.provider.client.ClientDetailsUserDetailsService">
+			<constructor-arg ref="clientDetails" />
+		</bean>
+
+		<bean id="tokenStore" class="org.springframework.security.oauth2.provider.token.InMemoryTokenStore" />
+
+		<bean id="tokenServices" class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">
+			<property name="tokenStore" ref="tokenStore" />
+			<property name="supportRefreshToken" value="true" />
+			<property name="refreshTokenValiditySeconds" value="2592000" />
+			<!-- 60*60*24*30 = 30d -->
+			<property name="accessTokenValiditySeconds" value="43200" />
+			<!-- 60*60*12 = 12h -->
+		</bean>
+
+		<oauth:authorization-server client-details-service-ref="clientDetails" token-services-ref="tokenServices">
+			<oauth:authorization-code />
+			<oauth:implicit />
+			<oauth:refresh-token />
+			<oauth:client-credentials />
+			<oauth:password />
+		</oauth:authorization-server>
+
+		<oauth:resource-server id="resourceServerFilter" resource-id="hybris" token-services-ref="tokenServices"
+			entry-point-ref="oauthAuthenticationEntryPoint" />
+
+		<!-- Each client application, e.g. mobile android client, mobile iOS client, 
+			will need to be created here. Below are just examples. It makes sense to 
+			create client_id's for each seperate client app, e.g. your iOS mobile app, 
+			your android mobile app, your external frontend, etc. -->
+		<oauth:client-details-service id="clientDetails">
+			<oauth:client client-id="client-side" resource-ids="hybris" authorized-grant-types="implicit,client_credentials"
+				authorities="ROLE_CLIENT" secret="secret" redirect-uri="http://localhost:8080/oauth2_implicit_callback" />
+			<oauth:client client-id="mobile_android" resource-ids="hybris"
+				authorized-grant-types="authorization_code,refresh_token,password,client_credentials" authorities="ROLE_CLIENT" secret="secret"
+				redirect-uri="http://localhost:8080/oauth2_callback" />
+			<oauth:client client-id="trusted_client" resource-ids="hybris"
+				authorized-grant-types="authorization_code,refresh_token,password,client_credentials" authorities="ROLE_TRUSTED_CLIENT"
+				secret="secret" />
+		</oauth:client-details-service>
+
+		<security:global-method-security pre-post-annotations="enabled" proxy-target-class="true"
+			secured-annotations="enabled" access-decision-manager-ref="methodSecurityAccessDecisionManager">
+			<security:expression-handler ref="oauthExpressionHandler" />
+		</security:global-method-security>
+
+		<oauth:expression-handler id="oauthExpressionHandler" />
+
+		<oauth:web-expression-handler id="oauthWebExpressionHandler" />
+
+		<!-- global method security access decission manager config -->
+		<bean id="methodSecurityAccessDecisionManager" class="org.springframework.security.access.vote.AffirmativeBased">
+			<constructor-arg>
+				<list>
+					<bean class="org.springframework.security.access.prepost.PreInvocationAuthorizationAdviceVoter">
+						<constructor-arg ref="expressionBasedPreInvocationAdvice" />
+					</bean>
+					<bean class="de.hybris.platform.ycommercewebservices.oauth2.OAuthClientVoter" />
+					<bean class="org.springframework.security.access.vote.RoleVoter" />
+					<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
+				</list>
+			</constructor-arg>
+		</bean>
+
+		<bean id="expressionBasedPreInvocationAdvice" class="org.springframework.security.access.expression.method.ExpressionBasedPreInvocationAdvice">
+			<property name="expressionHandler" ref="expressionHandler" />
+		</bean>
+
+		<bean id="expressionHandler" class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler" />
+		
+		<!-- Preventing brute force attack -->
+		<bean id="bruteForceAttackCounter" class="de.hybris.platform.ycommercewebservices.security.impl.DefaultBruteForceAttackCounter">
+        	<constructor-arg name="maxFailedLogins" value="5" />
+        	<constructor-arg name="cacheExpiration" value="60" />
+        	<constructor-arg name="cacheSizeLimit" value="1000" />
+    	</bean>
+
+    	<bean id="authenticationFailureListener" class="de.hybris.platform.ycommercewebservices.security.AuthenticationFailureListener">
+    		<property name="bruteForceAttackCounter" ref="bruteForceAttackCounter"/>
+    		<property name="userService" ref="userService"/>
+    		<property name="modelService" ref="modelService"/>
+    	</bean>
+
+    	<bean id="authenticationSuccessListener" class="de.hybris.platform.ycommercewebservices.security.AuthenticationSuccessListener">
+    		<property name="bruteForceAttackCounter" ref="bruteForceAttackCounter"/>
+    	</bean>	
+	</beans>
+</beans>

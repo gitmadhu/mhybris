@@ -1,0 +1,100 @@
+# ImpEx for Importing Categories into wsTest Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=wsTestProductCatalog
+$productCatalogName=wsTest Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=source(code, $catalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+
+# Insert Categories
+INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+ ;1
+ ;106
+ ;206
+ ;571
+ ;574
+ ;575
+ ;576
+ ;577
+ ;578
+ ;584
+ ;585
+ ;586
+ ;587
+ ;588
+ ;597
+ ;598
+ ;604
+ ;814
+ ;816
+ ;827
+ ;829
+ ;902
+ ;934
+ ;1201
+ ;1288
+ ;1421
+
+# Insert Category Structure
+INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
+ ;106;1
+ ;206;1
+ ;571;1
+ ;1421;1
+ ;574;571
+ ;575;571
+ ;577;571
+ ;584;571
+ ;576;575
+ ;578;575
+ ;585;571
+ ;586;585
+ ;587;585
+ ;588;585
+ ;597;585
+ ;598;585
+ ;604;585
+ ;814;816
+ ;816;106
+ ;827;816
+ ;829;816
+ ;902;206
+ ;934;585
+ ;1201;585
+ ;1288;585
+ 
+# Language
+$lang=en
+
+
+# Create Categories
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
+ ;1;;Open Catalogue;
+ ;106;;Components;
+ ;1201;;Fixatives;
+ ;1288;;Camera Kits;
+ ;1421;;Binoculars;
+ ;206;;Data storage;
+ ;571;;Cameras;
+ ;574;;Film cameras;
+ ;575;;Digital Cameras;
+ ;576;;Digital Compacts;
+ ;577;;Webcams;
+ ;578;;Digital SLR;
+ ;584;;Hand-held Camcorders;
+ ;585;;Camera Accessories & Supplies;
+ ;586;;Camera Flashes;
+ ;587;;Tripods;
+ ;588;;Camera Lenses;
+ ;597;;Colour Films;
+ ;598;;Black & White Films;
+ ;604;;Blank Video Tapes;
+ ;814;;Rechargeable Batteries;
+ ;816;;Power Supplies;
+ ;827;;Power Adapters & Inverters;
+ ;829;;Battery Chargers;
+ ;902;;Flash Memory;
+ ;934;;Camera Cables;
+ 
+ 

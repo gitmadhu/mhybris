@@ -1,0 +1,28 @@
+# Import the Solr configuration for the Powertools store
+#
+# Localization ja
+#
+$lang=ja
+
+$indexedType=powertoolsProductType
+
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true,default=$indexedType];name[unique=true];displayName[lang=$lang]
+ ;;allPromotions;プロモーション;
+ ;;brand;ブランド;
+ ;;category;カテゴリ;
+ ;;code;コード;
+ ;;description;説明;
+ ;;manufacturerName;製造会社名;
+ ;;name;名前;
+ ;;price;価格;
+ ;;summary;サマリ;
+
+
+# Define the available sorts
+UPDATE SolrSort;indexedType(identifier)[unique=true,default=$indexedType];code[unique=true];name[lang=$lang]
+ ;;name-asc;名前（昇順）;
+ ;;name-desc;名前（降順）;
+ ;;price-asc;価格（安い順）;
+ ;;price-desc;価格（高い順）;
+ ;;relevance;関連;
+ ;;topRated;ランキング上位の商品;

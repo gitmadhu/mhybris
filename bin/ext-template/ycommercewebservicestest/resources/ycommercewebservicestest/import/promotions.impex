@@ -1,0 +1,78 @@
+# ImpEx for Promotions for wsTest Store
+#% impex.setLocale( Locale.GERMAN ); 
+
+$defaultPromoGrp=wsTestPromoGrp
+$productCatalog=wsTestProductCatalog
+$catalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Online])[default=$productCatalog:Online]
+$regulargroup=regulargroup
+
+#### Order Discount ####
+INSERT PromotionPriceRow;&tresholdId;Currency(isocode);price
+;1;GBP;150
+;2;USD;200
+;3;JPY;15000
+
+INSERT PromotionPriceRow;&priceId;Currency(isocode);price
+;7;GBP;15
+;8;USD;20
+;9;JPY;1500
+
+INSERT_UPDATE OrderThresholdDiscountPromotion;PromotionGroup(Identifier[default=$defaultPromoGrp]);enabled[default=true,unique=true];code[unique=true];startDate[dateformat=yyyy-MM-dd];endDate[dateformat=yyyy-MM-dd];title;description;messageFired[lang=en];messageFired[lang=de];priority;thresholdTotals(&tresholdId);discountPrices(&priceId)
+;;;WS_OrderThreshold15Discount;2000-01-01;2099-01-01;You saved bunch of bucks for spending quite much;You saved bunch of bucks for spending quite much;You saved {3} for spending over {1};Sie haben {3} gespart, weil Sie mehr als {1} ausgegeben haben;500;1,2,3;7,8,9
+;;;WS_RestrictedOrderThreshold15Discount;2000-01-011;2099-01-01;You saved bunch of bucks for spending quite much;You saved bunch of bucks for spending quite much;You saved {3} for spending over {1};Sie haben {3} gespart, weil Sie mehr als {1} ausgegeben haben;600;1,2,3;7,8,9
+
+
+INSERT_UPDATE PromotionUserRestriction;positive;promotion(code)[unique=true];users(uid)
+;TRUE;WS_OrderThreshold15Discount;$regulargroup
+
+INSERT_UPDATE PromotionOrderRestriction;promotion(code)[unique=true];descriptionPattern
+;WS_RestrictedOrderThreshold15Discount;Test Order Restriction
+
+#### 10% Discount on Canon EOS 450D ####
+INSERT_UPDATE ProductPercentageDiscountPromotion;PromotionGroup(Identifier[default=$defaultPromoGrp]);enabled[default=true][unique=true];code[unique=true];startDate[dateformat=yyyy-MM-dd];endDate[dateformat=yyyy-MM-dd];title;description;percentageDiscount;priority;products(code,$catalogVersion)
+;;;WS_10DiscountCanonEOS450D;2000-01-01;2099-01-01;10% discount on EOS 450D;10% discount on EOS 450D;10;500;1382080
+
+
+#### Perfect partner on Digital SLR Camera DSLR-A100H and InfoLITHIUM-Akku battery ####
+INSERT PromotionPriceRow;&priceId;Currency(isocode);price
+;3;USD;75
+;4;JPY;7500
+
+INSERT_UPDATE ProductPerfectPartnerPromotion;PromotionGroup(Identifier[default=$defaultPromoGrp]);enabled[default=true][unique=true];code[unique=true];startDate[dateformat=yyyy-MM-dd];endDate[dateformat=yyyy-MM-dd];title;description;priority;products(code,$catalogVersion);partnerProducts(code,$catalogVersion);partnerPrices(&priceId)
+;;;WS_PerfectPartner;2000-01-01;2099-01-01;Buy DSLR-A100H, get InfoLITHIUM NP-FM55H for less;Buy DSLR-A100H, get InfoLITHIUM NP-FM55H for less;800;816780;482105;3,4
+
+#### Product bundle on HDR-CX105E Red ####
+INSERT PromotionPriceRow;&priceId;Currency(isocode);price
+;5;USD;500
+;6;JPY;50000
+
+INSERT_UPDATE ProductBundlePromotion;PromotionGroup(Identifier[default=$defaultPromoGrp]);enabled[default=true,unique=true];code[unique=true];startDate[dateformat=yyyy-MM-dd];endDate[dateformat=yyyy-MM-dd];title;description;priority;products(code,$catalogVersion);bundlePrices(&priceId)
+;;;WS_ProductBundle;2000-01-01;2099-01-01;Summer Special! Get your video camera, tripod and charger for one great price!;Summer Special! Get your video camera, tripod and charger for one great price!;700;1934406,278688,1687508;5,6
+
+
+
+
+# Language
+$lang=en
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+
+
+UPDATE ProductPercentageDiscountPromotion;code[unique=true];enabled[default=true][unique=true];messageFired[lang=$lang]
+ ;WS_10DiscountCanonEOS450D;;10% discount received.<br>You have saved {2} on this item.
+
+
+
+UPDATE ProductPerfectPartnerPromotion;code[unique=true];enabled[default=true][unique=true];messageCouldHaveFired[lang=$lang];messageFired[lang=$lang];
+ ;WS_PerfectPartner;;Buy DSLR-A100H, get Sony Battery for {1};Buy DSLR-A100H, get Sony Battery for {1} - You have saved {3}
+
+
+
+UPDATE ProductBundlePromotion;code[unique=true];enabled[default=true][unique=true];messageCouldHaveFired[lang=$lang];messageFired[lang=$lang]
+ ;WS_ProductBundle;;Buy {0,choice,1#one more item|1<another {0,number,integer} items} from our <a href='$storefrontContextRoot/Cameras/Hand-held-Camcorders/HDR-CX105E-Red/p/1934406' class='promotion_link'><b>SONY HDR Red</b></a> package deal with <a href='$storefrontContextRoot/Components/Power-Supplies/Battery-Chargers/AC-VQP10-CHARGER/p/278688' class='promotion_link'><b>CHARGER</b></a> and <a href='$storefrontContextRoot/Cameras/Camera-Accessories-Supplies/Tripods/Remote-Control-Tripod-VCT-80AV/p/1687508' class='promotion_link'><b>TRIPOD</b></a> for just {2}!;You got our camcorder bundle deal for {1} and saved {3}
+

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Facades -->
+
+	<alias name="defaultB2BFlexibleSearchProductSearchFacade" alias="b2bProductFlexibleSearchFacade"/>
+	<bean id="defaultB2BFlexibleSearchProductSearchFacade"
+		  class="de.hybris.platform.yb2bacceleratorfacades.search.impl.DefaultB2BFlexibleSearchProductSearchFacade"
+          parent="abstractB2BProductSearchFacade">
+		<property name="b2bFlexibleSearchProductSearchService" ref="b2bFlexibleSearchProductSearchService"/>
+		<property name="flexibleSearchConverter" ref="b2bFlexibleSearchConverter"/>
+	</bean>
+	
+	<alias name="defaultB2BSolrProductSearchFacade" alias="b2bSolrProductSearchFacade"/>
+	<bean id="defaultB2BSolrProductSearchFacade"
+		  class="de.hybris.platform.yb2bacceleratorfacades.search.impl.DefaultB2BSolrProductSearchFacade"
+          parent="abstractB2BProductSearchFacade">
+        <property name="productSearchFacade" ref="productSearchFacade" />
+	</bean>
+
+
+    <bean id="abstractB2BProductSearchFacade"
+          class="de.hybris.platform.yb2bacceleratorfacades.search.AbstractB2BProductSearchFacade" abstract="true">
+        <property name="productConfiguredPopulator" ref="b2bProductConfiguredPopulator" />
+        <property name="productFacade" ref="b2bProductFacade" />
+        <property name="productService" ref="productService" />
+    </bean>
+
+
+	<alias alias="b2bSimpleSuggestionFacade" name="b2bDefaultSimpleSuggestionFacade"/>
+	<bean id="b2bDefaultSimpleSuggestionFacade"
+		  class="de.hybris.platform.yb2bacceleratorfacades.suggestion.impl.DefaultSimpleSuggestionFacade">
+		<property name="b2bSimpleSuggestionService" ref="b2bSimpleSuggestionService"/>
+		<property name="userService" ref="userService"/>
+		<property name="categoryService" ref="categoryService"/>
+		<property name="productPricePopulator" ref="productPricePopulator"/>
+		<property name="productPrimaryImagePopulator" ref="productPrimaryImagePopulator"/>
+		<property name="productConverter" ref="productConverter"/>
+	</bean>
+	
+	<alias alias="b2bFlexibleSearchConverter" name="defaultB2BFlexibleSearchConverter"/>
+	<bean id="defaultB2BFlexibleSearchConverter" class="de.hybris.platform.yb2bacceleratorfacades.search.converters.impl.DefaultB2BFlexibleSearchConverter">
+		<property name="productConfiguredPopulator" ref="b2bProductConfiguredPopulator"/>
+	</bean>
+
+	<bean id="b2bProductFacade" parent="defaultProductFacade">
+		<property name="productConfiguredPopulator" ref="b2bProductConfiguredPopulator"/>
+	</bean>
+
+	<alias name="defaultProductPriceRangePopulator" alias="productPriceRangePopulator"/>
+	<bean id="defaultProductPriceRangePopulator" parent="baseProductPopulator"
+		  class="de.hybris.platform.yb2bacceleratorfacades.product.populators.ProductPriceRangePopulator">
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+		<property name="priceService" ref="priceService"/>
+	</bean>
+
+
+	<alias name="defaultProductVariantMatrixPopulator" alias="productVariantMatrixPopulator"/>
+	<bean id="defaultProductVariantMatrixPopulator"
+		  class="de.hybris.platform.yb2bacceleratorfacades.product.populators.ProductVariantMatrixPopulator">
+          <property name="modelService" ref="modelService"/>
+		  <property name="variantMatrixElementPopulator" ref="variantMatrixElementPopulator"/>
+          <property name="valueCategoryComparator" ref="variantValueCategoryModelPriorityComparator"/>
+    </bean>
+
+
+
+
+
+    <alias name="defaultVariantOptionPopulator" alias="variantOptionPopulator"/>
+    <bean id="defaultVariantOptionPopulator"
+          class="de.hybris.platform.commercefacades.converter.impl.DefaultConfigurablePopulator">
+        <property name="populators">
+            <map key-type="de.hybris.platform.yb2bacceleratorfacades.product.ProductVariantOption" merge="true">
+                <entry key="STOCK" value-ref="variantOptionDataStockPopulator"/>
+                <entry key="URL" value-ref="variantOptionDataUrlPopulator"/>
+                <entry key="PRICE" value-ref="variantOptionDataPricePopulator"/>
+                <entry key="MEDIA" value-ref="variantOptionDataMediaPopulator"/>
+            </map>
+        </property>
+    </bean>
+
+    <alias name="defaultVariantOptionDataUrlPopulator" alias="variantOptionDataUrlPopulator"/>
+    <bean id="defaultVariantOptionDataUrlPopulator"
+          class="de.hybris.platform.yb2bacceleratorfacades.variant.populators.VariantOptionDataUrlPopulator">
+        <property name="productModelUrlResolver" ref="productModelUrlResolver"/>
+    </bean>
+
+    <alias name="defaultVariantOptionDataStockPopulator" alias="variantOptionDataStockPopulator"/>
+    <bean id="defaultVariantOptionDataStockPopulator"
+          class="de.hybris.platform.yb2bacceleratorfacades.variant.populators.VariantOptionDataStockPopulator">
+    </bean>
+
+    <bean id="variantMatrixElementPopulator" class="de.hybris.platform.yb2bacceleratorfacades.product.populators.VariantMatrixElementPopulator"/>
+
+    <alias name="defaultVariantOptionDataPricePopulator" alias="variantOptionDataPricePopulator"/>
+	<bean id="defaultVariantOptionDataPricePopulator"
+		  class="de.hybris.platform.yb2bacceleratorfacades.variant.populators.VariantOptionDataPricePopulator">
+		<property name="commercePriceService" ref="commercePriceService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+	</bean>
+
+    <alias name="defaultVariantOptionDataMediaPopulator" alias="variantOptionDataMediaPopulator"/>
+    <bean id="defaultVariantOptionDataMediaPopulator"
+          class="de.hybris.platform.yb2bacceleratorfacades.variant.populators.VariantOptionDataMediaPopulator">
+        <property name="acceleratorImageFormatMapping" ref="imageFormatMapping"/>
+        <property name="imageFormats">
+            <list>
+                <value>zoom</value>
+                <value>product</value>
+                <value>thumbnail</value>
+                <value>cartIcon</value>
+                <value>styleSwatch</value>
+            </list>
+        </property>
+    </bean>
+
+
+	<bean id="b2bProductConfiguredPopulator" parent="defaultProductConfiguredPopulator">
+		<property name="populators">
+			<map key-type="de.hybris.platform.commercefacades.product.ProductOption" merge="true">
+				<entry key="PRICE_RANGE" value-ref="productPriceRangePopulator"/>
+				<entry key="VOLUME_PRICES" value-ref="productVolumePricesPopulator"/>
+				<entry key="VARIANT_MATRIX" value-ref="productVariantMatrixPopulator"/>
+                <entry key="VARIANT_MATRIX_BASE" value-ref="productVariantMatrixPopulator"/>
+                <entry key="VARIANT_MATRIX_ALL_OPTIONS" value-ref="configVariantMatrixDataPopulator"/>
+                <entry key="VARIANT_MATRIX_URL" value-ref="configVariantOptionDataUrlPopulator"/>
+                <entry key="VARIANT_MATRIX_MEDIA" value-ref="configVariantOptionDataMediaPopulator"/>
+                <entry key="VARIANT_MATRIX_PRICE" value-ref="configVariantOptionDataPricePopulator"/>
+                <entry key="VARIANT_MATRIX_STOCK" value-ref="configVariantOptionDataStockPopulator"/>
+				<entry key="URL" value-ref="productUrlPopulator"/>
+				<entry key="IMAGES" value-ref="productPrimaryImagePopulator"/>
+			</map>
+		</property>
+	</bean>
+
+
+    <bean id="configVariantOptionDataUrlPopulator" parent="configVariantMatrixDataPopulator">
+        <property name="productVariantOptionList">
+            <list>
+                <value>URL</value>
+            </list>
+        </property>
+    </bean>
+
+
+    <bean id="configVariantOptionDataStockPopulator" parent="configVariantMatrixDataPopulator">
+        <property name="productVariantOptionList">
+            <list>
+                <value>STOCK</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="configVariantOptionDataMediaPopulator" parent="configVariantMatrixDataPopulator">
+        <property name="productVariantOptionList">
+            <list>
+                <value>MEDIA</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="configVariantOptionDataPricePopulator" parent="configVariantMatrixDataPopulator">
+        <property name="productVariantOptionList">
+            <list>
+                <value>PRICE</value>
+            </list>
+        </property>
+    </bean>
+
+    <alias name="defaultConfigVariantMatrixDataPopulator" alias="configVariantMatrixDataPopulator"/>
+    <bean id="defaultConfigVariantMatrixDataPopulator" class="de.hybris.platform.yb2bacceleratorfacades.product.populators.ProductVariantOptionDataPopulator">
+        <property name="modelService" ref="modelService"/>
+        <property name="productVariantOptionList">
+            <list>
+                <value>URL</value>
+                <value>MEDIA</value>
+                <value>PRICE</value>
+                <value>STOCK</value>
+            </list>
+        </property>
+        <property name="variantOptionDataPopulator" ref="defaultVariantOptionPopulator"/>
+    </bean>
+
+
+
+
+
+    <!-- accelerator Image Format Mappings -->
+	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping"/>
+	<bean id="acceleratorImageFormatMapping" parent="defaultImageFormatMapping">
+		<property name="mapping">
+			<map>
+				<entry key="superZoom" value="1200Wx1200H"/>
+				<entry key="zoom" value="515Wx515H"/>
+				<entry key="store" value="365Wx246H"/>
+				<entry key="product" value="300Wx300H"/>
+				<entry key="thumbnail" value="96Wx96H"/>
+				<entry key="cartIcon" value="65Wx65H"/>
+				<entry key="styleSwatch" value="30Wx30H"/>
+			</map>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductPrimaryImagePopulator" alias="productPrimaryImagePopulator"/>
+	<bean id="acceleratorProductPrimaryImagePopulator" parent="defaultProductPrimaryImagePopulator">
+		<property name="imageFormats">
+			<list>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+				<value>cartIcon</value>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductGalleryImagesPopulator" alias="productGalleryImagesPopulator"/>
+	<bean id="acceleratorProductGalleryImagesPopulator" parent="defaultProductGalleryImagesPopulator">
+		<property name="imageFormats">
+			<list>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Email -->
+
+	<alias alias="emailContextFactory" name="acceleratorEmailContextFactory"/>
+	<bean id="acceleratorEmailContextFactory" parent="defaultEmailContextFactory">
+		<property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+		<property name="emailContextVariables">
+			<map merge="true">
+				<entry key="themeResourceUrl-powertools" value="{baseUrl}/_ui/{theme}"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="customerEmailContext"
+		  class="de.hybris.platform.yb2bacceleratorfacades.process.email.context.CustomerEmailContext"
+		  parent="abstractEmailContext" scope="prototype">
+		<property name="customerConverter" ref="customerConverter"/>
+	</bean>
+
+	<bean id="b2bForgottenPasswordEmailContext"
+		  class="de.hybris.platform.yb2bacceleratorfacades.process.email.context.ForgottenPasswordEmailContext"
+		  parent="customerEmailContext" scope="prototype">
+		<property name="customerConverter" ref="customerConverter"/>
+	</bean>
+
+	<bean id="orderReplenishmentEmailContext"
+		  class="de.hybris.platform.yb2bacceleratorfacades.process.email.context.OrderReplenishmentEmailContext"
+		  parent="abstractEmailContext" scope="prototype">
+		<property name="scheduledCartConverter" ref="scheduledCartConverter"/>
+	</bean>
+
+	<bean id="b2bOrderNotificationContext"
+		  class="de.hybris.platform.yb2bacceleratorfacades.process.email.context.OrderNotificationEmailContext"
+		  parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter"/>
+	</bean>
+
+	<alias name="defaultB2BCheckoutFlowFacade" alias="b2bCheckoutFlowFacade"/>
+	<bean id="defaultB2BCheckoutFlowFacade"
+		  class="de.hybris.platform.yb2bacceleratorfacades.flow.impl.DefaultB2BCheckoutFlowFacade"
+		  parent="defaultB2BCheckoutFacade">
+		<property name="checkoutFlowStrategy" ref="b2bCheckoutFlowStrategy"/>
+		<property name="checkoutPciStrategy" ref="b2bCheckoutPciStrategy"/>
+	</bean>
+
+	<alias name="b2bDefaultStoreFinderFacade" alias="b2bStoreFinderFacade"/>
+	<bean id="b2bDefaultStoreFinderFacade"
+		  class="de.hybris.platform.commercefacades.storefinder.impl.DefaultStoreFinderFacade">
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="storeFinderService" ref="storeFinderService"/>
+		<property name="searchPagePointOfServiceDistanceConverter" ref="b2bSearchPagePointOfServiceDistanceConverter"/>
+		<property name="pointOfServiceConverter" ref="pointOfServiceConverter"/>
+		<property name="pointOfServiceDistanceConverter" ref="pointOfServiceDistanceConverter"/>
+	</bean>
+
+	<alias name="b2bDefaultSearchPagePointOfServiceDistanceConverter"
+		   alias="b2bSearchPagePointOfServiceDistanceConverter"/>
+	<bean id="b2bDefaultSearchPagePointOfServiceDistanceConverter" parent="abstractPopulatingConverter">
+		<lookup-method name="createTarget" bean="storeFinderSearchPageData"/>
+		<property name="populators">
+			<list>
+				<ref bean="b2bSearchPagePointOfServiceDistancePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="yb2bacceleratorSearchPagePointOfServiceDistancePopulator"
+		   alias="b2bSearchPagePointOfServiceDistancePopulator"/>
+	<bean id="yb2bacceleratorSearchPagePointOfServiceDistancePopulator"
+		  class="de.hybris.platform.yb2bacceleratorfacades.storefinder.populators.SearchPagePointOfServiceDistancePopulator">
+		<property name="pointOfServiceDistanceConverter" ref="pointOfServiceDistanceConverter"/>
+	</bean>
+
+	<alias name="variantCommerceSearchResultProductPopulator" alias="commerceSearchResultProductPopulator"/>
+	<bean id="variantCommerceSearchResultProductPopulator"
+		  class="de.hybris.platform.yb2bacceleratorfacades.search.converters.populator.VariantSearchResultProductPopulator"
+		  parent="defaultCommerceSearchResultProductPopulator">
+		<property name="categoryManager" ref="solrFirstVariantCategoryManager"/>
+	</bean>
+
+
+</beans>

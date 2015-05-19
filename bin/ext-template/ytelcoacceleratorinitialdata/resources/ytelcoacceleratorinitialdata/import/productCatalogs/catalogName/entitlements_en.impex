@@ -1,0 +1,14 @@
+# ImpEx for Entitlements - English
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+$lang=en
+
+
+# Subscription pricing
+UPDATE UsageUnit;id[unique=true];name[lang=$lang];namePlural[lang=$lang]
+
+UPDATE NonMeteredEntitlement;id[unique=true];name[lang=$lang]
+
+UPDATE MeteredEntitlement;id[unique=true];name[lang=$lang]

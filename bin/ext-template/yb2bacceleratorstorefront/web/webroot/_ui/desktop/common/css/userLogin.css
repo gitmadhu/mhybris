@@ -1,0 +1,192 @@
+/*
+## userLogin
+********************************************************************/
+
+.login_header_logo {
+	background: url("../images/medias.png") no-repeat scroll 0 0 #FFFFFF;
+	height: 70px;
+}
+
+.userLogin{
+	border: 1px dotted #A5A5A5;
+	padding:0 20px 10px 20px;
+}
+
+.userLogin .headline{
+	border-bottom: 1px solid #A5A5A5;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 33px;
+	line-height: 39px;
+	text-transform: uppercase;
+	margin:0 0 20px 0;
+}
+
+.template-pages-LoginPageTemplate #wrapper{
+	background-color: #fff;
+	border-top: 30px solid #edf0f6;
+}
+
+.userLogin .description{
+	margin:0 0 5px 0;
+}
+
+.userLogin  form{
+	margin:0;
+}
+
+.userLogin  .expressCheckoutLogin {
+	margin:20px 0 0 0;
+}
+
+.userLogin  .expressCheckoutLogin ul li{
+	list-style: disc outside none;
+	margin:0 0 5px 13px;
+}
+
+.forgottenPwd{
+	padding:20px;
+}
+
+.login_container{
+	background: url("../images/world_map.png") no-repeat scroll 0 0 #F1F1F1;
+	height: 400px;
+}
+
+.forgottenPwd .headline{
+	border-bottom: 1px solid #A5A5A5;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 39px;
+	line-height: 39px;
+	text-transform: uppercase;
+	margin:0 0 20px 0;
+}
+
+.forgottenPwd .description{
+	margin:0 0 20px 0;
+}
+
+.expressCheckoutCheckbox {
+	margin: 0 0 10px 0;
+}
+
+.expressCheckoutCheckbox input{
+	margin: 2px 7px 0 0;
+}
+
+a.password-forgotten {
+	text-decoration:underline;
+}
+
+.login-panel{
+    background-color: #000000;
+    float: none;
+    margin: 0 auto;	
+}
+
+#loginForm .control-label{
+    text-transform: uppercase;	
+    font-size: 14px;
+} 
+
+#forgottenPwdForm .control-label{
+    color: #000000;
+}
+
+#loginForm .form-actions button {
+    float: right;
+    height: 28px;
+    margin-right: 0;
+    min-width: 80px;	
+}
+
+#forgottenPwdForm .controls{
+	float: left;
+    width: 320px;
+}
+
+#forgottenPwdForm .controls input{
+    width: 320px;
+}
+
+#forgottenPwdForm button{
+    float: left;
+    height: 30px;
+    margin: 0 0 0 20px;
+}
+
+.b2b_login_header{
+	background-color: #bdbdbd;
+	height: 120px;
+}
+
+.form_field_error-message a{
+	padding-top: 10px;
+	float: left;
+}
+
+#copyright{
+	padding: 10px 0 0;
+}
+
+#copyright .links a,
+#copyright span p{
+	color: #555;
+	font-size: 10px;
+}
+
+.login-header{
+    color: #333333;
+    float: none;
+    font-size: 16px;
+    margin: 0 auto;	
+}
+
+.template-pages-LoginPageTemplate #lang-form .controls{
+	width: 130px;
+	float: left;
+}
+
+#footer #lang-selector {
+    background-color: #FBFBFB;
+    border: 1px solid;
+    font-size: 10px;
+    height: 15px;
+    min-height: 20px;
+    padding: 2px;
+    width: 120px;	
+}
+
+div.secure_container_holder{
+	color: #fff;
+	padding: 10px 20px;
+}
+
+div.secure_container_holder a{
+	color: #fff;
+}
+
+div.secure_container_holder h2{
+	color: #fff;
+	margin-bottom: 0;
+}
+
+#loginForm{
+	padding-bottom: 35px;
+}
+
+.secure_container_holder button{
+	margin: 0;
+	padding: 0 20px;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+.secure_container_holder dl {
+	margin-bottom: 0;
+}
+
+.secure_container_holder dd {
+	margin-left: 0;
+}

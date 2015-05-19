@@ -1,0 +1,50 @@
+#
+# Import the CMS content for the Powertools site emails
+#
+# Localization ja
+#
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$emailResource=jar:de.hybris.platform.yb2bacceleratorcore.setup.CoreSystemSetup&/yb2bacceleratorcore/import/contentCatalogs/$contentCatalog/emails
+
+# Language
+$lang=ja
+
+# CMS components velocity templates
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+ ;powertools-BannerComponent-template;CMSBannerComponent テンプレート;$emailResource/email-bannerComponentTemplate.vm;
+ ;powertools-CMSImageComponent-template;CMSImageComponent テンプレート;$emailResource/email-cmsImageComponentTemplate.vm;
+ ;powertools-CMSLinkComponent-template;CMSLinkComponent テンプレート;$emailResource/email-cmsLinkComponentTemplate.vm;
+ ;powertools-CMSParagraphComponent-template;CMSParagraphComponent テンプレート;$emailResource/email-cmsParagraphComponentTemplate.vm;
+ ;powertools-SimpleBannerComponent-template;CMSSimpleBannerComponent テンプレート;$emailResource/email-bannerComponentTemplate.vm;
+
+# Email velocity templates
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+ ;powertools_Email_Customer_Registration_Body;顧客登録 Body 電子メール;$emailResource/email-customerRegistrationBody.vm;
+ ;powertools_Email_Customer_Registration_Subject;顧客登録電子メール件名;$emailResource/email-customerRegistrationSubject.vm;
+ ;powertools_Email_Forgotten_Password_Body;パスワードを忘れた場合 Body 電子メール;$emailResource/email-forgottenPasswordBody.vm;
+ ;powertools_Email_Forgotten_Password_Subject;パスワードを忘れた場合電子メール件名;$emailResource/email-forgottenPasswordSubject.vm;
+ ;powertools_Email_Order_ApprovalRejection_Body;注文承認拒否 Body 電子メール;$emailResource/email-orderApprovalRejectionBody.vm;
+ ;powertools_Email_Order_ApprovalRejection_Subject;注文承認拒否電子メール件名;$emailResource/email-orderApprovalRejectionSubject.vm;
+ ;powertools_Email_Order_Confirmation_Body;注文確認 Body 電子メール;$emailResource/email-orderConfirmationBody.vm;
+ ;powertools_Email_Order_Confirmation_Subject;注文確認電子メール件名;$emailResource/email-orderConfirmationSubject.vm;
+ ;powertools_Email_Order_PendingApproval_Body;注文保留承認 Body 電子メール;$emailResource/email-orderPendingApprovalBody.vm;
+ ;powertools_Email_Order_PendingApproval_Subject;注文保留承認電子メール件名;$emailResource/email-orderPendingApprovalSubject.vm;
+ ;powertools_Email_Quote_Order_Approve_Body;見積注文承認 Body 電子メール;$emailResource/email-quoteOrderApprovalBody.vm;
+ ;powertools_Email_Quote_Order_Approve_Subject;見積注文承認電子メール件名;$emailResource/email-quoteOrderApprovalSubject.vm;
+ ;powertools_Email_Quote_Order_Reject_Body;見積注文拒否 Body 電子メール;$emailResource/email-quoteOrderRejectionBody.vm;
+ ;powertools_Email_Quote_Order_Reject_Subject;見積注文拒否電子メール件名;$emailResource/email-quoteOrderRejectionSubject.vm;
+ ;powertools_Email_Replenishment_Order_Confirmation_Body;注文確認 Body 電子メール;$emailResource/email-replenishmentOrderConfirmationBody.vm;
+ ;powertools_Email_Replenishment_Order_Confirmation_Subject;注文確認電子メール件名;$emailResource/email-replenishmentOrderConfirmationSubject.vm;
+ ;powertools_Email_Replenishment_Order_Placed_Body;注文確認電子メール件名;$emailResource/email-replenishmentOrderPlacedBody.vm;
+ ;powertools_Email_Replenishment_Order_Placed_Subject;注文確認電子メール件名;$emailResource/email-replenishmentOrderPlacedSubject.vm;
+
+# Email Pages
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+ ;;CustomerRegistrationEmail;customerservices@hybris.com;"顧客サービス チーム"
+ ;;ForgottenPasswordEmail;customerservices@hybris.com;"顧客サービス チーム"
+ ;;OrderApprovalRejectionEmail;customerservices@hybris.com;"顧客サービス チーム"
+ ;;OrderConfirmationEmail;customerservices@hybris.com;"顧客サービス チーム"
+ ;;OrderPendingApprovalEmail;customerservices@hybris.com;"顧客サービス チーム"
+ ;;ReplenishmentOrderConfirmationEmail;customerservices@hybris.com;"顧客サービス チーム"
+ ;;ReplenishmentOrderPlacedEmail;customerservices@hybris.com;"顧客サービス チーム"

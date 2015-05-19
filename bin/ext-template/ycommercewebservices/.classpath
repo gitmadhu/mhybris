@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+	<classpathentry exported="false" kind="src" path="/platform" />
+	<classpathentry exported="true" kind="src" path="/commercefacades" />
+	<classpathentry exported="true" kind="src" path="/commerceservices" />
+	<classpathentry exported="true" kind="src" path="/commercewebservicescommons" />
+	<classpathentry exported="true" kind="lib" path="lib/kxml2-2.1.8.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.persistence.antlr-2.5.0.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.persistence.asm-2.5.0.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.persistence.core-2.5.0.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.persistence.moxy-2.5.0.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/cors-filter-1.8.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/java-property-utils-1.9.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/jstl-1.2.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/spring-security-oauth2-1.0.5.RELEASE.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/spring-security-taglibs-3.1.4.RELEASE.jar" />
+	<classpathentry exported="false" kind="lib" path="web/webroot/WEB-INF/lib/spring-webmvc-3.2.8.RELEASE.jar" />
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
+	<classpathentry exported="false" output="eclipsebin/web/classes" kind="src" path="web/src" />
+	<classpathentry exported="false" output="eclipsebin/web/classes" kind="src" path="web/testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
+				
+</classpath>
+				

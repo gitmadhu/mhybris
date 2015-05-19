@@ -1,0 +1,28 @@
+# Import the Solr configuration for the Powertools store
+#
+# Localization en
+#
+$lang=en
+
+$indexedType=powertoolsProductType
+
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true,default=$indexedType];name[unique=true];displayName[lang=$lang]
+ ;;allPromotions;Promotion;
+ ;;brand;Brand;
+ ;;category;Category;
+ ;;code;Code;
+ ;;description;Description;
+ ;;manufacturerName;Manufacturer Name;
+ ;;name;Name;
+ ;;price;Price;
+ ;;summary;Summary;
+
+
+# Define the available sorts
+UPDATE SolrSort;indexedType(identifier)[unique=true,default=$indexedType];code[unique=true];name[lang=$lang]
+ ;;name-asc;Name (ascending);
+ ;;name-desc;Name (descending);
+ ;;price-asc;Price (lowest first);
+ ;;price-desc;Price (highest first);
+ ;;relevance;Relevance;
+ ;;topRated;Top Rated;

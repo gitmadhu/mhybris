@@ -1,0 +1,19 @@
+# ImpEx for Importing Usage Charges Classifications		
+#% impex.setLocale( Locale.GERMAN ); 																
+
+$productCatalog=
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+
+INSERT_UPDATE VolumeUsageCharge;id[unique=true];usageUnit(id);$catalogVersion
+
+INSERT_UPDATE PerUnitUsageCharge;id[unique=true];usageUnit(id);usageChargeType(code);$catalogVersion
+
+INSERT_UPDATE TierUsageChargeEntry;id[unique=true];price;tierStart;tierEnd;$catalogVersion
+
+INSERT_UPDATE OverageUsageChargeEntry;id[unique=true];price;$catalogVersion
+
+UPDATE PerUnitUsageCharge;id[unique=true];usageChargeEntries(id, $catalogVersion);$catalogVersion
+
+UPDATE VolumeUsageCharge;id[unique=true];usageChargeEntries(id, $catalogVersion);$catalogVersion
+
+UPDATE SubscriptionPricePlan;product(code, $catalogVersion)[unique=true];usageCharges(id, $catalogVersion);$catalogVersion

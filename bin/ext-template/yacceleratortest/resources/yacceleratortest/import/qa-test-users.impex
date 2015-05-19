@@ -1,0 +1,188 @@
+#
+# Import Sample Customers
+# 
+$regulargroup=regulargroup
+$customergroup=customergroup
+
+$passwordEncoding=md5
+$defaultPassword=12341234
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+
+# Create Customer Group
+INSERT_UPDATE Usergroup;uid[unique=true];groups(uid)[mode=append]
+;$regulargroup;customergroup
+
+# Payment Modes
+INSERT_UPDATE StandardPaymentMode;code[unique=true];name[lang=de];name[lang=en];description[lang=de];description[lang=en];active;paymentinfotype(code)
+;creditcard;Kreditkarte;creditcard;Bezahlung per Keditkarte;payment with creditcard;true;CreditCardPaymentInfo
+;debitentry;Bankeinzug;Bank Collection;Bezahlung per Bankeinzug;payment with bank collection;true;DebitPaymentInfo
+;invoice;Rechnung;Invoice;per Rechnung bezahlen;payment with invoice;true;InvoicePaymentInfo
+;advance;Vorkasse;Advance;per Vorkasse bezahlen;payment in advance;true;AdvancePaymentInfo
+;;
+INSERT_UPDATE StandardPaymentModeValue;paymentmode(code)[unique=true];currency(isoCode)[unique=true];value;;;;
+;creditcard;EUR;0;;;;
+;creditcard;USD;0;;;;
+;creditcard;GBP;0;;;;
+;debitentry;EUR;0;;;;;;
+;debitentry;USD;0;;;;;;
+;debitentry;GBP;0;;;;;;
+;invoice;EUR;1,5;;;;;;
+;invoice;USD;1,4;;;;;;
+;invoice;GBP;1,5;;;;;;
+;advance;EUR;0;;;;;;
+;advance;USD;0;;;;;;
+;advance;GBP;0;;;;;;
+;;
+INSERT_UPDATE DeliveryMode;code[unique=true];active;net;supportedpaymentmodes(code);
+;courier;true;false;creditcard;Kreditkarte;creditcard,debitentry,invoice,advance;
+;postService;true;false;creditcard,debitentry,invoice,advance;
+;collect;true;false;invoice,advance;
+;;
+
+# Sample customers
+INSERT_UPDATE Customer;originalUid[unique=true];uid[unique=true];title(code);name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);$setPassword;&userId
+;PromotionUser@test.com;promotionuser@test.com;mr;promotions test user;a test user for order threshold promotions etc;en;GBP;$regulargroup;;user1
+;PaymentUser@test.com;paymentuser@test.com;mr;payments test user;a test user for payments;en;GBP;$customergroup;;user2
+;OrderHistoryUser@test.com;orderhistoryuser@test.com;mr;orders test user;a test user for orders;en;GBP;$customergroup;;user3
+;TestUser1@test.com;testuser1@test.com;mr;test user 1;test user;en;GBP;$customergroup;;user4
+;TestUser2@test.com;testuser2@test.com;mr;test user 2;test user;de;USD;$customergroup;;user5
+;TestUser3@test.com;testuser3@test.com;mr;test user 3;test user;ja;JPY;$customergroup;;user6
+;EnterpriseUser@test.com;enterpriseuser@test.com;mr;enterprise test user;an enterprise test user for orders;en;USD;$customergroup;;user7
+
+# Sample customer addresses
+INSERT_UPDATE Address;&addId;owner(&userId)[unique=true];streetname[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);region(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;addr1;user1;10 Yamashita-cho;231-8520;false;Yokohama;JP;;true;true;true;true;Promotion;User;PromotionUser@test.com;MALE;;+48 32 44 00 800;mr;;Hybris;;
+;addr2;user2;49 Landsberger Allee;10249;false;Berlin;DE;;true;true;true;true;Payment;User;PaymentUser@test.com;MALE;;+77364758;mr;;Hybris;;
+;addr3;user3;21 Trumpington Street;CB2 1RB;false;Cambridge;GB;;true;true;true;true;OrderHistory;User;OrderHistoryUser@test.com;MALE;;+60616707;mr;;Hybris;;
+;addr4;user4;11 Test Street;AB1 CD2;false;Edinburgh;GB;;true;true;true;true;Test1;User;TestUser1@test.com;MALE;;+11 1234567;mr;;Hybris;;
+;addr5;user5;22 Test Street;AB1 CD2;false;Munich;DE;;true;true;true;true;Test2;User;TestUser2@test.com;MALE;;+22 1234567;mr;;Hybris;;
+;addr6;user6;33 Test Street;AB1 CD2;false;Tokyo;JP;;true;true;true;true;Test3;User;TestUser3@test.com;MALE;;+33 1234567;mr;;Hybris;;
+;addr7;user7;44 Test Street;AB1 CD2;false;New York;US;US-NY;true;true;true;true;Enterprise;User;EnterpriseUser@test.com;MALE;;+44 1234567;mr;;Hybris;;
+
+# Set default payment and shipping addresses for sample customers
+UPDATE Customer;uid[unique=true];defaultPaymentAddress(&addId);defaultShipmentAddress(&addId)
+;promotionuser@test.com;addr1;addr1
+;paymentuser@test.com;addr2;addr2
+;orderhistoryuser@test.com;addr3;addr3
+;testuser1@test.com;addr4;addr4
+;testuser2@test.com;addr5;addr5
+;testuser3@test.com;addr6;addr6
+;enterpriseuser@test.com;addr7;addr7
+
+INSERT_UPDATE Customer;uid[unique=true];originalUid;name;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);$setPassword;
+;acceptanceuser@test.com;AcceptanceUser@test.com;John Acceptance;en;USD;$customergroup;;
+
+INSERT_UPDATE Address;owner(Customer.uid)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;lastname;firstname;email;gender(code);&addressID
+;acceptanceuser@test.com;Sesame Street;231;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;231
+;acceptanceuser@test.com;Sesame Street;232;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;232
+;acceptanceuser@test.com;Sesame Street;233;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;233
+;acceptanceuser@test.com;Sesame Street;234;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;234
+;acceptanceuser@test.com;Sesame Street;235;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;235
+;acceptanceuser@test.com;Sesame Street;236;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;236
+;acceptanceuser@test.com;Sesame Street;237;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;237
+;acceptanceuser@test.com;Sesame Street;238;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;238
+;acceptanceuser@test.com;Sesame Street;239;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;239
+;acceptanceuser@test.com;Sesame Street;2310;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;2310
+;acceptanceuser@test.com;Sesame Street;2311;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;2311
+;acceptanceuser@test.com;Sesame Street;2312;90210;false;Los Angeles;US;true;true;true;false;Acceptance;Johh;acceptanceuser@test.com;MALE;2312
+
+
+INSERT_UPDATE Customer;uid[unique=true];defaultPaymentaddress(&addressID);defaultShipmentAddress(&addressID)
+;acceptanceuser@test.com;231;231
+
+
+INSERT_UPDATE Order;code[unique=true];user(uid);date[dateformat=dd.MM.yyyy HH:mm];currency(isocode);net;deliveryMode(code[default='premium-gross']);paymentMode(code);Discounts(code);calculated;site(uid);store(uid);status(code)
+;acceptanceTestOrder1;acceptanceuser@test.com;17.04.2011 15:10;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder2;acceptanceuser@test.com;17.04.2011 15:12;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder3;acceptanceuser@test.com;17.04.2011 15:14;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder4;acceptanceuser@test.com;17.04.2011 15:16;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder5;acceptanceuser@test.com;17.04.2011 15:18;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder6;acceptanceuser@test.com;17.04.2011 15:20;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder7;acceptanceuser@test.com;17.04.2011 15:22;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder8;acceptanceuser@test.com;17.04.2011 15:24;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder9;acceptanceuser@test.com;17.04.2011 15:26;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder0;acceptanceuser@test.com;17.04.2011 15:28;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder10;acceptanceuser@test.com;17.04.2011 15:30;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder11;acceptanceuser@test.com;17.04.2011 15:32;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;acceptanceTestOrder12;acceptanceuser@test.com;17.04.2011 15:34;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+
+
+INSERT_UPDATE OrderEntry;order(code)[unique=true];product(code,catalogVersion(catalog(id),version))[unique=true];quantity;calculated;unit(code);entryNumber;
+;acceptanceTestOrder1;1934793:electronicsProductCatalog:Online;4;false;pieces;0
+;acceptanceTestOrder1;816323:electronicsProductCatalog:Online;1;false;pieces;1
+;acceptanceTestOrder1;1320808:electronicsProductCatalog:Online;2;false;pieces;2
+;acceptanceTestOrder2;1934793:electronicsProductCatalog:Online;3;false;pieces;0
+;acceptanceTestOrder2;816323:electronicsProductCatalog:Online;1;false;pieces;1
+;acceptanceTestOrder2;1320808:electronicsProductCatalog:Online;2;false;pieces;2
+;acceptanceTestOrder3;1934793:electronicsProductCatalog:Online;2;false;pieces;0
+;acceptanceTestOrder3;816323:electronicsProductCatalog:Online;1;false;pieces;1
+;acceptanceTestOrder3;1320808:electronicsProductCatalog:Online;2;false;pieces;2
+;acceptanceTestOrder4;1934793:electronicsProductCatalog:Online;4;false;pieces;0
+;acceptanceTestOrder4;816323:electronicsProductCatalog:Online;2;false;pieces;1
+;acceptanceTestOrder4;1320808:electronicsProductCatalog:Online;2;false;pieces;2
+;acceptanceTestOrder5;1934793:electronicsProductCatalog:Online;4;false;pieces;0
+;acceptanceTestOrder5;816323:electronicsProductCatalog:Online;3;false;pieces;1
+;acceptanceTestOrder5;1320808:electronicsProductCatalog:Online;2;false;pieces;2
+;acceptanceTestOrder6;1934793:electronicsProductCatalog:Online;4;false;pieces;0
+;acceptanceTestOrder6;816323:electronicsProductCatalog:Online;4;false;pieces;1
+;acceptanceTestOrder6;1320808:electronicsProductCatalog:Online;2;false;pieces;2
+;acceptanceTestOrder7;1934793:electronicsProductCatalog:Online;4;false;pieces;0
+;acceptanceTestOrder7;816323:electronicsProductCatalog:Online;5;false;pieces;1
+;acceptanceTestOrder7;1320808:electronicsProductCatalog:Online;2;false;pieces;2
+;acceptanceTestOrder8;1934793:electronicsProductCatalog:Online;4;false;pieces;0
+;acceptanceTestOrder8;816323:electronicsProductCatalog:Online;1;false;pieces;1
+;acceptanceTestOrder8;1320808:electronicsProductCatalog:Online;1;false;pieces;2
+;acceptanceTestOrder9;1934793:electronicsProductCatalog:Online;4;false;pieces;0
+;acceptanceTestOrder9;816323:electronicsProductCatalog:Online;2;false;pieces;1
+;acceptanceTestOrder9;1320808:electronicsProductCatalog:Online;5;false;pieces;2
+;acceptanceTestOrder10;1934793:electronicsProductCatalog:Online;4;false;pieces;0
+;acceptanceTestOrder10;816323:electronicsProductCatalog:Online;3;false;pieces;1
+;acceptanceTestOrder10;1320808:electronicsProductCatalog:Online;7;false;pieces;2
+;acceptanceTestOrder11;1934793:electronicsProductCatalog:Online;4;false;pieces;0
+;acceptanceTestOrder11;816323:electronicsProductCatalog:Online;1;false;pieces;1
+;acceptanceTestOrder11;1320808:electronicsProductCatalog:Online;3;false;pieces;2
+;acceptanceTestOrder12;1934793:electronicsProductCatalog:Online;5;false;pieces;0
+;acceptanceTestOrder12;816323:electronicsProductCatalog:Online;7;false;pieces;1
+;acceptanceTestOrder12;1320808:electronicsProductCatalog:Online;2;false;pieces;2
+
+INSERT_UPDATE CreditCardPaymentInfo;code[unique=true];user(uid)[unique=true];ccOwner;number;type(code);validFromMonth;validFromYear;validToMonth;validToYear;subscriptionId;duplicate[default=false];saved[default=true]
+;ccid1;acceptanceuser@test.com;John Acceptance;4012888888881881;visa;1;2010;12;2013;1231;
+;ccid2;acceptanceuser@test.com;John Acceptance;4012888888881882;visa;2;2010;12;2013;1232;
+;ccid3;acceptanceuser@test.com;John Acceptance;4012888888881883;visa;3;2010;12;2013;1233;
+;ccid4;acceptanceuser@test.com;John Acceptance;4012888888881884;visa;4;2010;12;2013;1234;
+;ccid5;acceptanceuser@test.com;John Acceptance;4012888888881885;visa;5;2010;12;2013;1235;
+;ccid6;acceptanceuser@test.com;John Acceptance;4012888888881886;visa;6;2010;12;2013;1236;
+;ccid7;acceptanceuser@test.com;John Acceptance;4012888888881887;visa;7;2010;12;2013;1237;
+;ccid8;acceptanceuser@test.com;John Acceptance;4012888888881888;visa;8;2010;12;2013;1238;
+;ccid9;acceptanceuser@test.com;John Acceptance;4012888888881889;visa;9;2010;12;2013;1239;
+;ccid10;acceptanceuser@test.com;John Acceptance;4012888888881820;visa;10;2010;12;2013;12310;
+;ccid11;acceptanceuser@test.com;John Acceptance;4012888888881832;visa;11;2010;12;2013;12311;
+;ccid12;acceptanceuser@test.com;John Acceptance;4012888888881854;visa;12;2010;12;2013;12312;
+

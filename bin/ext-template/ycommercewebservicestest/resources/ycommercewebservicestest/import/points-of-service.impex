@@ -1,0 +1,275 @@
+# ImpEx for wsTest Store
+#% impex.setLocale( Locale.GERMAN ); 
+
+$storeUid=wsTest
+$productCatalog=wsTestProductCatalog
+
+
+$standardHours=wsTest-japan-standard-hours
+$weekendHours=wsTest-japan-weekend-hours
+
+INSERT_UPDATE OpeningSchedule;code[unique=true];
+;$standardHours;
+;$weekendHours;
+
+INSERT_UPDATE WeekdayOpeningDay;openingSchedule(code)[unique=true];dayOfWeek(code)[unique=true];openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm];
+;$standardHours;MONDAY   ; 09:00; 20:00
+;$standardHours;TUESDAY  ; 09:00; 20:00
+;$standardHours;WEDNESDAY; 09:00; 20:00
+;$standardHours;THURSDAY ; 09:00; 20:00
+;$standardHours;FRIDAY   ; 09:00; 20:00
+;$standardHours;SATURDAY ; 10:00; 20:00
+
+;$weekendHours;MONDAY   ; 09:00; 20:00
+;$weekendHours;TUESDAY  ; 09:00; 20:00
+;$weekendHours;WEDNESDAY; 09:00; 20:00
+;$weekendHours;THURSDAY ; 09:00; 20:00
+;$weekendHours;FRIDAY   ; 09:00; 20:00
+;$weekendHours;SATURDAY ; 10:00; 20:00
+;$weekendHours;SUNDAY   ; 10:00; 16:00
+
+
+INSERT_UPDATE SpecialOpeningDay;openingSchedule(code)[unique=true];date[unique=true,dateformat=dd.MM.yyyy];closed;openingTime[dateformat=hh:mm];closingTime[dateformat=hh:mm]
+;$standardHours; 01.01.2013 ;true
+;$standardHours; 14.01.2013 ;true
+;$standardHours; 11.02.2013 ;true
+;$standardHours; 20.03.2013 ;true
+;$standardHours; 29.04.2013 ;true
+;$standardHours; 03.05.2013 ;true
+;$standardHours; 04.05.2013 ;true
+;$standardHours; 05.05.2013 ;true
+;$standardHours; 15.07.2013 ;true
+;$standardHours; 16.09.2013 ;true
+;$standardHours; 23.09.2013 ;true
+;$standardHours; 14.10.2013 ;true
+;$standardHours; 03.11.2013 ;true
+;$standardHours; 23.11.2013 ;true
+;$standardHours; 23.12.2013 ;true
+
+;$weekendHours; 01.01.2013 ;true
+;$weekendHours; 14.01.2013 ;true
+;$weekendHours; 11.02.2013 ;true
+;$weekendHours; 20.03.2013 ;true
+;$weekendHours; 29.04.2013 ;true
+;$weekendHours; 03.05.2013 ;true
+;$weekendHours; 04.05.2013 ;true
+;$weekendHours; 05.05.2013 ;true
+;$weekendHours; 15.07.2013 ;true
+;$weekendHours; 16.09.2013 ;true
+;$weekendHours; 23.09.2013 ;true
+;$weekendHours; 14.10.2013 ;true
+;$weekendHours; 03.11.2013 ;true
+;$weekendHours; 23.11.2013 ;true
+;$weekendHours; 23.12.2013 ;true
+
+
+INSERT_UPDATE PointOfService;name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];openingSchedule(code);basestore(uid)[default=$storeUid];features(code)
+;WS-Nakano;STORE;ws_addr1;35,6894875;139,6917064;29-04-2011;$standardHours
+;WS-Shinbashi;STORE;ws_addr2;35,6894875;139,6917064;29-04-2011;$standardHours
+;WS-Koto;STORE;ws_addr3;35,6894875;139,6917064;29-04-2011;$standardHours
+;WS-Misato;STORE;ws_addr4;35,6894875;139,6917064;29-04-2011;$weekendHours
+;WS-Matsudo;STORE;ws_addr5;35,6894875;139,6917064;29-04-2011;$standardHours
+;WS-Ichikawa;STORE;ws_addr6;35,6894875;139,6917064;29-04-2011;$weekendHours
+;WS-Choshi;STORE;ws_addr7;35,7409;140,8064;29-04-2011;$standardHours
+;WS-Chiba;STORE;ws_addr8;35,617;140,1023;29-04-2011;$weekendHours
+;WS-Yokosuka;STORE;ws_addr9;35,2853;139,664;29-04-2011;$standardHours
+;WS-Tokio Cerulean Tower Tokyu Hotel;STORE;ws_addr200;35,6894875;139,6917064;29-04-2011;$standardHours
+;WS-Tokio Flexstay Nippori Inn;STORE;ws_addr201;35,6894875;139,6917064;29-04-2011;$standardHours
+;WS-Tokio Hotel Metropolitan Tokyo;STORE;ws_addr202;35,6894875;139,6917064;29-04-2011;$standardHours
+;WS-Tokio Dormy Inn Tokyo Hatchobori;STORE;ws_addr203;35,6894875;139,6917064;29-04-2011;$weekendHours
+;WS-Tokio Park Hotel Tokyo;STORE;ws_addr204;35,6894875;139,6917064;29-04-2011;$standardHours
+;WS-Yokohama Sakuragicho Washington Hotel;STORE;ws_addr205;35,443708;139,638026;29-04-2011;$weekendHours
+;WS-Yokohama Shin Yokohama Prince Hotel;STORE;ws_addr206;35,443708;139,638026;29-04-2011;$standardHours
+;WS-Yokohama Comfort Hotel Yokohama Kannai;STORE;ws_addr207;35,443708;139,638026;29-04-2011;$weekendHours
+;WS-Yokohama Hotel New Grand;STORE;ws_addr208;35,443708;139,638026;29-04-2011;$standardHours
+;WS-Yokohama Hotel JAL City Kannai Yokohama;STORE;ws_addr209;35,443708;139,638026;29-04-2011;$standardHours
+;WS-Osaka Hilton Osaka Hotel;STORE;ws_addr210;34,698823;135,498235;29-04-2011;$standardHours
+;WS-Osaka Crowne Plaza Hotel Ana Osaka;STORE;ws_addr211;34,698823;135,498235;29-04-2011;$standardHours
+;WS-Osaka Ramada Osaka;STORE;ws_addr212;34,698823;135,498235;29-04-2011;$weekendHours
+;WS-Osaka Cross Hotel Osaka;STORE;ws_addr213;34,698823;135,498235;29-04-2011;$standardHours
+;WS-Osaka Best Western Hotel Fino Osaka Shinsaibashi;STORE;ws_addr214;34,698823;135,498235;29-04-2011;$weekendHours
+;WS-Nagoya Hilton Nagoya Hotel;STORE;ws_addr215;35,167306;136,896583;29-04-2011;$standardHours
+;WS-Nagoya Marriott Nagoya;STORE;ws_addr216;35,167306;136,896583;29-04-2011;$weekendHours
+;WS-Nagoya Crowne Plaza Ana Grand Court Nagoya;STORE;ws_addr217;35,167306;136,896583;29-04-2011;$standardHours
+;WS-Nagoya The Westin Nagoya Castle;STORE;ws_addr218;35,167306;136,896583;29-04-2011;$standardHours
+;WS-Nagoya Royal Park Inn Nagoya;STORE;ws_addr219;35,167306;136,896583;29-04-2011;$standardHours
+;WS-Sapporo Ana Hotel Sapporo;STORE;ws_addr220;43,06356;141,340771;29-04-2011;$standardHours
+;WS-Sapporo Best Western Hotel Sapporo Nakajima Koen;STORE;ws_addr221;43,06356;141,340771;29-04-2011;$weekendHours
+;WS-Sapporo Sheraton Sapporo Hotel;STORE;ws_addr222;43,06356;141,340771;29-04-2011;$standardHours
+;WS-Sapporo Hotel Resol Trinity Sapporo;STORE;ws_addr223;43,06356;141,340771;29-04-2011;$weekendHours
+;WS-Sapporo Hotel Sunroute Sapporo;STORE;ws_addr224;43,06356;141,340771;29-04-2011;$standardHours
+;WS-Kobe Hotel Monterey Amalie;STORE;ws_addr225;34,694741;135,186095;29-04-2011;$weekendHours
+;WS-Kobe Hotel Monterey Kobe;STORE;ws_addr226;34,694741;135,186095;29-04-2011;$standardHours
+;WS-Kobe Sannomiya Terminal Hotel;STORE;ws_addr227;34,694741;135,186095;29-04-2011;$standardHours
+;WS-Kobe Bay Sheraton Hotel and Towers;STORE;ws_addr228;34,694741;135,186095;29-04-2011;$standardHours
+;WS-Kobe the b;STORE;ws_addr229;34,694741;135,186095;29-04-2011;$standardHours
+;WS-Fukuoka Hotel Monterey La Soeur Fukuoka;STORE;ws_addr230;33,590355;130,401716;29-04-2011;$weekendHours
+;WS-Fukuoka Hilton Fukuoka Sea Hawk;STORE;ws_addr231;33,590355;130,401716;29-04-2011;$standardHours
+;WS-Fukuoka Best Western Fukuoka Nakasu Inn;STORE;ws_addr232;33,590355;130,401716;29-04-2011;$weekendHours
+;WS-Fukuoka Canal City Fukuoka Washington Hotel;STORE;ws_addr233;33,590355;130,401716;29-04-2011;$standardHours
+;WS-Fukuoka Hotel Nikko Fukuoka;STORE;ws_addr234;33,590355;130,401716;29-04-2011;$weekendHours
+;WS-Kawasaki Mets Kawasaki Hotel;STORE;ws_addr235;35,531106;139,696071;29-04-2011;$standardHours
+;WS-Kawasaki Mets Mizonokuchi Hotel;STORE;ws_addr236;35,531106;139,696071;29-04-2011;$standardHours
+;WS-Kawasaki Hotel Sunroute Kawasaki;STORE;ws_addr237;35,531106;139,696071;29-04-2011;$standardHours
+;WS-Kawasaki Pearl Hotel Kawasaki;STORE;ws_addr238;35,531106;139,696071;29-04-2011;$standardHours
+;WS-Kawasaki Grand Hotel;STORE;ws_addr239;35,531106;139,696071;29-04-2011;$weekendHours
+
+INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];town[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
+;ws_addr1;Waseda Dori;13;;Tokio;JP;;+81 1988 3600;WS-Nakano
+;ws_addr2;Hibiya Dori;20;;Tokio;JP;;+81 4649 8891;WS-Shinbashi
+;ws_addr3;Shin-Ohashi Dori;10;;Tokio;JP;;+81 6176 3426;WS-Koto
+;ws_addr4;Tokyo-Gaikan Expy;;;Tokio;JP;;+81 4376 5760;WS-Misato
+;ws_addr5;Chiba-ken Matsudo-shi;;;Tokio;JP;;+81 3519 4163;WS-Matsudo
+;ws_addr6;Chiba-ken Ichikawa-shi;;;Tokio;JP;;+81 666 563;WS-Ichikawa
+;ws_addr7;Chiba-ken Choshi-shi;;;Choshi;JP;;+81 501 6516;WS-Choshi
+;ws_addr8;Chiba-ken Chiba-shi Mihama-ku;;;Chiba;JP;;+81 8916 4281;WS-Chiba
+;ws_addr9;Kanagawa-ken Yokosuka-shi;;;Yokosuka;JP;;+81 9583 8863;WS-Yokosuka
+;ws_addr200;Sakuragaokacho Shibuya;26-01;150-8512;Tokio;JP;;+81 5141 3298;WS-Tokio Cerulean Tower Tokyu Hotel
+;ws_addr201;Higashi-Nippori Arakawa;5-43-7;116-0014;Tokio;JP;;+81 3550 9246;WS-Tokio Flexstay Nippori Inn
+;ws_addr202;Shinkawa Chuo;2-20-4;104-0033;Tokio;JP;;+81 7684 8185;WS-Tokio Hotel Metropolitan Tokyo
+;ws_addr203;Shinkawa Chuo;2-20-4;104-0033;Tokio;JP;;+81 6180 548;WS-Tokio Dormy Inn Tokyo Hatchobori
+;ws_addr204;Higashi Shimbashi;01.07.2001;105-7227;Tokio;JP;;+81 7093 958;WS-Tokio Park Hotel Tokyo
+;ws_addr205;Sakuragicho;1-101-1;231-0062;Yokohama;JP;;+81 1114 9907;WS-Yokohama Sakuragicho Washington Hotel
+;ws_addr206;Shin Yokohama;03-04;222-8533;Yokohama;JP;;+81 1006 1478;WS-Yokohama Shin Yokohama Prince Hotel
+;ws_addr207;Sumiyoshi-Cho;03 33;231-0013;Yokohama;JP;;+81 4220 68;WS-Yokohama Comfort Hotel Yokohama Kannai
+;ws_addr208;Yamashita-cho;10;231-8520;Yokohama;JP;;+81 6734 1664;WS-Yokohama Hotel New Grand
+;ws_addr209;Yamashita-cho;72;231-0023;Yokohama;JP;;+81 441 7148;WS-Yokohama Hotel JAL City Kannai Yokohama
+;ws_addr210;Umeda 1-chome;08-10;530-0001;Osaka;JP;;+81 6733 7883;WS-Osaka Hilton Osaka Hotel
+;ws_addr211;Dojimahama;01.03.2001;530-0004;Osaka;JP;;+81 8490 5589;WS-Osaka Crowne Plaza Hotel Ana Osaka
+;ws_addr212;Toyosaki ;3-16-19;531-0072;Osaka;JP;;+81 9068 703;WS-Osaka Ramada Osaka
+;ws_addr213;Shinsaibashisuji;02.05.2015;542-0085;Osaka;JP;;+81 2874 4274;WS-Osaka Cross Hotel Osaka
+;ws_addr214;Shinsaibashi;01.02.2019;542-0083;Osaka;JP;;+81 4535 1332;WS-Osaka Best Western Hotel Fino Osaka Shinsaibashi
+;ws_addr215;Sakae 1-chome;03-03;460-0008;Nagoya;JP;;+81 358 3977;WS-Nagoya Hilton Nagoya Hotel
+;ws_addr216;Meieki Nakamura-ku;01.01.2004;450-6002 ;Nagoya;JP;;+81 9550 891;WS-Nagoya Marriott Nagoya
+;ws_addr217;Kanayama;01.01.2001;460-0023;Nagoya;JP;;+81 9352 7328;WS-Nagoya Crowne Plaza Ana Grand Court Nagoya
+;ws_addr218;Hinokuchi-cho;03 19;451-8551;Nagoya;JP;;+81 6350 3904;WS-Nagoya The Westin Nagoya Castle
+;ws_addr219;Meieki Nakamura-Ku;3-27-5;450-0002;Nagoya;JP;;+81 1049 1568;WS-Nagoya Royal Park Inn Nagoya
+;ws_addr220;Kita Sanjo Nishi;01.02.2009;060-0003;Sapporo;JP;;+81 3243 3466;WS-Sapporo Ana Hotel Sapporo
+;ws_addr221;Nishi Minamihachijo Chuo-Ku;03-10-10;064-0808;Sapporo;JP;;+81 2392 7603;WS-Sapporo Best Western Hotel Sapporo Nakajima Koen
+;ws_addr222;Atsubetsuchuo 2J0;05-05-25;004-0052;Sapporo;JP;;+81 3026 7012;WS-Sapporo Sheraton Sapporo Hotel
+;ws_addr223;Odori Nishi;05-05;060-0042;Sapporo;JP;;+81 2230 9821;WS-Sapporo Hotel Resol Trinity Sapporo
+;ws_addr224;Nishi 1-chome;01-22;060-0807;Sapporo;JP;;+81 7872 9225;WS-Sapporo Hotel Sunroute Sapporo
+;ws_addr225;Nakayamate Dori;02.02.2028;650-0004;Kobe;JP;;+81 3181 7211;WS-Kobe Hotel Monterey Amalie
+;ws_addr226;Shimoyamate-Dori;02.11.2013;650-0031;Kobe;JP;;+81 6895 897;WS-Kobe Hotel Monterey Kobe
+;ws_addr227;Kumoidori;01-02-08;651-0096;Kobe;JP;;+81 7363 4347;WS-Kobe Sannomiya Terminal Hotel
+;ws_addr228;Koyocho-Naka;02-13;658-0032 ;Kobe;JP;;+81 4032 2345;WS-Kobe Bay Sheraton Hotel and Towers
+;ws_addr229;Shimoyamatedori Chuo;02.11.2005;650-0011;Kobe;JP;;+81 861 8092;WS-Kobe the b
+;ws_addr230;Daimyo;02.08.2027;810-0041;Fukuoka;JP;;+81 3425 1442;WS-Fukuoka Hotel Monterey La Soeur Fukuoka
+;ws_addr231;Jigyohama;02.02.2003;810-8650 ;Fukuoka;JP;;+81 9203 5762;WS-Fukuoka Hilton Fukuoka Sea Hawk
+;ws_addr232;Nakasu;05.01.2012;810-0801;Fukuoka;JP;;+81 8425 6756;WS-Fukuoka Best Western Fukuoka Nakasu Inn
+;ws_addr233;Sumiyoshi;01.02.2020;812-0018;Fukuoka;JP;;+81 4011 7870;WS-Fukuoka Canal City Fukuoka Washington Hotel
+;ws_addr234;Hakata Eki-Mae;2-18-25;812-0011;Fukuoka;JP;;+81 8770 6945;WS-Fukuoka Hotel Nikko Fukuoka
+;ws_addr235;Horikawa-Cho;26330;212-0013;Kawasaki;JP;;+81 2783 5395;WS-Kawasaki Mets Kawasaki Hotel
+;ws_addr236;Takatsu-Ku;01.01.2005;213-0001 ;Kawasaki;JP;;+81 4968 211;WS-Kawasaki Mets Mizonokuchi Hotel
+;ws_addr237;Isago;02.11.2017;210-0006;Kawasaki;JP;;+81 4489 6433;WS-Kawasaki Hotel Sunroute Kawasaki
+;ws_addr238;Ogawa cho;16-02;210-0023;Kawasaki;JP;;+81 2046 7181;WS-Kawasaki Pearl Hotel Kawasaki
+;ws_addr239;Miyamoto-cho;06-02;210-0004;Kawasaki;JP;;+81 6801 8294;WS-Kawasaki Grand Hotel
+
+
+INSERT_UPDATE StoreLocatorFeature;code[unique=true]
+;wheelchair
+;creche
+;sundayWorkshops
+;buyOnlinePickupInStore
+
+UPDATE PointOfService;name[unique=true];features(code);
+;WS-Nakano;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Shinbashi;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Koto;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Misato;wheelchair,buyOnlinePickupInStore;
+;WS-Matsudo;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Ichikawa;wheelchair,buyOnlinePickupInStore;
+;WS-Choshi;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Chiba;wheelchair,buyOnlinePickupInStore;
+;WS-Yokosuka;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Tokio Cerulean Tower Tokyu Hotel;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Tokio Flexstay Nippori Inn;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Tokio Hotel Metropolitan Tokyo;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Tokio Dormy Inn Tokyo Hatchobori;wheelchair,buyOnlinePickupInStore;
+;WS-Tokio Park Hotel Tokyo;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Yokohama Sakuragicho Washington Hotel;wheelchair,buyOnlinePickupInStore;
+;WS-Yokohama Shin Yokohama Prince Hotel;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Yokohama Comfort Hotel Yokohama Kannai;wheelchair,buyOnlinePickupInStore;
+;WS-Yokohama Hotel New Grand;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Yokohama Hotel JAL City Kannai Yokohama;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Osaka Hilton Osaka Hotel;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Osaka Crowne Plaza Hotel Ana Osaka;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Osaka Ramada Osaka;wheelchair,buyOnlinePickupInStore;
+;WS-Osaka Cross Hotel Osaka;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Osaka Best Western Hotel Fino Osaka Shinsaibashi;wheelchair,buyOnlinePickupInStore;
+;WS-Nagoya Hilton Nagoya Hotel;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Nagoya Marriott Nagoya;wheelchair,buyOnlinePickupInStore;
+;WS-Nagoya Crowne Plaza Ana Grand Court Nagoya;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Nagoya The Westin Nagoya Castle;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Nagoya Royal Park Inn Nagoya;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Sapporo Ana Hotel Sapporo;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Sapporo Best Western Hotel Sapporo Nakajima Koen;wheelchair,buyOnlinePickupInStore;
+;WS-Sapporo Sheraton Sapporo Hotel;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Sapporo Hotel Resol Trinity Sapporo;wheelchair,buyOnlinePickupInStore;
+;WS-Sapporo Hotel Sunroute Sapporo;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Kobe Hotel Monterey Amalie;wheelchair,buyOnlinePickupInStore;
+;WS-Kobe Hotel Monterey Kobe;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Kobe Sannomiya Terminal Hotel;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Kobe Bay Sheraton Hotel and Towers;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Kobe the b;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Fukuoka Hotel Monterey La Soeur Fukuoka;wheelchair,buyOnlinePickupInStore;
+;WS-Fukuoka Hilton Fukuoka Sea Hawk;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Fukuoka Best Western Fukuoka Nakasu Inn;wheelchair,buyOnlinePickupInStore;
+;WS-Fukuoka Canal City Fukuoka Washington Hotel;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Fukuoka Hotel Nikko Fukuoka;wheelchair,buyOnlinePickupInStore;
+;WS-Kawasaki Mets Kawasaki Hotel;creche,sundayWorkshops,buyOnlinePickupInStore;
+;WS-Kawasaki Mets Mizonokuchi Hotel;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Kawasaki Hotel Sunroute Kawasaki;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Kawasaki Pearl Hotel Kawasaki;wheelchair,creche,buyOnlinePickupInStore;
+;WS-Kawasaki Grand Hotel;wheelchair,buyOnlinePickupInStore;
+
+INSERT_UPDATE PoS2WarehouseRel;source(name)[unique=true];target(code)[unique=true]
+;WS-Nakano;WS-Nakano
+;WS-Shinbashi;WS-Shinbashi
+;WS-Koto;WS-Koto
+;WS-Misato;WS-Misato
+;WS-Matsudo;WS-Matsudo
+;WS-Ichikawa;WS-Ichikawa
+;WS-Choshi;WS-Choshi
+;WS-Chiba;WS-Chiba
+;WS-Yokosuka;WS-Yokosuka
+;WS-Tokio Cerulean Tower Tokyu Hotel;WS-Tokio Cerulean Tower Tokyu Hotel
+;WS-Tokio Flexstay Nippori Inn;WS-Tokio Flexstay Nippori Inn
+;WS-Tokio Hotel Metropolitan Tokyo;WS-Tokio Hotel Metropolitan Tokyo
+;WS-Tokio Dormy Inn Tokyo Hatchobori;WS-Tokio Dormy Inn Tokyo Hatchobori
+;WS-Tokio Park Hotel Tokyo;WS-Tokio Park Hotel Tokyo
+;WS-Yokohama Sakuragicho Washington Hotel;WS-Yokohama Sakuragicho Washington Hotel
+;WS-Yokohama Shin Yokohama Prince Hotel;WS-Yokohama Shin Yokohama Prince Hotel
+;WS-Yokohama Comfort Hotel Yokohama Kannai;WS-Yokohama Comfort Hotel Yokohama Kannai
+;WS-Yokohama Hotel New Grand;WS-Yokohama Hotel New Grand
+;WS-Yokohama Hotel JAL City Kannai Yokohama;WS-Yokohama Hotel JAL City Kannai Yokohama
+;WS-Osaka Hilton Osaka Hotel;WS-Osaka Hilton Osaka Hotel
+;WS-Osaka Crowne Plaza Hotel Ana Osaka;WS-Osaka Crowne Plaza Hotel Ana Osaka
+;WS-Osaka Ramada Osaka;WS-Osaka Ramada Osaka
+;WS-Osaka Cross Hotel Osaka;WS-Osaka Cross Hotel Osaka
+;WS-Osaka Best Western Hotel Fino Osaka Shinsaibashi;WS-Osaka Best Western Hotel Fino Osaka Shinsaibashi
+;WS-Nagoya Hilton Nagoya Hotel;WS-Nagoya Hilton Nagoya Hotel
+;WS-Nagoya Marriott Nagoya;WS-Nagoya Marriott Nagoya
+;WS-Nagoya Crowne Plaza Ana Grand Court Nagoya;WS-Nagoya Crowne Plaza Ana Grand Court Nagoya
+;WS-Nagoya The Westin Nagoya Castle;WS-Nagoya The Westin Nagoya Castle
+;WS-Nagoya Royal Park Inn Nagoya;WS-Nagoya Royal Park Inn Nagoya
+;WS-Sapporo Ana Hotel Sapporo;WS-Sapporo Ana Hotel Sapporo
+;WS-Sapporo Best Western Hotel Sapporo Nakajima Koen;WS-Sapporo Best Western Hotel Sapporo Nakajima Koen
+;WS-Sapporo Sheraton Sapporo Hotel;WS-Sapporo Sheraton Sapporo Hotel
+;WS-Sapporo Hotel Resol Trinity Sapporo;WS-Sapporo Hotel Resol Trinity Sapporo
+;WS-Sapporo Hotel Sunroute Sapporo;WS-Sapporo Hotel Sunroute Sapporo
+;WS-Kobe Hotel Monterey Amalie;WS-Kobe Hotel Monterey Amalie
+;WS-Kobe Hotel Monterey Kobe;WS-Kobe Hotel Monterey Kobe
+;WS-Kobe Sannomiya Terminal Hotel;WS-Kobe Sannomiya Terminal Hotel
+;WS-Kobe Bay Sheraton Hotel and Towers;WS-Kobe Bay Sheraton Hotel and Towers
+;WS-Kobe the b;WS-Kobe the b
+;WS-Fukuoka Hotel Monterey La Soeur Fukuoka;WS-Fukuoka Hotel Monterey La Soeur Fukuoka
+;WS-Fukuoka Hilton Fukuoka Sea Hawk;WS-Fukuoka Hilton Fukuoka Sea Hawk
+;WS-Fukuoka Best Western Fukuoka Nakasu Inn;WS-Fukuoka Best Western Fukuoka Nakasu Inn
+;WS-Fukuoka Canal City Fukuoka Washington Hotel;WS-Fukuoka Canal City Fukuoka Washington Hotel
+;WS-Fukuoka Hotel Nikko Fukuoka;WS-Fukuoka Hotel Nikko Fukuoka
+;WS-Kawasaki Mets Kawasaki Hotel;WS-Kawasaki Mets Kawasaki Hotel
+;WS-Kawasaki Mets Mizonokuchi Hotel;WS-Kawasaki Mets Mizonokuchi Hotel
+;WS-Kawasaki Hotel Sunroute Kawasaki;WS-Kawasaki Hotel Sunroute Kawasaki
+;WS-Kawasaki Pearl Hotel Kawasaki;WS-Kawasaki Pearl Hotel Kawasaki
+;WS-Kawasaki Grand Hotel;WS-Kawasaki Grand Hotel

@@ -1,0 +1,32 @@
+#
+# Import the CMS mobile content for the Powertools site
+#
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$jarResourceCms=jar:de.hybris.platform.yb2bacceleratorcore.setup.CoreSystemSetup&/yb2bacceleratorcore/import/cockpits/cmscockpit
+
+# These define sets of components that can fit into similar slots
+$wideContent=CMSImageComponent,SimpleBannerComponent,BannerComponent,ImageMapComponent,RotatingImagesComponent,ProductCarouselComponent,CMSParagraphComponent
+$narrowContent=ProductFeatureComponent,CategoryFeatureComponent,CMSImageComponent,SimpleBannerComponent,BannerComponent,ImageMapComponent,RotatingImagesComponent,ProductCarouselComponent,CMSParagraphComponent
+
+# Create Mobile PageTemplates
+# These define the layout for pages
+# "FrontendTemplateName" is used to define the JSP that should be used to render the page for pages with multiple possible layouts.
+# "RestrictedPageTypes" is used to restrict templates to page types
+INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;frontendTemplateName;restrictedPageTypes(code);active[default=true]
+;;MobileLandingPage2Template;Mobile Landing Page 2 Template;layout/sampleLandingPage;ContentPage
+
+# Add Velocity templates that are in the CMS Cockpit. These give a better layout for editing pages
+# The FileLoaderValueTranslator loads a File into a String property. The templates could also be inserted in-line in this file.
+UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;MobileLandingPage2Template      ;$jarResourceCms/structure-view/mobile/structure_sampleLandingPageTemplate.vm
+
+# All Content Pages have a UiExperienceRestriction
+INSERT_UPDATE CMSUiExperienceRestriction;$contentCV[unique=true];uid[unique=true];name;uiExperience(code)
+;;MobileExperienceRestriction;Restriction for Mobile Experience;Mobile
+
+# Create Content Pages
+
+# Site-wide Homepage
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='false'];approvalStatus(code)[default='approved'];restrictions(uid,$contentCV)[default='MobileExperienceRestriction'];onlyOneRestrictionMustApply[default='false']
+;;mobile-homepage;Mobile Homepage;MobileLandingPage2Template;homepage;

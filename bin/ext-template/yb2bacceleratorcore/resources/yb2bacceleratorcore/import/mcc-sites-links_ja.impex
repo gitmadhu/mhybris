@@ -1,0 +1,10 @@
+# Import links for the Multi Channel Cockpit
+#
+# Localization ja
+#
+
+$lang=ja
+
+
+UPDATE DynamicLink;code[unique=true];description[lang=$lang]
+ ;b2baccelerator-site-links;"B2B アクセラレーター ストアフロント";

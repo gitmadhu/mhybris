@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+
+-->
+<!--
+ All hybris buildcallbacks.xml macrodefinitions:
+
+ Build/Documentation
+
+	 before/after ant macro "clean"
+		 <macrodef name="acceleratorstorefront_before_clean"/>
+		 <macrodef name="yb2bacceleratorstorefront_after_clean"/>
+
+	 before/after ant macro "build"
+		 <macrodef name="yb2bacceleratorstorefront_before_build"/>
+		 <macrodef name="yb2bacceleratorstorefront_after_build"/>
+
+	 before/after ant macro "compile_core" - the core module of the extension
+		 <macrodef name="yb2bacceleratorstorefront_before_compile_core">
+		 <macrodef name="yb2bacceleratorstorefront_after_compile_core">
+
+	 before/after ant macro "compile_web" - the web module of the extension
+		 <macrodef name="yb2bacceleratorstorefront_before_compile_web" />
+		 <macrodef name="yb2bacceleratorstorefront_after_compile_web" />
+
+	 before/after ant macro "compile_hmc" - the hmc module of the extension
+		 <macrodef name="yb2bacceleratorstorefront_before_compile_hmc" />
+		 <macrodef name="yb2bacceleratorstorefront_after_compile_hmc" />
+
+ Preparing extension
+
+	 will be called in the beginning of the ant call and only once (also when using multiple 
+	 ant targets e.g. ant build yunittest)
+		 <macrodef name="yb2bacceleratorstorefront_only_once_prepare"/>
+
+ Creating ear module/production
+
+	 before/after ant macro "ear"
+		 <macrodef name="yb2bacceleratorstorefront_before_ear"/>
+		 <macrodef name="yb2bacceleratorstorefront_after_ear"/>
+
+	 before/after ant macro "production" - for hybris server only
+		 <macrodef name="yb2bacceleratorstorefront_before_production" />
+		 <macrodef name="yb2bacceleratorstorefront_after_production" />
+
+ JUnit Test
+
+	 before/after ant macro "yunitinit" 
+		 <macrodef name="yb2bacceleratorstorefront_before_yunitinit" />
+		 <macrodef name="yb2bacceleratorstorefront_after_yunitinit" />
+
+	 before/after ant macro "yunit"
+		 <macrodef name="yb2bacceleratorstorefront_before_yunit" />
+		 <macrodef name="yb2bacceleratorstorefront_after_yunit" /> 
+
+ Distribution package
+
+ 	 before/after ant macro "dist" - internal target; only for use when platform is available in source code
+		 <macrodef name="yb2bacceleratorstorefront_after_dist"/>
+		 <macrodef name="yb2bacceleratorstorefront_before_dist"/>
+
+	 before/after ant macro "dist_copy" - internal target; only for use when platform is available in source code
+		 <macrodef name="yb2bacceleratorstorefront_before_dist_copy"/>
+		 <macrodef name="yb2bacceleratorstorefront_after_dist_copy"/>
+
+-->
+
+<project name="yb2bacceleratorstorefront_buildcallbacks" >
+
+	<macrodef name="yb2bacceleratorstorefront_before_build">
+		<sequential>
+		<copy todir="${ext.yb2bacceleratorstorefront.path}/web/webroot/WEB-INF/messages" overwrite="true" verbose="true">
+			<fileset dir="${ext.yb2bacceleratorstorefront.path}/web/webroot/WEB-INF/messages/" includes="*_en.properties" />
+			<mapper>
+				<mapper type="regexp" from="^(.*)_en.properties$$" to="\1.properties" />
+			</mapper>
+		</copy>			
+		</sequential>
+	</macrodef>
+
+	
+	<macrodef name="yb2bacceleratorstorefront_after_build">
+				<sequential>
+					<impexGenerate extname="yb2bacceleratorstorefront"/>
+						<containsExact string="${extension.names}" substring="addonsupport" separator=";">
+							<do>
+								<foreachext>
+									<do>
+										<for list="${addon.folder}" param="addOnFile" delimiter=";">
+											<sequential>
+												<if>
+													<available file="${ext.@{extname}.path}/acceleratoraddon/@{addOnFile}" />
+													<then>
+														<copyAddOnToExtension addonextension="@{extname}" addonresource="@{addOnFile}" target="yb2bacceleratorstorefront" />
+													</then>
+												</if>
+											</sequential>
+										</for>
+									</do>
+								</foreachext>
+							</do>
+						</containsExact>
+				</sequential>
+		</macrodef>	
+			
+			<!-- 
+				Called whenever 'ant ear' is used. this callback can be used to modify the content of the ear file
+
+				${ear.path}: 			path to ear
+			 -->
+			<macrodef name="yb2bacceleratorstorefront_after_clean">
+				<sequential>
+					<!-- Addon folders in storefronts are always cleaned (even if there is no addonsupport on localextension list) -->
+					<addonclean/>
+				</sequential>
+			</macrodef>
+
+</project>

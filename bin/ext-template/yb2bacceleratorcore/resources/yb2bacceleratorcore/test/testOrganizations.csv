@@ -1,0 +1,125 @@
+$sessionCur=USD
+
+$passwordEncoding=md5
+$defaultPassword=nimda
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+
+INSERT_UPDATE UserPriceGroup;code[unique=true];name[lang=en];
+;B2B_DEFAULT_PRICE_GROUP;A DEFAULT B2B USERPRICEGROUP;
+
+INSERT_UPDATE Title;code[unique=true];name[lang=de];name[lang=en];;
+;mr;Herr;Mr.;;
+;mrs;Frau;Mrs.;;
+;miss;Fräulein;Miss;;
+
+INSERT_UPDATE Usergroup;uid[unique=true];groups(uid);locname[lang=en];
+;b2bgroup;customergroup;
+;b2badmingroup;b2bgroup;
+;b2bcustomergroup;b2bgroup;
+;b2bmanagergroup;b2bgroup,;
+;b2bapprovergroup;b2bgroup;
+;salesrepgroup;b2bgroup;
+
+# A DC ORGANIZATION 
+insert_update B2BUnit;&DCCustID;uid[unique=true,allownull=true];groups(uid);active[allownull=true];reportingOrganization(uid);approvalProcessCode;Approvers(uid);Addresses(&addId);
+;DCCust1;DC;;TRUE;DC;accApproval;DC CEO;;DCAddr1;
+;DCCust2;DC Production Center UK;DC;TRUE;DC;accApproval;;DCAddr2;
+;DCCust3;DC Sales;DC;TRUE;DC;approval;DC Sales Boss;DCAddr3;
+;DCCust4;DC Sales DE;DC Sales;TRUE;DC;accApproval;DC Sales DE Boss;DCAddr4;
+;DCCust5;DC Sales UK;DC Sales;TRUE;DC;accApproval;DC Sales UK Boss;DCAddr5;
+;DCCust6;DC Sales US;DC Sales;TRUE;DC;accApproval;DC Sales US Boss;DCAddr6;
+;DCCust7;DC Sales Hamburg;DC Sales DE;TRUE;DC;accApproval;;DCAddr7;
+;DCCust8;DC Sales Edinburgh;DC Sales UK;TRUE;DC;accApproval;;DCAddr8;
+;DCCust9;DC Sales London;DC Sales UK;TRUE;DC;accApproval;;DCAddr9;
+;DCCust10;DC Sales Nottingham;DC Sales UK;TRUE;DC;accApproval;;DCAddr10;
+;DCCust11;DC Sales Detroit;DC Sales US;TRUE;DC;accApproval;;DCAddr11;
+
+INSERT_UPDATE Address;&addId;owner(&DCCustID)[unique=true];streetname[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;DCAddr1;DCCust1;1 DC Street;AB1 CD2;false;New York;US;true;true;true;true;Bernie;BigBoss;DC@ac.com;MALE;;+11 1234567;mr;;Hybris;;
+;DCAddr2;DCCust2;2 DC Production Center UK Street;AB1 CD2;false;New York;US;true;true;true;true;Bobby;Bargain;DCProductionCenterUK@ac.com;MALE;;+11 1234567;mr;;Hybris;;
+;DCAddr3;DCCust3;3 DC Sales Street;AB1 CD2;false;New York;US;true;true;true;true;Bernie;BigBoss;DCSales@ac.com;MALE;;+11 1234567;mr;;Hybris;;
+;DCAddr4;DCCust4;4 DC Sales DE Street;AB1 CD2;false;New York;US;true;true;true;true;Otto;Meier;DCSalesDE@ac.com;MALE;;+22 1234567;mr;;Hybris;;
+;DCAddr5;DCCust5;5 DC Sales UK Street;AB1 CD2;false;New York;US;true;true;true;true;Bobby;Bargain;DCSalesUK@ac.com;MALE;;+11 1234567;mr;;Hybris;;
+;DCAddr6;DCCust6;6 DC Sales US Street;AB1 CD2;false;New York;US;true;true;true;true;John;Ford;DCSalesUS@ac.com;MALE;;+33 1234567;mr;;Hybris;;
+;DCAddr7;DCCust7;7 DC Sales Hamburg Street;AB1 CD2;false;New York;US;true;true;true;true;Uwe;Seeler;DCSalesHamburg@ac.com;MALE;;+22 1234567;mr;;Hybris;;
+;DCAddr8;DCCust8;8 DC Sales Edinburgh Street;AB1 CD2;false;Edinburgh;US;true;true;true;true;John;Ford;DCSalesNew York@ac.com;MALE;;+11 1234567;mr;;Hybris;;
+;DCAddr9;DCCust9;9 DC Sales London Street;AB1 CD2;false;New York;US;true;true;true;true;Bobby;Bargain;DCSalesLondon@ac.com;MALE;;+11 1234567;mr;;Hybris;;
+;DCAddr10;DCCust10;10 DC Sales Nottingham Street;AB1 CD2;false;New York;US;true;true;true;true;Robin;Hood;DCSalesNottingham@ac.com;MALE;;+11 1234567;mr;;Hybris;;
+;DCAddr11;DCCust11;11 DC Sales Detroit Street;AB1 CD2;false;New York;US;true;true;true;true;Ed;Whitacre;DCSalesDetroit@ac.com;MALE;;+33 1234567;mr;;Hybris;;
+
+insert_update B2BCustomer;uid[unique=true,allownull=true];$setPassword;Approvers(uid);active[allownull=true];email[allownull=true];ldapaccount[allownull=true];loginDisabled[allownull=true];name;groups(uid);sessionCurrency(isocode)[default='USD'];
+;DC Admin;;;TRUE;DC.Admin@gmail.com;FALSE;FALSE;Nimda Admin;DC,b2badmingroup;;
+;DC CEO;;;TRUE;DC.CEO@gmail.com;FALSE;FALSE;Bernie Big Boss;DC,b2bcustomergroup,b2bmanagergroup;;
+;DC Sales Boss;;;TRUE;DC.Sales.Boss@gmail.com;FALSE;FALSE;Big Cheese;DC Sales,b2bcustomergroup,b2bapprovergroup;;
+;DC Sales DE Boss;;;TRUE;DC.Sales.DE.Boss@gmail.com;FALSE;FALSE;Otto Meier;DC Sales DE,b2bcustomergroup,b2bapprovergroup;;
+;DC Sales UK Boss;;;TRUE;DC.Sales.Boss@gmail.com;FALSE;FALSE;Bobby Bargain;DC Sales UK,b2bcustomergroup,b2bapprovergroup;;
+;DC Sales US Boss;;;TRUE;DC.Sales.US.Boss@gmail.com;FALSE;FALSE;John Ford;DC Sales US,b2bcustomergroup,b2bapprovergroup;;
+;DC S Det;;DC Sales US Boss;TRUE;DC.S.Det@gmail.com;FALSE;FALSE;Ed Whitacre;DC Sales Detroit,b2bcustomergroup;;
+;DC S HH;;;TRUE;DC.S.HH@gmail.com;FALSE;FALSE;Uwe Seeler;DC Sales Hamburg,b2bcustomergroup;;
+;DC S No;;;TRUE;DC.S.No@gmail.com;FALSE;FALSE;Robin Hood;DC Sales Nottingham,b2bcustomergroup;;
+
+insert_update B2BBudget;Unit(uid)[allownull=true];active[allownull=true];budget;code[unique=true,allownull=true];currency(isocode)[allownull=true];dateRange[dateformat=dd.MM.yyyy hh:mm:ss,allownull=true];name[lang=de];name[lang=en];
+;DC;TRUE;1000000;DC BUDGET EUR 1M;EUR;01.07.2010 06:00:00,01.07.2012 05:59:59;DC BUDGET EUR 1M;DC BUDGET EUR 1M;
+;DC;TRUE;1000000;DC BUDGET USD 1M;USD;01.07.2010 06:00:00,01.07.2012 05:59:59;DC BUDGET USD 1M;DC BUDGET USD 1M;
+;DC;TRUE;1000000;DC BUDGET GBP 1M;GBP;27.08.2010 05:44:26,27.08.2012 06:00:00;DC BUDGET GBP 1M;DC BUDGET GBP 1M;
+;DC;TRUE;5000;DC BUDGET EUR 5K;EUR;27.08.2010 05:44:26,27.08.2012 06:00:00;DC BUDGET EUR 5K;DC BUDGET EUR 5K;
+
+insert_update B2BCostCenter;Unit(uid)[allownull=true];active[allownull=true];code[unique=true,allownull=true];currency(isocode)[allownull=true];name[lang=de];name[lang=en];budgets(code);
+;DC;TRUE;DC 0;GBP;DC 0;DC 0;DC BUDGET GBP 1M;
+;DC Production Center UK;TRUE;DC 1.1;GBP;DC 1.1;DC 1.1;DC BUDGET GBP 1M;
+;DC Sales UK;TRUE;DC 1.2;GBP;DC 1.2;DC 1.2;DC BUDGET GBP 1M;
+;DC Sales London;TRUE;DC 2.1;GBP;DC 2.1;DC 2.1;DC BUDGET GBP 1M
+;DC Sales Edinburgh;TRUE;DC 2.2;GBP;DC 2.2;DC 2.2;DC BUDGET GBP 1M;
+;DC Sales Nottingham;TRUE;DC 2.3;GBP;DC 2.3;DC 2.3;DC BUDGET GBP 1M;
+;DC Sales Hamburg;TRUE;DC 2.4;EUR;DC 2.4;DC 2.4;DC BUDGET EUR 5K;
+;DC Sales Detroit;TRUE;DC 2.5;USD;DC 2.5;DC 2.5;DC BUDGET USD 1M;
+
+insert_update B2BBudgetExceededPermission;Unit(uid)[allownull=true];active[allownull=true];code[unique=true,allownull=true];
+;DC;TRUE;DC BUDGET;
+
+insert_update B2BOrderThresholdPermission;Unit(uid)[allownull=true];active[allownull=true];code[unique=true,allownull=true];currency(isocode)[allownull=true];threshold[allownull=true];
+;DC;TRUE;DC 999,999,999 GBP;GBP;9999999999;
+;DC;TRUE;DC 1,000 EUR;EUR;1000;
+;DC;TRUE;DC 1,000 GPB max;GBP;1000;
+;DC;TRUE;DC 1,000 USD;USD;1000;
+;DC;TRUE;DC 10,000 EUR;EUR;10000;
+;DC;TRUE;DC 10,000 GBP;GBP;10000;
+;DC;TRUE;DC 10,000 USD;USD;10000;
+;DC;TRUE;DC 999,999,999 EUR;EUR;999999999;
+;DC;TRUE;DC 999,999,999 USD;USD;999999999;
+
+insert_update B2BOrderThresholdTimespanPermission;Unit(uid)[allownull=true];active[allownull=true];code[unique=true,allownull=true];currency(isocode)[allownull=true];range(code,itemtype(code))[allownull=true];threshold[allownull=true];
+;DC;TRUE;DC 10000 TIMESPAN EUR;EUR;MONTH:B2BPeriodRange;10000;
+;DC;TRUE;DC 10000 TIMESPAN GBP;GBP;MONTH:B2BPeriodRange;10000;
+;DC;TRUE;DC 10000 TIMESPAN USD;USD;MONTH:B2BPeriodRange;10000
+;DC;TRUE;DC 100000 TIMESPAN EUR;EUR;MONTH:B2BPeriodRange;100000;
+;DC;TRUE;DC 100000 TIMESPAN GBP;GBP;MONTH:B2BPeriodRange;100000;
+;DC;TRUE;DC 100000 TIMESPAN USD;USD;MONTH:B2BPeriodRange;100000;
+;DC;TRUE;DC UNLIMITED TIMESPAN EUR;EUR;YEAR:B2BPeriodRange;999999999;
+;DC;TRUE;DC UNLIMITED TIMESPAN GBP;GBP;YEAR:B2BPeriodRange;999999999;
+;DC;TRUE;DC UNLIMITED TIMESPAN USD;USD;YEAR:B2BPeriodRange;999999999;
+
+# Create B2BUserGroups Add Members
+insert_update B2BUserGroup;Unit(uid)[allownull=true];uid[unique=true,allownull=true];members(uid);
+;DC;EUROPE_MANAGER_PERM_GROUP_DC;DC Sales DE Boss;
+;DC;UK_MANAGER_GROUP_PERMISSIONS_DC;DC Sales UK Boss,DC Sales Boss;
+;DC;US_MANAGER_PERM_GROUP_DC;US_MANAGER_PERM_GROUP_DC;
+;DC;DC_CEO_PERMISSIONS;;
+
+# Add Permissions to B2BUserGroups
+update B2BUserGroup;Unit(uid)[allownull=true];uid[unique=true,allownull=true];permissions(code)[collection-delimiter=|];
+;DC;EUROPE_MANAGER_PERM_GROUP_DC;DC BUDGET|DC 100000 TIMESPAN EUR;
+;DC;DC_CEO_PERMISSIONS;DC 999,999,999 GBP|DC 999,999,999 EUR|DC 999,999,999 USD|DC UNLIMITED TIMESPAN EUR|DC UNLIMITED TIMESPAN GBP|DC UNLIMITED TIMESPAN USD|DC BUDGET;
+;DC;UK_MANAGER_GROUP_PERMISSIONS_DC;DC 100000 TIMESPAN GBP|DC BUDGET;
+;DC;US_MANAGER_PERM_GROUP_DC;DC 10,000 USD|DC 100000 TIMESPAN USD|DC BUDGET;
+
+# Add Permissions to B2BCustomer
+update b2bcustomer;uid[unique=true]; permissions(code)[collection-delimiter=|];
+;DC CEO;DC BUDGET|DC 999,999,999 GBP|DC 999,999,999 EUR|DC 999,999,999 USD|DC UNLIMITED TIMESPAN EUR|DC UNLIMITED TIMESPAN GBP|DC UNLIMITED TIMESPAN USD|DC BUDGET;
+;DC S Det;DC 1,000 USD|DC BUDGET|DC 10000 TIMESPAN USD;
+;DC S HH;DC 1,000 EUR|DC 999,999,999 GBP|DC UNLIMITED TIMESPAN GBP;
+;DC S No;DC 1,000 GPB max|DC BUDGET|DC 10000 TIMESPAN GBP;
+;DC Sales DE Boss;DC 10,000 EUR|DC 100000 TIMESPAN EUR|DC BUDGET;
+;DC Sales US Boss;DC 10,000 USD|DC 100000 TIMESPAN USD|DC BUDGET;
+;DC Sales Boss;DC 10,000 USD|DC 100000 TIMESPAN USD|DC BUDGET;

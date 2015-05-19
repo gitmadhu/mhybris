@@ -1,0 +1,12 @@
+# 
+# Import the Powertools BaseStore
+#
+# Localization ja
+#
+
+$lang=ja
+
+$storeUid=powertools
+
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+;$storeUid;"動力工具ストア";

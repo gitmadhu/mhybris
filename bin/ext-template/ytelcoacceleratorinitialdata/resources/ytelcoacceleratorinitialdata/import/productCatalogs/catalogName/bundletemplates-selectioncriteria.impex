@@ -1,0 +1,10 @@
+$productCatalog=
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+INSERT_UPDATE PickExactlyNBundleSelectionCriteria;id[unique=true];n;$catalogVersion
+
+INSERT_UPDATE AutoPickBundleSelectionCriteria;id[unique=true];$catalogVersion
+
+INSERT_UPDATE PickNToMBundleSelectionCriteria;id[unique=true];n;m;$catalogVersion
+
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];bundleSelectionCriteria(id, $catalogVersion);$catalogVersion

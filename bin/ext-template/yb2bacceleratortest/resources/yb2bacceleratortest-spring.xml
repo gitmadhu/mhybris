@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="yB2BAcceleratorTestDataSystemSetup" class="de.hybris.platform.yb2bacceleratortest.setup.TestDataSystemSetup"  parent="abstractCoreSystemSetup">
+		<property name="b2BAcceleratorTestOrderData" ref="b2BAcceleratorTestOrderData"/>
+	</bean>
+
+	<bean id="b2BAcceleratorTestOrderData" class="de.hybris.platform.yb2bacceleratortest.orders.B2BAcceleratorTestOrderData" >
+		<property name="transactionManager" ref="txManager" />
+		<property name="impersonationService" ref="impersonationService"/>
+		<property name="cmsAdminSiteService" ref="cmsAdminSiteService"/>
+		<property name="userService" ref="userService"/>
+		<property name="customerAccountService" ref="customerAccountService"/>
+		<property name="b2bCheckoutFacade" ref="b2bCheckoutFacade"/>
+		<property name="b2bWorkflowIntegrationService" ref="b2bWorkflowIntegrationService"/>
+		<property name="b2bCustomerAccountService" ref="b2bCustomerAccountService"/>
+		<property name="cronJobService" ref="cronJobService"/>
+		<property name="orderFacade" ref="b2bOrderFacade"/>
+		<property name="cartService" ref="cartService"/>
+		<property name="cartFacade" ref="cartFacade"/>
+		<property name="addressReversePopulator" ref="addressReversePopulator"/>
+		<property name="commerceCheckoutService" ref="commerceCheckoutService"/>
+		<property name="baseStoreSelectorStrategy" ref="baseStoreSelectorStrategy"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="i18nService" ref="commonI18NService"/>
+		<property name="calculationService" ref="calculationService"/>
+		<property name="accountManagerApproveScheduleService" ref="accountManagerApproveScheduleService"/>
+	</bean>
+
+	<bean id="accountManagerTestDataJob" class="de.hybris.platform.yb2bacceleratortest.job.AccountManagerJob" >
+		<property name="b2bWorkflowIntegrationService" ref="b2bWorkflowIntegrationService"/>
+		<property name="userService" ref="userService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
+	<bean id="accountManagerApproveScheduleService" class="de.hybris.platform.yb2bacceleratortest.services.AccountManagerApproveScheduleService" >
+		<property name="accountManagerTestDataJobId" value="accountManagerTestDataJob"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="cronJobService" ref="cronJobService"/>
+		<property name="customerAccountService" ref="customerAccountService"/>
+		<property name="baseStoreSelectorStrategy" ref="baseStoreSelectorStrategy"/>
+		<property name="userService" ref="userService"/>
+		<property name="cmsAdminSiteService" ref="cmsAdminSiteService"/>
+		<property name="impersonationService" ref="impersonationService"/>
+	</bean>
+
+</beans>

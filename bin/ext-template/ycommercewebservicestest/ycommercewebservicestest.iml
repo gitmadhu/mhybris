@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="EclipseModuleManager">
+    <libelement value="file://C:\hybris\trunk\bin\ext-hybris\ycommercewebservicestest\resources" />
+    <libelement value="file://C:\hybris\hybrisSrc\commercewebservices\ycommercewebservicestest\resources" />
+    <libelement value="file://lib/http-builder-0.7.1.jar" />
+    <libelement value="file://lib/spock-core-0.7-groovy-2.0.jar" />
+    <libelement value="file://lib/json-lib-2.3-jdk15.jar" />
+    <libelement value="file://lib/nekohtml-1.9.16.jar" />
+    <libelement value="file://lib/xml-resolver-1.2.jar" />
+    <libelement value="file://lib/xercesImpl-2.9.1.jar" />
+    <libelement value="file://lib/httpclient-4.2.1.jar" />
+    <libelement value="file://lib/httpcore-4.2.1.jar" />
+    <libelement value="file://lib/ezmorph-1.0.6.jar" />
+    <src_description expected_position="2">
+      <src_folder value="file://$MODULE_DIR$/src" expected_position="2" />
+      <src_folder value="file://$MODULE_DIR$/testsrc" expected_position="3" />
+      <src_folder value="file://$MODULE_DIR$/gensrc" expected_position="4" />
+      <src_folder value="GROOVY_SUPPORT" expected_position="6" />
+      <src_folder value="GROOVY_DSL_SUPPORT" expected_position="7" />
+    </src_description>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/eclipsebin/notused" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/testsrc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/gensrc" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="module-library" exported="">
+      <library name="resources">
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/resources" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="ycommercewebservices" />
+    <orderEntry type="module" module-name="platformwebservices" />
+    <orderEntry type="module-library">
+      <library name="http-builder-0.7.1.jar">
+        <CLASSES>
+          <root url="file://lib/http-builder-0.7.1.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="spock-core-0.7-groovy-2.0.jar">
+        <CLASSES>
+          <root url="file://lib/spock-core-0.7-groovy-2.0.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="json-lib-2.3-jdk15.jar">
+        <CLASSES>
+          <root url="file://lib/json-lib-2.3-jdk15.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="nekohtml-1.9.16.jar">
+        <CLASSES>
+          <root url="file://lib/nekohtml-1.9.16.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="xml-resolver-1.2.jar">
+        <CLASSES>
+          <root url="file://lib/xml-resolver-1.2.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="xercesImpl-2.9.1.jar">
+        <CLASSES>
+          <root url="file://lib/xercesImpl-2.9.1.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="httpclient-4.2.1.jar">
+        <CLASSES>
+          <root url="file://lib/httpclient-4.2.1.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="httpcore-4.2.1.jar">
+        <CLASSES>
+          <root url="file://lib/httpcore-4.2.1.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="ezmorph-1.0.6.jar">
+        <CLASSES>
+          <root url="file://lib/ezmorph-1.0.6.jar" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module" module-name="cms2" />
+  </component>
+</module>
+

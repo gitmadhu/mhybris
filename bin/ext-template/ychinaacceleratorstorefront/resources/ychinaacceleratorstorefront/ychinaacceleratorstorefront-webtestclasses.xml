@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testclasses>
+  <ychinaacceleratorstorefront>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.controllers.cms.DefaultCMSComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.filters.TagResourcesAddOnFilterTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.filters.AcceleratorAddOnFilterTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.filters.CustomerLocationRestorationFilterTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.security.impl.WebHttpSessionRequestCacheUnitTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.security.cookie.EnhancedCookieGeneratorTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.controllers.pages.SearchPageControllerUnitTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.interceptors.CSRFHandlerInterceptorTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.controllers.cms.MiniCartComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.filters.AbstractAddOnFilterTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.filters.AnonymousCheckoutFilterTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.controllers.cms.ProductReferencesComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.controllers.cms.CategoryFeatureComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.controllers.cms.ProductFeatureComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.controllers.cms.ProductCarouselComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.web.view.UiExperienceViewResolverTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.controllers.pages.CartPageControllerTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.security.impl.CartUsurpProtectionUnitTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.controllers.cms.PurchasedCategorySuggestionComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.controllers.cms.NavigationBarComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.interceptors.i18n.SetLanguageBeforeControllerHandlerTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.controllers.cms.CartSuggestionComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ychinaaccelerator.storefront.filters.CommonResourcesAddOnFilterTest</testclass>
+  </ychinaacceleratorstorefront>
+</testclasses>

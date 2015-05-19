@@ -1,0 +1,26 @@
+# ImPex for Importing Product Media
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+$storeName=
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog]
+$media=@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+$thumbnail=thumbnail(code, $catalogVersion)
+$picture=picture(code, $catalogVersion)
+$thumbnails=thumbnails(code, $catalogVersion)
+$detail=detail(code, $catalogVersion)
+$normal=normal(code, $catalogVersion)
+$others=others(code, $catalogVersion)
+$data_sheet=data_sheet(code, $catalogVersion)
+$medias=medias(code, $catalogVersion)
+$galleryImages=galleryImages(qualifier, $catalogVersion)
+$siteResource=jar:de.hybris.platform.ytelcoacceleratorinitialdata.setup.InitialDataSystemSetup&/ytelcoacceleratorinitialdata/import/productCatalogs/$productCatalog
+
+# Create Media
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpg'];$catalogVersion;folder(qualifier)[forceWrite=true]
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
+
+UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$normal;$thumbnails;$others;$galleryImages;$catalogVersion
+

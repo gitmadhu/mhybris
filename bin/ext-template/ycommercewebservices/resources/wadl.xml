@@ -1,0 +1,479 @@
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2014 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:apigee="http://api.apigee.com/wadl/2010/07/"
+	xmlns="http://wadl.dev.java.net/2009/02"
+	xsi:schemaLocation="http://wadl.dev.java.net/2009/02 http://apigee.com/schemas/wadl-schema.xsd http://api.apigee.com/wadl/2010/07/ http://apigee.com/schemas/apigee-wadl-extensions.xsd">
+
+	<!-- Base defines the domain and base path of the endpoint -->
+	<resources base="http://api.hybrisdev.com:9001/rest/v1">
+
+		<resource path="catalogs">
+			<param name="lang" required="false" type="xsd:string" style="query"
+				default="en">
+				<doc>Specifies the language, e.g. en</doc>
+			</param>
+			<param name="options" required="false" type="xsd:string" style="query"
+				default="BASIC">
+				<doc>Specifies the options, seperate multiple using comma:
+					BASIC,CATEGORIES,PRODUCTS</doc>
+			</param>
+
+			<method id="get_catalogs" name="GET" apigee:displayName="getCatalogs">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Catalog</apigee:tag>
+					<apigee:tag>getCatalogs</apigee:tag>
+				</apigee:tags>
+
+				<apigee:authentication required="true" />
+
+				<apigee:example url="/catalogs" />
+
+				<doc title="" apigee:url="http://wiki.hybris.com">
+					Returns all catalogs
+	    		</doc>
+			</method>
+		</resource>
+
+		<resource path="catalogs/{id}">
+			<param name="lang" required="false" type="xsd:string" style="query"
+				default="en">
+				<doc>Specifies the language, e.g. en</doc>
+			</param>
+			<param name="options" required="false" type="xsd:string" style="query"
+				default="BASIC">
+				<doc>Specifies the options, seperate multiple using comma:
+					BASIC,CATEGORIES,PRODUCTS</doc>
+			</param>
+
+			<method id="get_catalog" name="GET" apigee:displayName="getCatalogByID">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Catalog</apigee:tag>
+					<apigee:tag>getCatalogByID</apigee:tag>
+				</apigee:tags>
+
+				<apigee:authentication required="true" />
+				
+				<apigee:example url="/catalogs/electronicsProductCatalog" />
+
+				<doc title="" apigee:url="http://wiki.hybris.com">
+					Returns a specific catalog
+	    </doc>
+			</method>
+		</resource>
+
+		<resource path="catalogs/{id}/{version}">
+			<param name="lang" required="false" type="xsd:string" style="query"
+				default="en">
+				<doc>Specifies the language, e.g. en</doc>
+			</param>
+			<param name="options" required="false" type="xsd:string" style="query"
+				default="BASIC">
+				<doc>Specifies the options, seperate multiple using comma:
+					BASIC,CATEGORIES,PRODUCTS</doc>
+			</param>
+
+			<method id="get_catalog_version" name="GET"
+				apigee:displayName="getCatalogByIDAndVersion">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Catalog</apigee:tag>
+					<apigee:tag>getCatalogByIDAndVersion</apigee:tag>
+				</apigee:tags>
+
+				<apigee:authentication required="true" />
+
+				<apigee:example url="/catalogs/electronicsProductCatalog/Online" />
+
+				<doc title="" apigee:url="http://wiki.hybris.com">
+					Returns a specific catalog with a specific version
+	    </doc>
+			</method>
+		</resource>
+
+		<resource path="catalogs/{id}/{version}/categories/{category}">
+			<param name="lang" required="false" type="xsd:string" style="query"
+				default="en">
+				<doc>Specifies the language, e.g. en</doc>
+			</param>
+			<param name="options" required="false" type="xsd:string" style="query"
+				default="BASIC">
+				<doc>Specifies the options, seperate multiple using comma:
+					BASIC,CATEGORIES,PRODUCTS</doc>
+			</param>
+			<param name="pageNumber" required="false" type="xsd:string" style="query"
+				default="0">
+				<doc>Specifies the page number to access - pagination option</doc>
+			</param>
+			<param name="pageSize" required="false" type="xsd:string" style="query"
+				default="2147483647">
+				<doc>Specifies the page size used for the response, use it in combination with pageNumber</doc>
+			</param>
+
+			<method id="get_categories" name="GET" apigee:displayName="getCategories">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Catalog</apigee:tag>
+					<apigee:tag>getCategories</apigee:tag>
+				</apigee:tags>
+
+				<apigee:authentication required="true" />
+
+				<apigee:example url="/catalogs/electronicsProductCatalog/Online/categories/816" />
+
+				<doc title="" apigee:url="http://wiki.hybris.com">
+					Returns a specific catalog with a specific version
+	    </doc>
+			</method>
+		</resource>
+
+
+
+		<resource path="products">
+
+			<param name="query" required="true" type="xsd:string" style="query">
+				<doc>The serialized query, freetextserach and facets. The format
+					of
+					this serialized query is:
+					{freeTextSearch}:sort:{facetKey1}:{facetValue1}:{facetKey2}:{facetValue2}.
+					The query string needs to be URLencoded and the
+					client has to make
+					sure that no : and ',' elements are part of the
+					freetextsearch. The
+					query value needs to be properly
+					urlencoded,too. </doc>
+			</param>
+
+			<param name="currentPage" required="false" type="xsd:string"
+				style="query" default="0">
+				<doc>The current result page requested, optional. Default is 0.
+				</doc>
+			</param>
+
+			<param name="pageSize" required="false" type="xsd:string"
+				style="query" default="20">
+				<doc>The number of results returned per page, optional. Default is
+					20.</doc>
+			</param>
+
+			<param name="sort" required="false" type="xsd:string" style="query">
+				<doc>The sort applied to the search. </doc>
+			</param>
+			
+			<param name="catalog" required="true" type="xsd:string" style="query">
+				<doc>The catalog to use.</doc>
+			</param>
+
+			<param name="version" required="true" type="xsd:string" style="query">
+				<doc>The catalog version to use.</doc>
+			</param>
+
+
+			<method id="products_search" name="GET" apigee:displayName="searchProducts">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Products</apigee:tag>
+					<apigee:tag>Search</apigee:tag>
+				</apigee:tags>
+
+				<apigee:authentication required="true" />
+
+				<apigee:example url="/products?query=a&amp;catalog=electronicsProductCatalog&amp;version=Online" />
+
+				<!-- The content of the doc element is shown as a tooltip in the Console's 
+					method list. -->
+				<doc apigee:url="http://wiki.hybris.com">
+					Returns a list of products and additional data
+					like available facets, available sort options and pagination
+					options.
+				</doc>
+
+			</method>
+		</resource>
+
+		<resource path="products/{code}">
+			<param name="options" required="false" type="xsd:string"
+				style="query" default="BASIC">
+				<doc>The options parameter defines the level of detail requested.
+					This parameter can have a combination of
+					the followign values,
+					seperated by ','. Keep in mind the value needs to
+					be propery
+					urlencoded. Valid options are:BASIC, DESCRIPTION, GALLERY,
+					CATEGORIES, PROMOTIONS, STOCK, REVIEW, CLASSIFICATION,
+					REFERENCES.
+					Example:
+					options=BASIC,REVIEW (keep in
+					mind to urlencode)
+					to request the
+					basic level of detail plus
+					reviews
+					of a product.</doc>
+			</param>
+					
+			<param name="catalog" required="true" type="xsd:string" style="query">
+				<doc>The catalog to use.</doc>
+			</param>
+
+			<param name="version" required="true" type="xsd:string" style="query">
+				<doc>The catalog version to use.</doc>
+			</param>
+
+			<method id="products_getbycode" name="GET" apigee:displayName="getProduct">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Products</apigee:tag>
+					<apigee:tag>Code</apigee:tag>
+				</apigee:tags>
+
+				<apigee:authentication required="true" />
+
+				<apigee:example url="/products/300938?catalog=electronicsProductCatalog&amp;version=Online" />
+
+
+				<doc title=""
+					apigee:url="https://apigee.com/sven_haiges/embed/console/apigee-console-snapshots-1306904400000_3a8ff86d-ea59-4ce1-a3bd-01da2a9a0768/rendersnapshotview">
+					Rertuns a single product specified by product code.
+					Extra options
+					can
+					be expressed using
+					options=BASIC,DESCRIPTION,GALLERY,CATEGORIES,PROMOTIONS,STOCK,REVIEW,CLASSIFICATION,REFERENCES
+				</doc>
+
+				
+			</method>
+		</resource>
+
+		<resource path="products/{product}/reviews">
+
+			<param name="catalog" required="true" type="xsd:string" style="query">
+				<doc>The catalog to use.</doc>
+			</param>
+
+			<param name="version" required="true" type="xsd:string" style="query">
+				<doc>The catalog version to use.</doc>
+			</param>
+
+			<param name="langs" type="xsd:string" style="query" required="false">
+				<doc>Parameter langs can be used to specify language iso codes,
+					e.g.
+					langs=de%2Cus</doc>
+			</param>
+
+			<method id="products_reviews" name="GET" apigee:displayName="getReviews">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Products</apigee:tag>
+					<apigee:tag>Reviews</apigee:tag>
+				</apigee:tags>
+
+				<apigee:authentication required="true" />
+				<apigee:example url="/products/300938/reviews?catalog=electronicsProductCatalog&amp;version=Online" />
+
+				<doc title=""
+					apigee:url="https://apigee.com/sven_haiges/embed/console/apigee-console-snapshots-1301634000000_55785222-c5d6-41b3-b735-097819c540b2/rendersnapshotview">
+					Reviews for a product. Optional query string
+					parameter
+					langs can be used to
+					specify language iso codes, separated
+					by ',', e.g.
+					langs=de,en - keep in mind to urlencode the value of
+					parameters -
+					for GET. 
+	    		</doc>
+
+			</method>
+
+			<method id="products_reviews_create" name="POST" apigee:displayName="createReview">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Products</apigee:tag>
+					<apigee:tag>Reviews</apigee:tag>
+				</apigee:tags>
+
+				<!-- Is authentication required for this method? -->
+				<apigee:authentication required="true" />
+
+				<apigee:example url="/products/300938/reviews?catalog=electronicsProductCatalog&amp;version=Online" />
+				<doc title=""
+					apigee:url="https://apigee.com/sven_haiges/embed/console/apigee-console-snapshots-1301634000000_8c450e20-7915-428c-bf43-9369189210e7/rendersnapshotview">
+					Creates a new review for a product identified by
+					{code}.
+					You need to
+					specify the correct content-type
+					of
+					application/json or
+					application/xml. Include the review
+					representation in either json or
+					xml
+					into the body of the request.
+					Will return the saved review
+					representation which will include a
+					principal
+					(the user). Please
+					note
+					that the date field will be
+					overwritten by the
+					server, also
+					user
+					(principal) is set
+					by the server.
+				</doc>
+			</method>
+		</resource>
+		
+		<resource path="products/export">
+			<param name="options" required="false" type="xsd:string"
+				style="query" default="BASIC">
+				<doc>The options parameter defines the level of detail requested.
+					This parameter can have a combination of
+					the followign values,
+					seperated by ','. Keep in mind the value needs to
+					be propery
+					urlencoded. Valid options are:BASIC, DESCRIPTION, GALLERY,
+					CATEGORIES, PROMOTIONS, STOCK, REVIEW, CLASSIFICATION,
+					REFERENCES.
+					Example:
+					options=BASIC,REVIEW (keep in
+					mind to urlencode)
+					to request the
+					basic level of detail plus
+					reviews
+					of a product.</doc>
+			</param>
+					
+			<param name="currentPage" required="false" type="xsd:string" style="query"
+				default="0">
+				<doc>Specifies the page number to access - pagination option</doc>
+			</param>
+			<param name="pageSize" required="false" type="xsd:string" style="query" default="2147483647">
+				<doc>Specifies the page size used for the response, use it in combination with pageNumber</doc>
+			</param>
+			
+			<param name="catalog" required="true" type="xsd:string" style="query">
+				<doc>The catalog to use.</doc>
+			</param>
+
+			<param name="version" required="true" type="xsd:string" style="query">
+				<doc>The catalog version to use.</doc>
+			</param>
+							
+
+			<method id="products_export" name="GET" apigee:displayName="exportProducts">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Products</apigee:tag>
+					<apigee:tag>Export</apigee:tag>
+				</apigee:tags>
+
+				<apigee:authentication required="true" />
+
+				<apigee:example url="/products/export?options=SUMMARY" />
+
+
+				<doc title="" apigee:url="https://apigee.com/sven_haiges/embed/console/apigee-console-snapshots-1306904400000_3a8ff86d-ea59-4ce1-a3bd-01da2a9a0768/rendersnapshotview">
+					Web service handler for product export. If no 'options' query parameter is defined, it will assume BASIC. The 
+					options are turned into a Set&lt;ProductOption&gt; and passed on to the facade.
+				</doc>
+
+				
+			</method>
+		</resource>
+		
+		<resource path="/cart">
+
+			<method id="get_cart" name="GET" apigee:displayName="getCart">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Cart</apigee:tag>
+					<apigee:tag>Get</apigee:tag>
+				</apigee:tags>
+
+
+				<apigee:authentication required="false" />
+				
+				<apigee:example url="/cart" />
+
+				<!-- The content of the doc element is shown as a tooltip in the Console's 
+					method list. -->
+				<doc apigee:url="http://wiki.hybris.com">
+					Returns the current cart object. It requires session information sent in a cookie or via ;jsessionid=123 in the URL
+				</doc>
+
+			</method>
+		</resource>
+		
+		<resource path="/cart/add">
+
+			<method id="add_to_cart" name="POST" apigee:displayName="addToCart">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Cart</apigee:tag>
+					<apigee:tag>Add</apigee:tag>
+				</apigee:tags>
+
+				<apigee:authentication required="true" />
+
+				<apigee:example url="/cart/add" />
+					
+				
+
+				<!-- The content of the doc element is shown as a tooltip in the Console's 
+					method list. -->
+				<doc apigee:url="http://wiki.hybris.com">
+					Web service handler for adding new products to the session cart. 
+					Client should provide product code and quantity as POST Body. 
+					Content-Type needs to be set to application/x-www-form-urlencoded; charset=UTF-8 
+					and sample body (urlencoded) is: code=1234&amp;qty=2. If qty is not given, it&apos;s set to 1 by default.
+				</doc>
+				
+				<request>
+					<representation>
+						<apigee:payload><![CDATA[code=1234&qty=2]]></apigee:payload>
+					</representation>
+				</request>
+
+			</method>
+		</resource>
+		
+		<resource path="/cart/update">
+
+			<method id="update_cart" name="POST" apigee:displayName="updateCart">
+
+				<apigee:tags>
+					<apigee:tag primary="true">Cart</apigee:tag>
+					<apigee:tag>Update</apigee:tag>
+				</apigee:tags>
+
+				<apigee:authentication required="false" />
+
+				<apigee:example url="/cart/update" />
+					
+				
+
+				<!-- The content of the doc element is shown as a tooltip in the Console's 
+					method list. -->
+				<doc apigee:url="http://wiki.hybris.com">
+	 				Web service for modifying cart entry quantity. 
+	 				Client should provide cart entry number and new quantity as POST Body. 
+	 				Content-Type needs to be set to application/x-www-form-urlencoded; charset=UTF-8 
+	 				and sample body (urlencoded) is: entryNumber=1&amp;qty=2.
+				</doc>
+
+			</method>
+		</resource>
+
+	</resources>
+</application>

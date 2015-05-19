@@ -1,0 +1,14 @@
+# ImpEx for Vouchers for wsTest Store
+
+
+INSERT_UPDATE PromotionVoucher;code[unique=true];name[lang=en];description[lang=en];freeShipping[allownull=true];currency(isocode);priority;redemptionQuantityLimitPerUser;redemptionQuantityLimit;value;voucherCode
+;xyz;New Voucher;Voucher Description;true;USD;1;1;1;15;xyz-MHE2-B8L5-LPHE
+
+INSERT_UPDATE PromotionVoucher;code[unique=true];name[lang=en];description[lang=en];freeShipping[allownull=true];currency(isocode);priority;redemptionQuantityLimitPerUser;redemptionQuantityLimit;value;voucherCode
+;abc;New Promotional Voucher;Promotion Voucher Description;false;;1;1;1;10;abc-9PSW-EDH2-RXKA
+
+INSERT_UPDATE PromotionVoucher;code[unique=true];name[lang=en];description[lang=en];freeShipping[allownull=true];currency(isocode);priority;redemptionQuantityLimitPerUser;redemptionQuantityLimit;value;voucherCode
+;abr;Restricted Promotional Voucher;Restricted Promotion Voucher Description;false;;1;1;1;10;abr-D7S5-K14A-51Y5
+
+INSERT_UPDATE OrderRestriction;voucher(code)[unique=true];description[lang=en];total;currency(isocode)
+;abr;Only above 250.0USD;250;USD

@@ -1,0 +1,6 @@
+# ImpEx for BillingPlans
+
+# Macros / Replacement Parameter definitions
+$billingFrequency=billingFrequency(code)[default='monthly']
+
+INSERT_UPDATE BillingPlan;id[unique=true];billingCycleDay(code);billingCycleType(code);$billingFrequency

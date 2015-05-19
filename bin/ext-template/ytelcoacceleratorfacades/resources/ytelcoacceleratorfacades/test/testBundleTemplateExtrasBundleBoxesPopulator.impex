@@ -1,0 +1,248 @@
+$catalog-id=testCatalog
+$catalog-version=Online
+$catalogversion=catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version])[unique=true,default=$catalog-id:$catalog-version]
+$approved=approvalstatus(code)[default='approved']
+$supercategories=supercategories(code,catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version]))
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$billingFrequency=billingFrequency(code)[default='monthly']
+$termOfServiceRenewal=termOfServiceRenewal(code)[default='auto_renewing']
+$ruleType=ruleType(code)[default='ANY']
+
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique=true]; version[unique=true]; active;defaultCurrency(isocode)
+;$catalog-id;$catalog-version-staged;true;USD
+
+INSERT_UPDATE BillingFrequency;code[unique=true];order;cartAware[default=true]
+;monthly;5
+;quarterly;6
+;yearly;7
+
+INSERT_UPDATE BillingEvent;code[unique=true];order;cartAware[default=true]
+;paynow;1
+;onfirstbill;2
+;oncancellation;0;false
+
+INSERT_UPDATE Customer;uid[unique=true];customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password;
+;telco;K2006-C0008;Wim Telco;;en;USD;customergroup;1234;
+
+INSERT_UPDATE Address;owner(Customer.uid)[unique=true];streetname[unique=true];streetnumber[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;telco;Feldweg;7;18551;false;Sagard;DE;true;false;true;true;Arin;Brode;arin@wow-europe.com;MALE;;;;;hybris GmbH;;
+
+INSERT_UPDATE Customer;uid[unique=true];defaultPaymentaddress(owner(Customer.uid), streetname, streetnumber, postalcode,duplicate);defaultShipmentAddress(owner(Customer.uid), streetname, streetnumber, postalcode, duplicate);
+;telco;telco:Feldweg:7:18551:false;telco:Feldweg:7:18551:false;
+
+INSERT_UPDATE Cart;user(uid);code[unique=true];currency(isocode);date[dateformat=dd.MM.yyyy HH:mm:ss];net;calculated;
+;telco;telcoCart1;USD;21.05.2012 00:00:00;false;false;
+
+INSERT_UPDATE Vendor;code[unique=true];name[lang=en];name[lang=de];
+;telco;Telco;Telco;
+
+INSERT_UPDATE Device;code[unique=true];$supercategories;manufacturerName;manufacturerAID;description[lang=en];unit(code)[default=pieces];ean;variantType(code);$catalogversion
+;GALAXY_NEXUS;;Samsung;Samsung;27.06.2009;;8806071785585
+;GALAXY_S2;;Samsung;Samsung;27.06.2009;;8806071648507
+;APPLE_IPHONE_4S_16GB;;Apple;Apple;27.06.2009;;802971153485
+;APPLE_IPHONE_4S_32GB;;Apple;Apple;27.06.2009;;802971153486
+;MOTOROLA_RAZR;;Motorola;Motorola;27.06.2009;;6947681511507
+;HTC_INCREDIBLE_S;;htc;htc;27.06.2009;;843163074606
+
+UPDATE Device;code[unique=true];$prices;$approved;$catalogversion;Europe1PriceFactory_PTG(code)
+;GALAXY_NEXUS;600 USD
+;GALAXY_S2;650 USD
+;APPLE_IPHONE_4S_16GB;850 USD
+;APPLE_IPHONE_4S_32GB;950 USD
+;MOTOROLA_RAZR;650 USD
+;HTC_INCREDIBLE_S;600 USD
+
+INSERT_UPDATE StockLevel;productCode[unique=true];available[default=10];warehouse(code)[unique=true,default=warehouse_s];inStockStatus(code)[default=notSpecified];maxPreOrder[default=0];maxStockLevelHistoryCount[default=-1];overSelling[default=0];preOrder[default=0];reserved[default=0]
+;GALAXY_NEXUS
+;GALAXY_S2
+;APPLE_IPHONE_4S_16GB
+;APPLE_IPHONE_4S_32GB
+;MOTOROLA_RAZR
+;HTC_INCREDIBLE_S
+
+INSERT_UPDATE Device;code[unique=true];stockLevels(productCode,warehouse(code)[default=warehouse_s]);vendors(code)[default=telco];$catalogversion
+;GALAXY_NEXUS;GALAXY_NEXUS:warehouse_s
+;GALAXY_S2;GALAXY_S2:warehouse_s
+;APPLE_IPHONE_4S_16GB;APPLE_IPHONE_4S_16GB:warehouse_s
+;APPLE_IPHONE_4S_32GB;APPLE_IPHONE_4S_32GB:warehouse_s
+;MOTOROLA_RAZR;MOTOROLA_RAZR:warehouse_s
+;HTC_INCREDIBLE_S;HTC_INCREDIBLE_S:warehouse_s
+
+INSERT_UPDATE BillingPlan;id[unique=true];name[lang=en];billingCycleDay(code);billingCycleType(code);$billingFrequency
+;MonthlyPlan;Monthly Plan;;subscription_start;monthly
+
+INSERT_UPDATE SubscriptionTerm;id[unique=true];name[lang=en];termOfServiceFrequency(code);termOfServiceNumber(code);termOfServiceRenewal(code);billingPlan(id);cancellable
+;none;No contract;none;;auto_renewing;MonthlyPlan;true
+;monthly_1;1 Month contract - payment after first month;monthly;1;auto_renewing;MonthlyPlan;false
+;monthly_12;12 Months contract - monthly billing;monthly;12;auto_renewing;MonthlyPlan;false
+;monthly_24;24 Months contract - monthly billing;monthly;24;auto_renewing;MonthlyPlan;false
+;monthly_36;36 Months contract - monthly billing;monthly;36;auto_renewing;MonthlyPlan;false
+;annually_1;1 Year contract - monthly billing;annually;1;auto_renewing;MonthlyPlan;false
+;annually_2;2 Years contract - monthly billing;annually;2;auto_renewing;MonthlyPlan;false
+;annually_3;3 Years contract - monthly billing;annually;3;auto_renewing;MonthlyPlan;false
+
+INSERT_UPDATE ServicePlan;code[unique=true];$supercategories;manufacturerAID;unit(code);subscriptionTerm(id);ean;$approved;$catalogversion;soldIndividually[default=false]
+;SMART_STANDARD_1Y;;SMART_STANDARD_1Y;pieces;annually_1
+;SMART_STANDARD_2Y;;SMART_STANDARD_2Y;pieces;annually_2
+;SMART_STANDARD_3Y;;SMART_STANDARD_3Y;pieces;annually_3
+;SMART_ADVANCED_1000_12M;;SMART_ADVANCED_1000_12M;pieces;monthly_12
+;SMART_ADVANCED_1000_24M;;SMART_ADVANCED_1000_24M;pieces;monthly_24
+;SMART_ADVANCED_1000_36M;;SMART_ADVANCED_1000_36M;pieces;monthly_36
+;SMART_ADVANCED_2000_12M;;SMART_ADVANCED_2000_12M;pieces;monthly_12
+;SMART_ADVANCED_2000_24M;;SMART_ADVANCED_2000_24M;pieces;monthly_24
+;SMART_ADVANCED_2000_36M;;SMART_ADVANCED_2000_36M;pieces;monthly_36
+;SMART_ADVANCED_5000_12M;;SMART_ADVANCED_5000_12M;pieces;monthly_12
+;SMART_ADVANCED_5000_24M;;SMART_ADVANCED_5000_24M;pieces;monthly_24
+;SMART_ADVANCED_5000_36M;;SMART_ADVANCED_5000_36M;pieces;monthly_36
+;SMART_ADVANCED_NOLIM_12M;;SMART_ADVANCED_NOLIM_12M;pieces;monthly_12
+;SMART_ADVANCED_NOLIM_24M;;SMART_ADVANCED_NOLIM_24M;pieces;monthly_24
+;SMART_ADVANCED_NOLIM_36M;;SMART_ADVANCED_NOLIM_36M;pieces;monthly_36
+
+INSERT_UPDATE StockLevel;productCode[unique=true];available[default=10];warehouse(code)[unique=true,default=warehouse_s];inStockStatus(code)[default=forceInStock];maxPreOrder[default=0];maxStockLevelHistoryCount[default=-1];overSelling[default=0];preOrder[default=0];reserved[default=0]
+;SMART_STANDARD_1Y;
+;SMART_STANDARD_2Y;
+;SMART_STANDARD_3Y;
+;SMART_ADVANCED_1000_12M;
+;SMART_ADVANCED_1000_24M;
+;SMART_ADVANCED_1000_36M;
+;SMART_ADVANCED_2000_12M;
+;SMART_ADVANCED_2000_24M;
+;SMART_ADVANCED_2000_36M;
+;SMART_ADVANCED_5000_12M;
+;SMART_ADVANCED_5000_24M;
+;SMART_ADVANCED_5000_36M;
+;SMART_ADVANCED_NOLIM_12M;
+;SMART_ADVANCED_NOLIM_24M;
+;SMART_ADVANCED_NOLIM_36M;
+
+INSERT_UPDATE SubscriptionPricePlan;&pricePlan;product(code, $catalogversion)[unique=true];$catalogversion;price[default=0.0,unique=true];currency(isocode)[default=USD,unique=true];unit(code)[default=pieces]
+;pricePlan_SMART_STANDARD_1Y;SMART_STANDARD_1Y;
+;pricePlan_SMART_STANDARD_2Y;SMART_STANDARD_2Y;
+;pricePlan_SMART_STANDARD_3Y;SMART_STANDARD_3Y;
+;pricePlan_SMART_ADVANCED_1000_12M;SMART_ADVANCED_1000_12M;
+;pricePlan_SMART_ADVANCED_1000_24M;SMART_ADVANCED_1000_24M;
+;pricePlan_SMART_ADVANCED_1000_36M;SMART_ADVANCED_1000_36M;
+;pricePlan_SMART_ADVANCED_2000_12M;SMART_ADVANCED_2000_12M;
+;pricePlan_SMART_ADVANCED_2000_24M;SMART_ADVANCED_2000_24M;
+;pricePlan_SMART_ADVANCED_2000_36M;SMART_ADVANCED_2000_36M;
+;pricePlan_SMART_ADVANCED_5000_12M;SMART_ADVANCED_5000_12M;
+;pricePlan_SMART_ADVANCED_5000_24M;SMART_ADVANCED_5000_24M;
+;pricePlan_SMART_ADVANCED_5000_36M;SMART_ADVANCED_5000_36M;
+;pricePlan_SMART_ADVANCED_NOLIM_12M;SMART_ADVANCED_NOLIM_12M;
+;pricePlan_SMART_ADVANCED_NOLIM_24M;SMART_ADVANCED_NOLIM_24M;
+;pricePlan_SMART_ADVANCED_NOLIM_36M;SMART_ADVANCED_NOLIM_36M;
+
+INSERT_UPDATE RecurringChargeEntry;id[unique=true];subscriptionPricePlanRecurring(&pricePlan);price;cycleStart;cycleEnd;$catalogversion
+;RCE_SMART_STANDARD_1Y_MONTHLY;       pricePlan_SMART_STANDARD_1Y;       40;1;
+;RCE_SMART_STANDARD_2Y_MONTHLY;       pricePlan_SMART_STANDARD_2Y;       35;1;
+;RCE_SMART_STANDARD_3Y_MONTHLY;       pricePlan_SMART_STANDARD_3Y;       30;1;
+;RCE_SMART_ADVANCED_1000_12M_MONTHLY; pricePlan_SMART_ADVANCED_1000_12M; 50;1;
+;RCE_SMART_ADVANCED_1000_24M_MONTHLY; pricePlan_SMART_ADVANCED_1000_24M; 50;1;
+;RCE_SMART_ADVANCED_1000_36M_MONTHLY; pricePlan_SMART_ADVANCED_1000_36M; 50;1;
+;RCE_SMART_ADVANCED_2000_12M_MONTHLY; pricePlan_SMART_ADVANCED_2000_12M; 60;1;
+;RCE_SMART_ADVANCED_2000_24M_MONTHLY; pricePlan_SMART_ADVANCED_2000_24M; 60;1;
+;RCE_SMART_ADVANCED_2000_36M_MONTHLY; pricePlan_SMART_ADVANCED_2000_36M; 60;1;
+;RCE_SMART_ADVANCED_5000_12M_MONTHLY; pricePlan_SMART_ADVANCED_5000_12M; 70;1;
+;RCE_SMART_ADVANCED_5000_24M_MONTHLY; pricePlan_SMART_ADVANCED_5000_24M; 70;1;
+;RCE_SMART_ADVANCED_5000_36M_MONTHLY; pricePlan_SMART_ADVANCED_5000_36M; 70;1;
+;RCE_SMART_ADVANCED_NOLIM_12M_MONTHLY;pricePlan_SMART_ADVANCED_NOLIM_12M;80;1;
+;RCE_SMART_ADVANCED_NOLIM_24M_MONTHLY;pricePlan_SMART_ADVANCED_NOLIM_24M;80;1;
+;RCE_SMART_ADVANCED_NOLIM_36M_MONTHLY;pricePlan_SMART_ADVANCED_NOLIM_36M;80;1;    
+
+INSERT_UPDATE ServiceAddOn;code[unique=true];$supercategories;manufacturerAID;unit(code);subscriptionTerm(id);ean;$approved;$catalogversion;soldIndividually[default=true]
+;ACTIVATION_FEE_SMART;;ACTIVATION_FEE;pieces;monthly_1
+;ACTIVATION_FEE_IPHONE;;ACTIVATION_FEE;pieces;monthly_1
+;INTERNET_PACK_1G;;INTERNET_PACK_1G;pieces;annually_1
+;INTERNET_PACK_MAX;;INTERNET_PACK_MAX;pieces;annually_1
+;FRIENDS_AND_FAMILY;;FRIENDS_AND_FAMILY;pieces;annually_1
+;WEEKENDER;;WEEKENDER;pieces;annually_1
+;HOTSPOT_OPTION;;HOTSPOT_OPTION;pieces;annually_1
+;TV_MOBILE_BASIC;;TV_MOBILE_BASIC;pieces;annually_1
+;TV_MOBILE_EXTRAS_NEWS;;TV_MOBILE_EXTRAS_NEWS;pieces;annually_1
+;TV_MOBILE_EXTRAS_DOCU;;TV_MOBILE_EXTRAS_DOCU;pieces;annually_1
+
+INSERT_UPDATE StockLevel;productCode[unique=true];available[default=10];warehouse(code)[unique=true,default=warehouse_s];inStockStatus(code)[default=forceInStock];maxPreOrder[default=0];maxStockLevelHistoryCount[default=-1];overSelling[default=0];preOrder[default=0];reserved[default=0]
+;ACTIVATION_FEE_SMART
+;ACTIVATION_FEE_IPHONE
+;INTERNET_PACK_1G
+;INTERNET_PACK_MAX
+;FRIENDS_AND_FAMILY
+;WEEKENDER
+;HOTSPOT_OPTION
+;TV_MOBILE_BASIC
+;TV_MOBILE_EXTRAS_NEWS
+;TV_MOBILE_EXTRAS_DOCU
+
+UPDATE ServiceAddOn;code[unique=true];$prices;$approved;$catalogversion;Europe1PriceFactory_PTG(code)
+;ACTIVATION_FEE_SMART;10 USD
+;ACTIVATION_FEE_IPHONE;15 USD
+;INTERNET_PACK_1G;5 USD
+;INTERNET_PACK_MAX;15 USD
+;FRIENDS_AND_FAMILY;7 USD
+;WEEKENDER;5 USD
+;HOTSPOT_OPTION;5 USD
+;TV_MOBILE_BASIC;20 USD
+;TV_MOBILE_EXTRAS_NEWS;1 USD
+;TV_MOBILE_EXTRAS_DOCU;5 USD
+
+INSERT_UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];$catalogversion;parentTemplate(id);
+;SmartPhonePackage;;;;
+;SmartPhoneDeviceSelection;;;SmartPhonePackage;
+;SmartPhonePlanSelection;;;SmartPhonePackage;
+;SmartPhoneActivationSelection;;;SmartPhonePackage;
+;SmartPhoneInternetSelection;;;SmartPhonePackage;
+;SmartPhoneAddonSelection;;;SmartPhonePackage;
+;SmartPhoneTvBasicSelection;;;SmartPhonePackage;
+;SmartPhoneTvExtrasSelection;;;SmartPhonePackage;
+
+# set all BundleTemplates in approved status
+UPDATE BundleTemplateStatus[batchmode=true];itemtype(code)[unique=true];status(code)
+;BundleTemplateStatus;approved
+
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];products(code, $catalogversion);$catalogversion
+;SmartPhoneDeviceSelection;;GALAXY_NEXUS,GALAXY_S2,MOTOROLA_RAZR,HTC_INCREDIBLE_S,APPLE_IPHONE_4S_16GB,APPLE_IPHONE_4S_32GB;
+;SmartPhonePlanSelection;;SMART_STANDARD_1Y,SMART_STANDARD_2Y,SMART_STANDARD_3Y,SMART_ADVANCED_1000_12M,SMART_ADVANCED_1000_24M,SMART_ADVANCED_1000_36M,SMART_ADVANCED_2000_12M,SMART_ADVANCED_2000_24M,SMART_ADVANCED_2000_36M,SMART_ADVANCED_5000_12M,SMART_ADVANCED_5000_24M,SMART_ADVANCED_5000_36M,SMART_ADVANCED_NOLIM_12M,SMART_ADVANCED_NOLIM_24M,SMART_ADVANCED_NOLIM_36M;
+;SmartPhoneActivationSelection;;ACTIVATION_FEE_SMART;
+;SmartPhoneInternetSelection;;INTERNET_PACK_1G,INTERNET_PACK_MAX;
+;SmartPhoneAddonSelection;;FRIENDS_AND_FAMILY,WEEKENDER,HOTSPOT_OPTION;
+;SmartPhoneTvBasicSelection;;TV_MOBILE_BASIC;
+;SmartPhoneTvExtrasSelection;;TV_MOBILE_EXTRAS_NEWS,TV_MOBILE_EXTRAS_DOCU;
+
+INSERT_UPDATE AutoPickBundleSelectionCriteria;id[unique=true];$catalogversion
+;SmartPhoneActivationSelection_AutoPickBundleSelection
+
+INSERT_UPDATE PickExactlyNBundleSelectionCriteria;id[unique=true];n;$catalogversion
+;SmartPhoneDeviceSelection_PickExactly1;1
+;SmartPhonePlanSelection_PickExactly1;1
+
+INSERT_UPDATE PickNToMBundleSelectionCriteria;id[unique=true];n;m;$catalogversion
+;SmartPhoneInternetSelection_Pick0To1;0;1
+;SmartPhoneAddonSelection_Pick0To100;0;100
+;SmartPhoneTvBasicSelection_Pick0To1;0;1
+;SmartPhoneTvExtrasSelection_Pick0To2;0;2
+
+UPDATE BundleTemplate;id[unique=true];version[default=1.0];bundleSelectionCriteria(id, $catalogversion);$catalogversion
+;SmartPhoneActivationSelection;;SmartPhoneActivationSelection_AutoPickBundleSelection
+;SmartPhoneDeviceSelection;;SmartPhoneDeviceSelection_PickExactly1
+;SmartPhonePlanSelection;;SmartPhonePlanSelection_PickExactly1
+;SmartPhoneInternetSelection;;SmartPhoneInternetSelection_Pick0To1
+;SmartPhoneAddonSelection;;SmartPhoneAddonSelection_Pick0To100
+;SmartPhoneTvBasicSelection;;SmartPhoneTvBasicSelection_Pick0To1
+;SmartPhoneTvExtrasSelection;;SmartPhoneTvExtrasSelection_Pick0To2
+
+# Bundle dependencies
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];requiredBundleTemplates(id,version[default=1.0]);$catalogversion
+;SmartPhoneInternetSelection;;SmartPhonePlanSelection
+;SmartPhoneAddonSelection;;SmartPhonePlanSelection
+;SmartPhoneTvBasicSelection;;SmartPhonePlanSelection
+;SmartPhoneTvExtrasSelection;;SmartPhonePlanSelection,SmartPhoneTvBasicSelection
+
+INSERT_UPDATE ChangeProductPriceBundleRule;$catalogversion;id[unique=true];currency(isocode)[default=USD, unique=true];bundleTemplate(id, version, $catalogversion)[unique=true];ruleType(code)[default=ANY];conditionalProducts(code, $catalogversion);targetProducts(code, $catalogversion);price
+;;price_IPHONE4S32GB_with_SMART_ADVANCED_2000_12M;;SmartPhoneDeviceSelection:1.0;ALL;SMART_ADVANCED_2000_12M;APPLE_IPHONE_4S_32GB;350
+;;price_IPHONE4S32GB_with_SMART_ADVANCED_5000_12M;;SmartPhoneDeviceSelection:1.0;ALL;SMART_ADVANCED_5000_12M;APPLE_IPHONE_4S_32GB;330
+;;price_IPHONE4S32GB_with_SMART_ADVANCED_NOLIM_12M;;SmartPhoneDeviceSelection:1.0;ALL;SMART_ADVANCED_NOLIM_12M;APPLE_IPHONE_4S_32GB;310
+
+INSERT_UPDATE DisableProductBundleRule;id[unique=true];$catalogversion;bundleTemplate(id,version[default=1.0],$catalogversion);conditionalProducts(code,$catalogversion);targetProducts(code,$catalogversion);$ruleType
+;SmartPhoneAddonSelection_Disable_FRIENDS_AND_FAMILY_When_WEEKENDER;;SmartPhoneAddonSelection;WEEKENDER;FRIENDS_AND_FAMILY
+;SmartPhoneDeviceSelection_Disable_IPHONE_When_CheapPlans;;SmartPhoneDeviceSelection;SMART_STANDARD_1Y,SMART_STANDARD_2Y,SMART_STANDARD_3Y,SMART_ADVANCED_1000_12M,SMART_ADVANCED_1000_24M,SMART_ADVANCED_1000_36M;APPLE_IPHONE_4S_16GB,APPLE_IPHONE_4S_32GB

@@ -1,0 +1,10 @@
+# ImpEx for Importing Suppliers
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$superCategories=superCategories(code, $catalogVersion)
+
+# Create Supplier Categories
+INSERT_UPDATE Category;code[unique=true];$superCategories;allowedPrincipals(uid)[default='customergroup'];$catalogVersion

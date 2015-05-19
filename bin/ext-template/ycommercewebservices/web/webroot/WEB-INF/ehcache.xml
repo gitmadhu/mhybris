@@ -1,0 +1,30 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../config/ehcache.xsd" updateCheck="false" monitoring="autodetect"
+         dynamicConfig="true">
+
+	<!--
+	see ehcache-core-*.jar/ehcache-fallback.xml for description of elements
+	Attention: most of those settings will be overwritten by hybris
+	 -->
+
+	<diskStore path="java.io.tmpdir/occ_cache"/>
+	<defaultCache
+			maxElementsInMemory="100000"
+			eternal="false"
+			timeToIdleSeconds="360"
+			timeToLiveSeconds="360"
+			overflowToDisk="true"
+			diskPersistent="false"
+			maxEntriesLocalDisk="10"
+			diskExpiryThreadIntervalSeconds="360"
+			memoryStoreEvictionPolicy="FIFO"
+			/>
+
+	<cache name="fieldSetCache"
+	       maxElementsInMemory="100000"
+	       eternal="true"
+	       overflowToDisk="true"
+	       diskPersistent="false"
+	       maxEntriesLocalDisk="200000"
+	       memoryStoreEvictionPolicy="LRU"/>
+</ehcache>

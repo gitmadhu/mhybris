@@ -1,0 +1,28 @@
+# Import the Solr configuration for the Powertools store
+#
+# Localization zh
+#
+$lang=zh
+
+$indexedType=powertoolsProductType
+
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true,default=$indexedType];name[unique=true];displayName[lang=$lang]
+ ;;allPromotions;促销;
+ ;;brand;品牌;
+ ;;category;类别;
+ ;;code;代码;
+ ;;description;描述;
+ ;;manufacturerName;制造商名称;
+ ;;name;代码;
+ ;;price;价格;
+ ;;summary;摘要;
+
+
+# Define the available sorts
+UPDATE SolrSort;indexedType(identifier)[unique=true,default=$indexedType];code[unique=true];name[lang=$lang]
+ ;;name-asc;名称（升序）;
+ ;;name-desc;名称（降序）;
+ ;;price-asc;价格（由低到高）;
+ ;;price-desc;价格（由高到低）;
+ ;;relevance;关联性;
+ ;;topRated;最高排名;

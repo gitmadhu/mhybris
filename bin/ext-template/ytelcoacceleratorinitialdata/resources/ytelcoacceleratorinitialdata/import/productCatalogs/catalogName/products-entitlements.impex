@@ -1,0 +1,12 @@
+# ImpEx for Subscription Product Entitlements
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+$europe1pricefactory_ptg=Europe1PriceFactory_PTG(code)[default=us-sales-tax-full]
+
+INSERT_UPDATE SubscriptionProduct;code[unique=true];$catalogVersion;$europe1pricefactory_ptg
+
+INSERT_UPDATE NonMeteredSubscriptionEntitlement;id[unique=true];$catalogVersion
+
+INSERT_UPDATE MeteredSubscriptionEntitlement;id[unique=true];quantity;entitlement(id);subscriptionProduct(code, $catalogVersion);$catalogVersion

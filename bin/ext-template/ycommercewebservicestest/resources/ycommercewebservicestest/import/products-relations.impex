@@ -1,0 +1,24 @@
+# ImpEx for Related Products 
+
+# Macros / Replacement Parameter definitions
+$productCatalog=wsTestProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Insert Product References
+INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(code,$catalogVersion)[unique=true];referenceType(code);active;preselected
+ ;2053226;2053266;SIMILAR;true;false
+ ;2053226;2053367;SIMILAR;true;false
+ ;2053226;3557133;SIMILAR;true;false
+ ;2053266;2053226;SIMILAR;true;false
+ ;2053266;2053367;SIMILAR;true;false
+ ;2053367;2053266;SIMILAR;true;false
+ ;2053367;2053226;SIMILAR;true;false
+ ;2053367;3557133;SIMILAR;true;false
+ ;3557133;2053226;SIMILAR;true;false
+ ;2053226;4812254;SIMILAR;true;false
+ ;2053226;3958110;SIMILAR;true;false
+ ;2053226;4808175;SIMILAR;true;false
+ ;2053226;3555166;SIMILAR;true;false
+ ;2053226;5473115;SIMILAR;true;false
+ ;2053226;3708646;SIMILAR;true;false
+ ;2053226;2054947;SIMILAR;true;false

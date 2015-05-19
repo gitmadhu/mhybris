@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="GROOVY_DSL_SUPPORT"/>
+	<classpathentry kind="output" path="eclipsebin/notused"/>
+
+	<classpathentry exported="false" kind="src" path="/platform" />
+	<classpathentry exported="true" kind="src" path="/ycommercewebservices" />
+	<classpathentry exported="true" kind="src" path="/platformwebservices" />
+	<classpathentry exported="true" kind="src" path="/cms2" />
+	<classpathentry exported="true" kind="lib" path="lib/ezmorph-1.0.6.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/http-builder-0.7.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/httpclient-4.2.6.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/httpcore-4.2.5.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/json-lib-2.3-jdk15.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/json-lib-2.4-jdk13.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/nekohtml-1.9.16.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/spock-core-0.7-groovy-2.0.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/xercesImpl-2.9.1.jar" />
+	<classpathentry exported="true" kind="lib" path="lib/xml-resolver-1.2.jar" />
+	<classpathentry exported="true" kind="lib" path="resources" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="src" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="testsrc" />
+	<classpathentry exported="true" output="eclipsebin/classes" kind="src" path="gensrc" />
+				
+</classpath>
+				

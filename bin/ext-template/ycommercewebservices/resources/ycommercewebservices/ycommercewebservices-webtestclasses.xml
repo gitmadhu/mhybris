@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testclasses>
+  <ycommercewebservices>
+    <testclass>de.hybris.platform.ycommercewebservices.xstream.JsonXStreamFactoryTest</testclass>
+    <testclass>de.hybris.platform.ycommercewebservices.mapping.converters.StockLevelStatusConverterTest</testclass>
+    <testclass>de.hybris.platform.ycommercewebservices.v2.filter.BaseSiteMatchingFilterTest</testclass>
+    <testclass>de.hybris.platform.ycommercewebservices.xstream.XmlXStreamFactoryTest</testclass>
+    <testclass>de.hybris.platform.ycommercewebservices.interceptors.CacheControlHandlerInterceptorTest</testclass>
+    <testclass>de.hybris.platform.ycommercewebservices.xstream.XmlXStreamMarshallerFactoryTest</testclass>
+    <testclass>de.hybris.platform.ycommercewebservices.v2.filter.UserMatchingFilterTest</testclass>
+    <testclass>de.hybris.platform.ycommercewebservices.test.SearchQueryDataParserTest</testclass>
+    <testclass>de.hybris.platform.ycommercewebservices.v2.filter.CartMatchingFilterTest</testclass>
+    <testclass>de.hybris.platform.ycommercewebservices.mapping.converters.ConsignmentStatusConverterTest</testclass>
+  </ycommercewebservices>
+</testclasses>

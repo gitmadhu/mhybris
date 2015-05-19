@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	~ [y] hybris Platform
+	~
+	~  Copyright (c) 2000-2013 hybris AG
+	~  All rights reserved.
+	~
+	~  This software is the confidential and proprietary information of hybris
+	~  ("Confidential Information"). You shall not disclose such Confidential
+	~  Information and shall use it only in accordance with the terms of the
+	~  license agreement you entered into with hybris.
+-->
+<process xmlns="http://www.hybris.de/xsd/processdefinition"
+	start="approvalProcessStartAction" name="accApproval"
+	processClass="de.hybris.platform.b2b.process.approval.model.B2BApprovalProcessModel">
+
+	<action id="approvalProcessStartAction" bean="approvalProcessStartAction">
+		<transition name="OK" to="checkCreditCardOrderAction" />
+		<transition name="NOK" to="error" />
+	</action>
+	<action id="checkCreditCardOrderAction" bean="checkCreditCardOrderAction">
+		<transition name="NOK" to="checkOrderEntryCostCentersActive" />
+		<transition name="OK" to="sendOrderPlacedNotification" />
+	</action>
+	<action id="checkOrderEntryCostCentersActive" bean="checkOrderEntryCostCentersActive">
+		<transition name="NOK" to="error" />
+		<transition name="OK" to="checkForApproval" />
+	</action>
+
+	<action id="checkForApproval" bean="checkForApproval">
+		<transition name="NOK" to="findApprovers" />
+		<transition name="OK" to="startFulfilmentProcessAction" />
+		<transition name="ERROR" to="error" />
+	</action>
+
+	<action id="startFulfilmentProcessAction" bean="startFulfilmentProcessAction">
+			<transition name="OK" to="auditAutoApproval" />
+	</action>
+
+	<action id="auditAutoApproval" bean="auditAutoApproval">
+		<transition name="OK" to="performMerchantCheck" />
+	</action>
+
+	<action id="findApprovers" bean="findApprovers">
+		<transition name="OK" to="auditStartOfApproval" />
+		<transition name="NOK" to="auditStartOfAdminApproval" />
+	</action>
+
+	<action id="auditStartOfApproval" bean="auditStartOfApproval">
+		<transition name="OK" to="startWorkflow" />
+	</action>
+
+	<action id="auditStartOfAdminApproval" bean="auditStartOfApproval">
+		<transition name="OK" to="startWorkflowForAdmin" />
+	</action>
+
+	<action id="startWorkflowForAdmin" bean="startWorkflowForAdmin">
+		<transition name="OK" to="sendOrderPendingApprovalNotification" />
+		<transition name="NOK" to="error" />
+	</action>
+
+	<action id="startWorkflow" bean="startWorkflow">
+		<transition name="OK" to="sendOrderPendingApprovalNotification" />
+	</action>
+
+	<action id="sendOrderPendingApprovalNotification" bean="sendOrderPendingApprovalNotification">
+		<transition name="OK" to="waitProcess"/>
+	</action>
+
+	<!-- only one wait event is executing throughout the approval process therefore
+		a single event name is used -->
+	<wait id="waitProcess" then="checkWorkflowResults">
+		<event>APPROVAL_WORKFLOW_COMPLETE_EVENT</event>
+	</wait>
+
+	<action id="checkWorkflowResults" bean="checkWorkflowResults">
+		<transition name="OK" to="performMerchantCheck" />
+		<transition name="NOK" to="informOfOrderRejection" />
+	</action>
+
+	<action id="performMerchantCheck" bean="performMerchantCheck">
+		<transition name="OK" to="informOfOrderApproval" />
+		<transition name="NOK" to="auditSubmittedToMerchantForApproval" />
+		<transition name="ERROR" to="error" />
+	</action>
+
+	<action id="auditSubmittedToMerchantForApproval" bean="auditSubmittedToMerchantForApproval">
+		<transition name="OK" to="waitProcessCreditLimit" />
+	</action>
+
+	<!-- only one wait event is executing throughout the approval process therefore
+		a single event name is used -->
+	<wait id="waitProcessCreditLimit" then="checkCreditLimitResults">
+		<event>APPROVAL_WORKFLOW_COMPLETE_EVENT</event>
+	</wait>
+
+	<action id="checkCreditLimitResults" bean="checkCreditLimitResults">
+		<transition name="OK" to="informOfOrderApproval" />
+		<transition name="NOK" to="informOfOrderRejection" />
+	</action>
+
+	<action id="informOfOrderRejection" bean="sendOrderApprovalRejectionNotification">
+		<transition name="OK" to="approvalProcessCompleteAction" />
+	</action>
+
+	<action id="informOfOrderApproval" bean="informOfOrderApproval">
+		<transition name="OK" to="sendOrderPlacedNotification" />
+	</action>
+
+	<action id="sendOrderPlacedNotification" bean="b2bSendOrderPlacedNotificationAction">
+		<transition name="OK" to="setBookingLineEntries"/>
+	</action>
+
+	<action id="setBookingLineEntries" bean="setBookingLineEntries">
+		<transition name="OK" to="approvalProcessCompleteAction" />
+		<transition name="NOK" to="error" />
+	</action>
+	<action id="approvalProcessCompleteAction" bean="approvalProcessCompleteAction">
+		<transition name="OK" to="success" />
+		<transition name="NOK" to="error" />
+	</action>
+	<end id="error" state="ERROR">All went wrong.</end>
+	<end id="failed" state="FAILED">Order process failed.</end>
+	<end id="success" state="SUCCEEDED">Order process finished.</end>
+</process>

@@ -1,0 +1,12 @@
+# 
+# Import the Powertools BaseStore
+#
+# Localization de
+#
+
+$lang=de
+
+$storeUid=powertools
+
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+;$storeUid;"Powertools-Verkaufsstelle";

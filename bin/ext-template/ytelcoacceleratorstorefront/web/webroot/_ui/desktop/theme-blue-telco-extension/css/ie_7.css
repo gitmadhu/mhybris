@@ -1,0 +1,23 @@
+/*
+	Header
+*****************/
+#wrapper {
+	background: none ;
+}
+
+#nav_main ul li a:hover,
+#nav_main ul li a:active  {
+	background: #1485d4!important;
+}
+
+#cart_header {
+	background:none;	
+}
+
+.stripTransmitter ul {
+	display:block;	
+}
+
+.stripTransmitter ul li {
+	display:inline;
+}

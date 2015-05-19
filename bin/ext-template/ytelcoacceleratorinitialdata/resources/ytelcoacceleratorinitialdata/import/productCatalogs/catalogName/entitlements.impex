@@ -1,0 +1,12 @@
+# ImpEx for Entitlements
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+
+# Subscription pricing
+INSERT_UPDATE UsageUnit;id[unique=true];accumulative[default=false]
+
+INSERT_UPDATE NonMeteredEntitlement;id[unique=true];subscriptionEntitlements(id, $catalogVersion)
+
+INSERT_UPDATE MeteredEntitlement;id[unique=true];usageUnit(id)

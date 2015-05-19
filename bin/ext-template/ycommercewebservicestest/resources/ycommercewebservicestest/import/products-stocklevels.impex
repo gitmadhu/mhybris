@@ -1,0 +1,83 @@
+# ImpEx for Importing Products stock levels into $vendornics Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=wsTestProductCatalog
+$productCatalogName=wsTest Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$vendor=wsTestVendor
+
+INSERT_UPDATE Vendor;code[unique=true]
+;$vendor
+
+INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(code);default
+;ws_warehouse_s;Warehouse South;Warehouse South;$vendor;true
+;ws_warehouse_e;Warehouse East;Warehouse East;$vendor;true
+;ws_warehouse_w;Warehouse West;Warehouse West;$vendor;true
+;ws_warehouse_n;Warehouse North;Warehouse North;$vendor;true
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
+;4;ws_warehouse_n;notSpecified;1;-1;0;0;137220;0
+;15;ws_warehouse_w;notSpecified;1;-1;0;0;280916;0
+;2;ws_warehouse_w;notSpecified;1;-1;0;0;816780;0
+;2;ws_warehouse_w;notSpecified;1;-1;0;0;1377492;0
+;4;ws_warehouse_n;notSpecified;1;-1;0;0;1382080;0
+;15;ws_warehouse_w;notSpecified;1;-1;0;0;1687508;0
+;45;ws_warehouse_n;notSpecified;1;-1;0;0;1934406;0
+;60;ws_warehouse_s;notSpecified;1;-1;0;0;1934793;0
+;99;ws_warehouse_w;notSpecified;1;-1;0;0;1981415a;0
+;22;ws_warehouse_n;forceOutOfStock;1;-1;0;0;2006139;0
+;29;ws_warehouse_s;notSpecified;1;-1;0;0;2053226;0
+;31;ws_warehouse_e;forceOutOfStock;1;-1;0;0;2053266;0
+;36;ws_warehouse_w;notSpecified;1;-1;0;0;2053367;0
+;4;ws_warehouse_n;notSpecified;1;-1;0;0;3429337;0
+;15;ws_warehouse_w;notSpecified;1;-1;0;0;3557133;0
+;121;ws_warehouse_n;notSpecified;1;-1;0;0;278688;0
+;60;ws_warehouse_s;notSpecified;1;-1;0;0;482105;0
+;11;ws_warehouse_e;notSpecified;1;-1;0;0;872912a;0
+;45;ws_warehouse_n;notSpecified;1;-1;0;0;1225694;0
+;7;ws_warehouse_s;notSpecified;1;-1;0;0;1715477;0
+;15;ws_warehouse_w;notSpecified;1;-1;0;0;1934795;0
+;31;ws_warehouse_e;notSpecified;1;-1;0;0;1981412;0
+;36;ws_warehouse_w;notSpecified;1;-1;0;0;1981413;0
+;45;ws_warehouse_n;notSpecified;1;-1;0;0;1981414;0
+;157;ws_warehouse_s;notSpecified;1;-1;0;0;2054947;0
+;22;ws_warehouse_n;notSpecified;1;-1;0;0;3555166;0
+;36;ws_warehouse_w;notSpecified;1;-1;0;0;3708646;0
+;87;ws_warehouse_e;notSpecified;1;-1;0;0;3958110;0
+;60;ws_warehouse_s;notSpecified;1;-1;0;0;4808175;0
+;87;ws_warehouse_e;notSpecified;1;-1;0;0;4812254;0
+;11;ws_warehouse_e;notSpecified;1;-1;0;0;5473115;0
+
+
+UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
+;137220;;137220:ws_warehouse_n;$vendor
+;280916;;280916:ws_warehouse_w;$vendor
+;816780;;816780:ws_warehouse_w;$vendor
+;1377492;;1377492:ws_warehouse_w;$vendor
+;1382080;;1382080:ws_warehouse_n;$vendor
+;1687508;;1687508:ws_warehouse_w;$vendor
+;1934406;;1934406:ws_warehouse_n;$vendor
+;1934793;;1934793:ws_warehouse_s;$vendor
+;1981415a;;1981415a:ws_warehouse_w;$vendor
+;2006139;;2006139:ws_warehouse_n;$vendor
+;2053226;;2053226:ws_warehouse_s;$vendor
+;2053266;;2053266:ws_warehouse_e;$vendor
+;2053367;;2053367:ws_warehouse_w;$vendor
+;3429337;;3429337:ws_warehouse_n;$vendor
+;3557133;;3557133:ws_warehouse_w;$vendor
+;278688;;278688:ws_warehouse_n;$vendor
+;482105;;482105:ws_warehouse_s;$vendor
+;872912a;;872912a:ws_warehouse_e;$vendor
+;1225694;;1225694:ws_warehouse_n;$vendor
+;1715477;;1715477:ws_warehouse_s;$vendor
+;1934795;;1934795:ws_warehouse_w;$vendor
+;1981412;;1981412:ws_warehouse_e;$vendor
+;1981413;;1981413:ws_warehouse_w;$vendor
+;1981414;;1981414:ws_warehouse_n;$vendor
+;2054947;;2054947:ws_warehouse_s;$vendor
+;3555166;;3555166:ws_warehouse_n;$vendor
+;3708646;;3708646:ws_warehouse_w;$vendor
+;3958110;;3958110:ws_warehouse_e;$vendor
+;4808175;;4808175:ws_warehouse_s;$vendor
+;4812254;;4812254:ws_warehouse_e;$vendor
+;5473115;;5473115:ws_warehouse_e;$vendor

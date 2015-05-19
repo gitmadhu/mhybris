@@ -1,0 +1,73 @@
+$catalog-id=testCatalog;
+$catalog-version=Online;
+
+$testCategory0-id=testCategory0;
+$testCategory1-id=testCategory1;
+
+$catalogversion=catalogversion(catalog(id),version)[unique=true,default=$catalog-id:$catalog-version];
+$supercategories=supercategories(code,catalogversion(catalog(id[default=$catalog-id]),version[default=$catalog-version]));
+$prices=europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator];
+$taxGroup=Europe1PriceFactory_PTG(code)[default=us-vat-full]
+
+INSERT_UPDATE Language;isocode[unique=true];active;
+;de;true;Deutsch;German;
+;en;true;Englisch;English;
+
+INSERT_UPDATE Currency;isocode[unique=true];name[lang=de];name[lang=en];active;base;conversion;digits;symbol;
+;EUR;Euro;Euro;true;true;1;2;E;
+;USD;US-Dollar;US Dollar;true;false;1,38;2;$;
+
+INSERT_UPDATE Country;isocode[unique=true];name[lang=de];name[lang=en];active;
+;DE;Deutschland;Germany;true;
+;US;Vereinigte Staaten von Amerika;United States of America;true;
+
+INSERT_UPDATE Catalog;id[unique=true];name[lang=de];name[lang=en];defaultCatalog;
+;$catalog-id;$catalog-id;$catalog-id;true;
+
+INSERT_UPDATE CatalogVersion; catalog(id)[unique=true]; version[unique=true]; active;defaultCurrency(isocode);
+;$catalog-id;$catalog-version;true;EUR;de,en;
+
+INSERT_UPDATE Category;code[unique=true];$catalogversion;name[lang=de];name[lang=en];$supercategories;
+;$testCategory0-id;;$testCategory0-id;$testCategory0-id;
+;$testCategory1-id;;$testCategory1-id;$testCategory1-id;$testCategory0-id;
+
+INSERT_UPDATE Unit;unitType[unique=true];code[unique=true];name[lang=de];name[lang=en];conversion;
+;pieces;pieces;pieces;pieces;1;
+
+INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);
+;cockpitgroup;
+;b2bcustomergroup;cockpitgroup;
+
+INSERT_UPDATE Customer;uid[unique=true];customerID;name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);password;
+;ahertz;K2006-C0005;Anja Hertz;;en;USD;b2bcustomergroup;1234;
+
+INSERT_UPDATE Product;code[unique=true];$catalogversion;name[lang=de];name[lang=en];unit(code);$prices;approvalStatus(code);owner(Principal.uid);startLineNumber;$supercategories;
+;HW1210-3422;;testDE;testEN;pieces;57,95 EUR;approved;ahertz;0;$testCategory0-id;
+;HW1210-3423;;test2DE;test2EN;pieces;67,95 EUR;approved;ahertz;0;$testCategory1-id;
+;HW1210-3424;;test3DE;test3EN;pieces;32,95 EUR;approved;ahertz;0;$testCategory1-id;
+;HW1210-3425;;test3DE;test4EN;pieces;100 EUR;approved;ahertz;0;$testCategory1-id;
+
+INSERT_UPDATE CreditCardPaymentInfo;&paymentId;code[unique=true];user(uid)[unique=true];ccOwner;number;type(code);validFromMonth;validFromYear;validToMonth;validToYear;subscriptionId
+;ccid1;visa;ahertz;John Doe;4012888888881881;visa;1;2010;12;2013;123;
+
+INSERT_UPDATE BaseStore;uid[unique=true];name[lang=en];currencies(isocode);defaultCurrency(isocode);languages(isoCode);defaultLanguage(isoCode);submitOrderProcessCode;paymentProvider
+;defaultstore;Default Store;EUR;EUR;en,de;en;order-process;Mockup
+
+INSERT_UPDATE BaseSite;uid[unique=true];stores(uid);channel(code)
+;b2bstoretemplate;defaultstore;B2B
+
+## CART for AC S HH To Exceed 1000 EUR
+INSERT_UPDATE Cart;user(uid);code[unique=true];currency(isocode);date[dateformat=dd.MM.yyyy HH:mm:ss];net;calculated;paymentInfo(&paymentId);site(uid);store(uid)
+;DC S No;dc_shhCart_b2bas;USD;27.04.2010 00:00:00;false;false;ccid1;b2bstoretemplate;defaultstore
+#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultShipmentAddress());
+
+INSERT CartEntry;order(Cart.code);creationTime[dateformat=dd.MM.yyyy HH:mm:ss];product(code,catalogVersion(catalog(id),version));quantity;unit(code);entryNumber;
+;dc_shhCart_b2bas;27.04.2010 00:00:00;HW1210-3422:$catalog-id:$catalog-version;2;pieces;1;
+;dc_shhCart_b2bas;27.04.2010 00:00:00;HW1210-3424:$catalog-id:$catalog-version;2;pieces;2;
+;dc_shhCart_b2bas;27.04.2010 00:00:00;HW1210-3425:$catalog-id:$catalog-version;2;pieces;10;
+
+UPDATE Cart;code[unique=true];status(code);
+;dc_shhCart_b2bas;CREATED;
+#%   impex.getLastImportedItem().recalculate();
+
+

@@ -1,0 +1,105 @@
+# Import essential data for the Accelerator
+#
+# Includes:
+# * Languages
+# * Currencies
+# * Titles
+# * Vendors
+# * Warehouses
+# * Supported Credit/Debit cards
+# * User Groups
+# * DistanceUnits for Storelocator
+# * MediaFolders
+# * Media Formats
+# * Tax & Tax Groups
+# * Checkout Payment Types
+# * B2BPermission Types
+
+# Languages
+INSERT_UPDATE Language;isocode[unique=true];fallbackLanguages(isocode);active[default=true]
+;en;;;
+;de;en;;
+;ja;en;;
+;zh;en;;
+
+# Currencies
+INSERT_UPDATE Currency;isocode[unique=true];conversion;digits;symbol
+;EUR;1;2;€
+;USD;1,4;2;$
+;CAD;1,4;2;C$
+
+# Vendor
+INSERT_UPDATE Vendor;code[unique=true];name
+;default;Default Vendor
+
+# Warehouse
+INSERT_UPDATE Warehouse;code[unique=true];name;vendor(code)[default=default];default[default=true]
+;default;Default Warehouse;;true
+;pw_warehouse_s
+;pw_warehouse_e
+;pw_warehouse_w
+;pw_warehouse_n
+
+# Disable preview for email pages
+UPDATE CMSPageType;code[unique=true];previewDisabled
+;EmailPage;true
+
+# Titles
+INSERT_UPDATE Title;code[unique=true]
+;mr
+;mrs
+;miss
+;ms
+;dr
+;rev
+
+#Media Folders
+INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
+;images;images
+;email-body;email-body
+;email-attachments;email-attachments
+
+# Media formats
+INSERT_UPDATE MediaFormat;qualifier[unique=true]
+;1200Wx1200H
+;515Wx515H
+;365Wx246H
+;300Wx300H
+;96Wx96H
+;65Wx65H
+;30Wx30H
+
+# Tax & Tax Groups
+INSERT_UPDATE UserTaxGroup;code[unique=true]
+;us-taxes
+;ca-taxes
+
+INSERT_UPDATE ProductTaxGroup;code[unique=true]
+;us-sales-tax-full
+;ca-sales-tax-full
+
+INSERT_UPDATE Tax;code[unique=true];value;currency(isocode)
+;us-sales-tax-full;0
+;ca-sales-tax-full;0
+
+INSERT_UPDATE ServicelayerJob; code[unique=true];springId[unique=true]
+;organizationOrdersReportingJob;organizationOrdersReportingJob;
+;organizationCategoryPurchasedReportingJob;organizationCategoryPurchasedReportingJob;
+;cartRemovalJob;cartRemovalJob
+
+INSERT_UPDATE OrganizationOrdersReportingCronJob; code[unique=true];job(code);sessionLanguage(isoCode)[default=en]
+;organizationOrdersReportingCronJob;organizationOrdersReportingJob;
+;organizationCategoryPurchasedReportingCronJob;organizationCategoryPurchasedReportingJob;
+
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+;organizationOrdersReportingCronJob;0;0;0;-1;-1;-1;false;true;-1
+;organizationCategoryPurchasedReportingCronJob;0;0;0;-1;-1;-1;false;true;-1
+
+INSERT_UPDATE UserGroup;uid[unique=true];groups(uid);locname[lang=en];
+;freedelivery;;Free Delivery Group;
+;prospectivepowerdrill;;Prospective Powerdrill;
+;usd750off10korders;;USD 750 Off 10k Orders;
+;usd50offpowertools;;USD50OffPowertools;
+;bronzeloyalty;;Bronze Loyalty;
+;silverloyalty;;Silver Loyalty;
+;goldloyalty;;Gold Loyalty;

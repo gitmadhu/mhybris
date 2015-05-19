@@ -1,0 +1,3397 @@
+/*
+
+	Global
+*****************/
+body {
+	color: #333;
+	text-align: left;
+}
+
+.clear_fix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clear_fix {
+	display: inline-block;
+}
+
+/* Hides from IE-mac \*/
+* html .clear_fix {
+	height: 1%;
+}
+
+.clear_fix {
+	display: block;
+}
+
+/* End hide from IE-mac */
+#wrapper {
+	width: 990px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#header input#search:focus{
+	width: 200px;
+}
+
+#page {
+	position: relative;
+	overflow: hidden;
+	width: 970px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+}
+
+ul li {
+	list-style-type: none;
+}
+
+select {
+	float: left;
+}
+
+input.text,
+input.qty,
+label {
+	padding: 0 0 0 1px;
+	margin: 0;
+	float: left;
+}
+
+label {
+	font-weight: normal;
+}
+
+.paragraphContent p,
+.paragraphContent h1,
+.paragraphContent h2,
+.paragraphContent h3,
+.paragraphContent h4,
+.paragraphContent h5,
+.paragraphContent h6 {
+	padding: 10px;
+	margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: #666666;
+	line-height: 1.2;
+}
+
+.strong {
+	font-weight: bold;
+}
+
+.prod_image {
+	padding: 10px;
+}
+
+dl {
+	/*float: left;*/
+	overflow: hidden;
+	line-height: 1.5em;
+}
+
+dl dt {
+	float: left;
+	min-width: 148px;
+}
+
+table, th, td {
+	vertical-align: top;
+}
+
+table ul {
+	padding-left: 0;
+}
+
+thead th {
+	background: transparent;
+}
+
+table tr td {
+	padding: 10px;
+}
+
+.hidden {
+	display: none;
+}
+
+.text_hide {
+	text-indent: -9999px;
+}
+
+p {
+	margin: 0 0 10px 0;
+}
+
+dl {
+	margin: 0 0 10px 0;
+}
+
+/*
+
+	Forms
+*****************/
+.password-forgotten {
+	display: block;
+	clear: left;
+	margin: -5px 0 4px 0;
+}
+
+.mandatory {
+	display: inline-block;
+	vertical-align: 20%;
+}
+
+form {
+	/*padding-bottom: 30px;*/
+}
+
+form dl {
+	/*float: left;*/
+	overflow: hidden;
+}
+
+form dl dt {
+	clear: both;
+	overflow: hidden;
+	float: none; /* issues with IE with this active */
+}
+
+form dl dt.left {
+	clear: both;
+	overflow: inherit;
+}
+
+form dl dd input[type=text],
+form dl dd input[type=password],
+form dl dd select {
+	width: 234px;
+	padding: 4px;
+	margin-right: 10px;
+	margin-top: 0;
+}
+
+form dl dd input[type=text].cvc {
+	width: 40px;
+	clear: both;
+}
+
+form dl dd input[type=text].card {
+	width: 298px;
+}
+
+form dl dd select.card_date {
+	width: 150px;
+}
+
+form dl dd select.subscription_payment_method {
+	width: 220px;
+	margin-right: 5px;
+}
+
+form dl dd input[type=text].email {
+
+}
+
+form dl dd input[type=checkbox],
+form dl dt input[type=checkbox],
+form dl dd input[type=radio],
+form dl dt input[type=radio] {
+	float: left;
+	margin: 1px 7px 0 0;
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+ 	form dl dd input[type=checkbox],
+	form dl dt input[type=checkbox],
+	form dl dd input[type=radio],
+	form dl dt input[type=radio] {
+		float: left;
+		margin: 0 7px 0 0;
+	}
+}
+
+form dl dt a,
+form dl dd a {
+	float: left;
+}
+
+form dd {
+	margin-left: 0;
+}
+
+form input.text,
+form input.qty,
+form label {
+	padding-bottom: 0;
+	font-weight: normal;
+	vertical-align: middle;
+}
+
+form input.text {
+	padding-right: 20px;
+}
+
+form label {
+	padding-right: 20px;
+	padding-top: 2px;
+}
+
+form dl dd input.security {
+	width: 23px;
+}
+
+.required {
+	padding-top: 5px;
+	/*font-size: 90%;*/
+}
+
+form span {
+	/*padding-left: 10px; causing buttons to apepar out of line with form elements*/
+}
+
+form dl.terms {
+	float: left;
+	clear: none;
+}
+
+.add-address-left-label {
+	padding: 0 0 0 10px;
+}
+
+form dl dd input.add-address-left-input {
+	margin-top: -16px;
+	min-height: 0px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+ form dl dd input.add-address-left-input { margin-top: -15px; }
+}
+/*
+
+	Jquery Password Strength Indicator
+*****************/
+.pstrength-minchar {
+	font-size: 0.95em;
+	line-height: normal;
+}
+
+#password_bar {
+	clear: both;
+	float: left;
+}
+
+#password_minchar {
+	margin-bottom: 10px;
+	margin-top: 2px;
+}
+
+.pstrength-bar,
+.pstrength-minchar {
+	clear: both;
+	float: left;
+}
+
+input.strength {
+	margin-bottom: 5px !important;
+}
+
+/*
+
+	Links
+*****************/
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus {
+	text-decoration: underline;
+}
+
+a:focus img {
+	outline: 1px solid #999;
+}
+
+
+/*
+ 
+	Buttons
+*****************/
+button {
+	height: auto;
+	cursor: pointer;
+}
+
+button p {
+	padding: 5px;
+	float: left;
+	margin: 0;
+}
+
+.opaque {
+	opacity: 0.4;
+}
+
+.out-of-stock {
+	opacity: 0.3;
+	cursor: default;
+}
+
+.not-upgradable {
+	opacity: 0.3;
+	cursor: default;
+}
+
+/*
+
+	Header
+*****************/
+.skiptocontent {
+	position: absolute;
+	z-index: 10000;
+	left: -3000px;
+}
+
+.skiptocontent:focus {
+	left: auto;
+}
+
+.skiptonavigation {
+	position: absolute;
+	z-index: 10000;
+	left: -3000px;
+}
+
+.skiptonavigation:focus {
+	left: auto;
+}
+
+.siteLogo a:focus img {
+	outline: solid;
+}
+
+#header {
+	margin: 0 auto;
+	position: relative;
+	z-index: 9000;
+}
+
+#header span#Branding {
+	position: absolute;
+	bottom: 0;
+	display: inline-block;
+}
+
+#header .headerContent {
+	float: right;
+	max-width: 570px;
+	position: relative;
+	z-index: 1;
+}
+
+#header .search {
+	float: right;
+	clear: right;
+}
+
+#header .search form {
+	padding-bottom: 0;
+}
+
+#header h1 {
+	text-indent: -9999px;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 47px;
+	left: 0;
+}
+
+#header ul.nav {
+	float: right;
+}
+
+#header ul.nav a {
+	text-decoration: underline;
+}
+
+#header ul.nav li {
+	float: left;
+	margin-left: 5px;
+	padding-left: 5px;
+}
+
+#header ul.nav li:first-child {
+	margin-left: 0;
+	border-left: 0 none;
+	padding-left: 0;
+}
+
+#header ul.nav li:last-child {
+	margin-right: 0;
+	padding-right: 0;
+}
+
+#cart_header {
+	float: right;
+}
+
+#cart_header h2 {
+	margin-bottom: 0;
+}
+
+#cart_header dl,
+#cart_header dl dd {
+	margin: 0;
+}
+
+#cart_header dl dt {
+	font-weight: normal;
+	display: inline;
+	vertical-align: middle;
+	float: none;
+}
+
+#cart_header dl dd {
+	display: inline;
+	vertical-align: middle;
+}
+
+#cart_header ul {
+	overflow: hidden;
+	margin: 1px 0 0 0;
+	padding: 0;
+}
+
+#cart_header ul li {
+	float: left;
+}
+
+#cart_header ul li p {
+	margin: 0;
+}
+
+#header ul.language li {
+	float: left;
+	padding: 1px 10px;
+}
+
+#header ul.language li select {
+	margin: 0;
+}
+
+#header ul.language {
+	float: right;
+	clear: right;
+	margin: 0;
+	padding: 0;
+}
+
+#header ul.language li img {
+	padding-right: 8px;
+}
+
+#header ul.language li a {
+	padding-right: 10px;
+	float: left;
+}
+
+#header ul.language li a p {
+	margin: 0;
+	float: left;
+}
+
+#header ul.language li a.dropdown {
+	width: 19px;
+	height: 19px;
+	display: block;
+	float: left;
+	padding-right: 0;
+}
+
+a.dropdown span {
+	display: block;
+	width: 19px;
+	height: 19px;
+	text-indent: -10000px;
+	cursor: pointer;
+}
+
+.empty-nav-item {
+	color: #FFFFFF;
+    font-size: 1.1em;
+    padding: 10px 7px;
+    text-decoration: none;
+	float: left;
+    margin: 0;
+}
+
+/*
+
+	Navigation
+*****************/
+#nav_main {
+	margin: 0 auto;
+	position: relative;
+}
+
+#nav_main ul {
+	/*overflow: hidden;*/
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+#nav_main ul li {
+	float: left;
+	/* position: relative;  BA.2011.05.11 added to fix IE7 sub menu alignment issues.*/
+}
+
+#nav_main ul li img {
+	padding-right: 4px;
+}
+
+#nav_main ul li a {
+	float: left;
+	margin: 0;
+}
+
+#nav_main ul li:first-child a {
+	border-left: 0 none;
+}
+
+#nav_main ul li.special_offer {
+	float: right;
+}
+
+/*
+
+	Exposed Navigation
+**********************/
+ul.Lb {
+	left: -3000px;
+	position: absolute !important;
+	z-index: 10000000;
+	width: 0;
+}
+
+li.right_edge ul.Lb {
+	right: 0;
+	width: auto;
+}
+
+li.left_edge ul.Lb {
+	left: 0;
+	width: auto;
+}
+
+li.Lb {
+	/*min-height: 273px;*/
+	padding-bottom: 5px;
+	padding-right: 5px;
+}
+
+#nav_main ul li li.Lb .nav-submenu-title {
+	padding: 10px 10px 10px 10px;
+	display: block;
+}
+
+#nav_main ul li li.Lb a {
+	padding: 10px 10px 10px 10px;
+}
+
+li.La:hover ul.Lb,
+li.La a:focus + ul.Lb,
+li.La ul.dropdown-visible {
+	left: auto;
+	width: auto;
+}
+
+.left_col {
+	clear: left;
+}
+
+ul.Lc {
+	float: left;
+	min-width: 140px;
+}
+
+li.Lc {
+	clear: left;
+}
+
+#nav_main ul li.Lc.right_col {
+	float: left;
+}
+
+#nav_main ul li li.Lb li.Lc a {
+	padding: 0 0 0 10px;
+}
+
+/*
+
+/*
+
+	Breadcrumb
+*****************/
+#breadcrumb {
+	position: relative;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#breadcrumb ul {
+	margin: 0;
+	padding: 0;
+}
+
+#breadcrumb ul li {
+	float: left;
+	padding: 0 2px;
+}
+
+#breadcrumb ul li:first-child {
+	float: left;
+	padding-left: 0;
+}
+
+#breadcrumb ul li.skip_category {
+	position: absolute;
+}
+
+/*
+
+	Content
+*****************/
+#content {
+	margin: 0 auto 10px auto;
+	overflow: hidden;
+}
+
+/*
+
+	Item Container
+*****************/
+.item_container {
+	padding: 0 20px;
+}
+
+.item_container_holder {
+	margin-top: 7px;
+	margin-bottom: 10px;
+	margin-top: 20px;
+}
+
+.item_container_holder .title {
+	position: absolute;
+	max-width: 250px;
+	top: -7px;
+	left: 15px;
+	margin-left: 7px;
+	margin-right: 7px;
+	right: 0;
+	left: 0;
+	z-index: 0;
+}
+
+.item_container_holder .title-top {
+	overflow: auto;
+	height: 7px;
+}
+
+/*
+
+	Promo
+*****************/
+.scroller.promo a,
+.item_container_holder.promo a {
+	line-height: normal;
+}
+
+.scroller.promo ul li p,
+.item_container_holder.promo ul li p {
+	margin-bottom: 5px;
+}
+
+/*
+
+	Scroller 
+*****************/
+.scroller,
+.item_container {
+	margin-bottom: 25px;
+	/*margin-top: 7px; allows for scoll title top to be visible*/
+	overflow: hidden; /* needs to be overflow to fix IE7*/
+}
+
+.scroller .title_holder,
+.item_container_holder .title_holder {
+	position: relative;
+	overflow: visible;
+}
+
+.scroller .title-top img,
+.item_container_holder .title-top img {
+	float: right;
+}
+
+.scroller ul li p {
+	margin: 0 0 7px 0;
+}
+
+.scroller ul li span {
+	display: block;
+}
+
+.scroller ul li h3 {
+	/*float: left; redundant float BA.2011.06.11 */
+	margin-bottom: 0;
+}
+
+.scroller.horizontal,
+.scroller.vertical {
+	position: relative;
+	overflow: visible;
+}
+
+/*
+
+	Scroller Lightbox
+*****************/
+.scroller.lightbox .scoller_content {
+	overflow: hidden;
+}
+
+.scroller.lightbox {
+	position: relative;
+	overflow: visible;
+}
+
+.scroller.lightbox ul {
+	margin: 0 auto;
+	width: 98px;
+	padding: 0;
+	overflow: auto;
+}
+
+.scroller.lightbox ul li span {
+	display: block;
+	width: 96px;
+	height: 96px;
+	margin-bottom: 10px;
+	margin-top: 7px;
+	text-align: center;
+}
+
+.scroller.lightbox ul li span img {
+	padding-top: 5px;
+}
+
+.scroller.lightbox ul li p {
+	margin: 0 0 7px 0;
+	clear: both;
+}
+
+.scroller.lightbox ul li:first-child {
+	margin-top: 12px;
+}
+
+.scroller.lightbox ul li h3 {
+	font-size: 1.0em;
+	font-weight: bold;
+}
+
+.scroller.lightbox .next,
+.scroller.lightbox .previous {
+	width: 121px;
+	height: 30px;
+	margin: 0 auto;
+}
+
+.scroller.lightbox .next a,
+.scroller.lightbox .previous a {
+	display: block;
+	height: 30px;
+	width: 100%;
+	margin: 0 auto;
+}
+
+.scroller.lightbox .title_holder {
+	position: relative;
+	overflow: visible;
+}
+
+.scroller.lightbox .title {
+	position: absolute;
+	max-width: 350px;
+	top: -11px;
+	left: 15px;
+	margin-left: 7px;
+	margin-right: 7px;
+	right: 0;
+	left: 0;
+}
+
+.scroller.lightbox .title-top img {
+	float: right;
+}
+
+.scroller.lightbox .title_holder h2 {
+	margin: 0 16px 0 16px;
+	padding: 0 20px 10px 20px;
+	text-align: center;
+	max-width: 292px; /* width with above l & r padding removed (332px)*/
+}
+
+/*
+
+	Scroller Alt Images
+*****************/
+.jcarousel-skin .alt .jcarousel-item {
+	height: 103px;
+	width: 98px;
+}
+
+/*
+
+	Product Details Image
+*****************/
+.prod_image_main {
+	min-height: 376px;
+	overflow: visible;
+	position: relative;
+	text-align: center;
+	padding: 10px;
+	position: relative;
+	margin-bottom: 25px;
+}
+
+.prod_image span.details {
+	display: block;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	width: 18px;
+	height: 18px;
+}
+
+/*
+
+	Product Details
+*****************/
+.prod h1 {
+	margin-bottom: 5px;
+}
+
+.prod .bundle h3 {
+	margin-bottom: 3px;
+}
+
+.prod_add_to_cart {
+	margin-bottom: 5px;
+	overflow: hidden;
+}
+
+.prod_add_to_cart label {
+	float: left;
+}
+
+.prod_add_to_cart form button {
+	float: left;
+	margin-left: 8px;
+	width: 1;
+}
+
+.addthis_button {
+	display: block;
+	cursor: pointer;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.featureClass td {
+	width: 60%;
+}
+
+.featureClass td.attrib {
+	width: 40%;
+}
+
+.quickview_lightbox-goto-product a {
+	text-decoration: underline;
+	font-size: 1em;
+}
+
+.quickview_lightbox-goto-product {
+	margin: 20px 0;
+	padding-top: 5px;
+	border-top: 1px solid #eee;
+}
+
+/*
+
+	Product Review
+*****************/
+.prod_review {
+	overflow: hidden;
+	margin: 20px 0;
+}
+
+.prod_review ul {
+	margin: 0;
+	padding: 0;
+	clear: both;
+}
+
+.prod_review ul li {
+	float: left;
+	padding: 0 5px;
+}
+
+.prod_review ul li:first-child {
+	padding-left: 0;
+}
+
+.prod_review p {
+	float: left;
+	padding-left: 15px;
+	padding-top: 4px;
+	margin: 0;
+}
+
+#tab-reviews a {
+	text-decoration: underline;
+}
+
+/*
+
+	Stars
+*****************/
+.ui-stars-star,
+.ui-stars-cancel {
+	float: left;
+	display: block;
+	overflow: hidden;
+	text-indent: -999em;
+}
+
+.ui-stars-star a,
+.ui-stars-cancel a {
+	display: block;
+}
+
+.ui-stars-star-disabled,
+.ui-stars-star-disabled a,
+.ui-stars-cancel-disabled a {
+	cursor: default !important;
+}
+
+/*
+
+	Product Tabs
+*****************/
+#prod_tabs.ui-tabs .ui-tabs-hide {
+	display: none !important;
+}
+
+#prod_tabs {
+	overflow: hidden;
+}
+
+#prod_tabs.ui-tabs .ui-tabs-nav {
+	overflow: hidden;
+}
+
+#prod_tabs.ui-tabs .ui-tabs-nav li {
+	float: left;
+}
+
+#prod_tabs.ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
+	cursor: default !important;
+}
+
+.prod_content {
+	overflow: hidden;
+	overflow-y: auto;
+}
+
+#prod_tabs.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a {
+	cursor: text;
+}
+
+#prod_tabs.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a {
+	cursor: pointer;
+}
+
+/* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+/*
+
+	Reviews
+*****************/
+ul.review_actions li {
+	float: right;
+}
+
+ul.review_actions li:first-child {
+	float: left;
+}
+
+.review_detail {
+	float: left;
+}
+
+.review_detail span.stars {
+	float: right;
+}
+
+.review_detail p,
+.write_review p {
+	float: left;
+	clear: both;
+}
+
+.write_review p {
+	margin-left: 0;
+}
+
+.write_review p + p{
+	margin-top: 0;
+}
+
+.review_detail p.review_origins {
+	float: right;
+}
+
+.write_review {
+	float: left;
+	clear: both;
+}
+
+.write_review dl {
+	float: left;
+	overflow: hidden;
+}
+
+.write_review dl dt {
+	clear: both;
+	overflow: hidden;
+}
+
+#write_reviews ul.review_actions {
+	float: right;
+}
+
+/*
+
+	Nav Column
+*****************/
+.nav_column .title_holder {
+	position: relative;
+	overflow: visible;
+	margin-bottom: 10px;
+}
+
+.nav_column .title {
+	position: absolute;
+	max-width: 350px;
+	top: -11px;
+	left: 15px;
+	margin-left: 7px;
+	margin-right: 7px;
+	right: 0;
+	left: 0;
+}
+
+.nav_column .title-top {
+	height: 11px;
+}
+
+.nav_column .title-top img {
+	float: right;
+}
+
+.nav_column .item .category {
+	margin-bottom: 10px;
+	padding-top: 15px;
+	padding-bottom: 16px;
+	overflow: hidden;
+}
+
+.nav_column .item .category h4 {
+	display: inline;
+}
+
+.nav_column .item .category span.dropdown {
+	display: block;
+	float: right;
+	height: 19px;
+	padding-right: 0;
+	width: 19px;
+}
+
+.nav_column .item .category span.dropdown img {
+	display: block;
+	margin: 0 auto;
+	padding: 7px 5px;
+}
+
+.nav_column .item ul {
+	margin: 0;
+	padding: 0;
+	word-wrap: break-word;
+}
+
+.nav_column .item ul.facet_block span.remove {
+	float: right;
+	text-align: center;
+}
+
+.nav_column .item ul.facet_block span.remove a {
+	display: block;
+	width: 16px;
+	height: 16px;
+}
+
+.facet_block-label {
+	padding: 0;
+	float: none;
+	cursor: pointer;
+}
+
+.nav_column .item ul.indent li {
+	padding-left: 22px;
+}
+
+.nav_column .item ul li {
+	/*line-height: 2.3em;*/
+	padding-bottom: 4px;
+	padding-top: 4px;
+}
+
+.nav_column .item .more {
+	margin-left: 22px;
+}
+
+.nav_column .item .more.non-js {
+	margin-left: 0;
+}
+
+.nav_column .item li.nav_selected {
+	background-color: #e3e3e3;
+}
+
+.nav_column .item .category span.dropdown .dropdown-img {
+	text-indent: -9999px;
+	text-transform: capitalize;
+}
+
+/*
+
+	Product Refine
+*****************/
+.prod_refine {
+	padding: 10px 0;
+	overflow: hidden;
+}
+
+.prod_refine ul {
+	float: right;
+	margin: 0;
+	padding: 0;
+}
+
+.prod_refine ul li {
+	float: left;
+}
+
+.prod_refine label {
+
+}
+
+.prod_refine p {
+	float: left;
+}
+
+.prod_refine a {
+	float: left;
+	padding: 7px 10px;
+}
+
+/*
+
+	Product List
+*****************/
+.prod_list {
+	overflow: hidden;
+	padding-top: 15px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+.prod_list .thumb {
+	text-align: center;
+	margin: 0;
+	width: 130px;
+	float: left;
+}
+
+.prod_list .details {
+	width: 320px;
+	float: left;
+}
+
+.prod_list .thumb img {
+	padding: 5px 0 0 0;
+}
+
+.prod_list .thumb img.promo {
+	position: relative;
+	bottom: 45px;
+	right: -30px;
+	margin: 0;
+}
+
+.prod_list h3 {
+	padding-bottom: 50px;
+	margin: 0;
+}
+
+.prod_list .cart {
+	padding-right: 5px;
+	float: right;
+	width: 160px;
+}
+
+.prod_list .price {
+	display: block;
+}
+
+p.stocked {
+	float: right;
+	padding-left: 25px;
+	text-align: left;
+}
+
+/*
+
+	Product Grid
+*****************/
+.prod_grid {
+	overflow: hidden;
+	padding-top: 30px;
+	min-height: 248px;
+}
+
+.prod_grid .thumb {
+	text-align: center;
+	margin: 0;
+	float: left;
+	height: 148px;
+	width: 148px;
+}
+
+.prod_grid .thumb a {
+	display: block;
+}
+
+.prod_grid .thumb img.promo {
+	position: relative;
+	bottom: 45px;
+	right: -30px;
+}
+
+.prod_grid .details a {
+	text-decoration: underline;
+}
+
+.prod_grid .details {
+	float: left;
+	padding-top: 7px;
+	min-height: 36px;
+}
+
+.prod_grid .thumb img {
+	padding: 10px;
+}
+
+.prod_grid .cart {
+	clear: both;
+	overflow: hidden;
+	padding-top: 10px;
+}
+
+.prod_grid p {
+	margin: 0;
+	min-height: 5em;
+}
+
+.prod_grid .cart button {
+	float: right;
+}
+
+.prod_grid .price {
+	float: left;
+}
+
+/*
+
+	Product Category
+*****************/
+.prod_cat {
+	overflow: hidden;
+}
+
+.prod_cat .title {
+
+}
+
+.prod_cat h2 {
+}
+
+.prod_cat h2 a,
+.prod_cat h2 a:visited {
+	display: block;
+	padding: 10px;
+}
+
+.prod_cat .thumb {
+	margin: 0;
+	float: left;
+	width: 100%;
+	padding-top: 10px;
+}
+
+.prod_cat .details {
+	float: left;
+	padding: 7px 10px;
+}
+
+.prod_cat .thumb img {
+	padding: 10px;
+}
+
+.prod_cat p {
+	margin: 0;
+}
+
+.prod_cat .price {
+	padding-left: 10px;
+	display: none;
+}
+
+/*
+
+	Product Search
+*****************/
+.results {
+	padding: 20px 0;
+}
+
+
+.searchSpellingSuggestionPrompt a {
+	text-decoration: underline;
+}
+
+/*
+
+	Product Lightbox
+*****************/
+.zoom_lightbox {
+	overflow: hidden;
+}
+
+/*
+
+	J Carousel Skin
+*****************/
+.jcarousel-skin .jcarousel-container {
+}
+
+.jcarousel-skin .jcarousel-direction-rtl {
+	direction: rtl;
+}
+
+.jcarousel-skin .jcarousel-clip {
+	overflow: hidden;
+}
+
+.jcarousel-skin .jcarousel-clip-horizontal {
+	height: 150px;
+}
+
+.jcarousel-skin .jcarousel-clip-vertical {
+	width: 98px;
+	height: 430px;
+}
+
+.jcarousel-skin .jcarousel-item {
+	width: 98px;
+}
+
+.jcarousel-skin .jcarousel-item a {
+	display: block;
+}
+
+.jcarousel-skin .jcarousel-item img {
+	/*margin-top: 5px;*/
+}
+
+.jcarousel-skin .jcarousel-item-horizontal {
+	margin-left: 0;
+	margin-right: 45px;
+}
+
+.jcarousel-skin .jcarousel-direction-rtl .jcarousel-item-horizontal {
+	margin-left: 10px;
+	margin-right: 0;
+}
+
+.jcarousel-skin .jcarousel-item-vertical {
+	margin-bottom: 5px;
+}
+
+/*
+
+	J Carousel Skin Horizontal Buttons
+*****************/
+.jcarousel-skin .jcarousel-next-horizontal {
+	cursor: pointer;
+}
+
+.jcarousel-skin .jcarousel-direction-rtl .jcarousel-next-horizontal {
+	left: 5px;
+	right: auto;
+}
+
+.jcarousel-skin .jcarousel-next-horizontal:hover {
+	background-position: -32px 0;
+}
+
+.jcarousel-skin .jcarousel-next-horizontal:active {
+	background-position: -64px 0;
+}
+
+.jcarousel-skin .jcarousel-next-disabled-horizontal,
+.jcarousel-skin .jcarousel-next-disabled-horizontal:hover,
+.jcarousel-skin .jcarousel-next-disabled-horizontal:active {
+	cursor: default;
+	background-position: -96px 0;
+}
+
+.jcarousel-skin .jcarousel-prev-horizontal {
+	cursor: pointer;
+}
+
+.jcarousel-skin .jcarousel-direction-rtl .jcarousel-prev-horizontal {
+	left: auto;
+	right: 5px;
+}
+
+.jcarousel-skin .jcarousel-prev-horizontal:hover {
+	background-position: -32px 0;
+}
+
+.jcarousel-skin .jcarousel-prev-horizontal:active {
+	background-position: -64px 0;
+}
+
+.jcarousel-skin .jcarousel-prev-disabled-horizontal,
+.jcarousel-skin .jcarousel-prev-disabled-horizontal:hover,
+.jcarousel-skin .jcarousel-prev-disabled-horizontal:active {
+	cursor: default;
+	background-position: -96px 0;
+}
+
+/*
+
+	J Carousel Skin Vertical Buttons
+*****************/
+.jcarousel-skin .jcarousel-next-vertical {
+	cursor: pointer;
+}
+
+.jcarousel-skin .jcarousel-next-vertical:hover {
+	background-position: 0 -32px;
+}
+
+.jcarousel-skin .jcarousel-next-vertical:active {
+	background-position: 0 -64px;
+}
+
+.jcarousel-skin .jcarousel-next-disabled-vertical,
+.jcarousel-skin .jcarousel-next-disabled-vertical:hover,
+.jcarousel-skin .jcarousel-next-disabled-vertical:active {
+	cursor: default;
+	background-position: 0 -96px;
+}
+
+.jcarousel-skin .jcarousel-prev-vertical {
+	cursor: pointer;
+}
+
+.jcarousel-skin .jcarousel-prev-vertical:hover {
+	background-position: 0 -32px;
+}
+
+.jcarousel-skin .jcarousel-prev-vertical:active {
+	background-position: 0 -64px;
+}
+
+.jcarousel-skin .jcarousel-prev-disabled-vertical,
+.jcarousel-skin .jcarousel-prev-disabled-vertical:hover,
+.jcarousel-skin .jcarousel-prev-disabled-vertical:active {
+	cursor: default;
+	background-position: 0 -96px;
+}
+
+/*
+
+	Galleriffic Light Box Implementation
+*****************/
+#galleriffic_slider div.content {
+	/* The display of content is enabled using jQuery so that the slideshow content won't display unless javascript is enabled. */
+	display: none;
+	float: right;
+	width: 550px;
+}
+
+#galleriffic_slider div.controls {
+	margin-top: 5px;
+	height: 23px;
+}
+
+#galleriffic_slider div.controls a {
+	padding: 5px;
+}
+
+#galleriffic_slider div.ss-controls {
+	float: left;
+}
+
+#galleriffic_slider div.nav-controls {
+	float: right;
+}
+
+#galleriffic_slider div.slideshow-container {
+	position: relative;
+	clear: both;
+	height: 502px; /* This should be set to be at least the height of the largest image in the slideshow */
+}
+
+#galleriffic_slider div.loader {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 550px;
+	height: 502px; /* This should be set to be at least the height of the largest image in the slideshow */
+}
+
+#galleriffic_slider div.slideshow {
+
+}
+
+#galleriffic_slider div.slideshow span.image-wrapper {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#galleriffic_slider div.slideshow a.advance-link {
+	display: block;
+	width: 550px;
+	height: 502px; /* This should be set to be at least the height of the largest image in the slideshow */
+	line-height: 502px; /* This should be set to be at least the height of the largest image in the slideshow */
+	text-align: center;
+}
+
+#galleriffic_slider div.slideshow a.advance-link:hover, div.slideshow a.advance-link:active, div.slideshow a.advance-link:visited {
+	text-decoration: none;
+}
+
+#galleriffic_slider div.slideshow img {
+	vertical-align: middle;
+}
+
+#galleriffic_slider div.download {
+	float: right;
+}
+
+#galleriffic_slider div.caption-container {
+
+}
+
+#galleriffic_slider span.image-caption {
+	display: block;
+	position: absolute;
+}
+
+#galleriffic_slider div.caption {
+	padding: 12px;
+}
+
+#galleriffic_slider div.image-desc {
+	line-height: 1.3em;
+	padding-top: 12px;
+}
+
+#galleriffic_slider div.navigation {
+	/* The navigation style is set using jQuery so that the javascript specific styles won't be applied unless javascript is enabled. */
+}
+
+#galleriffic_slider ul.thumbs {
+	clear: both;
+	margin: 0;
+	padding: 0;
+}
+
+#galleriffic_slider ul.thumbs li {
+	float: none;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+#galleriffic_slider a.thumb {
+	padding: 0;
+	display: inline;
+	border: none;
+}
+
+#galleriffic_slider ul.thumbs img {
+	border: none;
+	display: block;
+}
+
+#galleriffic_slider div.pagination {
+	clear: both;
+}
+
+#galleriffic_slider div.navigation div.top {
+	margin-bottom: 12px;
+	height: 11px;
+}
+
+#galleriffic_slider div.navigation div.bottom {
+	margin-top: 12px;
+}
+
+#galleriffic_slider div.pagination a, div.pagination span.current, div.pagination span.ellipsis {
+	display: block;
+	float: left;
+	margin-right: 2px;
+	padding: 4px 7px 2px 7px;
+}
+
+#galleriffic_slider div.pagination span.ellipsis {
+	padding: 5px 0 3px 2px;
+}
+
+#galleriffic_slider #captionToggle a {
+	float: right;
+	display: block;
+	background-repeat: no-repeat;
+	background-position: right;
+	margin-top: 5px;
+	padding: 5px 30px 5px 5px;
+}
+
+/*
+
+	Cart Modal
+*****************/
+.cart_popup .title {
+	overflow: hidden;
+}
+
+.cart_popup dl dt {
+	min-width: inherit;
+}
+
+.cart_popup .title h3 {
+	display: inline;
+	margin: 0;
+	padding: 0;
+}
+
+.cart_popup .title a.close {
+	display: block;
+	float: right;
+	margin: 0;
+	padding: 0;
+}
+
+.cart_popup .cart_modal_popup {
+	overflow: hidden;
+}
+
+.cart_popup .legend a {
+	display: inline-block;
+	margin-left: 10px;
+	text-decoration: underline;
+}
+
+.cart_popup .cart_modal_popup .prod_image {
+	min-height: 0;
+	float: left;
+}
+
+.cart_popup .cart_modal_popup .prod_info {
+	float: left;
+	padding-left: 10px;
+	width: 200px;
+	position: relative;
+}
+
+.cart_popup .cart_modal_popup .prod_info .prod_price {
+	position: absolute;
+	top: 0;
+	right: -60px;
+	font-weight: bold;
+}
+
+.cart_popup .prod_cart-total {
+	margin: 10px;
+	font-weight: bold;
+}
+
+.cart_popup span.prod_color {
+	display: block;
+	margin-top: 3px;
+}
+
+.cart_popup span.prod_color img {
+	margin-left: 4px;
+	vertical-align: middle;
+}
+
+.cart_popup span.prod_size {
+	display: block;
+}
+
+.cart_popup .cart_modal_popup .prod_info p {
+	margin-bottom: 5px;
+}
+
+.cart_popup .cart_modal_popup .prod_info dl {
+	margin-bottom: 5px;
+}
+
+.cart_popup .cart_modal_popup .prod_info dl dt {
+	float: left;
+	width: 60px;
+}
+
+.cart_popup .links button {
+	font-size: 1em;
+	width: 143px;
+}
+
+.cart_popup .links button img {
+	height: 12px;
+}
+
+.cart_popup .content_slot {
+	height: 45px;
+	margin: 20px 15px 0 15px;
+	overflow: hidden;
+}
+
+#cart_popup {
+	display: none;
+	position: fixed;
+	left: 50%;
+	margin-left: 93px;
+	top: 77px;
+	z-index: 2147483647;
+}
+
+#cart_content {
+	cursor: pointer;
+}
+
+#rollover_cart_popup {
+	/*display:none;*/
+	position: absolute;
+	left: 650px;
+	top: 75px;
+	z-index: 2147483647;
+}
+
+.cart_popup_error_msg {
+	line-height: 1.5em;
+	color: #FFFFFF;
+	margin-bottom: 5px;
+	font-weight: bold
+}
+
+.product-variant-label {
+	display: inline-block;
+	padding-right: 5px;
+	min-width: 38px;
+}
+
+/*
+
+	Quickview Lightbox
+*****************/
+#quickview_lightbox .prod_image {
+	float: left;
+}
+
+#quickview_lightbox .prod {
+	width: 350px;
+	float: left;
+}
+
+#quickview_lightbox .prod button {
+}
+
+#quickview_lightbox input.qty {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	font-size: 1.2em;
+	text-align: center;
+	width: 37px;
+	height: 36px;
+}
+
+/*
+
+	Thumbnail Detail Banner
+*****************/
+.thumbnail_detail .banner,
+a.thumbnail_detail .banner:visited {
+	display: block;
+	overflow: hidden;
+	position: relative;
+	padding: 4px;
+	margin-bottom: 10px;
+	min-height: 96px;
+	cursor: pointer;
+}
+
+.thumbnail_detail .banner .thumb {
+	float: left;
+}
+
+.thumbnail_detail .banner .title {
+	float: right;
+	width: 50%;
+}
+
+.thumbnail_detail .banner .title h2,
+.thumbnail_detail .banner .details p {
+	margin: 0;
+}
+
+.thumbnail_detail .banner .details p {
+	line-height: 1.2em;
+	font-size: 0.9em;
+}
+
+body.language-ja .thumbnail_detail .banner .details p { font-size: 1.1em; }
+body.language-zh .thumbnail_detail .banner .details p { font-size: 1.1em; }
+
+.thumbnail_detail .banner .details {
+	float: left;
+	padding-left: 12px;
+	width: 90px;
+}
+
+.thumbnail_detail .banner .action {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 20px;
+	height: 23px;
+}
+
+.thumbnail_detail .banner .action img {
+	padding: 5px;
+}
+
+/*
+
+	Small Detail Banner
+*****************/
+.small_detail .banner,
+.small_detail .simple_banner {
+	overflow: hidden;
+	position: relative;
+	height: 230px;
+}
+
+.small_detail .banner .title {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 5px;
+}
+
+.small_detail .banner h2 {
+}
+
+.small_detail .banner h2 a,
+.small_detail .banner h2 a:visited {
+	display: block;
+	padding: 3px 10px;
+}
+
+.small_detail .banner .thumb {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 100%;
+}
+
+.small_detail .banner .details {
+	float: left;
+	padding: 7px 30px 7px 10px;
+}
+
+.small_detail .banner .thumb img {
+	padding: 0;
+}
+
+.small_detail .banner p {
+	margin: 0;
+}
+
+.small_detail .banner .action {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 27px;
+	height: 30px;
+}
+
+.small_detail .banner .action img {
+	padding: 10px;
+}
+
+/*
+
+	Slide Viewer
+*****************/
+#homepage_slider .svw {
+	width: 50px;
+	height: 20px;
+}
+
+.svw ul {
+	position: relative;
+	left: -999em;
+}
+
+#homepage_slider.stripViewer {
+	position: relative;
+	overflow: hidden;
+	margin: 0;
+}
+
+#homepage_slider.stripViewer ul {
+	margin: 0;
+	padding: 0;
+	position: relative;
+	left: 0;
+	top: 0;
+	width: 1%;
+}
+
+#homepage_slider.stripViewer ul li {
+	float: left;
+}
+
+#homepage_slider .tooltip {
+	padding: 0.5em;
+}
+
+.stripTransmitter {
+	overflow: auto;
+	width: 1%;
+	padding: 0 15px 7px 15px;
+}
+
+.stripTransmitter ul {
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+
+.stripTransmitter ul li {
+	width: 30px;
+	float: left;
+	margin: 0 1px 1px 0;
+}
+
+.stripTransmitter a {
+	line-height: 22px;
+	display: block;
+	padding-top: 15px;
+}
+
+/*
+
+	Cart Page
+*****************/
+.cart_total {
+	float: right;
+	padding-right: 20px;
+}
+
+#your_cart dl dt {
+	min-width: 50px;
+}
+
+#your_cart .quantity img {
+	float: right;
+	margin: 0;
+}
+
+/* readded lost styles from rev 1428 */
+#your_cart .quantity input[type="image"] {
+	float: right;
+	margin: 0;
+}
+
+/* readded lost styles from rev 1428 */
+#your_cart .quantity input.qty {
+	margin-right: 10px;
+}
+
+#your_cart p {
+	float: left;
+	margin-right: 30px;
+	margin-right: 20px;
+	padding-left: 12px;
+}
+
+#your_cart .product_image {
+	width: 96px;
+	display: block;
+	margin: 0 auto 10px;
+}
+
+#your_cart .product_details {
+	border-left: 0 none;
+	width: 400px;
+}
+
+ul.cart-promotions {
+	margin: 5px 0 0 5px;
+	width: 260px;
+}
+
+ul.cart-promotions li {
+	line-height: 1.2em;
+	margin-bottom: 6px;
+}
+
+.cart-promotions-potential {
+	padding-bottom: 6px;
+	border-bottom: 1px solid #eee;
+}
+
+.cart_id {
+	font-weight: normal;
+	font-size: 100%;
+	margin-bottom: -23px;
+	display: block;
+}
+
+/*
+
+	Order Detail Page
+*****************/
+#your_order dl dt {
+	min-width: 50px;
+}
+
+#your_order .quantity img {
+	float: right;
+	margin: 0;
+}
+
+#your_order .quantity input[type="image"] {
+	float: right;
+	margin: 0;
+}
+
+#your_order .quantity input.qty {
+	margin-right: 10px;
+}
+
+#your_order p {
+	float: left;
+	margin-right: 30px;
+	margin-right: 20px;
+	padding-left: 12px;
+}
+
+#your_order .product_image {
+	width: 65px;
+}
+
+#your_order .product_details {
+	border-left: 0 none;
+	width: 320px;
+}
+
+/*
+
+	Payment Details Page and Modal
+*****************/
+#payment_details,
+#payment_details_modal {
+	margin-top: 20px;
+}
+
+#payment_details th,
+#payment_details_modal th {
+	padding: 10px;
+}
+
+/*
+
+	Information Messages
+*****************/
+.information_message {
+	position: relative;
+	margin: 20px 0 10px 0;
+	min-height: 55px;
+}
+
+.information_message p {
+	margin-left: 27px;
+	padding: 5px 10px 5px 40px;
+}
+
+.information_message span {
+	position: absolute;
+	width: 55px;
+	height: 55px;
+	top: -4px;
+	left: 0;
+}
+
+.information_message span.single {
+	top: -11px;
+}
+
+/*
+
+	Error Messages
+*****************/
+.error_message {
+	overflow: auto;
+}
+
+.error_message p {
+	padding-top: 23px;
+}
+
+.error_message span {
+	width: 55px;
+	height: 55px;
+	display: block;
+	float: left;
+	margin: 7px;
+}
+
+.error_message ul {
+	padding-left: 90px;
+}
+
+.error_message ul li {
+	padding-bottom: 5px;
+}
+
+.form_field_error {
+	padding: 10px;
+	float: left;
+	margin: 5px 0;
+}
+
+.form_field_error p,
+.form_field_error .notify {
+	margin: 0;
+}
+
+/*
+
+	Checkout Summary Flow
+*****************/
+.checkout_summary_flow {
+	position: relative;
+}
+
+.checkout_summary_flow .item_container_holder .title_holder h2 span {
+	position: absolute;
+}
+
+.checkout_summary_flow_a {
+	position: absolute;
+}
+
+.checkout_summary_flow_a button.form,
+.checkout_summary_flow_b button.form,
+.checkout_summary_flow_c button.form {
+	position: absolute;
+}
+
+.checkout_summary_flow_b {
+	position: absolute;
+}
+
+.checkout_summary_flow_c {
+	position: absolute;
+}
+
+.checkout_summary_flow form dl dt {
+	float: none;
+}
+
+.place-order:disabled {
+	cursor: default;
+	opacity: 0.6;
+}
+
+#delivery_modes_dl dt.left label {
+	line-height: 1.2em;
+	float: left;
+	width: 640px;
+}
+
+#delivery_modes_dl dt.left {
+	margin-bottom: 3px;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #ddd;
+}
+
+.deliverymode-description {
+	max-height: 96px;
+	overflow: hidden;
+	cursor: help;
+	line-height: 1.2em;
+	font-size: 0.95em;
+}
+
+/*
+
+	Varient Options
+*****************/
+.variant_options {
+	overflow: auto;
+}
+
+.variant_options .colour p {
+	float: left;
+}
+
+.variant_options .size,
+.variant_options .colour {
+	float: left;
+	overflow: hidden;
+}
+
+.variant_options .size dl {
+	float: left;
+}
+
+.variant_options .size a {
+	float: left;
+	clear: both;
+}
+
+/*
+
+	Existing Address
+*****************/
+.existing_address {
+	border: 1px solid #CCCECF;
+	overflow: auto;
+	padding: 10px;
+}
+
+.existing_address button {
+	display: block;
+	float: right;
+	clear: right;
+	margin: 0 0 10px 0;
+}
+
+.existing_address ul {
+	padding: 0;
+	margin: 0;
+	float: left;
+}
+
+/*
+
+	Delivery Address Details Table
+	Payment Method Details Table
+*****************/
+.table_action_col_item{
+	margin: 18px;
+	padding: 0;
+	line-height: 3em;
+}
+
+/*
+	Delivery Method Details
+*****************/
+.delivery_method {
+	border: 1px solid #CCCECF;
+	overflow: auto;
+	padding: 10px;
+}
+
+.delivery_method ul {
+	padding: 0;
+	margin: 0;
+	float: left;
+}
+#delivery_method_item {
+	border: 1px solid #CCCECF;
+	overflow: auto;
+	padding: 10px;
+	margin-top: 10px;	
+}
+
+#delivery_method_item
+input.text,
+input.qty,
+label {
+	padding: 0 0 0 1px;
+	margin: 0;
+	float: none;
+}
+
+/*
+	Payment Details
+*****************/
+.payment_details_left_col {
+	float: left;
+}
+
+.payment_details_right_col {
+	float: right;
+}
+
+.save_payment_details {
+	float: left;
+}
+
+.existing_payment_details {
+	border: 1px solid #CCCECF;
+	overflow: auto;
+	padding: 10px;
+}
+
+/*
+
+	Footer
+*****************/
+#footer {
+	margin: 0 auto;
+	overflow: hidden;
+	position: relative;
+}
+
+#footer a {
+	text-decoration: underline;
+}
+
+#footer ul.Fa {
+	overflow: hidden;
+	margin: 0;
+}
+
+#footer ul.Fa li {
+	float: left;
+}
+
+#footer ul.Fb {
+	padding: 0 20px;
+	margin: 0;
+}
+
+#footer ul.Fb li {
+	width: 100%;
+}
+
+#footer ul.Fc {
+	float: left;
+	min-width: 180px;
+}
+
+#footer ul.Fc li {
+	clear: left;
+}
+
+/*
+
+	Copyright
+*****************/
+#copyright {
+	width: 950px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+#copyright p {
+	padding-top: 10px;
+}
+
+/*
+
+	textpage
+*****************/
+.faq-menulink {
+	display: block;
+}
+
+.textpage a {
+	text-decoration: underline;
+}
+
+.textpage h2 {
+	margin: 1.2em 0 0.1em 0;
+}
+
+.textpage h3 {
+	margin: 1em 0 0.1em 0;
+}
+
+.textpage-faqs ul li {
+	list-style: disc;
+}
+
+/*
+
+	Accessibility
+*******************/
+.skip {
+	position: absolute;
+	top: -30000px;
+	left: -30000px;
+}
+
+/*
+
+	Checkout Progress
+*******************/
+
+.checkoutProgress{
+	width: 790px;
+	float: left;
+}
+
+.checkoutProgress ul{
+	list-style: none;
+	width: 100%;
+	padding-left:0;
+	padding-right: 0;
+	overflow: hidden;
+}
+
+.checkoutProgress li{
+	float: left;
+	width: 24.5%;
+	text-align: center;
+}
+
+
+
+
+/*
+
+	Mobile Store switch
+*******************/
+
+.backToMobileStore{
+	font-size: 5em;
+	font-weight: bold;
+	border-bottom: 0.1em solid #687387;
+	padding: 0.5em 0.5em;
+	background-image: -moz-linear-gradient(top, #ffffff, #e6edf3);
+	background-image: -ms-linear-gradient(top, #ffffff, #e6edf3);
+	background-image: -o-linear-gradient(top, #ffffff, #e6edf3);
+	background-image: -webkit-gradient(linear, center top, center bottom, from(#ffffff), to(#e6edf3));
+	background-image: -webkit-linear-gradient(top, #ffffff, #e6edf3);
+	background-image: linear-gradient(top, #ffffff, #e6edf3);
+}
+
+.greyDot {
+	background: none repeat scroll 0 0 #6E7588;
+	border-radius: 500em 500em 500em 500em;
+	color: #FFFFFF;
+	display: block;
+	float: left;
+	font-size: 0.6em;
+	height: 1.5em;
+	margin: 0.6em 0.6em 0 0;
+	text-align: center;
+	width: 1.5em;
+}
+
+.closeDot{
+	float: right;
+	cursor: pointer;
+}
+
+a.box
+{
+background-color: white;
+color: #173C93;
+padding: 3px;
+text-decoration: none
+}
+
+a.box:hover
+{
+cursor: info;
+background-color: #fff;
+color: #ff9933
+}
+
+a.box span
+{
+position: absolute;
+visibility: hidden;
+margin-left: 2px;
+margin-top: -10px;
+padding: 8px;
+text-decoration: none
+}
+
+a.box:hover span
+{
+visibility: visible;
+border: 1px;
+color: #000;
+background-color: lightblue
+}
+
+.entitlement_units {
+	color: darkgrey;
+	font-size: 12px;
+	font-style: italic;
+}
+
+/*
+# sbg Product List Styles
+******************************************************************************/
+
+.sbgProductList{
+	margin:15px 0 0 0;
+}
+
+.sbgProductList .sbgProduct{
+	float:left;
+	width:240px;
+	margin:0 0 0 10px;
+	background:#fff;
+}
+
+.sbgProductList .sbgProduct:first-child{
+	margin:0;
+}
+
+/*
+## sbgProductHeader
+******************************************************************************/
+
+.sbgProductList .sbgProduct .sbgProductHeader{
+	border-bottom:2px solid #c0c1c2;
+	padding:20px;
+}
+
+.sbgProductList .sbgProduct .sbgProductHeader .thumb{
+	text-align: center;
+}
+
+.sbgProductList .sbgProduct .sbgProductHeader .name{
+	text-align:center;
+	
+}
+
+.sbgProductList .sbgProduct .sbgProductHeader .name a,
+.sbgProductList .sbgProduct .sbgProductHeader .name a:hover{
+	font-size:24px;
+	font-weight:normal;
+	color:#000;
+	text-transform:uppercase;
+}
+
+.sbgProductList .sbgProduct .sbgProductHeader .summary{
+	text-align:center;
+}
+
+/*
+## viewplans
+******************************************************************************/
+
+.sbgProductList .sbgProduct .viewplan{
+	border-bottom:2px solid #c0c1c2;
+}
+
+.sbgProductList .sbgProduct .viewplan .header{
+	font-size:14px;
+	line-height:30px;
+	font-weight:bold;
+	color:#000;
+	text-transform:uppercase;
+	margin-left:8px;
+	margin-right:8px;
+	white-space:nowrap;
+}
+
+.sbgProductList .sbgProduct .viewplan .content{
+	padding:5px 0;
+	margin-left:8px;
+	margin-right:8px;
+	white-space:nowrap;
+}
+
+/*
+## buybutton
+******************************************************************************/
+
+.sbgProductList .sbgProduct .buybutton,
+.sbgProductList .sbgProduct .addtocartbutton{
+	width:100%;
+	margin:12px 0 0 0;
+}
+
+/*
+## Subscription
+******************************************************************************/
+
+.subscription_content_area{
+	width: 50%;
+	padding: 0 10px 0 0;
+}
+
+.subscription_details table#subscription_details td span,
+.subscription_details table#subscription_manage td span,
+.subscription_details table#subscription_activity td span {
+    min-width: 47%;
+    display: block;
+    float: left;
+    font-weight: normal;
+    margin-right: 10px;    
+}
+
+table#subscription_details .subscription_detail_area_head,
+table#subscription_manage .subscription_detail_area_head,
+table#subscription_activity .subscription_detail_area_head {
+    border-bottom: 2px solid #BBBBBB;
+    font-size: 12px;
+    text-transform: uppercase;
+    height: 40px;
+    vertical-align: bottom;    
+}
+
+table#subscription_activity .subscription_detail_area_head .activity{
+    font-weight: bold;
+    color: #000000;	
+}
+
+table#subscription_activity .subscription_detail_area_head .order_number,
+table#subscription_activity .subscription_detail_area_head .order_number a{
+	font-size: 12px;
+	font-weight: normal;
+	text-transform: none;
+	min-width: 80px;
+}
+
+table#subscription_activity .subscription_detail_area_head .order_number a{
+	text-decoration: underline;
+}
+
+.plan_summary {
+	clear: left;
+}
+
+.subscription_details table#subscription_details td,
+.subscription_details table#subscription_manage td,
+.subscription_details table#subscription_activity td {
+    padding: 5px;
+    font-weight: bold;
+    color: #000000;
+}
+
+#plan_name{
+	color: #2C3A55;
+    font-size: 18px;
+}
+
+.r_function_btn,
+.r_action_btn{
+    background-color: #FFFFFF;
+    border: 1px solid #000000;
+    color: #000000;
+	padding: 3px;
+    font-size: 1.2em;
+    font-weight: bold;
+    /*font-family: helvetica;*/
+    height: 26px;
+}
+
+.function_btn{
+    background-color: #000000;
+    border: medium none;
+    color: #FFFFFF;
+    font-size: 1.238em;
+    font-weight: bold;
+    padding: 4px 15px;
+    /*font-family: helvetica;*/
+    margin-right: 10px;
+    height: 26px;
+}
+
+.r_function_btn:hover{
+    background-color: #CCCCCC;
+}
+
+.function_btn:hover{
+    background-color: #333333;
+}
+
+.r_action_btn{
+    height: 26px;
+    /*font-family: helvetica;*/
+    /*border: 1px solid #555555;*/
+    font-weight: normal;
+    font-size: 1.2em;  
+    padding: 3px 14px;  	
+}
+
+.r_action_btn:hover{
+    background-color: #cccccc;
+}
+
+.subscription_details .p_action_btn{
+	padding: 8px 20px;
+	/*font-family: helvetica;*/
+	font-size: 14px;
+	height: auto;
+}
+
+.subscription_content_area .first_row {
+    height: 25px;
+    vertical-align: bottom;	
+}
+
+.subscription_content_area .h_45{
+	height: 45px;
+}
+
+.subscription_content_area tr td span:first-child {
+	color: #666666;
+} 
+
+#contractDurationExtensionOptions, #paymentMethods {
+    border: 1px solid #000000;
+    font-size: 10.5px;
+    margin: 0 10px 0 0;
+    max-width: 160px;
+    min-width: 160px;
+    padding: 4px;
+    text-overflow: ellipsis;
+}
+
+.subscription_content_area #subscription_details .bold_text{
+	font-weight: bold;
+}
+.pay{
+	font-weight: normal;
+}
+
+/*#subscriptions button{
+	font-family: helvetica;
+	font-size: 1.2em;
+}
+*/
+#pauseSubscriptionForm button{
+	background-image: url("../images/paused.png");
+	background-repeat: no-repeat;
+	background-position: 0 -4px;
+	padding-left: 27px;
+}
+
+#deactivateAutorenewalForm button{
+	background-image: url("../images/stop.png");
+	background-repeat: no-repeat;
+	background-position: 0 -4px;
+	padding-left: 27px;
+}
+
+#resumeSubscriptionForm button.r_function_btn,
+#activateAutorenewalForm button{
+	background-image: url("../images/resume.png");
+	background-position: 0 -4px;
+	background-repeat: no-repeat;
+	padding-left: 27px;
+}
+
+
+
+
+table#subscription_details .first_row,
+table#subscription_manage .first_row{
+	vertical-align: top;
+	height: auto;
+	padding-top: 15px !important;
+}
+
+
+
+#viewBillingActivityForm{
+	margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+/*
+## change plan
+******************************************************************************/
+
+.account-upgrade-subscription .tabs {
+  font-size: 100%;
+}
+
+.account-upgrade-subscription .tabs ul.tabs-list {
+    border-bottom: 1px solid #313131;
+}
+
+.account-upgrade-subscription .tabs ul.tabs-list  li{
+    border-bottom: 0;
+    padding: 0; 
+    margin-bottom:-1px ;
+    border:0;
+    width: 25%;
+}
+
+.account-upgrade-subscription .tabs ul.tabs-list  li a{
+    padding: 5px 15px;
+	border:0;
+    border-bottom:1px solid #313131;
+    text-align: center;
+    color:#BBBBBB;
+    font-size: 14px;
+    line-height: 20px;
+
+}
+
+.account-upgrade-subscription .tabs ul.tabs-list  li.current a{
+	padding: 4px 14px 5px;
+	border:1px solid #313131;
+    border-bottom:1px solid transparent;
+    background: #f3f3f3;
+    color: #000;
+
+}
+
+.account-upgrade-subscription .tabs ul.tabs-list  li a{
+	outline:none;
+}
+
+
+
+.account-upgrade-subscription .tabs .content{
+	margin: 0 !important;
+}
+
+.account-upgrade-subscription-table{
+    margin-bottom: 40px;
+}
+
+
+.account-upgrade-subscription-table  tr td{
+    border-top-width: 1px !important;
+}
+
+.account-upgrade-subscription-table thead  .top_plan {
+    font-size: 1.5em;
+    padding-left: 5px;	
+}
+
+.account-upgrade-subscription-table thead .info-line{
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #000000;
+    padding-left: 5px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    text-align: left;
+}
+
+.account-upgrade-subscription-table thead .info-line.center{
+	text-align: center;
+	padding: 0;
+	margin-top: 25px;
+}
+
+.account-upgrade-subscription-table thead  th{
+   background-color: #f3f3f3 !important;
+   padding-top: 30px;
+}
+
+
+.account-upgrade-subscription-table td.change_col{
+	text-align: center;
+	background-color: #f3f3f3 !important;
+}
+
+.account-upgrade-subscription-table td.change_col .equalCheck{
+	margin-left: 5px;
+}
+
+.account-upgrade-subscription .p_action_btn{
+    background-color: #81C026;
+    background-image: none;
+    padding: 4px 15px;
+    margin: 0;
+    font-size: 1.2em;
+    /*height: auto;*/
+    height: 26px;
+}
+
+
+
+
+
+.account-upgrade-subscription .tabs .r_action_btn,
+.account-upgrade-subscription .tabs .function_btn,
+.account-upgrade-subscription .tabs .p_action_btn
+{
+	margin: 0;
+}
+
+
+.account-upgrade-subscription .tabs .function_btn
+{
+	margin-right: 10px;
+}
+
+
+
+/*
+## Subscription page header area
+******************************************************************************/
+
+div.item_container_holder .title_holder h2,
+.title_holder h2,
+#plan_name h2 {
+    font-family: helvetica;
+    font-weight: 600;
+    margin: 10px;	
+    color: #333333;
+    font-size: 18px;
+}
+
+#plan_name h2 {
+	margin-left: 0;
+}
+
+div.item_container p,
+.title-top p {
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+div.item_container .infoline{
+	font-size: 1.2em;
+}
+
+
+
+
+
+
+
+
+
+
+#cancel-subscription-confirm, .remove-address-confirm{
+	padding: 20px;
+
+}
+
+
+
+#cancel-subscription-confirm .title, .remove-address-confirm .title{
+	font-size: 16px;
+    text-transform: uppercase;
+    line-height: 20px;
+    font-weight: bold;
+	
+}
+
+
+#cancel-subscription-confirm .actions, .remove-address-confirm .actions{
+	text-align: right;
+	margin: 20px 0 0;
+	
+}
+
+
+
+#cancel-subscription-confirm .actions .r_action_btn,
+#cancel-subscription-confirm .actions .confirm,
+.remove-address-confirm .actions .r_action_btn,
+.remove-address-confirm .actions .confirm{
+	margin-left: 10px;
+	min-width: 80px;
+}
+
+
+
+
+
+#upgrade-billing-changes{
+	padding: 20px;
+}
+
+
+#upgrade-billing-changes .headline{
+	font-size: 20px;
+ 	font-weight: bold;
+    line-height: 20px;
+	
+}
+
+
+#upgrade-billing-changes .change-compare{
+	margin: 20px 0 ;
+
+} 
+
+#upgrade-billing-changes .change-compare .change-box{
+	color: #fff;
+	background: #000;
+	float: left;
+	width: 220px;
+	padding: 10px;
+	min-height: 70px;
+}
+
+.manageSubscriptions .change-box{
+	color: #fff;
+	background: #000;
+	margin: 10px 0 30px 0;
+	padding: 13px 10px; 
+}
+.manageSubscriptions div.item_container .infoline {
+	font-size: 1.1em;
+	margin-bottom: 15px;
+}
+.manageSubscriptions .account td.actions {
+	text-align: center;
+}
+.manageSubscriptions .change-box table {
+	margin: 0;
+}
+.manageSubscriptions .change-box table #id_changeToPM{
+	margin: 4px 15px 5px 0;
+	width: 225px;
+}
+.manageSubscriptions .change-box table #buttonChangeTo{
+	margin: 0;
+}
+.manageSubscriptions .back_btns {
+	clear: both;
+}
+.manageSubscriptions .back_btns .right{
+	margin: 0;
+}
+#upgrade-billing-changes .change-compare .change-box.right,
+.manageSubscriptions .change-box.right {
+	float: right;
+	position: relative;
+}
+
+#upgrade-billing-changes .change-compare .change-box.right:before,
+.manageSubscriptions .change-box.right:before{
+	content:"";
+	position: absolute;
+	left: -44px;
+	top: 10px;
+	width: 0;
+	height: 0;
+
+	border:25px solid transparent;
+	border-left-color:#666;
+
+}
+.manageSubscriptions .no-payment{
+	margin-top: 10px;
+	border: 1px solid #000;
+	padding: 10px 0;
+	text-align: center;
+	font-size: 1.1em;
+	margin-bottom: 30px;
+}
+
+
+#upgrade-billing-changes .change-compare .change-box .title{
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#upgrade-billing-changes .change-compare .change-box .plan{
+
+}
+
+#upgrade-billing-changes .change-compare .change-box .term{
+
+}
+
+
+
+#upgrade-billing-changes .upgrade-preview-table{
+}
+
+#upgrade-billing-changes .upgrade-preview-table  td{
+	border:0;
+	padding:0;
+	line-height: 26px;
+	width: 50%;
+}
+
+#upgrade-billing-changes .upgrade-preview-table thead td{
+	border-bottom:1px solid #000;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+
+#upgrade-billing-changes .upgrade-preview-table tbody td{
+
+}
+
+
+
+
+#upgrade-billing-changes .actions{
+	text-align: right;
+	margin: 20px 0 0;
+	
+}
+
+#upgrade-billing-changes .actions form{
+	display: inline-block;
+	
+}
+
+#upgrade-billing-changes .actions .cancel,
+#upgrade-billing-changes .actions .confirm{
+	font-size: 1.2em;
+	margin-left: 10px;
+	min-width: 80px;
+
+	font-weight: bold;
+}
+
+
+
+
+
+#payment-method-subscriptions{
+	padding: 20px;
+}
+
+
+.headline{
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+#payment-method-subscriptions .infoline{
+	font-size: 1.2em;
+}
+
+#payment-method-subscriptions{
+	padding: 20px;
+}
+
+#payment-method-subscriptions .headline{
+	font-size: 20px;
+ 	font-weight: bold;
+    line-height: 20px;
+}
+
+#payment-method-subscriptions .infoline,
+#payment-method-delete .infoline {
+	font-size: 1.2em;
+	margin: 10px 0;
+	clear: both;
+}
+
+
+#payment-method-subscriptions .actions{
+	text-align: right;
+}
+
+#payment-method-subscriptions .actions .r_action_btn,
+#payment-method-delete .actions .r_action_btn{
+	padding-top: 3px;
+	padding-bottom: 3px;
+	height: 26px;
+	margin-right: 10px;
+}
+
+
+/*#payment-method-subscriptions .payment-box,
+#payment-method-delete .payment-box */
+.payment-box {
+	background: none repeat scroll 0 0 #000;
+	color: #fff;
+	float: left;
+	padding: 10px;
+	width: 220px;
+	margin: 10px 0;
+}
+.payment-box .credit-card {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+
+#payment-method-subscriptions td,
+#payment-method-delete td{
+	border:0;
+}
+
+
+
+#payment-method-subscriptions .payment-method-subscriptions-table thead td{
+	border-bottom:1px solid #000;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+
+#payment-method-subscriptions .payment-method-subscriptions-table tbody td{
+    border-bottom:1px solid #000;
+}
+
+#payment-method-switch-existing-subscriptions .payment-method-subscriptions-table thead td{
+	border-bottom:1px solid #000;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+
+#payment-method-switch-existing-subscriptions .payment-method-subscriptions-table tbody td{
+    border-bottom:1px solid #000;
+}
+
+#payment-method-delete {
+    padding: 20px;
+}
+
+#payment-method-delete .headline{
+	font-size: 20px;
+ 	font-weight: bold;
+    line-height: 20px;
+}
+
+#payment-method-delete .actions{
+	text-align: right;
+}
+
+#payment-method-delete .information_message.negative p {
+	line-height: 16px;
+}
+
+#payment-method-delete table{
+	width: 560px;
+	clear: both;
+}
+#payment-method-delete .account-box{
+	width: 560px;
+}
+
+
+#resumeSubscriptionForm{
+	display: inline-block;
+}
+
+
+input.uneditable {
+    background-color: lightgrey;
+}
+
+select.uneditable {
+    background-color: lightgrey;
+}
+
+#payment-method-delete-subscriptions{
+    padding: 20px;
+}
+
+#payment-method-delete-subscriptions .headline{
+	font-size: 20px;
+ 	font-weight: italic;
+    line-height: 20px;
+}
+
+#payment-method-delete-subscriptions .infoline{
+	font-size: 1.2em;
+}
+
+#payment-method-delete .r_action_btn {
+	margin-right: 10px;
+}
+
+#payment-method-switch-existing-subscriptions{
+	padding: 20px;
+}
+
+#payment-method-switch-existing-subscriptions .headline{
+	font-size: 20px;
+ 	font-weight: italic;
+    line-height: 20px;
+}
+
+#payment-method-switch-existing-subscriptions .infoline{
+	font-size: 1.2em;
+}
+
+#payment-method-switch-existing-subscriptions .payment-method-subscriptions-table thead td{
+	border-bottom:1px solid #000;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+button.deactivated {
+    color: lightgrey;
+}

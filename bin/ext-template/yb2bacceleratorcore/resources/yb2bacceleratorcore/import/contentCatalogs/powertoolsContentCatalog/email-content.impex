@@ -1,0 +1,184 @@
+#
+# Import the CMS content for the Powertools site emails
+#
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$wideContent=CMSImageComponent,BannerComponent
+$jarResourceCms=jar:de.hybris.platform.yb2bacceleratorcore.setup.CoreSystemSetup&/yb2bacceleratorcore/import/cockpits/cmscockpit
+
+# Email page Template
+INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;subject(code);htmlTemplate(code);restrictedPageTypes(code)
+;;CustomerRegistrationEmailTemplate;Customer Registration Email Template;true;customerRegistrationEmail;powertools_Email_Customer_Registration_Subject;powertools_Email_Customer_Registration_Body;EmailPage
+;;ForgottenPasswordEmailTemplate;Forgotten Password Email Template;true;forgottenPasswordEmail;powertools_Email_Forgotten_Password_Subject;powertools_Email_Forgotten_Password_Body;EmailPage
+;;OrderConfirmationEmailTemplate;Order Confirmation Email Template;true;orderConfirmationEmail;powertools_Email_Order_Confirmation_Subject;powertools_Email_Order_Confirmation_Body;EmailPage
+;;OrderPendingApprovalEmailTemplate;Order Pending Approval Email Template;true;orderPendingApprovalEmail;powertools_Email_Order_PendingApproval_Subject;powertools_Email_Order_PendingApproval_Body;EmailPage
+;;ReplenishmentOrderConfirmationEmailTemplate;Replenishment Order Confirmation Email Template;true;replenishmentOrderConfirmationEmail;powertools_Email_Replenishment_Order_Confirmation_Subject;powertools_Email_Replenishment_Order_Confirmation_Body;EmailPage
+;;ReplenishmentOrderPlacedEmailTemplate;Replenishment Order Placed Email Template;true;replenishmentOrderPlacedEmail;powertools_Email_Replenishment_Order_Placed_Subject;powertools_Email_Replenishment_Order_Placed_Body;EmailPage
+;;OrderApprovalRejectionEmailTemplate;Order Approval Rejection Email Template;true;orderApprovalRejectionEmail;powertools_Email_Order_ApprovalRejection_Subject;powertools_Email_Order_ApprovalRejection_Body;EmailPage
+;;QuoteOrderApproveEmailTemplate;Quote Order Approval Email Template;true;QuoteOrderApproveEmail;powertools_Email_Quote_Order_Approve_Subject;powertools_Email_Quote_Order_Approve_Body;EmailPage
+;;QuoteOrderRejectEmailTemplate;Quote Order Rejection Email Template;true;QuoteOrderRejectEmail;powertools_Email_Quote_Order_Reject_Subject;powertools_Email_Quote_Order_Reject_Body;EmailPage
+
+# Templates for CMS Cockpit Page Edit
+UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+;;CustomerRegistrationEmailTemplate;$jarResourceCms/structure-view/structure_customerRegistrationEmailTemplate.vm
+;;ForgottenPasswordEmailTemplate;$jarResourceCms/structure-view/structure_forgottenPasswordEmailTemplate.vm
+;;OrderConfirmationEmailTemplate;$jarResourceCms/structure-view/structure_orderConfirmationEmailTemplate.vm
+;;OrderPendingApprovalEmailTemplate;$jarResourceCms/structure-view/structure_orderPendingApprovalEmailTemplate.vm
+;;OrderApprovalRejectionEmailTemplate;$jarResourceCms/structure-view/structure_orderApprovalRejectionEmailTemplate.vm
+;;ReplenishmentOrderConfirmationEmailTemplate;$jarResourceCms/structure-view/structure_replenishmentOrderConfirmationEmailTemplate.vm
+;;ReplenishmentOrderPlacedEmailTemplate;$jarResourceCms/structure-view/structure_replenishmentOrderPlacedEmailTemplate.vm
+;;QuoteOrderApproveEmailTemplate;$jarResourceCms/structure-view/structure_quoteOrderApproveEmailTemplate.vm
+;;QuoteOrderRejectEmailTemplate;$jarResourceCms/structure-view/structure_quoteOrderRejectEmailTemplate.vm
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='CustomerRegistrationEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ForgottenPasswordEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='OrderConfirmationEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='OrderPendingApprovalEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ReplenishmentOrderConfirmationEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='ReplenishmentOrderPlacedEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='OrderApprovalRejectionEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='QuoteOrderApproveEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='QuoteOrderRejectEmailTemplate'];validComponentTypes(code)
+;SiteLogo;;;logo
+;TopContent;;$wideContent;
+;BottomContent;;$wideContent;
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
+;;EmailTopSlot;Default Email Top Slot;true
+;;EmailBottomSlot;Default Email Bottom Slot;true
+
+# Bind Content Slots to Email Page Templates
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CustomerRegistrationEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-CustomerRegistrationEmail;SiteLogo;;SiteLogoSlot;true
+;;TopContent-CustomerRegistrationEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-CustomerRegistrationEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ForgottenPasswordEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ForgottenPasswordEmail;SiteLogo;;SiteLogoSlot;true
+;;TopContent-ForgottenPasswordEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-ForgottenPasswordEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='OrderConfirmationEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OrderConfirmationEmail;SiteLogo;;SiteLogoSlot;true
+;;TopContent-OrderConfirmationEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-OrderConfirmationEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='OrderPendingApprovalEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OrderPendingApprovalEmail;SiteLogo;;SiteLogoSlot;true
+;;TopContent-OrderPendingApprovalEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-OrderPendingApprovalEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ReplenishmentOrderConfirmationEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ReplenishmentOrderConfirmationEmail;SiteLogo;;SiteLogoSlot;true
+;;TopContent-ReplenishmentOrderConfirmationEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-ReplenishmentOrderConfirmationEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ReplenishmentOrderPlacedEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-ReplenishmentOrderPlacedEmail;SiteLogo;;SiteLogoSlot;true
+;;TopContent-ReplenishmentOrderPlacedEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-ReplenishmentOrderPlacedEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='OrderApprovalRejectionEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-OrderApprovalRejectionEmail;SiteLogo;;SiteLogoSlot;true
+;;TopContent-OrderApprovalRejectionEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-OrderApprovalRejectionEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='QuoteOrderApproveEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-QuoteOrderApproveEmail;SiteLogo;;SiteLogoSlot;true
+;;TopContent-QuoteOrderApproveEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-QuoteOrderApproveEmail;BottomContent;;EmailBottomSlot;true
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='QuoteOrderRejectEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-QuoteOrderRejectEmail;SiteLogo;;SiteLogoSlot;true
+;;TopContent-QuoteOrderRejectEmail;TopContent;;EmailTopSlot;true
+;;BottomContent-QuoteOrderRejectEmail;BottomContent;;EmailBottomSlot;true
+
+# Customer Registration Email Page
+INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];fromEmail[lang=en];fromName[lang=en]
+;;CustomerRegistrationEmail;Customer Registration Email;CustomerRegistrationEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
+;;ForgottenPasswordEmail;Forgotten Password Email;ForgottenPasswordEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
+;;OrderConfirmationEmail;Order Confirmation Email;OrderConfirmationEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
+;;OrderPendingApprovalEmail;Order Pending Approval Email;OrderPendingApprovalEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
+;;ReplenishmentOrderConfirmationEmail;Order Confirmation Email;ReplenishmentOrderConfirmationEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
+;;ReplenishmentOrderPlacedEmail;Order Confirmation Email;ReplenishmentOrderPlacedEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
+;;OrderApprovalRejectionEmail;Order Approval Rejection Email;OrderApprovalRejectionEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
+;;QuoteOrderApproveEmail;Quote Order Approval Email;QuoteOrderApproveEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
+;;QuoteOrderRejectEmail;Quote Order Rejection Email;QuoteOrderRejectEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
+
+# CMS components velocity templates
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;powertools-CMSImageComponent-template;java.util.Map
+;powertools-BannerComponent-template;java.util.Map
+;powertools-SimpleBannerComponent-template;java.util.Map
+;powertools-CMSLinkComponent-template;java.util.Map
+;powertools-CMSParagraphComponent-template;java.util.Map
+
+# Email velocity templates
+INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+;powertools_Email_Customer_Registration_Body;de.hybris.platform.b2bacceleratorfacades.process.email.context.CustomerEmailContext
+;powertools_Email_Forgotten_Password_Body;de.hybris.platform.yb2bacceleratorfacades.process.email.context.ForgottenPasswordEmailContext
+;powertools_Email_Forgotten_Password_Subject;de.hybris.platform.yb2bacceleratorfacades.process.email.context.ForgottenPasswordEmailContext
+;powertools_Email_Order_Confirmation_Body;de.hybris.platform.b2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+;powertools_Email_Customer_Registration_Subject;de.hybris.platform.b2bacceleratorfacades.process.email.context.CustomerEmailContext
+;powertools_Email_Order_Confirmation_Subject;de.hybris.platform.b2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+;powertools_Email_Order_PendingApproval_Subject;de.hybris.platform.b2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+;powertools_Email_Order_PendingApproval_Body;de.hybris.platform.b2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+;powertools_Email_Replenishment_Order_Confirmation_Subject;de.hybris.platform.b2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+;powertools_Email_Replenishment_Order_Confirmation_Body;de.hybris.platform.b2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+;powertools_Email_Replenishment_Order_Placed_Body;de.hybris.platform.yb2bacceleratorfacades.process.email.context.OrderReplenishmentEmailContext
+;powertools_Email_Replenishment_Order_Placed_Subject;de.hybris.platform.yb2bacceleratorfacades.process.email.context.OrderReplenishmentEmailContext
+;powertools_Email_Order_ApprovalRejection_Body;de.hybris.platform.b2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+;powertools_Email_Order_ApprovalRejection_Subject;de.hybris.platform.b2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+;powertools_Email_Quote_Order_Approve_Body;de.hybris.platform.yb2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+;powertools_Email_Quote_Order_Approve_Subject;de.hybris.platform.yb2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+;powertools_Email_Quote_Order_Reject_Body;de.hybris.platform.yb2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+;powertools_Email_Quote_Order_Reject_Subject;de.hybris.platform.yb2bacceleratorfacades.process.email.context.OrderNotificationEmailContext
+
+
+# Preview Image for use in the CMS Cockpit
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
+;;EmailPageModel_preview;text/gif;EmailPageModel_preview.gif;$jarResourceCms/preview-images/EmailPageModel_preview.gif
+
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
+;;CustomerRegistrationEmail;EmailPageModel_preview
+;;ForgottenPasswordEmail;EmailPageModel_preview
+;;OrderConfirmationEmail;EmailPageModel_preview
+;;OrderPendingApprovalEmail;EmailPageModel_preview
+;;ReplenishmentOrderConfirmationEmail;EmailPageModel_preview
+;;ReplenishmentOrderPlacedEmail;EmailPageModel_preview
+;;OrderApprovalRejectionEmail;EmailPageModel_preview
+;;QuoteOrderApproveEmail;EmailPageModel_preview
+;;QuoteOrderRejectEmail;EmailPageModel_preview

@@ -1,0 +1,52 @@
+# ImpEx for Importing Suppliers 
+
+# Macros / Replacement Parameter definitions
+$productCatalog=wsTestProductCatalog
+$productCatalogName=wsTest Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$superCategories=superCategories(code, $catalogVersion)
+
+# Create Supplier Categories
+INSERT_UPDATE Category;code[unique=true];$superCategories;allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+ ;brands;;
+ ;brand_1;brands
+ ;brand_2;brands
+ ;brand_5;brands
+ ;brand_10;brands
+ ;brand_18;brands
+ ;brand_26;brands
+ ;brand_75;brands
+ ;brand_88;brands
+ ;brand_91;brands
+ ;brand_103;brands
+ ;brand_128;brands
+ ;brand_251;brands
+ ;brand_702;brands
+ ;brand_745;brands
+ ;brand_750;brands
+ ;brand_2171;brands
+ 
+ # Language
+$lang=en
+
+
+
+# Create Categories
+UPDATE Category;code[unique=true];$catalogVersion;name[lang=en];description[lang=en]
+ ;brand_1;;HP;HP;
+ ;brand_10;;Canon;Canon;
+ ;brand_103;;NEC;NEC;
+ ;brand_128;;Targus;Targus;
+ ;brand_18;;Kingston;Kingston;
+ ;brand_2;;Toshiba;Toshiba;
+ ;brand_2171;;ICIDU;ICIDU;
+ ;brand_251;;TDK;TDK;
+ ;brand_26;;Samsung;Samsung;
+ ;brand_5;;Sony;Sony;
+ ;brand_702;;Sweex;Sweex;
+ ;brand_745;;Canyon;Canyon;
+ ;brand_75;;Fujifilm;Fujifilm;
+ ;brand_750;;Dane-Elec;Dane-Elec;
+ ;brand_88;;Kodak;Kodak;
+ ;brand_91;;Logitech;Logitech;
+ ;brands;;Brands;Brands;

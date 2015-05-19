@@ -1,0 +1,2142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.1">
+	<hashTree>
+		<TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="AcceleratorTestPlan" enabled="true">
+			<stringProp name="TestPlan.comments"></stringProp>
+			<boolProp name="TestPlan.functional_mode">false</boolProp>
+			<boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+			<elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+				<collectionProp name="Arguments.arguments">
+					<elementProp name="threads" elementType="Argument">
+						<stringProp name="Argument.name">threads</stringProp>
+						<stringProp name="Argument.value">${__property(threads)}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="rampup" elementType="Argument">
+						<stringProp name="Argument.name">rampup</stringProp>
+						<stringProp name="Argument.value">${__property(rampup)}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="loops" elementType="Argument">
+						<stringProp name="Argument.name">loops</stringProp>
+						<stringProp name="Argument.value">${__property(loops)}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="inputDataFolder" elementType="Argument">
+						<stringProp name="Argument.name">inputDataFolder</stringProp>
+						<stringProp name="Argument.value">${__property(inputDataFolder)}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="version" elementType="Argument">
+						<stringProp name="Argument.name">version</stringProp>
+						<stringProp name="Argument.value">0.4</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="homePageThreads" elementType="Argument">
+						<stringProp name="Argument.name">homePageThreads</stringProp>
+						<stringProp name="Argument.value">${__javaScript(${__property(threads)}*${__property(homeLandingPercent)}*(1-${__property(userLoggedPercent)}))}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="productPageThreads" elementType="Argument">
+						<stringProp name="Argument.name">productPageThreads</stringProp>
+						<stringProp name="Argument.value">${__javaScript(${__property(threads)}*${__property(productLandingPercent)}*(1-${__property(userLoggedPercent)}))}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="categoryPageThreads" elementType="Argument">
+						<stringProp name="Argument.name">categoryPageThreads</stringProp>
+						<stringProp name="Argument.value">${__javaScript(${__property(threads)}*${__property(categoryLandingPercent)}*(1-${__property(userLoggedPercent)}))}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="addToCartPercent" elementType="Argument">
+						<stringProp name="Argument.name">addToCartPercent</stringProp>
+						<stringProp name="Argument.value">${__property(cartAddersPercent)}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="userLoggedThreads" elementType="Argument">
+						<stringProp name="Argument.name">userLoggedThreads</stringProp>
+						<stringProp name="Argument.value">${__javaScript(${__property(threads)}*${__property(userLoggedPercent)})}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="homePath" elementType="Argument">
+						<stringProp name="Argument.name">homePath</stringProp>
+						<stringProp name="Argument.value">${__property(homePath)}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="timesToSearch" elementType="Argument">
+						<stringProp name="Argument.name">timesToSearch</stringProp>
+						<stringProp name="Argument.value">${__property(timesToSearch)}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="pagesToBrowse" elementType="Argument">
+						<stringProp name="Argument.name">pagesToBrowse</stringProp>
+						<stringProp name="Argument.value">${__property(pagesToBrowse)}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="purchasePercent" elementType="Argument">
+						<stringProp name="Argument.name">purchasePercent</stringProp>
+						<stringProp name="Argument.value">${__property(purchasePercent)}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="itemsAddToCart" elementType="Argument">
+						<stringProp name="Argument.name">itemsAddToCart</stringProp>
+						<stringProp name="Argument.value">${__property(itemsAddToCart)}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+					<elementProp name="durationTime" elementType="Argument">
+						<stringProp name="Argument.name">durationTime</stringProp>
+						<stringProp name="Argument.value">${__property(durationTime)}</stringProp>
+						<stringProp name="Argument.metadata">=</stringProp>
+					</elementProp>
+				</collectionProp>
+			</elementProp>
+			<stringProp name="TestPlan.user_define_classpath"></stringProp>
+		</TestPlan>
+		<hashTree>
+			<ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="AcceleratorThreadGroup" enabled="true">
+				<stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+				<elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+					<boolProp name="LoopController.continue_forever">false</boolProp>
+					<stringProp name="LoopController.loops">${loops}</stringProp>
+				</elementProp>
+				<stringProp name="ThreadGroup.num_threads">${threads}</stringProp>
+				<stringProp name="ThreadGroup.ramp_time">${rampup}</stringProp>
+				<longProp name="ThreadGroup.start_time">1308884399000</longProp>
+				<longProp name="ThreadGroup.end_time">1308884399000</longProp>
+				<boolProp name="ThreadGroup.scheduler">true</boolProp>
+				<stringProp name="ThreadGroup.duration">${durationTime}</stringProp>
+				<stringProp name="ThreadGroup.delay">0</stringProp>
+			</ThreadGroup>
+			<hashTree>
+				<ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTPRequestDefaults" enabled="true">
+					<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+						<collectionProp name="Arguments.arguments" />
+					</elementProp>
+					<stringProp name="HTTPSampler.domain">${server}</stringProp>
+					<stringProp name="HTTPSampler.port">${port}</stringProp>
+					<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+					<stringProp name="HTTPSampler.response_timeout"></stringProp>
+					<stringProp name="HTTPSampler.protocol">http</stringProp>
+					<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+					<stringProp name="HTTPSampler.path">${homePath}/</stringProp>
+				</ConfigTestElement>
+				<hashTree />
+				<CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTPCookieManager" enabled="true">
+					<collectionProp name="CookieManager.cookies" />
+					<boolProp name="CookieManager.clearEachIteration">true</boolProp>
+					<stringProp name="CookieManager.policy">default</stringProp>
+				</CookieManager>
+				<hashTree />
+				<Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="UserDefinedVariables" enabled="true">
+					<collectionProp name="Arguments.arguments">
+						<elementProp name="readyStateThreads" elementType="Argument">
+							<stringProp name="Argument.name">readyStateThreads</stringProp>
+							<stringProp name="Argument.value">${__javaScript(${homePageThreads} + ${userLoggedThreads} + (${productPageThreads} - (${productPageThreads}*${addToCartPercent}*${purchasePercent})) + (${categoryPageThreads} - (${categoryPageThreads}*${addToCartPercent}*${purchasePercent})))}</stringProp>
+							<stringProp name="Argument.metadata">=</stringProp>
+						</elementProp>
+						<elementProp name="outputTreeResults" elementType="Argument">
+							<stringProp name="Argument.name">outputTreeResults</stringProp>
+							<stringProp name="Argument.value">${__property(inputDataFolder)}${__property(outputDataFolder)}treeResults-t${threads}-v${version}.csv</stringProp>
+							<stringProp name="Argument.metadata">=</stringProp>
+						</elementProp>
+						<elementProp name="outputMonitorResults" elementType="Argument">
+							<stringProp name="Argument.name">outputMonitorResults</stringProp>
+							<stringProp name="Argument.value">${__property(inputDataFolder)}${__property(outputDataFolder)}monitorResults-t${threads}-v${version}.csv</stringProp>
+							<stringProp name="Argument.metadata">=</stringProp>
+						</elementProp>
+						<elementProp name="outputSumaryReportResults" elementType="Argument">
+							<stringProp name="Argument.name">outputSumaryReportResults</stringProp>
+							<stringProp name="Argument.value">${__property(inputDataFolder)}${__property(outputDataFolder)}summaryReportResults-t${threads}-v${version}.csv</stringProp>
+							<stringProp name="Argument.metadata">=</stringProp>
+						</elementProp>
+						<elementProp name="outputGraphResults" elementType="Argument">
+							<stringProp name="Argument.name">outputGraphResults</stringProp>
+							<stringProp name="Argument.value">${__property(inputDataFolder)}${__property(outputDataFolder)}graphResults-t${threads}-v${version}.csv</stringProp>
+							<stringProp name="Argument.metadata">=</stringProp>
+						</elementProp>
+						<elementProp name="state" elementType="Argument">
+							<stringProp name="Argument.name">state</stringProp>
+							<stringProp name="Argument.value">ready</stringProp>
+							<stringProp name="Argument.metadata">=</stringProp>
+						</elementProp>
+						<elementProp name="userLifeTimeDuringTest" elementType="Argument">
+							<stringProp name="Argument.name">userLifeTimeDuringTest</stringProp>
+							<stringProp name="Argument.value">${__property(userLifeTimeDuringTest)}</stringProp>
+							<stringProp name="Argument.metadata">=</stringProp>
+						</elementProp>
+						<elementProp name="addToCartFromProduct" elementType="Argument">
+							<stringProp name="Argument.name">addToCartFromProduct</stringProp>
+							<stringProp name="Argument.value">false</stringProp>
+							<stringProp name="Argument.metadata">=</stringProp>
+						</elementProp>
+					</collectionProp>
+				</Arguments>
+				<hashTree />
+				<RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="RandomVariable" enabled="true">
+					<stringProp name="maximumValue">${__javaScript(Math.floor(${threads}))}</stringProp>
+					<stringProp name="minimumValue">1</stringProp>
+					<stringProp name="outputFormat"></stringProp>
+					<boolProp name="perThread">true</boolProp>
+					<stringProp name="randomSeed"></stringProp>
+					<stringProp name="variableName">randomVariableThreads</stringProp>
+				</RandomVariableConfig>
+				<hashTree />
+				<HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTPHeaderManager" enabled="true">
+					<collectionProp name="HeaderManager.headers">
+						<elementProp name="Accept-Language" elementType="Header">
+							<stringProp name="Header.name">Accept-Language</stringProp>
+							<stringProp name="Header.value">es-es,es;q=0.8,en-us;q=0.5,en;q=0.3</stringProp>
+						</elementProp>
+						<elementProp name="Accept" elementType="Header">
+							<stringProp name="Header.name">Accept</stringProp>
+							<stringProp name="Header.value">text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</stringProp>
+						</elementProp>
+						<elementProp name="Keep-Alive" elementType="Header">
+							<stringProp name="Header.name">Keep-Alive</stringProp>
+							<stringProp name="Header.value">115</stringProp>
+						</elementProp>
+						<elementProp name="User-Agent" elementType="Header">
+							<stringProp name="Header.name">User-Agent</stringProp>
+							<stringProp name="Header.value">Mozilla/5.0 (Windows NT 6.1; WOW64; rv:2.0.1) Gecko/20100101 Firefox/4.0.1</stringProp>
+						</elementProp>
+						<elementProp name="Accept-Encoding" elementType="Header">
+							<stringProp name="Header.name">Accept-Encoding</stringProp>
+							<stringProp name="Header.value">gzip, deflate</stringProp>
+						</elementProp>
+						<elementProp name="Accept-Charset" elementType="Header">
+							<stringProp name="Header.name">Accept-Charset</stringProp>
+							<stringProp name="Header.value">ISO-8859-1,utf-8;q=0.7,*;q=0.7</stringProp>
+						</elementProp>
+					</collectionProp>
+				</HeaderManager>
+				<hashTree />
+				<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVSetup" enabled="true">
+					<stringProp name="delimiter">,</stringProp>
+					<stringProp name="fileEncoding"></stringProp>
+					<stringProp name="filename">${inputDataFolder}initializationSetup.csv</stringProp>
+					<boolProp name="quotedData">false</boolProp>
+					<boolProp name="recycle">true</boolProp>
+					<stringProp name="shareMode">All threads</stringProp>
+					<boolProp name="stopThread">false</boolProp>
+					<stringProp name="variableNames">server,port,securePort</stringProp>
+				</CSVDataSet>
+				<hashTree />
+				<GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="SimpleController" enabled="true" />
+				<hashTree>
+					<ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="TreeResults" enabled="true">
+						<boolProp name="ResultCollector.error_logging">false</boolProp>
+						<objProp>
+							<name>saveConfig</name>
+							<value class="SampleSaveConfiguration">
+								<time>true</time>
+								<latency>true</latency>
+								<timestamp>true</timestamp>
+								<success>true</success>
+								<label>true</label>
+								<code>true</code>
+								<message>true</message>
+								<threadName>true</threadName>
+								<dataType>true</dataType>
+								<encoding>false</encoding>
+								<assertions>true</assertions>
+								<subresults>true</subresults>
+								<responseData>false</responseData>
+								<samplerData>false</samplerData>
+								<xml>false</xml>
+								<fieldNames>true</fieldNames>
+								<responseHeaders>false</responseHeaders>
+								<requestHeaders>false</requestHeaders>
+								<responseDataOnError>false</responseDataOnError>
+								<saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+								<assertionsResultsToSave>0</assertionsResultsToSave>
+								<bytes>true</bytes>
+							</value>
+						</objProp>
+						<stringProp name="filename">${outputTreeResults}</stringProp>
+					</ResultCollector>
+					<hashTree />
+					<ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="SummaryReport" enabled="true">
+						<boolProp name="ResultCollector.error_logging">false</boolProp>
+						<objProp>
+							<name>saveConfig</name>
+							<value class="SampleSaveConfiguration">
+								<time>true</time>
+								<latency>true</latency>
+								<timestamp>true</timestamp>
+								<success>true</success>
+								<label>true</label>
+								<code>true</code>
+								<message>true</message>
+								<threadName>true</threadName>
+								<dataType>true</dataType>
+								<encoding>false</encoding>
+								<assertions>true</assertions>
+								<subresults>true</subresults>
+								<responseData>false</responseData>
+								<samplerData>false</samplerData>
+								<xml>false</xml>
+								<fieldNames>true</fieldNames>
+								<responseHeaders>false</responseHeaders>
+								<requestHeaders>false</requestHeaders>
+								<responseDataOnError>false</responseDataOnError>
+								<saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+								<assertionsResultsToSave>0</assertionsResultsToSave>
+								<bytes>true</bytes>
+							</value>
+						</objProp>
+						<stringProp name="filename">${outputSumaryReportResults}</stringProp>
+					</ResultCollector>
+					<hashTree />
+					<ResultCollector guiclass="GraphVisualizer" testclass="ResultCollector" testname="GraphResults" enabled="false">
+						<boolProp name="ResultCollector.error_logging">false</boolProp>
+						<objProp>
+							<name>saveConfig</name>
+							<value class="SampleSaveConfiguration">
+								<time>true</time>
+								<latency>true</latency>
+								<timestamp>true</timestamp>
+								<success>true</success>
+								<label>true</label>
+								<code>true</code>
+								<message>true</message>
+								<threadName>true</threadName>
+								<dataType>true</dataType>
+								<encoding>false</encoding>
+								<assertions>true</assertions>
+								<subresults>true</subresults>
+								<responseData>false</responseData>
+								<samplerData>false</samplerData>
+								<xml>false</xml>
+								<fieldNames>true</fieldNames>
+								<responseHeaders>false</responseHeaders>
+								<requestHeaders>false</requestHeaders>
+								<responseDataOnError>false</responseDataOnError>
+								<saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+								<assertionsResultsToSave>0</assertionsResultsToSave>
+								<bytes>true</bytes>
+							</value>
+						</objProp>
+						<stringProp name="filename">${outputGraphResults}</stringProp>
+					</ResultCollector>
+					<hashTree />
+					<IfController guiclass="IfControllerPanel" testclass="IfController" testname="if_user_login" enabled="true">
+						<stringProp name="IfController.condition">(${userLoggedThreads}) &gt;=(${randomVariableThreads})</stringProp>
+						<boolProp name="IfController.evaluateAll">false</boolProp>
+					</IfController>
+					<hashTree>
+						<RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="RandomOrderController" enabled="true" />
+						<hashTree>
+							<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVUsers" enabled="true">
+								<stringProp name="filename">${inputDataFolder}userInputData.csv</stringProp>
+								<stringProp name="fileEncoding"></stringProp>
+								<stringProp name="variableNames">titleCode,firstName,lastName,email,pwd,checkPwd,phone</stringProp>
+								<stringProp name="delimiter">,</stringProp>
+								<boolProp name="quotedData">false</boolProp>
+								<boolProp name="recycle">true</boolProp>
+								<boolProp name="stopThread">false</boolProp>
+								<stringProp name="shareMode">All threads</stringProp>
+							</CSVDataSet>
+							<hashTree />
+							<GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="SimpleController" enabled="true" />
+							<hashTree>
+								<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="userRegisterPage" enabled="true">
+									<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+										<collectionProp name="Arguments.arguments">
+											<elementProp name="titleCode" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.name">titleCode</stringProp>
+												<stringProp name="Argument.value">${titleCode}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+											</elementProp>
+											<elementProp name="firstName" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.name">firstName</stringProp>
+												<stringProp name="Argument.value">${firstName}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+											</elementProp>
+											<elementProp name="lastName" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.name">lastName</stringProp>
+												<stringProp name="Argument.value">${lastName}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+											</elementProp>
+											<elementProp name="email" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.name">email</stringProp>
+												<stringProp name="Argument.value">${email}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+											</elementProp>
+											<elementProp name="pwd" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.name">pwd</stringProp>
+												<stringProp name="Argument.value">${pwd}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+											</elementProp>
+											<elementProp name="checkPwd" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.name">checkPwd</stringProp>
+												<stringProp name="Argument.value">${checkPwd}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+											</elementProp>
+											<elementProp name="phone" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.name">phone</stringProp>
+												<stringProp name="Argument.value">${phone}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+											</elementProp>
+										</collectionProp>
+									</elementProp>
+									<stringProp name="HTTPSampler.domain">${server}</stringProp>
+									<stringProp name="HTTPSampler.port">${securePort}</stringProp>
+									<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+									<stringProp name="HTTPSampler.response_timeout"></stringProp>
+									<stringProp name="HTTPSampler.protocol">https</stringProp>
+									<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+									<stringProp name="HTTPSampler.path">${homePath}/login/register</stringProp>
+									<stringProp name="HTTPSampler.method">POST</stringProp>
+									<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+									<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+									<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+									<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+									<boolProp name="HTTPSampler.monitor">false</boolProp>
+									<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+								</HTTPSampler>
+								<hashTree>
+									<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="registerTimer" enabled="true">
+										<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+										<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+									</UniformRandomTimer>
+									<hashTree />
+								</hashTree>
+								<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="userLoginPage" enabled="true">
+									<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+										<collectionProp name="Arguments.arguments">
+											<elementProp name="login-type" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.name">login-type</stringProp>
+												<stringProp name="Argument.value">normal</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+											</elementProp>
+											<elementProp name="j_username" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.name">j_username</stringProp>
+												<stringProp name="Argument.value">${email}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+											</elementProp>
+											<elementProp name="j_password" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.name">j_password</stringProp>
+												<stringProp name="Argument.value">${pwd}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+											</elementProp>
+										</collectionProp>
+									</elementProp>
+									<stringProp name="HTTPSampler.domain">${server}</stringProp>
+									<stringProp name="HTTPSampler.port">${securePort}</stringProp>
+									<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+									<stringProp name="HTTPSampler.response_timeout"></stringProp>
+									<stringProp name="HTTPSampler.protocol">https</stringProp>
+									<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+									<stringProp name="HTTPSampler.path">${homePath}/j_spring_security_check</stringProp>
+									<stringProp name="HTTPSampler.method">POST</stringProp>
+									<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+									<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+									<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+									<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+									<boolProp name="HTTPSampler.monitor">false</boolProp>
+									<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+								</HTTPSampler>
+								<hashTree>
+									<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="loginTimer" enabled="true">
+										<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+										<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+									</UniformRandomTimer>
+									<hashTree />
+								</hashTree>
+							</hashTree>
+						</hashTree>
+					</hashTree>
+					<IfController guiclass="IfControllerPanel" testclass="IfController" testname="if_go_home_page" enabled="true">
+						<stringProp name="IfController.condition">((${homePageThreads}) &gt;=${randomVariableThreads}) || ((${userLoggedThreads}) &gt;=${randomVariableThreads})</stringProp>
+						<boolProp name="IfController.evaluateAll">false</boolProp>
+					</IfController>
+					<hashTree>
+						<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="homePage" enabled="true">
+							<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+								<collectionProp name="Arguments.arguments" />
+							</elementProp>
+							<stringProp name="HTTPSampler.domain"></stringProp>
+							<stringProp name="HTTPSampler.port"></stringProp>
+							<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+							<stringProp name="HTTPSampler.response_timeout"></stringProp>
+							<stringProp name="HTTPSampler.protocol"></stringProp>
+							<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+							<stringProp name="HTTPSampler.path"></stringProp>
+							<stringProp name="HTTPSampler.method">GET</stringProp>
+							<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+							<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+							<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+							<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+							<boolProp name="HTTPSampler.monitor">false</boolProp>
+							<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+						</HTTPSampler>
+						<hashTree>
+							<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="homeTimer" enabled="true">
+								<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+								<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+							</UniformRandomTimer>
+							<hashTree />
+						</hashTree>
+					</hashTree>
+					<IfController guiclass="IfControllerPanel" testclass="IfController" testname="if_go_product_page" enabled="true">
+						<stringProp name="IfController.condition">((${homePageThreads}) &lt;${randomVariableThreads}) &amp;&amp; (${randomVariableThreads}&lt;= (${__javaScript(Math.floor(${productPageThreads} + ${homePageThreads}))}))</stringProp>
+						<boolProp name="IfController.evaluateAll">false</boolProp>
+					</IfController>
+					<hashTree>
+						<RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="RandomOrderController" enabled="true" />
+						<hashTree>
+							<Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="UserDefinedVariables" enabled="true">
+								<collectionProp name="Arguments.arguments">
+									<elementProp name="reviewThreads" elementType="Argument">
+										<stringProp name="Argument.name">reviewThreads</stringProp>
+										<stringProp name="Argument.value">${__javaScript(${readyStateThreads}*${__property(reviewPercent)})}</stringProp>
+										<stringProp name="Argument.metadata">=</stringProp>
+									</elementProp>
+								</collectionProp>
+							</Arguments>
+							<hashTree />
+							<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVProducts" enabled="true">
+								<stringProp name="filename">${inputDataFolder}productInputData.csv</stringProp>
+								<stringProp name="fileEncoding"></stringProp>
+								<stringProp name="variableNames">productLink</stringProp>
+								<stringProp name="delimiter"></stringProp>
+								<boolProp name="quotedData">false</boolProp>
+								<boolProp name="recycle">true</boolProp>
+								<boolProp name="stopThread">false</boolProp>
+								<stringProp name="shareMode">All threads</stringProp>
+							</CSVDataSet>
+							<hashTree />
+							<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="productPage" enabled="true">
+								<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+									<collectionProp name="Arguments.arguments" />
+								</elementProp>
+								<stringProp name="HTTPSampler.domain"></stringProp>
+								<stringProp name="HTTPSampler.port"></stringProp>
+								<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+								<stringProp name="HTTPSampler.response_timeout"></stringProp>
+								<stringProp name="HTTPSampler.protocol"></stringProp>
+								<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+								<stringProp name="HTTPSampler.path">${homePath}/${productLink}</stringProp>
+								<stringProp name="HTTPSampler.method">GET</stringProp>
+								<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+								<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+								<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+								<boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+								<boolProp name="HTTPSampler.monitor">false</boolProp>
+								<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+							</HTTPSampler>
+							<hashTree>
+								<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="productTimer" enabled="true">
+									<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+									<stringProp name="RandomTimer.range">${__property(thinkTimeProduct)}</stringProp>
+								</UniformRandomTimer>
+								<hashTree />
+								<BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShellPostProcessor" enabled="true">
+									<stringProp name="filename"></stringProp>
+									<stringProp name="parameters"></stringProp>
+									<boolProp name="resetInterpreter">true</boolProp>
+									<stringProp name="script">vars.put(&quot;state&quot;,&quot;checkCart&quot;);vars.put(&quot;addToCartFromProduct&quot;,&quot;true&quot;);</stringProp>
+								</BeanShellPostProcessor>
+								<hashTree />
+							</hashTree>
+							<IfController guiclass="IfControllerPanel" testclass="IfController" testname="If_Review" enabled="true">
+								<stringProp name="IfController.condition">((${homePageThreads}) &lt;${randomVariableThreads}) &amp;&amp; (${randomVariableThreads}&lt;= (${__javaScript(Math.floor(${reviewThreads} + ${homePageThreads}))}))</stringProp>
+								<boolProp name="IfController.evaluateAll">false</boolProp>
+							</IfController>
+							<hashTree>
+								<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVReviews" enabled="true">
+									<stringProp name="filename">${inputDataFolder}reviewInputData.csv</stringProp>
+									<stringProp name="fileEncoding"></stringProp>
+									<stringProp name="variableNames">headline,comment,rating,alias</stringProp>
+									<stringProp name="delimiter"></stringProp>
+									<boolProp name="quotedData">true</boolProp>
+									<boolProp name="recycle">true</boolProp>
+									<boolProp name="stopThread">false</boolProp>
+									<stringProp name="shareMode">All threads</stringProp>
+								</CSVDataSet>
+								<hashTree />
+								<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="review" enabled="true">
+									<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+										<collectionProp name="Arguments.arguments">
+											<elementProp name="headline" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.name">headline</stringProp>
+												<stringProp name="Argument.value">${headline}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+											</elementProp>
+											<elementProp name="comment" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.value">${comment}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+												<stringProp name="Argument.name">comment</stringProp>
+											</elementProp>
+											<elementProp name="rating" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.value">${rating}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+												<stringProp name="Argument.name">rating</stringProp>
+											</elementProp>
+											<elementProp name="alias" elementType="HTTPArgument">
+												<boolProp name="HTTPArgument.always_encode">false</boolProp>
+												<stringProp name="Argument.value">${alias}</stringProp>
+												<stringProp name="Argument.metadata">=</stringProp>
+												<boolProp name="HTTPArgument.use_equals">true</boolProp>
+												<stringProp name="Argument.name">alias</stringProp>
+											</elementProp>
+										</collectionProp>
+									</elementProp>
+									<stringProp name="HTTPSampler.domain"></stringProp>
+									<stringProp name="HTTPSampler.port"></stringProp>
+									<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+									<stringProp name="HTTPSampler.response_timeout"></stringProp>
+									<stringProp name="HTTPSampler.protocol"></stringProp>
+									<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+									<stringProp name="HTTPSampler.path">${homePath}/${productLink}/review</stringProp>
+									<stringProp name="HTTPSampler.method">POST</stringProp>
+									<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+									<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+									<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+									<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+									<boolProp name="HTTPSampler.monitor">false</boolProp>
+									<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+								</HTTPSampler>
+								<hashTree>
+									<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="thinkTimeReview" enabled="true">
+										<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+										<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+									</UniformRandomTimer>
+									<hashTree />
+								</hashTree>
+							</hashTree>
+						</hashTree>
+					</hashTree>
+					<IfController guiclass="IfControllerPanel" testclass="IfController" testname="if_go_category_page" enabled="true">
+						<stringProp name="IfController.condition">(${randomVariableThreads}) &gt;(${__javaScript(${threads} - ${categoryPageThreads})})</stringProp>
+						<boolProp name="IfController.evaluateAll">false</boolProp>
+					</IfController>
+					<hashTree>
+						<RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="RandomOrderController" enabled="true" />
+						<hashTree>
+							<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVCategories" enabled="true">
+								<stringProp name="filename">${inputDataFolder}categoryInputData.csv</stringProp>
+								<stringProp name="fileEncoding"></stringProp>
+								<stringProp name="variableNames">categoryLink</stringProp>
+								<stringProp name="delimiter"></stringProp>
+								<boolProp name="quotedData">false</boolProp>
+								<boolProp name="recycle">true</boolProp>
+								<boolProp name="stopThread">false</boolProp>
+								<stringProp name="shareMode">All threads</stringProp>
+							</CSVDataSet>
+							<hashTree />
+							<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="categoryPage" enabled="true">
+								<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+									<collectionProp name="Arguments.arguments" />
+								</elementProp>
+								<stringProp name="HTTPSampler.domain"></stringProp>
+								<stringProp name="HTTPSampler.port"></stringProp>
+								<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+								<stringProp name="HTTPSampler.response_timeout"></stringProp>
+								<stringProp name="HTTPSampler.protocol"></stringProp>
+								<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+								<stringProp name="HTTPSampler.path">${homePath}/${categoryLink}</stringProp>
+								<stringProp name="HTTPSampler.method">GET</stringProp>
+								<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+								<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+								<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+								<boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+								<boolProp name="HTTPSampler.monitor">false</boolProp>
+								<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+							</HTTPSampler>
+							<hashTree>
+								<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="categoriesTimer" enabled="true">
+									<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+									<stringProp name="RandomTimer.range">${__property(thinkTimeCategory)}</stringProp>
+								</UniformRandomTimer>
+								<hashTree />
+								<BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShellPostProcessor" enabled="true">
+									<stringProp name="filename"></stringProp>
+									<stringProp name="parameters"></stringProp>
+									<boolProp name="resetInterpreter">true</boolProp>
+									<stringProp name="script">vars.put(&quot;state&quot;,&quot;checkCart&quot;);</stringProp>
+								</BeanShellPostProcessor>
+								<hashTree />
+							</hashTree>
+						</hashTree>
+					</hashTree>
+					<WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="WhileController" enabled="true">
+						<stringProp name="WhileController.condition">${__javaScript(&quot;${state}&quot;!=&quot;deleted&quot;)}</stringProp>
+					</WhileController>
+					<hashTree>
+						<Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="UserDefinedVariables" enabled="true">
+							<collectionProp name="Arguments.arguments">
+								<elementProp name="searchThreads" elementType="Argument">
+									<stringProp name="Argument.name">searchThreads</stringProp>
+									<stringProp name="Argument.value">${__javaScript(${readyStateThreads}*${__property(userSearchPercent)})}</stringProp>
+									<stringProp name="Argument.metadata">=</stringProp>
+								</elementProp>
+								<elementProp name="browseThreads" elementType="Argument">
+									<stringProp name="Argument.name">browseThreads</stringProp>
+									<stringProp name="Argument.value">${__javaScript(${readyStateThreads}*${__property(userBrowsePercent)})}</stringProp>
+									<stringProp name="Argument.metadata">=</stringProp>
+								</elementProp>
+								<elementProp name="otherPageThreads" elementType="Argument">
+									<stringProp name="Argument.name">otherPageThreads</stringProp>
+									<stringProp name="Argument.value">${__javaScript(${readyStateThreads}*${__property(userOtherPagePercent)})}</stringProp>
+									<stringProp name="Argument.metadata">=</stringProp>
+								</elementProp>
+							</collectionProp>
+						</Arguments>
+						<hashTree />
+						<GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="SimpleController" enabled="true" />
+						<hashTree>
+							<Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="UserDefinedVariables" enabled="true">
+								<collectionProp name="Arguments.arguments">
+									<elementProp name="addToCartPageTotalThreads" elementType="Argument">
+										<stringProp name="Argument.name">addToCartPageTotalThreads</stringProp>
+										<stringProp name="Argument.value">${__javaScript(Math.floor(${productPageThreads} + ${categoryPageThreads} + ${searchThreads} + ${browseThreads}))}</stringProp>
+										<stringProp name="Argument.metadata">=</stringProp>
+									</elementProp>
+								</collectionProp>
+							</Arguments>
+							<hashTree />
+							<GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="SimpleController" enabled="true" />
+							<hashTree>
+								<Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="UserDefinedVariables" enabled="true">
+									<collectionProp name="Arguments.arguments">
+										<elementProp name="addToCartPageThreads" elementType="Argument">
+											<stringProp name="Argument.name">addToCartPageThreads</stringProp>
+											<stringProp name="Argument.value">${__javaScript(${addToCartPageTotalThreads}*${addToCartPercent})}</stringProp>
+											<stringProp name="Argument.metadata">=</stringProp>
+										</elementProp>
+									</collectionProp>
+								</Arguments>
+								<hashTree />
+								<IfController guiclass="IfControllerPanel" testclass="IfController" testname="if_state_checkCart" enabled="true">
+									<stringProp name="IfController.condition">${__javaScript(&quot;${state}&quot;==&quot;checkCart&quot;)}</stringProp>
+									<boolProp name="IfController.evaluateAll">false</boolProp>
+								</IfController>
+								<hashTree>
+									<RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="RandomVariable" enabled="true">
+										<stringProp name="maximumValue">${__javaScript(Math.floor(${addToCartPageTotalThreads}))}</stringProp>
+										<stringProp name="minimumValue">0</stringProp>
+										<stringProp name="outputFormat"></stringProp>
+										<boolProp name="perThread">true</boolProp>
+										<stringProp name="randomSeed"></stringProp>
+										<stringProp name="variableName">randomVariableAddToCartThreads</stringProp>
+									</RandomVariableConfig>
+									<hashTree />
+									<IfController guiclass="IfControllerPanel" testclass="IfController" testname="If_go_addToCart_page" enabled="true">
+										<stringProp name="IfController.condition">${randomVariableAddToCartThreads}&lt;= ${addToCartPageThreads}</stringProp>
+										<boolProp name="IfController.evaluateAll">false</boolProp>
+									</IfController>
+									<hashTree>
+										<Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="UserDefinedVariables" enabled="true">
+											<collectionProp name="Arguments.arguments">
+												<elementProp name="checkOutThreads" elementType="Argument">
+													<stringProp name="Argument.name">checkOutThreads</stringProp>
+													<stringProp name="Argument.value">${__javaScript(${addToCartPageThreads} * ${purchasePercent})}</stringProp>
+													<stringProp name="Argument.metadata">=</stringProp>
+												</elementProp>
+											</collectionProp>
+										</Arguments>
+										<hashTree />
+										<RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="RandomVariable" enabled="true">
+											<stringProp name="maximumValue">${__javaScript(Math.floor(${addToCartPageThreads}))}</stringProp>
+											<stringProp name="minimumValue">0</stringProp>
+											<stringProp name="outputFormat"></stringProp>
+											<boolProp name="perThread">true</boolProp>
+											<stringProp name="randomSeed"></stringProp>
+											<stringProp name="variableName">randomVariableCheckOutThreads</stringProp>
+										</RandomVariableConfig>
+										<hashTree />
+										<LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="LoopControllerAddToCart" enabled="true">
+											<boolProp name="LoopController.continue_forever">true</boolProp>
+											<stringProp name="LoopController.loops">${itemsAddToCart}</stringProp>
+										</LoopController>
+										<hashTree>
+											<RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="RandomOrderControllerAddToCart" enabled="true" />
+											<hashTree>
+												<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVAddToCart" enabled="true">
+													<stringProp name="filename">${inputDataFolder}addToCartInputData.csv</stringProp>
+													<stringProp name="fileEncoding"></stringProp>
+													<stringProp name="variableNames">productCode,quantitty</stringProp>
+													<stringProp name="delimiter"></stringProp>
+													<boolProp name="quotedData">false</boolProp>
+													<boolProp name="recycle">true</boolProp>
+													<boolProp name="stopThread">false</boolProp>
+													<stringProp name="shareMode">All threads</stringProp>
+												</CSVDataSet>
+												<hashTree />
+												<GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="SimpleController" enabled="true" />
+												<hashTree>
+													<IfController guiclass="IfControllerPanel" testclass="IfController" testname="If_From_Product_Page" enabled="true">
+														<stringProp name="IfController.condition">${__javaScript(&quot;${addToCartFromProduct}&quot;==&quot;true&quot;)}</stringProp>
+														<boolProp name="IfController.evaluateAll">false</boolProp>
+													</IfController>
+													<hashTree>
+														<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="addToCartProductPage" enabled="true">
+															<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+																<collectionProp name="Arguments.arguments">
+																	<elementProp name="productCodePost" elementType="HTTPArgument">
+																		<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																		<stringProp name="Argument.name">productCodePost</stringProp>
+																		<stringProp name="Argument.value">${productCode}</stringProp>
+																		<stringProp name="Argument.metadata">=</stringProp>
+																		<boolProp name="HTTPArgument.use_equals">true</boolProp>
+																	</elementProp>
+																	<elementProp name="qty" elementType="HTTPArgument">
+																		<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																		<stringProp name="Argument.value">${quantitty}</stringProp>
+																		<stringProp name="Argument.metadata">=</stringProp>
+																		<boolProp name="HTTPArgument.use_equals">true</boolProp>
+																		<stringProp name="Argument.name">qty</stringProp>
+																	</elementProp>
+																</collectionProp>
+															</elementProp>
+															<stringProp name="HTTPSampler.domain"></stringProp>
+															<stringProp name="HTTPSampler.port"></stringProp>
+															<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+															<stringProp name="HTTPSampler.response_timeout"></stringProp>
+															<stringProp name="HTTPSampler.protocol"></stringProp>
+															<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+															<stringProp name="HTTPSampler.path">${homePath}/cart/add</stringProp>
+															<stringProp name="HTTPSampler.method">POST</stringProp>
+															<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+															<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+															<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+															<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+															<boolProp name="HTTPSampler.monitor">false</boolProp>
+															<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+														</HTTPSampler>
+														<hashTree>
+															<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="AddToCartTimer" enabled="true">
+																<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+																<stringProp name="RandomTimer.range">${__property(thinkTimeCartReview)}</stringProp>
+															</UniformRandomTimer>
+															<hashTree />
+														</hashTree>
+													</hashTree>
+													<IfController guiclass="IfControllerPanel" testclass="IfController" testname="If_Not_From_Product_Page" enabled="true">
+														<stringProp name="IfController.condition">${__javaScript(&quot;${addToCartFromProduct}&quot;==&quot;false&quot;)}</stringProp>
+														<boolProp name="IfController.evaluateAll">false</boolProp>
+													</IfController>
+													<hashTree>
+														<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="addToCartCategoryPage" enabled="true">
+															<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+																<collectionProp name="Arguments.arguments">
+																	<elementProp name="productCodePost" elementType="HTTPArgument">
+																		<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																		<stringProp name="Argument.name">productCodePost</stringProp>
+																		<stringProp name="Argument.value">${productCode}</stringProp>
+																		<stringProp name="Argument.metadata">=</stringProp>
+																		<boolProp name="HTTPArgument.use_equals">true</boolProp>
+																	</elementProp>
+																</collectionProp>
+															</elementProp>
+															<stringProp name="HTTPSampler.domain"></stringProp>
+															<stringProp name="HTTPSampler.port"></stringProp>
+															<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+															<stringProp name="HTTPSampler.response_timeout"></stringProp>
+															<stringProp name="HTTPSampler.protocol"></stringProp>
+															<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+															<stringProp name="HTTPSampler.path">${homePath}/cart/add</stringProp>
+															<stringProp name="HTTPSampler.method">POST</stringProp>
+															<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+															<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+															<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+															<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+															<boolProp name="HTTPSampler.monitor">false</boolProp>
+															<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+														</HTTPSampler>
+														<hashTree>
+															<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="AddToCartTimer" enabled="true">
+																<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+																<stringProp name="RandomTimer.range">${__property(thinkTimeCartReview)}</stringProp>
+															</UniformRandomTimer>
+															<hashTree />
+														</hashTree>
+													</hashTree>
+												</hashTree>
+											</hashTree>
+										</hashTree>
+										<RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="RandomOrderControllerBasket" enabled="true" />
+										<hashTree>
+											<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVBasket" enabled="true">
+												<stringProp name="filename">${inputDataFolder}basketInputData.csv</stringProp>
+												<stringProp name="fileEncoding"></stringProp>
+												<stringProp name="variableNames">item,quantitty</stringProp>
+												<stringProp name="delimiter"></stringProp>
+												<boolProp name="quotedData">false</boolProp>
+												<boolProp name="recycle">true</boolProp>
+												<boolProp name="stopThread">false</boolProp>
+												<stringProp name="shareMode">All threads</stringProp>
+											</CSVDataSet>
+											<hashTree />
+											<GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="SimpleController" enabled="true" />
+											<hashTree>
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="viewBasketPage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments" />
+													</elementProp>
+													<stringProp name="HTTPSampler.domain"></stringProp>
+													<stringProp name="HTTPSampler.port"></stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol"></stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/cart</stringProp>
+													<stringProp name="HTTPSampler.method">GET</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="thinkTimeBasket" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+												</hashTree>
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="updateProductBasketPage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments">
+															<elementProp name="entryNumber" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">entryNumber</stringProp>
+																<stringProp name="Argument.value">${item}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="quantity" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">quantity</stringProp>
+																<stringProp name="Argument.value">${quantitty}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+														</collectionProp>
+													</elementProp>
+													<stringProp name="HTTPSampler.domain"></stringProp>
+													<stringProp name="HTTPSampler.port"></stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol"></stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/cart/update</stringProp>
+													<stringProp name="HTTPSampler.method">POST</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="thinkTimeBasket" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+												</hashTree>
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="deleteProductBasketPage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments">
+															<elementProp name="entryNumber" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">entryNumber</stringProp>
+																<stringProp name="Argument.value">${item}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="quantity" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">quantity</stringProp>
+																<stringProp name="Argument.value">0</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+														</collectionProp>
+													</elementProp>
+													<stringProp name="HTTPSampler.domain"></stringProp>
+													<stringProp name="HTTPSampler.port"></stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol"></stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/cart/update</stringProp>
+													<stringProp name="HTTPSampler.method">POST</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="thinkTimeBasket" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+												</hashTree>
+											</hashTree>
+										</hashTree>
+										<IfController guiclass="IfControllerPanel" testclass="IfController" testname="if_go_checkout_page" enabled="true">
+											<stringProp name="IfController.condition">${checkOutThreads} &gt;=${randomVariableCheckOutThreads}</stringProp>
+											<boolProp name="IfController.evaluateAll">false</boolProp>
+										</IfController>
+										<hashTree>
+											<GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="checkCart" enabled="true" />
+											<hashTree>
+												<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVUsersChekOut" enabled="true">
+													<stringProp name="filename">${inputDataFolder}userCheckOutInputData.csv</stringProp>
+													<stringProp name="fileEncoding"></stringProp>
+													<stringProp name="variableNames">addressId,titleCode,firstName,lastName,line1,line2,townCity,postcode,countryIso,shippingAddress,billingAddress,saveInAddressBook,_saveInAddressBook,email,pwd,checkPwd,phone</stringProp>
+													<stringProp name="delimiter">,</stringProp>
+													<boolProp name="quotedData">false</boolProp>
+													<boolProp name="recycle">true</boolProp>
+													<boolProp name="stopThread">false</boolProp>
+													<stringProp name="shareMode">All threads</stringProp>
+												</CSVDataSet>
+												<hashTree />
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="checkout/summaryPage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments" />
+													</elementProp>
+													<stringProp name="HTTPSampler.domain">${server}</stringProp>
+													<stringProp name="HTTPSampler.port">${securePort}</stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol">https</stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/checkout/summary</stringProp>
+													<stringProp name="HTTPSampler.method">GET</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="thinkTimeSummary" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimePurchase)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+												</hashTree>
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="userRegisterCheckOutPage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments">
+															<elementProp name="titleCode" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">titleCode</stringProp>
+																<stringProp name="Argument.value">${titleCode}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="firstName" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">firstName</stringProp>
+																<stringProp name="Argument.value">${firstName}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="lastName" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">lastName</stringProp>
+																<stringProp name="Argument.value">${lastName}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="email" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">email</stringProp>
+																<stringProp name="Argument.value">${email}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="pwd" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">pwd</stringProp>
+																<stringProp name="Argument.value">${pwd}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="checkPwd" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">checkPwd</stringProp>
+																<stringProp name="Argument.value">${checkPwd}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="phone" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">phone</stringProp>
+																<stringProp name="Argument.value">${phone}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+														</collectionProp>
+													</elementProp>
+													<stringProp name="HTTPSampler.domain">${server}</stringProp>
+													<stringProp name="HTTPSampler.port">${securePort}</stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol">https</stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/login/checkout/register</stringProp>
+													<stringProp name="HTTPSampler.method">POST</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="registerTimer" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+												</hashTree>
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="userLoginCheckOutPage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments">
+															<elementProp name="login-type" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">login-type</stringProp>
+																<stringProp name="Argument.value">checkout</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="j_username" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">j_username</stringProp>
+																<stringProp name="Argument.value">${email}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="j_password" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">j_password</stringProp>
+																<stringProp name="Argument.value">${pwd}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+														</collectionProp>
+													</elementProp>
+													<stringProp name="HTTPSampler.domain">${server}</stringProp>
+													<stringProp name="HTTPSampler.port">${securePort}</stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol">https</stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/j_spring_security_check</stringProp>
+													<stringProp name="HTTPSampler.method">POST</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="loginTimer" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+												</hashTree>
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="checkout/summary/createUpdateDeliveryAddressPage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments">
+															<elementProp name="addressId" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">addressId</stringProp>
+																<stringProp name="Argument.value">${addressId}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="titleCode" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">titleCode</stringProp>
+																<stringProp name="Argument.value">${titleCode}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="firstName" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">firstName</stringProp>
+																<stringProp name="Argument.value">${firstName}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="lastName" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">lastName</stringProp>
+																<stringProp name="Argument.value">${lastName}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="line1" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">line1</stringProp>
+																<stringProp name="Argument.value">${line1}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="line2" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">line2</stringProp>
+																<stringProp name="Argument.value">${line2}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="townCity" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">townCity</stringProp>
+																<stringProp name="Argument.value">${townCity}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="postcode" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">postcode</stringProp>
+																<stringProp name="Argument.value">${postcode}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="countryIso" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">countryIso</stringProp>
+																<stringProp name="Argument.value">${countryIso}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="shippingAddress" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">shippingAddress</stringProp>
+																<stringProp name="Argument.value">${shippingAddress}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="billingAddress" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">billingAddress</stringProp>
+																<stringProp name="Argument.value">${billingAddress}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="_saveInAddressBook" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">_saveInAddressBook</stringProp>
+																<stringProp name="Argument.value">${_saveInAddressBook}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+														</collectionProp>
+													</elementProp>
+													<stringProp name="HTTPSampler.domain">${server}</stringProp>
+													<stringProp name="HTTPSampler.port">${securePort}</stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol">https</stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/checkout/summary/createUpdateDeliveryAddress.json</stringProp>
+													<stringProp name="HTTPSampler.method">POST</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="thinkTimeDeliveryAddress" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimePurchase)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+												</hashTree>
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="checkout/summary/setDeliveryModePage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments">
+															<elementProp name="modeCode" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">modeCode</stringProp>
+																<stringProp name="Argument.value">std-gross</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+														</collectionProp>
+													</elementProp>
+													<stringProp name="HTTPSampler.domain">${server}</stringProp>
+													<stringProp name="HTTPSampler.port">${securePort}</stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol">https</stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/checkout/summary/setDeliveryMode.json</stringProp>
+													<stringProp name="HTTPSampler.method">POST</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="thinkTimeDeliveryMode" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimePurchase)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+												</hashTree>
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="checkout/summary/createUpdatePaymentDetailsPage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments">
+															<elementProp name="paymentId" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">paymentId</stringProp>
+																<stringProp name="Argument.value"></stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="cardTypeCode" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">cardTypeCode</stringProp>
+																<stringProp name="Argument.value">visa</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="nameOnCard" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">nameOnCard</stringProp>
+																<stringProp name="Argument.value">John+Doe</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="cardNumber" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">cardNumber</stringProp>
+																<stringProp name="Argument.value">4111111111111111</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="startMonth" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">startMonth</stringProp>
+																<stringProp name="Argument.value"></stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="startYear" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">startYear</stringProp>
+																<stringProp name="Argument.value"></stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="expiryMonth" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">expiryMonth</stringProp>
+																<stringProp name="Argument.value">12</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="expiryYear" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">expiryYear</stringProp>
+																<stringProp name="Argument.value">2020</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="issueNumber" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">issueNumber</stringProp>
+																<stringProp name="Argument.value">123</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="_newBillingAddress" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">_newBillingAddress</stringProp>
+																<stringProp name="Argument.value">on</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+														</collectionProp>
+													</elementProp>
+													<stringProp name="HTTPSampler.domain">${server}</stringProp>
+													<stringProp name="HTTPSampler.port">${securePort}</stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol">https</stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/checkout/summary/createUpdatePaymentDetails.json</stringProp>
+													<stringProp name="HTTPSampler.method">POST</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="thinkTimePaymentDetailsMode" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimePurchase)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+												</hashTree>
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="checkout/summary/placeOrderPage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments">
+															<elementProp name="securityCode" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">securityCode</stringProp>
+																<stringProp name="Argument.value">123</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="termsCheck" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">termsCheck</stringProp>
+																<stringProp name="Argument.value">true</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+															<elementProp name="_termsCheck" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.name">_termsCheck</stringProp>
+																<stringProp name="Argument.value">on</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															</elementProp>
+														</collectionProp>
+													</elementProp>
+													<stringProp name="HTTPSampler.domain">${server}</stringProp>
+													<stringProp name="HTTPSampler.port">${securePort}</stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol">https</stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/checkout/summary/placeOrder</stringProp>
+													<stringProp name="HTTPSampler.method">POST</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="thinkTimePlaceOrder" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimePurchase)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+													<BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShellPostProcessor" enabled="true">
+														<stringProp name="filename"></stringProp>
+														<stringProp name="parameters"></stringProp>
+														<boolProp name="resetInterpreter">true</boolProp>
+														<stringProp name="script">vars.put(&quot;state&quot;,&quot;deleted&quot;);</stringProp>
+													</BeanShellPostProcessor>
+													<hashTree />
+												</hashTree>
+											</hashTree>
+										</hashTree>
+										<IfController guiclass="IfControllerPanel" testclass="IfController" testname="if_go_ready" enabled="true">
+											<stringProp name="IfController.condition">${checkOutThreads} &lt;${randomVariableCheckOutThreads}</stringProp>
+											<boolProp name="IfController.evaluateAll">false</boolProp>
+										</IfController>
+										<hashTree>
+											<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="homePageReadyState" enabled="true">
+												<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+													<collectionProp name="Arguments.arguments" />
+												</elementProp>
+												<stringProp name="HTTPSampler.domain"></stringProp>
+												<stringProp name="HTTPSampler.port"></stringProp>
+												<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+												<stringProp name="HTTPSampler.response_timeout"></stringProp>
+												<stringProp name="HTTPSampler.protocol"></stringProp>
+												<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+												<stringProp name="HTTPSampler.path"></stringProp>
+												<stringProp name="HTTPSampler.method">GET</stringProp>
+												<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+												<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+												<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+												<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+												<boolProp name="HTTPSampler.monitor">false</boolProp>
+												<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+											</HTTPSampler>
+											<hashTree>
+												<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="homePageReadyTimer" enabled="true">
+													<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+													<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+												</UniformRandomTimer>
+												<hashTree />
+												<BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShellPostProcessor" enabled="true">
+													<stringProp name="filename"></stringProp>
+													<stringProp name="parameters"></stringProp>
+													<boolProp name="resetInterpreter">true</boolProp>
+													<stringProp name="script">vars.put(&quot;state&quot;,&quot;ready&quot;);</stringProp>
+												</BeanShellPostProcessor>
+												<hashTree />
+											</hashTree>
+										</hashTree>
+									</hashTree>
+								</hashTree>
+								<IfController guiclass="IfControllerPanel" testclass="IfController" testname="if_state_ready" enabled="true">
+									<stringProp name="IfController.condition">${__javaScript(&quot;${state}&quot;==&quot;ready&quot;)}</stringProp>
+									<boolProp name="IfController.evaluateAll">false</boolProp>
+								</IfController>
+								<hashTree>
+									<RandomVariableConfig guiclass="TestBeanGUI" testclass="RandomVariableConfig" testname="RandomVariableReady" enabled="true">
+										<stringProp name="maximumValue">${__javaScript(Math.floor(${readyStateThreads}))}</stringProp>
+										<stringProp name="minimumValue">1</stringProp>
+										<stringProp name="outputFormat"></stringProp>
+										<boolProp name="perThread">true</boolProp>
+										<stringProp name="randomSeed"></stringProp>
+										<stringProp name="variableName">randomVariableThreads_ready</stringProp>
+									</RandomVariableConfig>
+									<hashTree />
+									<IfController guiclass="IfControllerPanel" testclass="IfController" testname="if_go_search_page" enabled="true">
+										<stringProp name="IfController.condition">${randomVariableThreads_ready}&lt;= ${searchThreads}</stringProp>
+										<boolProp name="IfController.evaluateAll">false</boolProp>
+									</IfController>
+									<hashTree>
+										<LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="LoopController" enabled="true">
+											<boolProp name="LoopController.continue_forever">true</boolProp>
+											<stringProp name="LoopController.loops">${timesToSearch}</stringProp>
+										</LoopController>
+										<hashTree>
+											<RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="RandomOrderController" enabled="true" />
+											<hashTree>
+												<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVSearch" enabled="true">
+													<stringProp name="filename">${inputDataFolder}searchInputData.csv</stringProp>
+													<stringProp name="fileEncoding"></stringProp>
+													<stringProp name="variableNames">searchProperty</stringProp>
+													<stringProp name="delimiter"></stringProp>
+													<boolProp name="quotedData">false</boolProp>
+													<boolProp name="recycle">true</boolProp>
+													<boolProp name="stopThread">false</boolProp>
+													<stringProp name="shareMode">All threads</stringProp>
+												</CSVDataSet>
+												<hashTree />
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="searchPage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments">
+															<elementProp name="text" elementType="HTTPArgument">
+																<boolProp name="HTTPArgument.always_encode">false</boolProp>
+																<stringProp name="Argument.value">${searchProperty}</stringProp>
+																<stringProp name="Argument.metadata">=</stringProp>
+																<boolProp name="HTTPArgument.use_equals">true</boolProp>
+																<stringProp name="Argument.name">text</stringProp>
+															</elementProp>
+														</collectionProp>
+													</elementProp>
+													<stringProp name="HTTPSampler.domain"></stringProp>
+													<stringProp name="HTTPSampler.port"></stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol"></stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/search</stringProp>
+													<stringProp name="HTTPSampler.method">GET</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="searchTimer" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+													<BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShellPostProcessor" enabled="true">
+														<stringProp name="filename"></stringProp>
+														<stringProp name="parameters"></stringProp>
+														<boolProp name="resetInterpreter">true</boolProp>
+														<stringProp name="script">vars.put(&quot;state&quot;,&quot;checkCart&quot;);</stringProp>
+													</BeanShellPostProcessor>
+													<hashTree />
+												</hashTree>
+											</hashTree>
+										</hashTree>
+									</hashTree>
+									<IfController guiclass="IfControllerPanel" testclass="IfController" testname="if_go_browse_page" enabled="true">
+										<stringProp name="IfController.condition">(${searchThreads} &lt;${randomVariableThreads_ready}) &amp;&amp;(${randomVariableThreads_ready} &lt;${__javaScript(${searchThreads} + ${browseThreads})})</stringProp>
+										<boolProp name="IfController.evaluateAll">false</boolProp>
+									</IfController>
+									<hashTree>
+										<LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="LoopController" enabled="true">
+											<boolProp name="LoopController.continue_forever">true</boolProp>
+											<stringProp name="LoopController.loops">${pagesToBrowse}</stringProp>
+										</LoopController>
+										<hashTree>
+											<RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="RandomOrderController" enabled="true" />
+											<hashTree>
+												<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVBrowse" enabled="true">
+													<stringProp name="filename">${inputDataFolder}categoryInputData.csv</stringProp>
+													<stringProp name="fileEncoding"></stringProp>
+													<stringProp name="variableNames">categoryProperty</stringProp>
+													<stringProp name="delimiter"></stringProp>
+													<boolProp name="quotedData">false</boolProp>
+													<boolProp name="recycle">true</boolProp>
+													<boolProp name="stopThread">false</boolProp>
+													<stringProp name="shareMode">All threads</stringProp>
+												</CSVDataSet>
+												<hashTree />
+												<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="browsePage" enabled="true">
+													<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+														<collectionProp name="Arguments.arguments" />
+													</elementProp>
+													<stringProp name="HTTPSampler.domain"></stringProp>
+													<stringProp name="HTTPSampler.port"></stringProp>
+													<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+													<stringProp name="HTTPSampler.response_timeout"></stringProp>
+													<stringProp name="HTTPSampler.protocol"></stringProp>
+													<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+													<stringProp name="HTTPSampler.path">${homePath}/${categoryProperty}</stringProp>
+													<stringProp name="HTTPSampler.method">GET</stringProp>
+													<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+													<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+													<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+													<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+													<boolProp name="HTTPSampler.monitor">false</boolProp>
+													<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+												</HTTPSampler>
+												<hashTree>
+													<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="browseTimer" enabled="true">
+														<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+														<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+													</UniformRandomTimer>
+													<hashTree />
+													<BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShellPostProcessor" enabled="true">
+														<stringProp name="filename"></stringProp>
+														<stringProp name="parameters"></stringProp>
+														<boolProp name="resetInterpreter">true</boolProp>
+														<stringProp name="script">vars.put(&quot;state&quot;,&quot;checkCart&quot;);</stringProp>
+													</BeanShellPostProcessor>
+													<hashTree />
+												</hashTree>
+											</hashTree>
+										</hashTree>
+									</hashTree>
+									<IfController guiclass="IfControllerPanel" testclass="IfController" testname="if_go_other_page" enabled="true">
+										<stringProp name="IfController.condition">${randomVariableThreads_ready}&gt;= ${__javaScript(${readyStateThreads} - ${otherPageThreads})}</stringProp>
+										<boolProp name="IfController.evaluateAll">false</boolProp>
+									</IfController>
+									<hashTree>
+										<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="storeFinderPage" enabled="true">
+											<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+												<collectionProp name="Arguments.arguments" />
+											</elementProp>
+											<stringProp name="HTTPSampler.domain"></stringProp>
+											<stringProp name="HTTPSampler.port"></stringProp>
+											<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+											<stringProp name="HTTPSampler.response_timeout"></stringProp>
+											<stringProp name="HTTPSampler.protocol"></stringProp>
+											<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+											<stringProp name="HTTPSampler.path">${homePath}/store-finder</stringProp>
+											<stringProp name="HTTPSampler.method">GET</stringProp>
+											<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+											<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+											<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+											<boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+											<boolProp name="HTTPSampler.monitor">false</boolProp>
+											<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+										</HTTPSampler>
+										<hashTree>
+											<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="otherTimer" enabled="true">
+												<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+												<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+											</UniformRandomTimer>
+											<hashTree />
+										</hashTree>
+										<RandomOrderController guiclass="RandomOrderControllerGui" testclass="RandomOrderController" testname="RandomOrderController" enabled="true" />
+										<hashTree>
+											<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVCategories" enabled="true">
+												<stringProp name="filename">${inputDataFolder}categoryInputData.csv</stringProp>
+												<stringProp name="fileEncoding"></stringProp>
+												<stringProp name="variableNames">categoryLink</stringProp>
+												<stringProp name="delimiter"></stringProp>
+												<boolProp name="quotedData">false</boolProp>
+												<boolProp name="recycle">true</boolProp>
+												<boolProp name="stopThread">false</boolProp>
+												<stringProp name="shareMode">All threads</stringProp>
+											</CSVDataSet>
+											<hashTree />
+											<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVCategoriesRefinement" enabled="true">
+												<stringProp name="filename">${inputDataFolder}categoryRefinementData.csv</stringProp>
+												<stringProp name="fileEncoding"></stringProp>
+												<stringProp name="variableNames">categoryRefinementLink,refinement</stringProp>
+												<stringProp name="delimiter">,</stringProp>
+												<boolProp name="quotedData">false</boolProp>
+												<boolProp name="recycle">true</boolProp>
+												<boolProp name="stopThread">false</boolProp>
+												<stringProp name="shareMode">All threads</stringProp>
+											</CSVDataSet>
+											<hashTree />
+											<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVSort" enabled="true">
+												<stringProp name="filename">${inputDataFolder}sortData.csv</stringProp>
+												<stringProp name="fileEncoding"></stringProp>
+												<stringProp name="variableNames">sort,q</stringProp>
+												<stringProp name="delimiter">,</stringProp>
+												<boolProp name="quotedData">true</boolProp>
+												<boolProp name="recycle">true</boolProp>
+												<boolProp name="stopThread">false</boolProp>
+												<stringProp name="shareMode">All threads</stringProp>
+											</CSVDataSet>
+											<hashTree />
+											<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVCurrency" enabled="true">
+												<stringProp name="filename">${inputDataFolder}currencyData.csv</stringProp>
+												<stringProp name="fileEncoding"></stringProp>
+												<stringProp name="variableNames">currency</stringProp>
+												<stringProp name="delimiter">,</stringProp>
+												<boolProp name="quotedData">true</boolProp>
+												<boolProp name="recycle">true</boolProp>
+												<boolProp name="stopThread">false</boolProp>
+												<stringProp name="shareMode">All threads</stringProp>
+											</CSVDataSet>
+											<hashTree />
+											<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVProducts" enabled="true">
+												<stringProp name="filename">${inputDataFolder}productInputData.csv</stringProp>
+												<stringProp name="fileEncoding"></stringProp>
+												<stringProp name="variableNames">productLink</stringProp>
+												<stringProp name="delimiter"></stringProp>
+												<boolProp name="quotedData">false</boolProp>
+												<boolProp name="recycle">true</boolProp>
+												<boolProp name="stopThread">false</boolProp>
+												<stringProp name="shareMode">All threads</stringProp>
+											</CSVDataSet>
+											<hashTree />
+											<CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSVLanguage" enabled="true">
+												<stringProp name="filename">${inputDataFolder}languageInputData.csv</stringProp>
+												<stringProp name="fileEncoding"></stringProp>
+												<stringProp name="variableNames">language</stringProp>
+												<stringProp name="delimiter"></stringProp>
+												<boolProp name="quotedData">false</boolProp>
+												<boolProp name="recycle">true</boolProp>
+												<boolProp name="stopThread">false</boolProp>
+												<stringProp name="shareMode">All threads</stringProp>
+											</CSVDataSet>
+											<hashTree />
+											<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="sortCategoryPage" enabled="true">
+												<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+													<collectionProp name="Arguments.arguments">
+														<elementProp name="sort" elementType="HTTPArgument">
+															<boolProp name="HTTPArgument.always_encode">false</boolProp>
+															<stringProp name="Argument.value">${sort}</stringProp>
+															<stringProp name="Argument.metadata">=</stringProp>
+															<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															<stringProp name="Argument.name">sort</stringProp>
+														</elementProp>
+														<elementProp name="q" elementType="HTTPArgument">
+															<boolProp name="HTTPArgument.always_encode">false</boolProp>
+															<stringProp name="Argument.value">${q}</stringProp>
+															<stringProp name="Argument.metadata">=</stringProp>
+															<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															<stringProp name="Argument.name">q</stringProp>
+														</elementProp>
+													</collectionProp>
+												</elementProp>
+												<stringProp name="HTTPSampler.domain"></stringProp>
+												<stringProp name="HTTPSampler.port"></stringProp>
+												<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+												<stringProp name="HTTPSampler.response_timeout"></stringProp>
+												<stringProp name="HTTPSampler.protocol"></stringProp>
+												<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+												<stringProp name="HTTPSampler.path">${homePath}/${categoryLink}</stringProp>
+												<stringProp name="HTTPSampler.method">GET</stringProp>
+												<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+												<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+												<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+												<boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+												<boolProp name="HTTPSampler.monitor">false</boolProp>
+												<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+											</HTTPSampler>
+											<hashTree>
+												<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="sortTimer" enabled="true">
+													<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+													<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+												</UniformRandomTimer>
+												<hashTree />
+											</hashTree>
+											<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="switchCurrencyPage" enabled="true">
+												<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+													<collectionProp name="Arguments.arguments">
+														<elementProp name="currency" elementType="HTTPArgument">
+															<boolProp name="HTTPArgument.always_encode">false</boolProp>
+															<stringProp name="Argument.value">${currency}</stringProp>
+															<stringProp name="Argument.metadata">=</stringProp>
+															<boolProp name="HTTPArgument.use_equals">true</boolProp>
+															<stringProp name="Argument.name">currency</stringProp>
+														</elementProp>
+													</collectionProp>
+												</elementProp>
+												<stringProp name="HTTPSampler.domain"></stringProp>
+												<stringProp name="HTTPSampler.port"></stringProp>
+												<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+												<stringProp name="HTTPSampler.response_timeout"></stringProp>
+												<stringProp name="HTTPSampler.protocol"></stringProp>
+												<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+												<stringProp name="HTTPSampler.path">${homePath}/s/scurrency</stringProp>
+												<stringProp name="HTTPSampler.method">POST</stringProp>
+												<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+												<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+												<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+												<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+												<boolProp name="HTTPSampler.monitor">false</boolProp>
+												<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+											</HTTPSampler>
+											<hashTree>
+												<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="otherTimer" enabled="true">
+													<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+													<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+												</UniformRandomTimer>
+												<hashTree />
+											</hashTree>
+											<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="switchLanguagePage" enabled="true">
+												<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+													<collectionProp name="Arguments.arguments">
+														<elementProp name="lang" elementType="HTTPArgument">
+															<boolProp name="HTTPArgument.always_encode">false</boolProp>
+															<stringProp name="Argument.name">lang</stringProp>
+															<stringProp name="Argument.value">${language}</stringProp>
+															<stringProp name="Argument.metadata">=</stringProp>
+															<boolProp name="HTTPArgument.use_equals">true</boolProp>
+														</elementProp>
+													</collectionProp>
+												</elementProp>
+												<stringProp name="HTTPSampler.domain"></stringProp>
+												<stringProp name="HTTPSampler.port"></stringProp>
+												<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+												<stringProp name="HTTPSampler.response_timeout"></stringProp>
+												<stringProp name="HTTPSampler.protocol"></stringProp>
+												<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+												<stringProp name="HTTPSampler.path">${homePath}/s/slang</stringProp>
+												<stringProp name="HTTPSampler.method">POST</stringProp>
+												<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+												<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+												<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+												<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+												<boolProp name="HTTPSampler.monitor">false</boolProp>
+												<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+											</HTTPSampler>
+											<hashTree>
+												<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="otherTimer" enabled="true">
+													<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+													<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+												</UniformRandomTimer>
+												<hashTree />
+											</hashTree>
+											<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="productDeliveryTab" enabled="true">
+												<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+													<collectionProp name="Arguments.arguments" />
+												</elementProp>
+												<stringProp name="HTTPSampler.domain"></stringProp>
+												<stringProp name="HTTPSampler.port"></stringProp>
+												<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+												<stringProp name="HTTPSampler.response_timeout"></stringProp>
+												<stringProp name="HTTPSampler.protocol"></stringProp>
+												<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+												<stringProp name="HTTPSampler.path">${homePath}/${productLink}#tab-deliveryTab</stringProp>
+												<stringProp name="HTTPSampler.method">GET</stringProp>
+												<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+												<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+												<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+												<boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+												<boolProp name="HTTPSampler.monitor">false</boolProp>
+												<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+											</HTTPSampler>
+											<hashTree>
+												<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="otherTimer" enabled="true">
+													<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+													<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+												</UniformRandomTimer>
+												<hashTree />
+											</hashTree>
+											<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="productDetailsTab" enabled="true">
+												<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+													<collectionProp name="Arguments.arguments" />
+												</elementProp>
+												<stringProp name="HTTPSampler.domain"></stringProp>
+												<stringProp name="HTTPSampler.port"></stringProp>
+												<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+												<stringProp name="HTTPSampler.response_timeout"></stringProp>
+												<stringProp name="HTTPSampler.protocol"></stringProp>
+												<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+												<stringProp name="HTTPSampler.path">${homePath}/${productLink}#tab-details</stringProp>
+												<stringProp name="HTTPSampler.method">GET</stringProp>
+												<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+												<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+												<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+												<boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+												<boolProp name="HTTPSampler.monitor">false</boolProp>
+												<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+											</HTTPSampler>
+											<hashTree>
+												<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="otherTimer" enabled="true">
+													<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+													<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+												</UniformRandomTimer>
+												<hashTree />
+											</hashTree>
+											<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="productReviewsTab" enabled="true">
+												<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+													<collectionProp name="Arguments.arguments" />
+												</elementProp>
+												<stringProp name="HTTPSampler.domain"></stringProp>
+												<stringProp name="HTTPSampler.port"></stringProp>
+												<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+												<stringProp name="HTTPSampler.response_timeout"></stringProp>
+												<stringProp name="HTTPSampler.protocol"></stringProp>
+												<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+												<stringProp name="HTTPSampler.path">${homePath}/${productLink}#tab-reviews</stringProp>
+												<stringProp name="HTTPSampler.method">GET</stringProp>
+												<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+												<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+												<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+												<boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+												<boolProp name="HTTPSampler.monitor">false</boolProp>
+												<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+											</HTTPSampler>
+											<hashTree>
+												<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="otherTimer" enabled="true">
+													<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+													<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+												</UniformRandomTimer>
+												<hashTree />
+											</hashTree>
+											<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="refinementPage" enabled="true">
+												<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+													<collectionProp name="Arguments.arguments">
+														<elementProp name="q" elementType="HTTPArgument">
+															<boolProp name="HTTPArgument.always_encode">true</boolProp>
+															<stringProp name="Argument.name">q</stringProp>
+															<stringProp name="Argument.value">${refinement}</stringProp>
+															<stringProp name="Argument.metadata">=</stringProp>
+															<boolProp name="HTTPArgument.use_equals">true</boolProp>
+														</elementProp>
+													</collectionProp>
+												</elementProp>
+												<stringProp name="HTTPSampler.domain"></stringProp>
+												<stringProp name="HTTPSampler.port"></stringProp>
+												<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+												<stringProp name="HTTPSampler.response_timeout"></stringProp>
+												<stringProp name="HTTPSampler.protocol"></stringProp>
+												<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+												<stringProp name="HTTPSampler.path">${homePath}/${categoryRefinementLink}</stringProp>
+												<stringProp name="HTTPSampler.method">GET</stringProp>
+												<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+												<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+												<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+												<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+												<boolProp name="HTTPSampler.monitor">false</boolProp>
+												<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+											</HTTPSampler>
+											<hashTree>
+												<UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="otherTimer" enabled="true">
+													<stringProp name="ConstantTimer.delay">${__property(delayOffset)}</stringProp>
+													<stringProp name="RandomTimer.range">${__property(thinkTimeAllOthers)}</stringProp>
+												</UniformRandomTimer>
+												<hashTree />
+											</hashTree>
+										</hashTree>
+									</hashTree>
+								</hashTree>
+								<CounterConfig guiclass="CounterConfigGui" testclass="CounterConfig" testname="CounterUserLifeTimeDuringTest" enabled="true">
+									<stringProp name="CounterConfig.start">1</stringProp>
+									<stringProp name="CounterConfig.end">${userLifeTimeDuringTest}</stringProp>
+									<stringProp name="CounterConfig.incr">1</stringProp>
+									<stringProp name="CounterConfig.name">counterUserLifeTimeDuringTest</stringProp>
+									<stringProp name="CounterConfig.format"></stringProp>
+									<boolProp name="CounterConfig.per_user">false</boolProp>
+								</CounterConfig>
+								<hashTree />
+								<IfController guiclass="IfControllerPanel" testclass="IfController" testname="If_time_out" enabled="true">
+									<stringProp name="IfController.condition">(${userLifeTimeDuringTest} &gt;=${__javaScript(${counterUserLifeTimeDuringTest})}) &amp;&amp;(${__javaScript(&quot;${state}&quot;!=&quot;deleted&quot;)})</stringProp>
+									<boolProp name="IfController.evaluateAll">false</boolProp>
+								</IfController>
+								<hashTree>
+									<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="homePageTimeOut" enabled="true">
+										<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+											<collectionProp name="Arguments.arguments" />
+										</elementProp>
+										<stringProp name="HTTPSampler.domain"></stringProp>
+										<stringProp name="HTTPSampler.port"></stringProp>
+										<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+										<stringProp name="HTTPSampler.response_timeout"></stringProp>
+										<stringProp name="HTTPSampler.protocol"></stringProp>
+										<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+										<stringProp name="HTTPSampler.path"></stringProp>
+										<stringProp name="HTTPSampler.method">GET</stringProp>
+										<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+										<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+										<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+										<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+										<boolProp name="HTTPSampler.monitor">false</boolProp>
+										<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+									</HTTPSampler>
+									<hashTree>
+										<BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShellPostProcessor" enabled="true">
+											<stringProp name="filename"></stringProp>
+											<stringProp name="parameters"></stringProp>
+											<boolProp name="resetInterpreter">true</boolProp>
+											<stringProp name="script">vars.put(&quot;state&quot;,&quot;deleted&quot;);</stringProp>
+										</BeanShellPostProcessor>
+										<hashTree />
+									</hashTree>
+								</hashTree>
+							</hashTree>
+						</hashTree>
+					</hashTree>
+				</hashTree>
+				<HTTPSampler guiclass="HttpTestSampleGui" testclass="HTTPSampler" testname="ReportingServer" enabled="true">
+					<elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
+						<collectionProp name="Arguments.arguments">
+							<elementProp name="XML" elementType="HTTPArgument">
+								<boolProp name="HTTPArgument.always_encode">false</boolProp>
+								<stringProp name="Argument.value">true</stringProp>
+								<stringProp name="Argument.metadata">=</stringProp>
+								<boolProp name="HTTPArgument.use_equals">true</boolProp>
+								<stringProp name="Argument.name">XML</stringProp>
+							</elementProp>
+						</collectionProp>
+					</elementProp>
+					<stringProp name="HTTPSampler.domain">${server}</stringProp>
+					<stringProp name="HTTPSampler.port">${port}</stringProp>
+					<stringProp name="HTTPSampler.connect_timeout"></stringProp>
+					<stringProp name="HTTPSampler.response_timeout"></stringProp>
+					<stringProp name="HTTPSampler.protocol"></stringProp>
+					<stringProp name="HTTPSampler.contentEncoding"></stringProp>
+					<stringProp name="HTTPSampler.path">/manager/status</stringProp>
+					<stringProp name="HTTPSampler.method">GET</stringProp>
+					<boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+					<boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+					<boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+					<boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+					<boolProp name="HTTPSampler.image_parser">true</boolProp>
+					<boolProp name="HTTPSampler.monitor">true</boolProp>
+					<stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+				</HTTPSampler>
+				<hashTree>
+					<AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTPAuthorizationManager" enabled="true">
+						<collectionProp name="AuthManager.auth_list">
+							<elementProp name="" elementType="Authorization">
+								<stringProp name="Authorization.url"></stringProp>
+								<stringProp name="Authorization.username">admin</stringProp>
+								<stringProp name="Authorization.password">nimda</stringProp>
+								<stringProp name="Authorization.domain"></stringProp>
+								<stringProp name="Authorization.realm"></stringProp>
+							</elementProp>
+						</collectionProp>
+					</AuthManager>
+					<hashTree />
+					<ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="ConstantTimer" enabled="true">
+						<stringProp name="ConstantTimer.delay">5000</stringProp>
+					</ConstantTimer>
+					<hashTree />
+					<ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="SimpleDataWriter" enabled="true">
+						<boolProp name="ResultCollector.error_logging">false</boolProp>
+						<objProp>
+							<name>saveConfig</name>
+							<value class="SampleSaveConfiguration">
+								<time>true</time>
+								<latency>true</latency>
+								<timestamp>true</timestamp>
+								<success>true</success>
+								<label>true</label>
+								<code>true</code>
+								<message>true</message>
+								<threadName>true</threadName>
+								<dataType>true</dataType>
+								<encoding>false</encoding>
+								<assertions>false</assertions>
+								<subresults>false</subresults>
+								<responseData>false</responseData>
+								<samplerData>false</samplerData>
+								<xml>false</xml>
+								<fieldNames>true</fieldNames>
+								<responseHeaders>false</responseHeaders>
+								<requestHeaders>false</requestHeaders>
+								<responseDataOnError>false</responseDataOnError>
+								<saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+								<assertionsResultsToSave>0</assertionsResultsToSave>
+								<bytes>true</bytes>
+								<threadCounts>true</threadCounts>
+							</value>
+						</objProp>
+						<stringProp name="filename">${outputMonitorResults}</stringProp>
+					</ResultCollector>
+					<hashTree />
+					<ResultCollector guiclass="MonitorHealthVisualizer" testclass="ResultCollector" testname="MonitorResults" enabled="true">
+						<boolProp name="ResultCollector.error_logging">false</boolProp>
+						<objProp>
+							<name>saveConfig</name>
+							<value class="SampleSaveConfiguration">
+								<time>true</time>
+								<latency>true</latency>
+								<timestamp>true</timestamp>
+								<success>true</success>
+								<label>true</label>
+								<code>true</code>
+								<message>true</message>
+								<threadName>true</threadName>
+								<dataType>true</dataType>
+								<encoding>false</encoding>
+								<assertions>false</assertions>
+								<subresults>false</subresults>
+								<responseData>false</responseData>
+								<samplerData>false</samplerData>
+								<xml>false</xml>
+								<fieldNames>true</fieldNames>
+								<responseHeaders>false</responseHeaders>
+								<requestHeaders>false</requestHeaders>
+								<responseDataOnError>false</responseDataOnError>
+								<saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+								<assertionsResultsToSave>0</assertionsResultsToSave>
+								<bytes>true</bytes>
+								<threadCounts>true</threadCounts>
+							</value>
+						</objProp>
+						<stringProp name="filename"></stringProp>
+					</ResultCollector>
+					<hashTree />
+				</hashTree>
+			</hashTree>
+		</hashTree>
+	</hashTree>
+</jmeterTestPlan>

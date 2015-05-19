@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Spring Integration -->
+	<import resource="ytelcoacceleratorcore-spring-integration-telco.xml"/>
+	
+	<!-- SystemSetup for the YtelcoacceleratorCore -->
+	<bean id="telcoAcceleratorCoreSystemSetup" class="de.hybris.platform.ytelcoacceleratorcore.setup.CoreSystemSetup"
+	       parent="abstractCoreSystemSetup">
+		<property name="typeService" ref="typeService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="userService" ref="userService"/>
+	</bean>
+
+	<!-- START copy from yaccelerator -->
+	<bean id="image515ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="515Wx515H"/>
+	</bean>
+	<bean id="image300ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="300Wx300H"/>
+	</bean>
+	<bean id="image96ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="96Wx96H"/>
+	</bean>
+	<bean id="image65ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="65Wx65H"/>
+	</bean>
+	<bean id="image30ValueProvider" parent="abstractImageValueProvider" >
+		<property name="mediaFormat" value="30Wx30H"/>
+	</bean>
+	
+	<bean id="productUrlValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductUrlValueProvider" parent="abstractPropertyFieldValueProvider" >
+		<property name="urlResolver" ref="productModelUrlResolver"/>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="i18nService" ref="i18nService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	
+	<bean id="promotionCodeValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PromotionCodeValueProvider" parent="abstractPropertyFieldValueProvider" >
+		<property name="promotionsService" ref="promotionsService"/>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+
+	<bean id="promotionImageValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PrimaryPromotionImageValueProvider" parent="abstractPropertyFieldValueProvider" >
+		<property name="promotionsService" ref="promotionsService"/>
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+	
+		<!--
+		Event listeners are singletons, therefore the dependency for a bean in tenant-scope
+		must be configured with a lookup method.
+	-->
+	<bean id="telcoCustomerRegistrationEventListener" class="de.hybris.platform.ytelcoacceleratorcore.event.RegistrationEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="telcoForgottenPasswordEventListener" class="de.hybris.platform.ytelcoacceleratorcore.event.ForgottenPasswordEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	<bean id="telcoSubmitOrderEventListener" class="de.hybris.platform.ytelcoacceleratorcore.event.SubmitOrderEventListener" parent="abstractSiteEventListener">
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+	</bean>
+	<bean id="telcoOrderConfirmationEventListener" class="de.hybris.platform.ytelcoacceleratorcore.event.OrderConfirmationEventListener" parent="abstractSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<!-- Process resources definition -->
+
+	<bean id="telcoCustomerRegistrationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/ytelcoacceleratorcore/processes/customerRegistrationEmailProcess.xml"/>
+	</bean>
+	<bean id="telcoForgottenPasswordEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/ytelcoacceleratorcore/processes/forgottenPasswordEmailProcess.xml"/>
+	</bean>
+	<bean id="telcoOrderConfirmationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/ytelcoacceleratorcore/processes/orderConfirmationEmailProcess.xml"/>
+	</bean>
+
+	<!-- Actions -->
+	<bean id="abstractAction" class="de.hybris.platform.processengine.action.AbstractAction" abstract="true">
+		<property name="modelService" ref="modelService"/>
+		<property name="processParameterHelper" ref="processParameterHelper"/>
+	</bean>
+
+	<bean id="sendEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction" parent="abstractAction">
+		<property name="emailService" ref="emailService"/>
+	</bean>
+
+	<bean id="generateTelcoCustomerRegistrationEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
+		<property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
+		<property name="emailGenerationService" ref="emailGenerationService"/>
+	</bean>
+
+	<bean id="generateTelcoForgottenPasswordEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+		<property name="frontendTemplateName" value="ForgottenPasswordEmailTemplate"/>
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
+		<property name="emailGenerationService" ref="emailGenerationService"/>
+	</bean>
+
+	<bean id="generateTelcoOrderConfirmationEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+		<property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
+		<property name="emailGenerationService" ref="emailGenerationService"/>
+	</bean>
+	
+	<bean id="removeSentEmail"
+	      class="de.hybris.platform.acceleratorservices.process.email.actions.RemoveSentEmailAction" parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	
+	<bean id="abstractCategoryCodeValueProvider" abstract="true" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryCodeValueProvider" parent="abstractPropertyFieldValueProvider" >
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+	<bean id="abstractCategoryNameValueProvider" abstract="true" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryNameValueProvider" parent="abstractPropertyFieldValueProvider" >
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+	</bean>
+
+	
+	<!-- END copy from accelerator -->
+
+	<!-- Solr field value providers -->
+	<bean id="telcoCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="1"/>
+		<!-- '1' is the root icecat category -->
+	</bean>
+	<bean id="telcoBrandCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="brands"/>
+		<!-- 'brands' is the root of the brands hierarchy -->
+	</bean>
+
+	<bean id="telcoCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="telcoCategorySource"/>
+	</bean>
+	<bean id="telcoBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="telcoBrandCategorySource"/>
+	</bean>
+	<bean id="telcoCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="telcoCategorySource"/>
+	</bean>
+	<bean id="telcoBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="telcoBrandCategorySource"/>
+	</bean>
+
+	<!-- Actions -->
+
+	<alias alias="guidedSellingService" name="defaultGuidedSellingService"/>
+	<bean id="defaultGuidedSellingService" class="de.hybris.platform.ytelcoacceleratorcore.bundle.impl.DefaultGuidedSellingService" >
+		<property name="bundleTemplateService" ref="bundleTemplateService"/>
+		<property name="bundleComponentEditableChecker" ref="cartBundleComponentEditableChecker" />			
+	</bean>	
+	
+	<alias name="defaultConsignmentService" alias="consignmentService"/>
+
+	<!-- Compatibility Service -->
+	<alias name="defaultCompatibilityService" alias="compatibilityService"/>
+	<bean id="defaultCompatibilityService" class="de.hybris.platform.ytelcoacceleratorcore.services.impl.DefaultCompatibilityService">
+	     <property name="classificationService" ref="classificationService" />
+	     <property name="productService" ref="productService" />
+	     <property name="genericSearchService" ref="genericSearchService" />
+	     <property name="modelService" ref="modelService" />    
+	     <property name="classificationClassCode" value="accessoryclassification" />
+	     <property name="classificationAttributeCode" value="vendorcompatibility" />
+	     <property name="productsFeaturesDao" ref="productsFeaturesDao" />
+	</bean>
+			
+	<bean id="productReviewCountValueProvider" class="de.hybris.platform.ytelcoacceleratorcore.search.solrfacetsearch.provider.impl.ProductReviewCountValueProvider" parent="abstractPropertyFieldValueProvider" >
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="customerReviewService" ref="customerReviewService"/>
+	</bean>
+	
+	<alias name="defaultProductsFeaturesDao" alias="productsFeaturesDao" />
+	<bean id="defaultProductsFeaturesDao" class="de.hybris.platform.ytelcoacceleratorcore.daos.impl.DefaultProductsFeaturesDao" parent="abstractItemDao" >	
+		<property name="typeService" ref="typeService" />
+	</bean>
+	
+	<alias alias="uiExperienceService" name="telcoUiExperienceService"/>
+	<bean id="telcoUiExperienceService" parent="defaultUiExperienceService"
+		class="de.hybris.platform.ytelcoacceleratorcore.uiexperience.impl.TelcoUiExperienceService">
+		<property name="baseStoreService" ref="baseStoreService"/>
+	</bean>
+
+	<bean id="mccTelcoSiteUrlHelper" class="de.hybris.platform.ytelcoacceleratorcore.util.MccSiteUrlHelper">
+		<property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService"/>
+		<property name="cmsSiteService" ref="cmsSiteService"/>
+	</bean>
+	
+    <alias alias="constraintDao" name="customConstraintDao" />
+	<bean id="customConstraintDao" class="de.hybris.platform.ytelcoacceleratorcore.validation.dao.impl.CustomConstraintDao"
+		parent="abstractItemDao" />
+		
+	<alias alias="validationService" name="customValidationService" />
+	<bean id="customValidationService" class="de.hybris.platform.ytelcoacceleratorcore.validation.CustomValidationService"
+		parent="abstractBusinessService" >
+		<property name="constraintsExtractor" ref="constraintsExtractor"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService" />
+		<property name="constraintDao" ref="constraintDao" />
+		<lookup-method name="lookupViolation" bean="hybrisConstraintViolation"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2014 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="v1/error-config-v1-spring.xml" />
+	<import resource="v2/error-config-v2-spring.xml" />
+
+	<util:map id="statusCodeMappings">
+		<!-- Spring internal exceptions -->
+		<entry key="BindException" value="400" />
+		<entry key="ConversionNotSupportedException" value="500" />
+		<entry key="HttpMediaTypeNotAcceptableException" value="406" />
+		<entry key="HttpMediaTypeNotSupportedException" value="415" />
+		<entry key="HttpMessageNotReadableException" value="400" />
+		<entry key="HttpMessageNotWritableException" value="400" />
+		<entry key="HttpRequestMethodNotSupportedException" value="405" />
+		<entry key="MethodArgumentNotValidException" value="400" />
+		<entry key="MissingServletRequestParameterException" value="400" />
+		<entry key="MissingServletRequestPartException" value="400" />
+		<entry key="NoSuchRequestHandlingMethodException" value="404" />
+		<entry key="TypeMismatchException" value="400" />
+		<!-- Other exceptions -->
+		<entry key="UnknownResourceException" value="404" />
+		<entry key="AccessDeniedException" value="401" />
+		<entry key="AuthenticationException" value="401" />
+	</util:map>
+
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>/WEB-INF/messages/messages</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<!-- webservice error factory & converters -->
+
+	<alias alias="webserviceErrorFactory" name="defaultWebserviceErrorFactory" />
+	<bean id="defaultWebserviceErrorFactory" class="de.hybris.platform.ycommercewebservices.errors.factory.impl.DefaultWebserviceErrorFactory">
+		<property name="converters">
+			<list>
+				<ref bean="validationErrorConverter" />
+				<ref bean="cartModificationDataListErrorConverter" />
+				<ref bean="webserviceExceptionConverter" />
+				<ref bean="exceptionConverter" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="abstractLocalizedErrorConverter" abstract="true"
+		class="de.hybris.platform.commercewebservicescommons.errors.converters.AbstractLocalizedErrorConverter">
+		<property name="messageSource" ref="messageSource" />
+	</bean>
+
+	<alias alias="validationErrorConverter" name="defaultValidationErrorConverter" />
+	<bean name="defaultValidationErrorConverter" class="de.hybris.platform.commercewebservicescommons.errors.converters.ValidationErrorConverter"
+		parent="abstractLocalizedErrorConverter">
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+	</bean>
+
+	<alias alias="exceptionConverter" name="defaultExceptionConverter" />
+	<bean name="defaultExceptionConverter" class="de.hybris.platform.commercewebservicescommons.errors.converters.ExceptionConverter" />
+
+	<alias alias="webserviceExceptionConverter" name="defaultWebserviceExceptionConverter" />
+	<bean name="defaultWebserviceExceptionConverter" class="de.hybris.platform.commercewebservicescommons.errors.converters.WebserviceExceptionConverter" />
+
+	<alias alias="cartModificationDataErrorConverter" name="defaultCartModificationDataErrorConverter" />
+	<bean name="defaultCartModificationDataErrorConverter" class="de.hybris.platform.ycommercewebservices.errors.converters.CartModificationDataErrorConverter"
+		parent="abstractLocalizedErrorConverter">
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+	</bean>
+
+	<alias alias="cartModificationDataListErrorConverter" name="defaultCartModificationDataListErrorConverter" />
+	<bean name="defaultCartModificationDataListErrorConverter" class="de.hybris.platform.ycommercewebservices.errors.converters.CartModificationDataListErrorConverter">
+		<property name="cartModificationDataErrorConverter" ref="cartModificationDataErrorConverter" />
+	</bean>
+</beans>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2014 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+
+
+
+
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="httpMessageConverterV2" class="de.hybris.platform.ycommercewebservices.jaxb.Jaxb2HttpMessageConverter" abstract="true">
+		<property name="jaxbContextFactory" ref="jaxbContextFactory" />
+		<property name="marshallerProperties">
+			<map>
+				<entry key="jaxb.formatted.output">
+					<value type="java.lang.Boolean">true</value>
+				</entry>
+				<entry key="jaxb.encoding" value="UTF-8" />
+				<entry key="eclipselink.json.marshal-empty-collections">
+					<value type="java.lang.Boolean">false</value>
+				</entry>
+				<entry key="eclipselink.json.wrapper-as-array-name">
+					<value type="java.lang.Boolean">true</value>
+				</entry>
+				<entry key="eclipselink.json.include-root">
+					<value type="java.lang.Boolean">false</value>
+				</entry>
+			</map>
+		</property>
+		<property name="unmarshallerProperties">
+			<map>
+				<entry key="eclipselink.json.wrapper-as-array-name">
+					<value type="java.lang.Boolean">true</value>
+				</entry>
+				<entry key="eclipselink.json.include-root">
+					<value type="java.lang.Boolean">false</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="xmlHttpMessageConverterV2" class="de.hybris.platform.ycommercewebservices.jaxb.Jaxb2HttpMessageConverter" parent="httpMessageConverterV2">
+		<property name="marshallerProperties">
+			<map merge="true">
+				<entry key="eclipselink.media-type" value="application/xml" />
+			</map>
+		</property>
+		<property name="unmarshallerProperties">
+			<map merge="true">
+				<entry key="eclipselink.media-type" value="application/xml" />
+			</map>
+		</property>
+		<property name="supportedMediaTypes">
+			<list>
+				<util:constant id="xml" static-field="org.springframework.http.MediaType.APPLICATION_XML" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jsonHttpMessageConverterV2" class="de.hybris.platform.ycommercewebservices.jaxb.Jaxb2HttpMessageConverter" parent="httpMessageConverterV2">
+		<property name="marshallerProperties">
+			<map merge="true">
+				<entry key="eclipselink.media-type" value="application/json" />
+			</map>
+		</property>
+		<property name="unmarshallerProperties">
+			<map merge="true">
+				<entry key="eclipselink.media-type" value="application/json" />
+			</map>
+		</property>
+		<property name="supportedMediaTypes">
+			<list>
+				<util:constant id="json" static-field="org.springframework.http.MediaType.APPLICATION_JSON" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jaxbContextFactory" class="de.hybris.platform.ycommercewebservices.jaxb.MoxyJaxbContextFactoryImpl">
+		<property name="wrapCollections" value="false" />
+		<property name="typeAdapters">
+			<list>
+				<value>de.hybris.platform.ycommercewebservices.jaxb.DateAdapter</value>
+			</list>
+		</property>
+	</bean>
+
+	<util:list id="jaxbMessageConverters">
+		<ref bean="jsonHttpMessageConverterV2" />
+		<ref bean="xmlHttpMessageConverterV2" />
+	</util:list>
+
+	<alias name="jaxbMessageConverters" alias="messageConvertersV2" />
+</beans>

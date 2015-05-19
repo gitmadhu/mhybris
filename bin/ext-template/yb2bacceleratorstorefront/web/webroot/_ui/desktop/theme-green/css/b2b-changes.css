@@ -1,0 +1,51 @@
+
+.checkout_summary_flow_a {
+	background: url("../images/background-checkout-summary-box-a-b2b.png") no-repeat scroll center center;
+}
+.checkout_summary_flow_b {
+	background: url("../images/background-checkout-summary-box-b1-b2b.png") no-repeat scroll center center;
+}
+.checkout_summary_flow_c {
+	background: url("../images/background-checkout-summary-box-b-b2b.png") no-repeat scroll center center;
+}
+#checkout_summary_deliverymode_div {
+	background: url("../images/background-checkout-summary-box-b-b2b.png") no-repeat scroll center center;
+}
+.checkout_summary_flow_a.complete {
+	background: url("../images/background-checkout-summary-box-a-b2b-complete.png") no-repeat scroll center center;
+}
+.checkout_summary_flow_b.complete {
+	background: url("../images/background-checkout-summary-box-b1-b2b-complete.png") no-repeat scroll center center;
+}
+.checkout_summary_flow_c.complete {
+	background: url("../images/background-checkout-summary-box-b-b2b-complete.png") no-repeat scroll center center;
+}
+#checkout_summary_deliverymode_div.complete {
+	background: url("../images/background-checkout-summary-box-b-b2b-complete.png") no-repeat scroll center center;
+}
+#CostCenter{
+	background: url("../images/bg-gradient-select.png") repeat-x scroll center bottom #ffffff;
+}
+
+#cancel-place-replenishmentOrder{
+	background-image: url("../images/button/gradient-button-positive.png");
+}
+#cancel-quote-negotiation{
+	background-image: url("../images/button/gradient-button-positive.png");
+}
+
+#replenishmentStartDate{
+	background: url("../images/bg_replenishmentstartdate.jpg") no-repeat;
+}
+#nDays{
+	background: url("../images/bg-gradient-select.png") repeat-x scroll center bottom #ffffff;
+}
+#daysOfWeek{
+	background: url("../images/bg-gradient-select.png") repeat-x scroll center bottom #ffffff;
+}
+#nWeeks{
+	background: url("../images/bg-gradient-select.png") repeat-x scroll center bottom #ffffff;
+}
+#nthDayOfMonth{
+	background: url("../images/bg-gradient-select.png") repeat-x scroll center bottom #ffffff;
+}

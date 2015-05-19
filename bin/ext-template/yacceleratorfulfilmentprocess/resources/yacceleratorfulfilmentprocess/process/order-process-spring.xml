@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2014 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Order Process Actions -->
+
+	<bean id="abstractOrderAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.AbstractOrderAction"  abstract="true" parent="abstractAction">
+		<property name="timeService" ref="timeService"/>
+	</bean>
+
+	<bean id="checkOrderAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.CheckOrderAction"  parent="abstractAction">
+		<property name="checkOrderService" ref="checkOrderService"/>
+	</bean>
+
+	<bean id="cancelWholeOrderAuthorizationAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.CancelWholeOrderAuthorizationAction"
+            parent="abstractAction">
+		<property name="paymentService" ref="paymentService"/>
+    </bean>
+
+	<bean id="sendOrderPlacedNotificationAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.SendOrderPlacedNotificationAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="takePaymentAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.TakePaymentAction"  parent="abstractAction">
+		<property name="paymentService" ref="paymentService"/>
+    </bean>
+
+	<bean id="sendPaymentFailedNotificationAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.SendPaymentFailedNotificationAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="checkTransactionReviewStatusAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.CheckTransactionReviewStatusAction"  parent="abstractAction">
+		<property name="ticketBusinessService" ref="ticketBusinessService"/>
+	</bean>
+
+	<bean id="fraudCheckOrderAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.FraudCheckOrderAction"  parent="abstractOrderAction">
+		<property name="fraudService" ref="fraudService"/>
+		<property name="providerName" value="Mockup_3rdPartyProvider"/>
+	</bean>
+
+	<bean id="prepareOrderForManualCheckAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.PrepareOrderForManualCheckAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="sendFraudErrorNotificationAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.SendFraudErrorNotificationAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="checkAuthorizeOrderPaymentAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.CheckAuthorizeOrderPaymentAction"  parent="abstractAction"/>
+
+	<bean id="sendAuthorizationFailedNotificationAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.SendAuthorizationFailedNotificationAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="reserveOrderAmountAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.ReserveOrderAmountAction"  parent="abstractAction"/>
+
+	<bean id="fraudCheckOrderInternalAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.FraudCheckOrderInternalAction"  parent="abstractOrderAction">
+		<property name="fraudService" ref="fraudService"/>
+		<property name="providerName" value="hybris"/>
+	</bean>
+
+	<bean id="orderManualCheckedAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.OrderManualCheckedAction"  parent="abstractOrderAction"/>
+
+	<bean id="splitOrderAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.SplitOrderAction"  parent="abstractAction">
+		<property name="orderSplittingService" ref="orderSplittingService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
+	<bean id="subprocessesCompletedAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.SubprocessesCompletedAction"  parent="abstractAction"/>
+
+	<bean id="sendOrderCompletedNotificationAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.SendOrderCompletedNotificationAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+	<bean id="scheduleForCleanUpAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.ScheduleForCleanUpAction"  parent="abstractAction">
+		<property name="timeService" ref="timeService"/>
+	</bean>
+
+	<bean id="notifyCustomerAboutFraudAction" class="de.hybris.platform.yacceleratorfulfilmentprocess.actions.order.NotifyCustomerAboutFraudAction"  parent="abstractAction">
+		<property name="eventService" ref="eventService"/>
+	</bean>
+
+
+</beans>

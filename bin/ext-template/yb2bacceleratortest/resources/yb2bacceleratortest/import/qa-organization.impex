@@ -1,0 +1,47 @@
+###############################
+# QA Additions to Rustic Hardware ORGANIZATION (Hierarchy) from b2bsacceleratorsampledata
+
+$passwordEncoding=md5
+$defaultPassword=12341234
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+
+INSERT_UPDATE Employee;uid[unique=true];name;groups(uid)[mode=append];$setPassword;
+;QAAccMnr;QAAccMnr;employeegroup,acctmgrgroup,cockpitgroup;;
+
+INSERT_UPDATE B2BCreditLimit;code[unique=true];alertRateType(code,itemtype(code));alertThreshold;amount;currency(isocode);dateRange(code,itemtype(code));datePeriod[dateformat=dd.MM.yyyy hh:mm:ss];
+;QACreditLimit40K;PERCENTAGE:B2BRateType;10;40000;USD;MONTH:B2BPeriodRange;;
+;QACreditLimit1dollar;;;1;USD;MONTH:B2BPeriodRange;;
+
+INSERT_UPDATE B2BUnit;uid[unique=true];groups(uid);reportingOrganization(uid);description;name;locname[lang=en];creditLimit(code);accountManager(uid);approvers(uid);Addresses(&addId);&b2bUnitID
+;QAMiddleUnit;Rustic Services;Rustic;QAMiddleUnit;QAMiddleUnit;QAMiddleUnit;QACreditLimit40K;QAAccMnr;qaapprover@test.com;;QAUnitID1;
+;QAEndUnit;QAMiddleUnit;Rustic;QAEndUnit;QAEndUnit;QAEndUnit;QACreditLimit1dollar;;qaapprover@test.com;QAAddrID1;QAUnitID2;
+
+INSERT_UPDATE Address;streetname[unique=true];postalcode[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;title(code);&addId;owner(&b2bUnitID)[unique=true];
+;999 South Wacker Drive;60606;Chicago;US;TRUE;TRUE;TRUE;TRUE;Akiro;Nakamura;akiro.nakamura@rustic-hw.com;mr;QAAddrID1;QAUnitID2;
+
+INSERT_UPDATE B2BCustomer;originalUid;uid[unique=true];email;name;title(code);groups(uid);description;sessionCurrency(isocode)[default='USD'];$setPassword;
+;QAPayUser@test.com;qapayuser@test.com;QAPayUser@test.com;QAPayUser;mr;QAMiddleUnit,b2badmingroup,b2bcustomergroup;QA;;;
+;QAOrderHistoryUser@test.com;qaorderhistoryuser@test.com;QAOrderHistoryUser@test.com;QAOrderHistoryUser;mr;QAMiddleUnit,b2bcustomergroup;QA;;; 
+;QAReplenishmentUser@test.com;qareplenishmentuser@test.com;QAReplenishmentUser@test.com;QAReplenishmentUser;mr;QAMiddleUnit,b2bcustomergroup;QA;;;
+;QAApprover@test.com;qaapprover@test.com;QAApprover@test.com;QAApprover;mr;QAMiddleUnit,b2bcustomergroup,b2bapprovergroup;QA;;;
+;QAQuoteUser@test.com;qaquoteuser@test.com;QAQuoteUser@test.com;QAQuoteUser;mr;QAMiddleUnit,b2bcustomergroup;QA;;;
+;QAEditUser@test.com;qaedituser@test.com;QAEditUser@test.com;QAEditUser;mr;QAMiddleUnit,b2bcustomergroup,b2bapprovergroup;QA;;;
+
+INSERT_UPDATE B2BBudget;code[unique=true];Unit(uid);budget;currency(isocode)[allownull=true];dateRange[dateformat=dd.MM.yyyy hh:mm:ss,allownull=true];name[lang=en];;
+;QABudget;QAMiddleUnit;50000;USD;01.01.2010 00:00:00,12.31.2032 12:59:59;QABudget;
+
+INSERT_UPDATE B2BCostCenter;code[unique=true];Unit(uid);currency(isocode);budgets(code);name[lang=en];
+;QAMiddleCostCenter;QAMiddleUnit;USD;QABudget;QAMiddleCostCenter;
+;QAEndCostCenter;QAEndUnit;USD;QABudget;QAEndCostCenter;
+;QACCwithNoBudget;QAEndUnit;USD;;QACCwithNoBudget;
+
+UPDATE B2BCustomer;originalUid[unique=true];permissions(code,Unit(uid));permissionGroups(uid);
+;QAPayUser@test.com;Rustic 25K USD MONTH:Rustic,Rustic 1K USD ORDER:Rustic;
+;QAOrderHistoryUser@test.com;Rustic 25K USD MONTH:Rustic,Rustic 1K USD ORDER:Rustic;
+;QAReplenishmentUser@test.com;Rustic 25K USD MONTH:Rustic,Rustic 20K USD ORDER:Rustic;
+;QAQuoteUser@test.com;Rustic 25K USD MONTH:Rustic,Rustic 20K USD ORDER:Rustic;
+;QAApprover@test.com;Rustic 20K USD ORDER:Rustic,Rustic Unlimited Timespan:Rustic,Rustic Budget Exceeded:Rustic;;
+;QAEditUser@test.com;Rustic 20K USD ORDER:Rustic,Rustic Unlimited Timespan:Rustic,Rustic Budget Exceeded:Rustic;;
+
+

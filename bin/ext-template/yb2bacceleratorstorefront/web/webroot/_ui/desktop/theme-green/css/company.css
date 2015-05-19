@@ -1,0 +1,957 @@
+/*
+## Company
+********************************************************************/
+
+
+#companyNav{
+	
+}
+
+
+
+#companyNav .headline{
+	border-bottom:1px solid #a5a5a5;
+	line-height:120%;
+	text-transform:uppercase;
+	font-weight:bold;
+	font-size:1.2em;
+	margin:0 0 20px 0;
+	padding:0 0 10px 0;
+}
+
+
+#companyNav li.active{
+	font-weight:bold;
+	
+}
+
+
+
+
+
+
+
+.customCompany{
+	margin:0 -20px 0 0;
+	width:810px;
+}
+
+
+.customCompany .tile{
+	border:1px dotted #a5a5a5;
+	padding:0 20px 20px;
+	width:343px;
+	margin:0 20px 20px 0;
+	height:100px;
+}
+
+
+.customCompany .tile .headline{
+	border-bottom: 1px solid #A5A5A5;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 39px;
+	line-height: 39px;
+	text-transform: uppercase;
+	margin:0 0 20px;
+}
+
+
+.customCompany .tile .headline a{
+	display:block;
+}
+
+
+
+
+
+
+
+
+
+.companyContentPane {
+	border:1px dotted #a5a5a5;
+	padding:0 20px 20px;
+	width:748px;
+	margin:0;
+
+}
+
+
+
+.companyContentPane .headline{
+	border-bottom: 1px solid #A5A5A5;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	text-transform: uppercase;
+	margin:0 0 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
+## treeview
+********************************************************************/
+
+
+
+
+.treeview, .treeview ul { 
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.treeview ul {
+	background-color: white;
+	margin-top: 4px;
+}
+
+.treeview .hitarea {
+	background: url(../images/treeview/treeview-default.gif) -64px -25px no-repeat;
+	height: 16px;
+	width: 16px;
+	margin-left: -16px;
+	float: left;
+	cursor: pointer;
+}
+/* fix for IE6 */
+* html .treeview .hitarea {
+	display: inline;
+	float:none;
+}
+
+.treeview li { 
+	margin: 0;
+	padding: 3px 0pt 3px 16px;
+}
+.treeview .hover { color: red; cursor: pointer; }
+.treeview li { background: url(../images/treeview/treeview-default-line.gif) 0 0 no-repeat; }
+.treeview li.collapsable, .treeview li.expandable { background-position: 0 -176px; }
+.treeview .expandable-hitarea { background-position: -80px -3px; }
+.treeview li.last { background-position: 0 -1766px }
+.treeview li.lastCollapsable, .treeview li.lastExpandable { background-image: url(../images/treeview/treeview-default.gif); }  
+.treeview li.lastCollapsable { background-position: 0 -111px }
+.treeview li.lastExpandable { background-position: -32px -67px }
+
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea { background-position: 0; }
+
+.treeview .placeholder {
+	background: url(../images/treeview/ajax-loader.gif) 0 0 no-repeat;
+	height: 16px;
+	width: 16px;
+	display: block;
+}
+.treeview >li.collapsable:first-child{
+   background-position: -17px -90px;
+}
+
+.treeview >li.expandable:first-child{
+   background-position: -49px -46px;
+}
+.treeview li a{
+	display: block;
+	margin-top: -2px;
+}
+
+/* quick fix to expand teh first hierachy*/
+.treeview li ul li ul{
+   display:none;
+}
+
+
+
+
+/*
+## datepicker
+********************************************************************/
+#ui-datepicker-div {
+	background-color: #fff;
+	padding: 5px 5px 5px 5px;
+	box-shadow: 2px 2px 5px #888;
+	display: none;
+}
+
+table.ui-datepicker-calendar tr td {
+	padding: 4px;
+}
+
+.ui-datepicker-next {
+	color: #356F70;
+}
+
+.ui-datepicker-next:hover {
+	color: #7fada5;
+	cursor: pointer;
+}
+
+.ui-datepicker-prev {
+	color: #356F70;
+	padding: 0px 10px 0px 0px;
+}
+
+.ui-datepicker-prev:hover {
+	color: #7fada5;
+	cursor: pointer;
+}
+
+
+
+
+.right{
+	margin:0 0 0 20px;
+}
+
+
+
+
+
+
+/*
+## buttons
+********************************************************************/
+
+button.edit,a.button.edit,
+button.disable,a.button.disable,
+button.create,a.button.create,
+button.add,a.button.add,
+button.remove,a.button.remove,
+button.confirm,a.button.confirm,
+button.no-confirm,a.button.no-confirm
+{
+   	background-color:#169e08;
+    border-color: #169e08;
+	color:#fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+## futureStock
+********************************************************************/
+
+
+#futureStockOverlay {
+	padding:0 20px 20px 20px;
+}
+
+
+#futureStockOverlay .headline{
+	border-bottom: 1px dotted #A5A5A5;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 39px;
+	line-height: 39px;
+	text-transform: uppercase;
+	margin:0 0 20px 0;
+}
+
+
+#futureStockOverlay .description{
+	margin:0 0 20px 0;
+}
+
+
+
+#futureStockOverlay .product{
+
+}
+
+
+#futureStockOverlay .thumb{
+	float:left;
+	margin:0 20px 0 0;
+}
+
+
+#futureStockOverlay .details{
+	float:left;
+}
+
+
+#futureStockOverlay .orderList{
+	border:0;
+	padding:0;
+}
+
+
+
+/*
+	Order form tooltip
+*****************/
+span.future_tooltip {
+    position: relative;
+}
+span.future_tooltip a .tooltip_table {
+    display: none;
+    max-height: 82px;
+    overflow: auto;
+}
+span.future_tooltip a:hover {
+    font-color: #000000;
+}
+span.future_tooltip a:hover .tooltip_table {
+    color: #000000;
+    display: block;
+    font: 12px "Arial",sans-serif;
+    text-align: left;
+    text-decoration: none;                /*oms_error_message*/
+
+    background-color: #FFFFFF;
+    border: 1px solid #999999;
+    border-radius: 3px 3px 3px 3px;
+
+    margin-left: -38px;
+    margin-top: 6px;
+    margin-right: 20px;
+
+    right: -50px;
+    bottom: -5px;
+    height: auto;
+    width: 125px;
+    padding: 2px;
+    position: absolute;
+    z-index: 109;
+}
+.tooltip_title {
+	font-weight: bold;
+	margin-bottom: 2px;
+    padding: 1px 0 4px;
+	background-color: #dadada;
+}
+.tooltip_title, .tooltip_value {
+	width: 50px;
+	padding-left: 3px;
+	font-size: 10px;
+	color: #444444;
+    text-align: center;
+}
+.tooltip_value {
+	border-bottom: 1px solid #dadada;
+}
+.tooltip_table div {
+	float: left;
+}
+.oms_message_holder {
+    padding-left: 5px;
+    position: relative;
+    top: -15px;
+}
+
+
+
+
+
+
+
+
+/*
+## advancedSearch
+********************************************************************/
+
+
+.advancedSearch{
+	margin:0;
+}
+
+
+.advancedSearch .headline{
+	border-bottom: 1px dotted #A5A5A5;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 39px;
+	line-height: 39px;
+	text-transform: uppercase;
+	margin:0 0 20px 0;
+}
+
+
+
+.advancedSearch .radios .control-group{
+	float:left;
+	margin:0 20px 0 0;
+}
+
+.advancedSearch .radios .control-group label{
+	margin-top:0;
+}
+
+
+.advancedSearch .searchInput {
+	position:relative;
+}
+
+.advancedSearch .searchInput #js-add-product-ids{
+	margin: 0;
+    position: absolute;
+    right: 0;
+    top: 22px;
+	height:30px;
+}
+
+
+
+
+
+.advancedSearch .product-id-tag-box{
+	border: 2px solid #C7C7C7;
+	display:block;
+	float:left;
+	margin:10px 20px 10px 0;
+}
+
+
+.advancedSearch .product-id-tag-box span{
+	padding:0 10px;
+	line-height:20px;
+	display:block;
+	float:left;
+}
+
+
+.advancedSearch .product-id-tag-box button{
+
+	margin:0;
+	border: 0;
+	border-left: 2px solid #C7C7C7;
+	height: 20px;
+	line-height:20px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+
+
+/*
+.advancedSearch .orderFormTotal{
+	border: 1px dotted #A5A5A5;
+	padding: 10px;
+}*/
+
+
+
+
+.advancedSearch .productListItem{
+	margin-left:0;
+	margin-right:0;
+}
+
+
+
+
+
+.advancedSearch .orderForm_grid_group{
+	
+}
+
+
+.advancedSearch  .product-grid-container{
+	
+}
+
+
+
+/*
+	orderForm_grid_group
+*****************/
+
+.orderForm_grid_group img {
+    border: 1px solid #BACAD5;
+    margin-bottom: 5px;
+    padding: 5px;
+}
+
+.grid_three_dimensions tr td:first-child {
+    font-weight: bold;
+}
+
+.grid_three_dimensions {
+    width: auto !important;
+    background-color: #EEEEEE;
+    float: left;
+    margin-bottom: 0;
+}
+.single_grid_three_dimensions {
+    margin-bottom: 10px;
+    overflow: auto;
+}
+.grid_three_dimensions tbody tr td {
+    width: 65px;
+    padding: 5px;
+    text-align: center;
+    border-left: 1px solid #FFFFFF;
+    border-top: 1px solid #FFFFFF;
+    background-color: #FFFFFF;
+}
+.grid_three_dimensions tbody tr:first-child td:first-child {
+    border-top: none;
+}
+.grid_three_dimensions tbody tr td:first-child {
+    border-left: none;
+    color: #333333;
+    text-transform: uppercase;
+}
+.grid_three_dimensions tr td:first-child,  #content .grid_three_dimensions tr th {
+    background-color: #EEEEEE;
+    text-align: center;
+    text-transform: uppercase;
+}
+.grid_three_dimensions tr td input{
+    width: 20px;
+    font-size: 10px;
+    text-align: center;
+}
+.grid_three_dimensions tr .in-stock {
+    background-color: #66CC99;
+}
+.grid_three_dimensions tr .out-of-stock {
+    background-color: #FF6633;
+}
+.grid_three_dimensions tr .future-stock {
+    background-color: #FFCC33;
+}
+.orderForm_subHeader {
+    float: right;
+    margin-bottom: 15px;
+    text-align: right;
+    width: 220px;
+}
+.orderForm_grid_group {
+	clear: both;
+
+    padding: 0 0 10px;
+    margin-bottom: 25px;
+    width: 100%;
+
+	border-bottom: 1px dotted #979797;
+
+}
+
+
+
+#colorbox .cboxGrid{
+	padding: 25px;
+}
+
+
+.subHeader_value {
+    display: inline-block;
+    text-align: right;
+    width: 70px;
+}
+#subTotal__label,
+#subtotal {
+    font-weight: bold;
+    font-size: 12px;
+}
+.swatch_legend {
+    display: block;
+    font-size: 11px;
+    text-align: right;
+    margin: 20px 0 0;
+}
+.legend_label {
+    margin-left: 10px;
+    text-transform: capitalize;
+}
+.clr_inStock {
+    background-color: #66CC99;
+    display: inline-block;
+    height: 11px;
+    position: relative;
+    top: 1px;
+    width: 25px;
+}
+.clr_future {
+    background-color: #ffcc33;
+    display: inline-block;
+    height: 11px;
+    position: relative;
+    top: 1px;
+    width: 25px;
+}
+.clr_outStock {
+    background-color: #ff6633;
+    display: inline-block;
+    height: 11px;
+    position: relative;
+    top: 1px;
+    width: 25px;
+}
+
+
+
+#js-add-product-ids{
+	display:none;
+}
+
+
+.productMainLink.gridGroup{
+	border:0;
+}
+
+
+#productOrderButton{
+
+	font-size: 1em;
+	height: 37px;
+	padding: 0;
+	width: 49%;
+	margin:0;
+	margin-top:9px;
+}
+
+
+
+
+
+
+
+
+
+.productDescription .variantOptions {
+	padding: 5px 0;
+	line-height:2.5em;
+	color:#929292;
+}
+
+.productDescription  .variantName {
+	float:left;
+	width: 57px;
+}
+
+.productDescription  ul.variantList {
+	float:left;
+}
+
+.productDescription ul.variantList li{
+	float:left;
+	margin:0 10px 0 0;
+}
+
+
+
+.productDescription .futureStockLink{
+	display:block;
+	text-align:right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+	placeOrder
+*****************/
+
+
+
+#placeOrder{
+	margin:0 0 20px 0;
+}
+
+
+
+
+
+
+
+
+
+
+#replenishmentSchedule{
+	border: 1px dotted #A5A5A5;
+	margin: 0 0 30px;
+	padding: 0 20px 20px;
+	position: relative;
+	top:10px;
+	clear: both;
+}
+
+
+#replenishmentSchedule .headline {
+  border-bottom: 1px solid #A5A5A5;
+  font-size: 1.2em;
+  font-weight: bold;
+  height: 39px;
+  line-height: 39px;
+  margin: 0 0 20px;
+  text-transform: uppercase;
+}
+
+
+#replenishmentSchedule .scheduleform{
+	width: 203.5px;
+	border-left:1px dotted #A5A5A5;
+	margin:0 0 0 15px;
+	padding:0 0 0 15px;
+	min-height:140px;
+}
+
+#replenishmentSchedule .scheduleform_left{
+	margin:0;
+	padding:0;
+	border:0;
+}
+
+
+#replenishmentSchedule .scheduleform.selected .replenishmentFrequency label{
+	font-weight:bold;
+}
+
+
+#replenishmentSchedule .scheduleform label{
+	vertical-align: top;
+}
+
+
+#replenishmentSchedule .scheduleform .replenishmentFrequency{
+	border-bottom: 1px solid #A5A5A5;
+	margin-bottom: 10px;
+	padding: 8px 0;
+}
+
+#replenishmentSchedule .scheduleform input[type="radio"]{
+	margin:0 5px;
+}
+
+#replenishmentSchedule .scheduleform select{
+	margin:0 5px;
+}
+#replenishmentSchedule .scheduleform .div_nWeeks1{
+	margin:0 0 10px 0;
+}
+
+
+
+
+
+
+
+
+#replenishmentSchedule .form-actions{
+	padding:20px 0 0 0;
+}
+
+
+#replenishmentSchedule .form-actions  a.button{
+	margin-top:0;
+}
+
+
+
+
+
+
+
+
+
+
+
+#negotiateQuote{
+	border: 1px dotted #A5A5A5;
+	margin: 0 0 30px;
+	padding: 0 20px 20px;
+	position: relative;
+	top:10px;
+	clear: both;
+}
+
+
+#negotiateQuote .headline {
+  border-bottom: 1px solid #A5A5A5;
+  font-size: 1.2em;
+  font-weight: bold;
+  height: 39px;
+  line-height: 39px;
+  margin: 0 0 20px;
+  text-transform: uppercase;
+}
+
+
+#negotiateQuote #quoteRequestDescription{
+	width:80%;
+	height:100px;
+	padding:10px;
+	font: inherit;
+}
+
+
+
+#negotiateQuote .form-actions{
+	padding:20px 0 0 0;
+}
+
+
+#negotiateQuote .form-actions  a.button{
+	margin-top:0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.yCmsComponent.login-info .content{
+	border: 1px dotted #A5A5A5;
+	margin: 20px 0 0;
+	padding: 20px;
+}
+
+
+
+
+
+
+
+
+
+.volume-prices{
+	margin:10px 0;
+}
+
+
+.volume-prices th,
+.volume-prices td{
+	padding: 0 5px;
+}
+
+
+
+
+
+
+
+
+
+/*
+## orderFormTotal
+********************************************************************/
+
+
+.orderFormTotal .orderForm {
+
+	border: 1px dotted #A5A5A5;
+	margin:0 0 20px 0;
+	padding: 0 10px 10px;
+}
+
+
+.orderFormTotal .orderForm .headline{
+	border-bottom: 1px dotted #A5A5A5;
+	font-size: 1.2em;
+	font-weight: bold;
+	height: 30px;
+	line-height:30px;
+	text-transform: uppercase;
+	margin:0  0 10px 0 ;
+}
+
+
+
+
+
+
+
+.orderFormHeader .pd_name{
+	border-bottom: 1px dotted #979797;
+    color: #000000;
+    font-size: 1.2em;
+    height: 25px;
+	line-height:25px;
+    font-weight: bold;
+    padding: 0 0 5px;
+    margin-bottom: 0.5em;
+}
+
+
+.orderFormHeader .big-price{
+	color: #303030;
+    font-size: 1.417em;
+    padding: 0 0 10px 10px;
+}
+
+
+
+
+
+.control-group fieldset input[type="checkbox"]{
+	float: left;
+}
+
+
+
+
+
+#cboxLoadedContent form.add_to_cart_order_form{
+	padding: 20px;
+}

@@ -1,0 +1,36 @@
+#
+# Import the CMS Site configuration for the wsTest store
+#
+$productCatalog=wsTestProductCatalog
+$contentCatalog=wsTestContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$defaultLanguage=en
+$storeUid=wsTest
+$siteUid=wsTest
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor];pk[unique=true]
+
+# Load the storefront context root config param
+$storefrontContextRoot=$config-storefrontContextRoot
+
+# CMS Site
+INSERT_UPDATE CMSSite;uid[unique=true];channel(code);stores(uid);contentCatalogs(id);defaultCatalog(id);defaultLanguage(isoCode);urlPatterns;active;previewURL;defaultPromotionGroup(Identifier)[default=wsTestPromoGrp]
+;$siteUid;B2C;$storeUid;$contentCatalog;$productCatalog;$defaultLanguage;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^https?://api\.hybrisdev\.com(:[\d]+)?/rest/.*$,(?i)^https?://localhost(:[\d]+)?/rest/.*$;true;$storefrontContextRoot/?site=$siteUid;
+
+
+UPDATE CMSSite;uid[unique=true];name[lang=en];locale[lang=en]
+;$siteUid;"wsTest Site";en_GB
+ 
+UPDATE CMSSite;uid[unique=true];name[lang=de];locale[lang=de]
+;$siteUid;"wsTest Site";de_DE
+ 
+UPDATE CMSSite;uid[unique=true];name[lang=ja];locale[lang=ja]
+;$siteUid;"wsTest Site";ja_JP
+ 
+UPDATE CMSSite;uid[unique=true];name[lang=zh];locale[lang=zh]
+;$siteUid;"wsTest Site";zh_CN
+ 
+#Setting Old Cart Cleanup CronJobs for wsTest site
+INSERT_UPDATE OldCartRemovalCronJob;code[unique=true];job(code);sites(uid)
+;oldCartRemovalCronJob;oldCartRemovalJob;$siteUid

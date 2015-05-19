@@ -1,0 +1,9 @@
+# ImpEx for Importing Usage Charges Classifications																		
+
+$productCatalog=
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+$lang=en
+
+INSERT_UPDATE VolumeUsageCharge;id[unique=true];name[lang=$lang];usageUnit(id);$catalogVersion
+
+INSERT_UPDATE PerUnitUsageCharge;id[unique=true];name[lang=$lang];usageUnit(id);$catalogVersion

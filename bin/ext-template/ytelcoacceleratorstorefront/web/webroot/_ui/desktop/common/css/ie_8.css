@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+ 
+	Buttons
+*****************/
+.opaque {
+	filter: alpha(opacity = 40);
+	zoom: 1;
+	/* BA 25/05/2011 To trigger "hasLayout" in IE if no width or height is set */
+}

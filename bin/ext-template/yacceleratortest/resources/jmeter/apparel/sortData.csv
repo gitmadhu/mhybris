@@ -1,0 +1,5 @@
+topRated,:relevance
+name-asc,:topRated
+name-desc,:name-asc
+price-asc,:name-desc
+price-desc,:price-asc

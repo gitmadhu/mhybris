@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	
+ 	<bean class="de.hybris.platform.commercefacades.xstream.alias.TypeAliasMapping">
+		<property name="alias" value="product" />
+		<property name="aliasedClass" value="de.hybris.platform.commercefacades.product.data.ProductData" />
+	</bean> 
+
+ 	<bean class="de.hybris.platform.commercefacades.xstream.alias.TypeAliasMapping">
+		<property name="alias" value="subscriptionPricePlan" />
+		<property name="aliasedClass" value="de.hybris.platform.subscriptionfacades.data.SubscriptionPricePlanData" />
+	</bean> 
+
+ 	<bean class="de.hybris.platform.commercefacades.xstream.alias.TypeAliasMapping">
+		<property name="alias" value="oneTimeChargeEntry" />
+		<property name="aliasedClass" value="de.hybris.platform.subscriptionfacades.data.OneTimeChargeEntryData" />
+	</bean> 
+
+ 	<bean class="de.hybris.platform.commercefacades.xstream.alias.TypeAliasMapping">
+		<property name="alias" value="recurringChargeEntry" />
+		<property name="aliasedClass" value="de.hybris.platform.subscriptionfacades.data.RecurringChargeEntryData" />
+	</bean> 
+
+ 	<bean class="de.hybris.platform.commercefacades.xstream.alias.TypeAliasMapping">
+		<property name="alias" value="perUnitUsageCharge" />
+		<property name="aliasedClass" value="de.hybris.platform.subscriptionfacades.data.PerUnitUsageChargeData" />
+	</bean> 
+
+ 	<bean class="de.hybris.platform.commercefacades.xstream.alias.TypeAliasMapping">
+		<property name="alias" value="volumeUsageCharge" />
+		<property name="aliasedClass" value="de.hybris.platform.subscriptionfacades.data.VolumeUsageChargeData" />
+	</bean> 
+
+ 	<bean class="de.hybris.platform.commercefacades.xstream.alias.TypeAliasMapping">
+		<property name="alias" value="tierUsageChargeEntry" />
+		<property name="aliasedClass" value="de.hybris.platform.subscriptionfacades.data.TierUsageChargeEntryData" />
+	</bean> 
+
+ 	<bean class="de.hybris.platform.commercefacades.xstream.alias.TypeAliasMapping">
+		<property name="alias" value="overageUsageChargeEntry" />
+		<property name="aliasedClass" value="de.hybris.platform.subscriptionfacades.data.OverageUsageChargeEntryData" />
+	</bean> 
+
+ 	<bean class="de.hybris.platform.commercefacades.xstream.alias.TypeAliasMapping">
+		<property name="alias" value="Image" />
+		<property name="aliasedClass" value="de.hybris.platform.commercefacades.product.data.ImageData" />
+	</bean> 
+
+</beans>

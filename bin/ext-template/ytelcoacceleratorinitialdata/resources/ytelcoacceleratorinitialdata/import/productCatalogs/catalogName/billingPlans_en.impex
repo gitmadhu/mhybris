@@ -1,0 +1,6 @@
+# Impex for Billing Plans - en
+
+# Macros / Replacement Parameter definitions
+$lang=en
+
+UPDATE BillingPlan;id[unique=true];name[lang=$lang]

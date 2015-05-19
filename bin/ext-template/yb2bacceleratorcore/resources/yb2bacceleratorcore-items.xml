@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+
+	<collectiontypes>
+		<collectiontype elementtype="Catalog" code="DependentCatalogs"
+						autocreate="true" type="list"/>
+	</collectiontypes>
+	
+	<enumtypes>
+		<enumtype generate="true" code="B2BCheckoutFlowEnum" autocreate="true" dynamic="true">
+			<!-- <model package="de.hybris.platform.yb2bacceleratorcore.enums"/> -->
+			<value code="SINGLE"/>
+			<value code="MULTISTEP"/>
+		</enumtype>
+		<enumtype generate="true" code="B2BCheckoutPciOptionEnum" autocreate="true" dynamic="true">
+			<!-- <model package="de.hybris.platform.yb2bacceleratorcore.enums"/> -->
+			<value code="Default"/>
+			<value code="HOP"/>
+		</enumtype>
+	</enumtypes>
+	
+	<itemtypes>
+		<!-- Add your item definitions here -->
+
+		<itemtype code="MultipleCatalogsSyncCronJob" extends="CronJob" autocreate="true" generate="true"
+				jaloclass="de.hybris.platform.yb2bacceleratorcore.jalo.MultipleCatalogsSyncCronJob">
+			<attributes>
+				<attribute type="DependentCatalogs" qualifier="contentCatalogs">
+					<modifiers optional="false" initial="true"/>
+					<persistence type="property"/>
+					<description>
+						List of content catalogs used for CatalogVersionSyncJob
+					</description>
+				</attribute>
+				<attribute type="Catalog" qualifier="productCatalog">
+					<modifiers optional="false" initial="true"/>
+					<persistence type="property"/>
+					<description>
+						Products catalog used for CatalogVersionSyncJob
+					</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="PowertoolsSizeVariantProduct" extends="VariantProduct"
+          autocreate="true" generate="true"
+          jaloclass="de.hybris.platform.yb2bacceleratorcore.jalo.PowertoolsSizeVariantProduct">
+				 <description>Powertools size variant type that contains additional attribute describing variant size.
+				</description>
+				<attributes>
+					<attribute qualifier="size" type="localized:java.lang.String"
+					           metatype="VariantAttributeDescriptor">
+						<description>Size of the product.</description>
+						<modifiers/>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+		<typegroup name="btg">
+			<itemtype code="OrganizationOrderStatistics" autocreate="true" generate="true"
+					jaloclass="de.hybris.platform.yb2bacceleratorcore.jalo.btg.OrganizationOrderStatistics">
+				<description>Used to collect order total information within an organization</description>
+				<deployment table="OrganizationOrderStats" typecode="6214"/>
+				<attributes>
+					<attribute qualifier="unit" type="B2BUnit">
+						<description>The root unit of an organization</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="currency" type="Currency">
+						<description>The currency of orders</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="orderTotal" type="java.lang.Double">
+						<description>The total of all orders for an organization</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="date" type="java.util.Date">
+						<description>The date for which to gather order total information</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="category" type="java.lang.String">
+						<description>The category for which to gather order total information</description>
+						<persistence type="property"/>
+					</attribute>
+					<attribute qualifier="catalog" type="java.lang.String">
+						<description>The catalog code to which the category belongs to</description>
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+				<indexes>
+					<index name="orgStatsIdx" unique="false">
+						<key attribute="unit"/>
+						<key attribute="currency"/>
+						<key attribute="date"/>
+					</index>
+				</indexes>
+			</itemtype>
+
+
+			<itemtype code="OrganizationOrdersReportingCronJob" autocreate="true" generate="true" extends="CronJob"
+					  jaloclass="de.hybris.platform.yb2bacceleratorcore.jalo.btg.OrganizationOrdersReportingCronJob">
+			</itemtype>
+
+			<itemtype code="BTGOrganizationTotalSpentInCurrencyLastYearOperand" extends="BTGAbstractOrderOperand" autocreate="true" generate="true"
+					jaloclass="de.hybris.platform.yb2bacceleratorcore.jalo.btg.BTGOrganizationTotalSpentInCurrencyLastYearOperand">
+				<description>Gets total of all orders for an organization in the prior year for a given catalog category
+					if provided
+				</description>
+				<attributes>
+					<attribute type="Currency" qualifier="currency">
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="productCatalogId">
+						<persistence type="property"/>
+						<modifiers optional="true"/>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="categoryCode">
+						<persistence type="property"/>
+						<modifiers optional="true"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="BTGOrganizationTotalSpentInCurrencyRelativeDatesOperand" extends="BTGOrganizationTotalSpentInCurrencyLastYearOperand"
+					autocreate="true" generate="true" jaloclass="de.hybris.platform.yb2bacceleratorcore.jalo.btg.BTGOrganizationTotalSpentInCurrencyRelativeDatesOperand">
+				<description>Gets total of all orders for an organization in the past period specified for a given catalog
+					category if provided
+				</description>
+				<attributes>
+					<attribute type="java.lang.Integer" qualifier="value">
+						<persistence type="property"/>
+					</attribute>
+					<attribute type="IntervalResolution" qualifier="unit">
+						<persistence type="property"/>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+		</typegroup>
+
+	</itemtypes>
+
+</items>

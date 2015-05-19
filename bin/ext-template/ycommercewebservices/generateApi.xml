@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2014 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<project name="genApi" basedir="." default="genapi">
+	<property file="platformhome.properties"/>
+	<property name="enunciate.home" location="resources/enunciate"/>
+
+	<target name="genapi" description="Generate OCC Api Documentation">
+		<path id="enunciate.classpath">
+			<fileset dir="${enunciate.home}/lib">
+				<include name="*.jar"/>
+			</fileset>
+			<!--include (optional) spring module-->
+			<fileset dir="${java.home}">
+				<include name="lib/tools.jar"/>
+			</fileset>
+			<fileset dir="/y/artifacts/hybris-commerce-suite-5.0.4-0_build/bin">
+				<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="/y/artifacts/hybris-commerce-suite-5.0.4-0_build/manualBinaries">
+				<include name="**/*.jar"/>
+			</fileset>
+			<!--<fileset dir="${platformhome}">
+				<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="../">
+				<include name="**/*.jar"/>
+			</fileset>-->
+		</path>
+
+		<taskdef name="enunciate" classname="org.codehaus.enunciate.main.EnunciateTask">
+			<classpath refid="enunciate.classpath"/>
+		</taskdef>
+
+		<enunciate basedir="web/src" configFile="enunciate.xml" debug="true" verbose="true">
+			<include name="**/*.java"/>
+			<classpath refid="enunciate.classpath"/>
+			<export artifactId="docs" destination="web/webroot/WEB-INF/docs"/>
+			<javacargument argument="-g"/>
+		</enunciate>
+	</target>
+</project>

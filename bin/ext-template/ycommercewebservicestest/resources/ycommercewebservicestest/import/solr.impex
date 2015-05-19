@@ -1,0 +1,334 @@
+#
+# Import the Solr configuration for the wsTest store
+#
+$productCatalog=wsTestProductCatalog
+$catalogVersions=catalogVersions(catalog(id),version);
+$serverConfigName=wsTestSolrServerConfig
+$indexConfigName=wsTestSolrIndexConfig
+$searchConfigName=wsTestPageSize
+$facetSearchConfigName=wsTestIndex
+$facetSearchConfigDescription=wsTest Solr Index
+$searchIndexNamePrefix=wsTest
+$solrIndexedType=wsTestProductType
+$indexBaseSite=wsTest
+$indexLanguages=ja,en,de,zh
+$indexCurrencies=JPY,USD
+
+
+#
+# Setup the Solr server, indexer, and search configs
+#
+
+# Create the solr server configuration
+INSERT_UPDATE SolrServerConfig;name[unique=true];mode(code);embeddedMaster
+;$serverConfigName;embedded;true
+
+# Create the solr indexer configuration
+INSERT_UPDATE SolrIndexConfig;name[unique=true];batchSize;numberOfThreads;indexMode(code);
+;$indexConfigName;100;1;TWO_PHASE;
+
+# Create the faceted search configuration
+INSERT_UPDATE SolrSearchConfig;description[unique=true];pageSize
+;$searchConfigName;20
+
+# Define the available sorts
+INSERT_UPDATE SolrSort;&sortRefID;indexedType(identifier)[unique=true];code[unique=true]
+;sortRef1;$solrIndexedType;relevance
+;sortRef2;$solrIndexedType;topRated
+;sortRef3;$solrIndexedType;name-asc
+;sortRef4;$solrIndexedType;name-desc
+;sortRef5;$solrIndexedType;price-asc
+;sortRef6;$solrIndexedType;price-desc
+
+#
+# Setup the indexed types, their properties, and the update queries
+#
+
+# Declare the indexed type Product
+INSERT_UPDATE SolrIndexedType;identifier[unique=true];type(code);variant;sorts(&sortRefID)
+;$solrIndexedType;Product;false;sortRef1,sortRef2,sortRef3,sortRef4,sortRef5,sortRef6
+
+INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefix;languages(isocode);currencies(isocode);solrServerConfig(name);solrSearchConfig(description);solrIndexConfig(name);solrIndexedTypes(identifier);enabledLanguageFallbackMechanism;$catalogVersions
+;$facetSearchConfigName;$facetSearchConfigDescription;$searchIndexNamePrefix;$indexLanguages;$indexCurrencies;$serverConfigName;$searchConfigName;$indexConfigName;$solrIndexedType;true;$productCatalog:Online,$productCatalog:Staged
+
+UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
+;$indexBaseSite;$facetSearchConfigName
+
+# Define price ranges
+INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+;rangeRefUSD1;wsTestPriceRangeUSD;      $0-$49.99;   0;  49.99
+;rangeRefUSD2;wsTestPriceRangeUSD;    $50-$199.99;  50; 199.99
+;rangeRefUSD3;wsTestPriceRangeUSD;   $200-$499.99; 200; 499.99
+;rangeRefUSD4;wsTestPriceRangeUSD;   $500-$999.99; 500; 999.99
+;rangeRefUSD5;wsTestPriceRangeUSD;$1,000-$100,000;1000; 100000
+
+;rangeRefJPY1;wsTestPriceRangeJPY;           ¥0-¥4,999;     0;    4999
+;rangeRefJPY2;wsTestPriceRangeJPY;      ¥5,000-¥19,999;  5000;   19999
+;rangeRefJPY3;wsTestPriceRangeJPY;     ¥20,000-¥49,999; 20000;   49999
+;rangeRefJPY4;wsTestPriceRangeJPY;     ¥50,000-¥99,999; 50000;   99999
+;rangeRefJPY5;wsTestPriceRangeJPY;¥100,000-¥10,000,000;100000;10000000
+
+# Define price range set
+INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
+;wsTestPriceRangeUSD;USD;double;rangeRefUSD1,rangeRefUSD2,rangeRefUSD3,rangeRefUSD4,rangeRefUSD5
+;wsTestPriceRangeJPY;JPY;double;rangeRefJPY1,rangeRefJPY2,rangeRefJPY3,rangeRefJPY4,rangeRefJPY5
+
+
+# Non-facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter
+;$solrIndexedType; itemtype               ;string ;            ;    ;    ;    ;    ;    ;
+;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;true;true;springELValueProvider;code
+;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;true;true;springELValueProvider;getName(#lang)
+;$solrIndexedType; description            ;text   ;            ;    ;true;    ;    ;    ;;
+;$solrIndexedType; summary                ;text   ;            ;    ;true;    ;    ;    ;;
+;$solrIndexedType; manufacturerName       ;text   ;            ;    ;    ;    ;true;true;;
+;$solrIndexedType; manufacturerAID        ;string ;            ;    ;    ;    ;    ;    ;;
+;$solrIndexedType; ean                    ;string ;            ;    ;    ;    ;true;true;;
+;$solrIndexedType; priceValue             ;double ;            ;true;    ;    ;    ;    ;productPriceValueProvider;
+;$solrIndexedType; keywords               ;text   ;            ;    ;true;    ;true;true;productKeywordsValueProvider;
+;$solrIndexedType; reviewAvgRating        ;double ;            ;    ;true;    ;    ;    ;productReviewAverageRatingValueProvider;
+#;$solrIndexedType; img-515Wx515H          ;string ;            ;    ;    ;    ;    ;    ;image515ValueProvider;
+#;$solrIndexedType; img-300Wx300H          ;string ;            ;    ;    ;    ;    ;    ;image300ValueProvider;
+#;$solrIndexedType; img-96Wx96H            ;string ;            ;    ;    ;    ;    ;    ;image96ValueProvider;
+#;$solrIndexedType; img-65Wx65H            ;string ;            ;    ;    ;    ;    ;    ;image65ValueProvider;
+#;$solrIndexedType; img-30Wx30H            ;string ;            ;    ;    ;    ;    ;    ;image30ValueProvider;
+#;$solrIndexedType; url                    ;string ;            ;    ;true;    ;    ;    ;productUrlValueProvider;
+#;$solrIndexedType; primaryPromotionCode   ;string ;            ;    ;    ;    ;    ;    ;promotionCodeValueProvider;
+#;$solrIndexedType; primaryPromotionBanner ;string ;            ;    ;    ;    ;    ;    ;promotionImageValueProvider;
+;$solrIndexedType; stockLevelStatus       ;string ;            ;    ;    ;    ;    ;    ;productStockLevelStatusValueProvider;
+;$solrIndexedType; inStockFlag            ;boolean;            ;    ;    ;    ;    ;    ;productInStockFlagValueProvider;
+#;$solrIndexedType; pickupAvailableFlag    ;boolean;            ;    ;    ;    ;    ;    ;productPickupAvailabilityValueProvider
+
+# Category fields
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=false];multiValue[default=true];categoryField[default=true];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider
+;$solrIndexedType; categoryName     ;text   ;true;;;true;true;wsTestCategoryNameValueProvider
+;$solrIndexedType; brandName        ;text   ;true;;;    ;    ;wsTestCategoryNameValueProvider
+
+# Category facets
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
+;$solrIndexedType; allCategories 	;string;;;Refine		;Alpha;-9999;false;;categoryCodeValueProvider;
+;$solrIndexedType; categoryPath  	;string;;;Refine		;Alpha;-9999;false;false;categoryPathValueProvider;
+;$solrIndexedType; category      	;string;;;Refine		;Alpha; 6000;true;;wsTestCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+;$solrIndexedType; brand         	;string;;;Refine		;Alpha; 5000;true;;wsTestBrandCategoryCodeValueProvider;categoryFacetDisplayNameProvider;defaultTopValuesProvider
+
+# Other facet properties
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)
+;$solrIndexedType; price        	;double ;	 ;true ;     ;     ;     ;MultiSelectOr ;Alpha ; 4000;true;     ;     ;productPriceValueProvider 	;;;defaultTopValuesProvider;wsTestPriceRangeUSD,wsTestPriceRangeJPY
+#;$solrIndexedType; allPromotions	;string ;	 ;     ;     ;true ;     ;MultiSelectOr ;Alpha ; 0   ;false;     ;     ;promotionCodeValueProvider	;promotionFacetDisplayNameProvider;                         ;
+#;$solrIndexedType; availableInStores;string	;	 ;     ;     ;true ;     ;MultiSelectOr ;Alpha;10000;true;     ;     ;productStoreStockValueProvider;pointOfServiceFacetDisplayNameProvider;
+
+# Create the queries that will be used to extract data for Solr
+INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid)
+;$solrIndexedType;$searchIndexNamePrefix-fullQuery;full;;;false;"SELECT {PK} FROM {Product}";anonymous
+;$solrIndexedType;$searchIndexNamePrefix-updateQuery;update;;;;"
+SELECT DISTINCT tbl.pk, tbl.code FROM (
+	{{
+		SELECT DISTINCT {p:PK} AS pk, {p:code} AS code
+		FROM {Product AS p LEFT JOIN CustomerReview AS cr ON {cr:product}={p:PK} }
+		WHERE {p:varianttype} IS NULL AND ({p:modifiedtime} >= ?lastIndexTime OR {cr:modifiedtime} >= ?lastIndexTime)
+	}}
+	UNION
+	{{
+		SELECT {p:PK}  AS pk, {p:code} AS code FROM {Product AS p} WHERE {p:code} IN (
+			{{
+				SELECT DISTINCT {sl:productCode} FROM {StockLevel AS sl} WHERE {sl:modifiedtime} >= ?lastIndexTime
+			}}
+		)
+	}}
+) tbl ORDER BY tbl.code
+";anonymous
+
+
+# Define the sort fields
+INSERT_UPDATE SolrSortField;sort(indexedType(identifier),code)[unique=true];fieldName[unique=true];ascending[unique=true]
+;$solrIndexedType:relevance;inStockFlag;false
+;$solrIndexedType:relevance;score;false
+;$solrIndexedType:topRated;inStockFlag;false
+;$solrIndexedType:topRated;reviewAvgRating;false
+;$solrIndexedType:name-asc;name;true
+;$solrIndexedType:name-desc;name;false
+;$solrIndexedType:price-asc;priceValue;true
+;$solrIndexedType:price-desc;priceValue;false
+
+# Language
+$lang=en
+
+# Solr Indexed Property
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
+ #;$solrIndexedType;allPromotions;"Promotion"
+ #;$solrIndexedType;availableInStores;"Stores"
+ ;$solrIndexedType;brand;"Brand"
+ ;$solrIndexedType;category;"Category"
+ ;$solrIndexedType;code;"Code"
+ ;$solrIndexedType;description;"Description"
+ ;$solrIndexedType;manufacturerName;"Manufacturer Name"
+ ;$solrIndexedType;name;"Name"
+ ;$solrIndexedType;price;"Price"
+ ;$solrIndexedType;summary;"Summary"
+
+# Define the available sorts
+UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang]
+ ;$solrIndexedType;name-asc;"Name (ascending)"
+ ;$solrIndexedType;name-desc;"Name (descending)"
+ ;$solrIndexedType;price-asc;"Price (lowest first)"
+ ;$solrIndexedType;price-desc;"Price (highest first)"
+ ;$solrIndexedType;relevance;"Relevance"
+ ;$solrIndexedType;topRated;"Top Rated"
+
+
+##################################################################################################################################
+
+#
+# Add additional sample solr index configuration
+# - indexed properties for the classification features that we want to index
+#
+$classSystemVersion=systemVersion(catalog(id[default='wsTestClassification']),version[default='1.0'])
+$classCatalogVersion=catalogVersion(catalog(id[default='wsTestClassification']),version[default='1.0'])
+$classAttribute=classificationAttribute(code,$classSystemVersion)
+$classClass=classificationClass(code,$classCatalogVersion)
+$classAttributeAssignment=classAttributeAssignment($classClass,$classAttribute,$classSystemVersion)
+$contentCatalogName=wsTestContentCatalog
+$contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
+$productCatalog=wsTestProductCatalog
+$productCatalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Define Megapixel ranges
+INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+;rangeRefMegaPixel4;MegaPixelRange;       < 5 mp;  0;4.9999
+;rangeRefMegaPixel5;MegaPixelRange;   5 - 5.9 mp;  5;5.9999
+;rangeRefMegaPixel6;MegaPixelRange;   6 - 6.9 mp;  6;6.9999
+;rangeRefMegaPixel7;MegaPixelRange;   7 - 7.9 mp;  7;7.9999
+;rangeRefMegaPixel8;MegaPixelRange;   8 - 8.9 mp;  8;8.9999
+;rangeRefMegaPixel9;MegaPixelRange;   9 - 9.9 mp;  9;9.9999
+;rangeRefMegaPixel10;MegaPixelRange;10 - 10.9 mp;  10;10.9999
+;rangeRefMegaPixel11;MegaPixelRange;11 - 11.9 mp;  11;11.9999
+;rangeRefMegaPixel12;MegaPixelRange;12 - 12.9 mp;  12;12.9999
+;rangeRefMegaPixel13;MegaPixelRange;13 - 13.9 mp;  13;13.9999
+;rangeRefMegaPixel14;MegaPixelRange;14 - 14.9 mp;  14;14.9999
+;rangeRefMegaPixel15;MegaPixelRange;15 - 15.9 mp;  15;15.9999
+;rangeRefMegaPixel16;MegaPixelRange;16 - 16.9 mp;  16;16.9999
+;rangeRefMegaPixel17;MegaPixelRange;17 - 17.9 mp;  17;17.9999
+;rangeRefMegaPixel18;MegaPixelRange;18 - 18.9 mp;  18;18.9999
+;rangeRefMegaPixel19;MegaPixelRange;19 - 19.9 mp;  19;19.9999
+;rangeRefMegaPixel20;MegaPixelRange;20 - 29.9 mp;  20;29.9999
+;rangeRefMegaPixel30;MegaPixelRange;30 - 39.9 mp;  30;39.9999
+;rangeRefMegaPixel40;MegaPixelRange;40 - 49.9 mp;  40;49.9999
+;rangeRefMegaPixel50;MegaPixelRange;      50+ mp;  50;9999999
+
+# Define price range set
+INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
+;MegaPixelRange;;double;rangeRefMegaPixel4,rangeRefMegaPixel5,rangeRefMegaPixel6,rangeRefMegaPixel7,rangeRefMegaPixel8,rangeRefMegaPixel9,rangeRefMegaPixel10,rangeRefMegaPixel11,rangeRefMegaPixel12,rangeRefMegaPixel13,rangeRefMegaPixel14,rangeRefMegaPixel15,rangeRefMegaPixel16,rangeRefMegaPixel17,rangeRefMegaPixel18,rangeRefMegaPixel19,rangeRefMegaPixel20,rangeRefMegaPixel30,rangeRefMegaPixel40,rangeRefMegaPixel50
+
+
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=false];facetType(code);facetSort(code);priority;visible;fieldValueProvider;customFacetSortProvider;rangeSets(name);$classAttributeAssignment
+;wsTestProductType;Megapixel, 63          ;double;; ;    ; ;true;MultiSelectOr;Custom;1000;true;commerceClassificationPropertyValueProvider;numericFacetSortProviderDesc;MegaPixelRange;57:::Megapixel, 63::::
+;wsTestProductType;Mounting, 1867         ;string;; ;true; ;true;Refine;Alpha;1000;true;commerceClassificationPropertyValueProvider;;;634:::Mounting, 1867::::
+;wsTestProductType;Colour of product, 1766;string;; ;true; ;true;MultiSelectOr;Alpha;1000;true;commerceClassificationPropertyValueProvider;;;3856:::Colour of product, 1766::::
+;wsTestProductType;Lens type, 472   ;string;; ;true;true;true;MultiSelectOr;Alpha;1000;true;classificationPropertySplitValueProvider;;;1094:::Lens type, 472::::
+;wsTestProductType;Resolution, 80         ;string;; ;    ; ;true;Refine;Alpha;1000;true;commerceClassificationPropertyValueProvider;;;631:::Resolution, 80::::
+
+# Import classification features
+INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);localized[default=true];multiValue[default=false];fieldValueProvider;$classAttributeAssignment
+;wsTestProductType;feature-size    ;text;true;false;commerceClassificationPropertyValueProvider;622:::Size, 1147::::
+;wsTestProductType;feature-videoCap;text;true;false;commerceClassificationPropertyValueProvider;622:::Video memory capacity, 5167::::
+;wsTestProductType;feature-aperture;text;true;false;commerceClassificationPropertyValueProvider;622:::Aperture setting, 5775::::
+;wsTestProductType;feature-picMode ;text;true;true;commerceClassificationPropertyValueProvider;622:::Picture mode, 2030::::
+;wsTestProductType;feature-memCards;text;true;false;commerceClassificationPropertyValueProvider;42:::Compatible memory cards, 730::::
+;wsTestProductType;feature-display ;text;true;false;commerceClassificationPropertyValueProvider;41:::Display, 83::::
+
+# Show the classification features in the product lister
+INSERT_UPDATE ClassAttributeAssignment;$classClass[unique=true];$classAttribute[unique=true];$classSystemVersion[unique=true];listable
+;622;Size, 1147;;true
+;622;Video memory capacity, 5167;;true
+;622;Aperture setting, 5775;;true
+;622;Picture mode, 2030;;true
+;42;Compatible memory cards, 730;;true
+;41;Display, 83;;true
+
+# Redirect page URL
+INSERT_UPDATE SolrURIRedirect;url[unique=true]
+;"/cart"
+;"http://www.hybris.com/multichannel-accelerator"
+
+#INSERT_UPDATE SolrPageRedirect;redirectItem(uid,$contentCatalogVersion)[unique=true]
+#;faq
+
+INSERT_UPDATE SolrCategoryRedirect;redirectItem(code,$productCatalogVersion)[unique=true]
+;brand_5
+;brand_10
+;902
+
+INSERT_UPDATE SolrProductRedirect;redirectItem(code,$productCatalogVersion)[unique=true]
+;1382080
+;2053266
+;816780
+
+# ImpEx for Solr for wsTest Store
+$indexedType=wsTestProductType
+$solrIndexedType=solrIndexedType(identifier[default=$indexedType])[unique=true]
+$facetSearchConfigName=wsTestIndex
+$contentCatalogName=wsTestContentCatalog
+$contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalogName]),CatalogVersion.version[default=Staged])[default=$contentCatalogName:Staged]
+$productCatalog=wsTestProductCatalog
+$productCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=Staged])[default=$productCatalog:Staged]
+
+# Language
+$lang=en
+
+UPDATE SolrIndexedProperty;name[unique=true];$solrIndexedType;displayName[lang=$lang]
+ ;Colour of product, 1766;;"Color";
+ ;Lens type, 472   ;;"Lens type";
+ ;Megapixel, 63          ;;"Megapixels";
+ ;Mounting, 1867         ;;"Mounting";
+ ;Resolution, 80         ;;"Resolution";
+
+# Redirect page URL (Must use INSERT_UPDATE here)
+UPDATE SolrURIRedirect;url[unique=true];&redirectRefID
+;"/cart";$contentCatalogName-redirectRefID-cart
+;"/cart";$contentCatalogName-redirectRefID-basket
+;"http://www.hybris.com/multichannel-accelerator";$contentCatalogName-redirectRefID-accelerator
+;"http://www.hybris.com/multichannel-accelerator";$contentCatalogName-redirectRefID-hymacc
+
+#UPDATE SolrPageRedirect;redirectItem(uid,$contentCatalogVersion)[unique=true];&redirectRefID
+#;faq;$contentCatalogName-redirectRefID-help
+#;faq;$contentCatalogName-redirectRefID-shipping
+
+UPDATE SolrProductRedirect;redirectItem(code,$productCatalogVersion)[unique=true];&redirectRefID
+;1382080;$contentCatalogName-redirectRefID-1382080
+;2053266;$contentCatalogName-redirectRefID-2053266
+;816780;$contentCatalogName-redirectRefID-816780
+
+# Category Redirect (Must use INSERT_UPDATE here)
+INSERT_UPDATE SolrCategoryRedirect;redirectItem(code,$productCatalogVersion)[unique=true];&redirectRefID
+;brand_5;$productCatalog-redirectRefID-sony
+;brand_10;$productCatalog-redirectRefID-canon
+;902;$productCatalog-redirectRefID-memory
+
+# Synonyms (Must use INSERT_UPDATE here)
+INSERT_UPDATE SolrSynonymConfig;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];synonymFrom[unique=true];synonymTo
+ ;;;"af";"autofocus"
+ ;;;"video camera";"camcorder"
+ ;;;"small,mini";"compact"
+ ;;;"deals";"special offers"
+ 
+# Keyword Redirects (Must use INSERT_UPDATE here)
+#INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];keyword[unique=true];matchType(code)[unique=true];redirect(&redirectRefID);ignoreCase[default=true]
+# ;;;"accelerator";EXACT;$contentCatalogName-redirectRefID-accelerator;
+# ;;;"basket";EXACT;$contentCatalogName-redirectRefID-basket;
+# ;;;"cart";EXACT;$contentCatalogName-redirectRefID-cart;
+# ;;;"help";EXACT;$contentCatalogName-redirectRefID-help;
+# ;;;"hymacc";EXACT;$contentCatalogName-redirectRefID-hymacc;
+
+# Keyword Redirects (Must use INSERT_UPDATE here)
+#INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];keyword[unique=true];matchType(code)[unique=true];redirect(&redirectRefID);ignoreCase[default=true]
+
+#INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];keyword[unique=true];matchType(code)[unique=true];redirect(&redirectRefID);ignoreCase[default=true]
+# ;;;"450d";CONTAINS;$contentCatalogName-redirectRefID-1382080;
+# ;;;"500d";CONTAINS;$contentCatalogName-redirectRefID-2053266;
+# ;;;"a100";CONTAINS;$contentCatalogName-redirectRefID-816780;
+ 
+
+# Starts With Keyword Redirects (Must use INSERT_UPDATE here)
+#INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true,default=$facetSearchConfigName];language(isocode)[unique=true,default=$lang];keyword[unique=true];matchType(code)[unique=true];redirect(&redirectRefID);ignoreCase[default=true]
+# ;;;"shipping";STARTS_WITH;$contentCatalogName-redirectRefID-shipping;
+

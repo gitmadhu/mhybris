@@ -1,0 +1,27 @@
+# ImpEx for Importing Prices
+#% impex.setLocale( Locale.GERMAN ); 
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+$prices=Europe1prices[translator=de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+$europe1PriceFactory_PTG=Europe1PriceFactory_PTG(code)[default=us-sales-tax-full]
+
+# Set product approval status to Approved only for those products that have prices.
+$approved=approvalstatus(code)[default='approved']
+$billingEvent=billingEvent(code)[default='onfirstbill']
+
+UPDATE Device;code[unique=true];$prices;$approved;$catalogVersion;$europe1PriceFactory_PTG
+
+UPDATE Accessory;code[unique=true];$prices;$approved;$catalogVersion;$europe1PriceFactory_PTG
+
+UPDATE ServiceAddOn;code[unique=true];$approved;$catalogVersion;$europe1PriceFactory_PTG
+
+INSERT_UPDATE SubscriptionPricePlan;&pricePlan;product(code, $catalogVersion)[unique=true];$catalogVersion;currency(isocode)[default=USD,unique=true];unit(code)[default=pieces]
+
+INSERT_UPDATE SubscriptionProduct;code[unique=true];$catalogVersion;$approved;$europe1PriceFactory_PTG
+
+INSERT_UPDATE RecurringChargeEntry;id[unique=true];subscriptionPricePlanRecurring(&pricePlan);price;cycleStart;cycleEnd;$catalogVersion
+
+INSERT_UPDATE OneTimeChargeEntry;id[unique=true];subscriptionPricePlanOneTime(&pricePlan);price;$catalogVersion;$billingEvent

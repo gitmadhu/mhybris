@@ -1,0 +1,64 @@
+@charset "utf-8";
+/* CSS Document */
+#header button.button {
+	width: auto;
+	padding: 3px 15px 0px 15px;
+	position: static;
+}
+/*
+
+	Cart Modal
+*****************/
+.cart_popup .cart_modal_popup .prod_info {
+	width: auto;
+}
+
+/*
+	Header
+*****************/
+#cart_header {
+	background: url(../images/bg-gradient-header-cart-ie7.png) repeat-x center top transparent;
+}
+
+#cart_content {
+	min-width: 1px;
+	padding-right: 11px;
+}
+
+#header ul.language {
+	margin: 10px -10px 10px 0;
+}
+
+#header .search {
+	height: 28px;
+}
+
+#header .headerContent {
+	max-width: 750px;
+}
+
+/*
+	Home Page Media Banners
+*****************/
+.cms_banner_slot .banner .media a {
+	display: block; /* Resolves IE7 Empty Text Node issue */
+}
+
+.scroller {
+	height: 1%;
+}
+/*
+	Product Page Tabs
+*****************/
+#prod_tabs.ui-tabs .ui-tabs-nav li h2 a {
+	padding-left: 20px;
+}
+
+#cart_popup {
+	display: none;
+}
+
+button.search .search-icon {
+	background: transparent url(../images/button/search-small.png) no-repeat left 0px;
+	display: block;
+}

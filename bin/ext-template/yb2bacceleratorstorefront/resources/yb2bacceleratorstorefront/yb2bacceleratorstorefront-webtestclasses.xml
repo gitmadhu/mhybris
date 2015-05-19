@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testclasses>
+  <yb2bacceleratorstorefront>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.controllers.cms.CategoryFeatureComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.controllers.cms.ProductCarouselComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.filters.TagResourcesAddOnFilterTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.controllers.cms.ProductFeatureComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.controllers.cms.MiniCartComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.controllers.cms.NavigationBarComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.filters.AbstractAddOnFilterTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.controllers.cms.DefaultCMSComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.controllers.pages.SearchPageControllerUnitTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.filters.CommonResourcesAddOnFilterTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.filters.AcceleratorAddOnFilterTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.security.cookie.EnhancedCookieGeneratorTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.interceptors.i18n.SetLanguageBeforeControllerHandlerTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.controllers.cms.ProductReferencesComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.controllers.cms.PurchasedCategorySuggestionComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.yb2bacceleratorstorefront.util.MetaSanitizerUtilTest</testclass>
+  </yb2bacceleratorstorefront>
+</testclasses>

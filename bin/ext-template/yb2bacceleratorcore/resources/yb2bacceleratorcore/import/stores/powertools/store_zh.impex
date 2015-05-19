@@ -1,0 +1,12 @@
+# 
+# Import the Powertools BaseStore
+#
+# Localization zh
+#
+
+$lang=zh
+
+$storeUid=powertools
+
+UPDATE BaseStore;uid[unique=true];name[lang=$lang]
+;$storeUid;"电动工具店铺";

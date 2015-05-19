@@ -1,0 +1,8 @@
+/*
+
+	Scroller 
+*****************/
+.scroller,
+.item_container {
+	overflow: visible; /* added to resolve payment details page diver cols*/
+}

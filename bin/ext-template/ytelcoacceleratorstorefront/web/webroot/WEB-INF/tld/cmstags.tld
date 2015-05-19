@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.0" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd">
+	<tlib-version>1.0</tlib-version>
+	<short-name>cms</short-name>
+	<uri>/cms2lib/cmstags/cmstags.tld</uri>
+
+	<tag>
+		<name>slot</name>
+		<tag-class>de.hybris.platform.cms2lib.cmstags.CMSContentSlotTag</tag-class>
+		<body-content>JSP</body-content>
+		<info>Iterates over a CMS content slot</info>
+		<attribute>
+			<name>contentSlot</name>
+			<required>false</required>
+			<description>the content slot</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>uid</name>
+			<required>false</required>
+			<description>the uid of content slot</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>position</name>
+			<required>false</required>
+			<description>the position of content slot</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<description>request or page context</description>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<description>the var name to access the content element</description>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>component</name>
+		<tag-class>de.hybris.platform.acceleratorcms.tags.AcceleratorCMSComponentTag</tag-class>
+		<body-content>JSP</body-content>
+		<info>Renders a component by calling it's controller</info>
+		<attribute>
+			<name>uid</name>
+			<required>false</required>
+			<description>the uid of the component</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>component</name>
+			<required>false</required>
+			<description>the component</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>evaluateRestriction</name>
+			<required>false</required>
+			<description>Set to true in order to evaluate restrictions on this component, default value false. Note that restrictions are typically evaluated by the slot tag.</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<name>body</name>
+		<tag-class>de.hybris.platform.acceleratorcms.tags.AcceleratorCMSBodyTag</tag-class>
+		<body-content>JSP</body-content>
+		<info>Body tag. Needed for live edit mode</info>
+		<attribute>
+			<name>cssClass</name>
+			<required>false</required>
+			<description>the css class to apply to the tag</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>style</name>
+			<required>false</required>
+			<description>the style to apply to the tag</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>liveEditCssPath</name>
+			<required>true</required>
+			<description>the path to the live edit CSS to include</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>liveEditJsPath</name>
+			<required>true</required>
+			<description>the path to the live edit JS to include</description>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

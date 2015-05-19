@@ -1,0 +1,9 @@
+# Import Themes
+#
+# Localization zh
+#
+
+$lang=zh
+
+UPDATE SiteTheme;code[unique=true];name[lang=$lang]
+;green;绿色;

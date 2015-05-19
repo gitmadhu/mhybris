@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Spring Integration -->
+    <import resource="classpath:/yb2bacceleratorcore/integration/hot-folder-store-powertools-spring.xml"/>
+
+    <!-- SystemSetup for the yb2bacceleratorcore -->
+    <bean id="b2bAcceleratorCoreSystemSetup" class="de.hybris.platform.yb2bacceleratorcore.setup.CoreSystemSetup"  parent="abstractCoreSystemSetup">
+        <property name="setupSyncJobService" ref="b2bSetupSyncJobService"/>
+    </bean>
+
+    <!-- Solr field value providers -->
+
+    <bean id="volumeAwareProductPriceValueProvider" class="de.hybris.platform.yb2bacceleratorcore.solr.provider.VolumeAwareProductPriceValueProvider"  parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+        <property name="priceService" ref="priceService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="sessionService" ref="sessionService"/>
+        <property name="userService" ref="userService"/>
+        <property name="priceComparator" ref="volumePriceComparator"/>
+        <property name="catalogVersionService" ref="catalogVersionService"/>
+    </bean>
+
+    <bean id="volumePriceComparator" class="de.hybris.platform.yb2bacceleratorcore.VolumeAwarePriceInformationComparator" scope="singleton"/>
+
+    <bean id="productVolumePricesProvider" class="de.hybris.platform.yb2bacceleratorcore.solr.provider.ProductVolumePricesProvider"  parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+        <property name="priceService" ref="priceService"/>
+    </bean>
+
+    <bean id="powertoolsCategorySource" parent="variantCategorySource">
+        <property name="rootCategory" value="1"/> <!-- '1' is the root icecat category -->
+    </bean>
+    <bean id="powertoolsVariantCategorySource" parent="variantCategorySource"/>
+
+    <bean id="powertoolsBrandCategorySource" parent="defaultCategorySource">
+        <property name="rootCategory" value="brands"/> <!-- 'brands' is the root of the brands hierarchy -->
+    </bean>
+
+    <bean id="abstractCategoryCodeValueProvider" abstract="true" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryCodeValueProvider" parent="abstractPropertyFieldValueProvider" >
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+    <bean id="abstractCategoryNameValueProvider" abstract="true" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryNameValueProvider" parent="abstractPropertyFieldValueProvider" >
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+
+    <bean id="powertoolsCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="powertoolsCategorySource"/>
+    </bean>
+    <bean id="powertoolsBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="powertoolsBrandCategorySource"/>
+    </bean>
+    <bean id="powertoolsVariantCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+        <property name="categorySource" ref="powertoolsVariantCategorySource"/>
+    </bean>
+
+
+    <bean id="powertoolsCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+        <property name="categorySource" ref="powertoolsCategorySource"/>
+    </bean>
+    <bean id="powertoolsBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+        <property name="categorySource" ref="powertoolsBrandCategorySource"/>
+    </bean>
+
+    <bean id="image515ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="515Wx515H"/>
+    </bean>
+    <bean id="image300ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="300Wx300H"/>
+    </bean>
+    <bean id="image96ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="96Wx96H"/>
+    </bean>
+    <bean id="image65ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="65Wx65H"/>
+    </bean>
+    <bean id="image30ValueProvider" parent="abstractImageValueProvider">
+        <property name="mediaFormat" value="30Wx30H"/>
+    </bean>
+
+    <bean id="productUrlValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.ProductUrlValueProvider" parent="abstractPropertyFieldValueProvider" >
+        <property name="urlResolver" ref="productModelUrlResolver"/>
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+        <property name="i18nService" ref="i18nService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+    </bean>
+
+    <bean id="promotionCodeValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PromotionCodeValueProvider" parent="abstractPropertyFieldValueProvider" >
+        <property name="promotionsService" ref="promotionsService"/>
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+    </bean>
+
+    <bean id="promotionImageValueProvider" class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.PrimaryPromotionImageValueProvider" parent="abstractPropertyFieldValueProvider" >
+        <property name="promotionsService" ref="promotionsService"/>
+        <property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+    </bean>
+
+    <!--
+        Event listeners are singletons, therefore the dependency for a bean in tenant-scope
+        must be configured with a lookup method.
+    -->
+    <bean id="b2b-customerRegistrationEventListener" class="de.hybris.platform.yb2bacceleratorcore.event.RegistrationEventListener" parent="abstractSiteEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+
+    </bean>
+    <bean id="b2b-forgottenPasswordEventListener" class="de.hybris.platform.yb2bacceleratorcore.event.ForgottenPasswordEventListener" parent="abstractSiteEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+
+    </bean>
+    <bean id="b2b-submitOrderEventListener" class="de.hybris.platform.yb2bacceleratorcore.event.SubmitOrderEventListener" parent="abstractSiteEventListener">
+        <property name="businessProcessService" ref="businessProcessService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="baseStoreService" ref="baseStoreService"/>
+    </bean>
+    <bean id="b2b-orderConfirmationEventListener" class="de.hybris.platform.yb2bacceleratorcore.event.OrderConfirmationEventListener" parent="abstractSiteEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+
+    <!-- Process resourcess definition -->
+
+    <bean id="b2bCustomerRegistrationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/yb2bacceleratorcore/processes/customerRegistrationEmailProcess.xml"/>
+    </bean>
+    <bean id="b2bForgottenPasswordEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/yb2bacceleratorcore/processes/forgottenPasswordEmailProcess.xml"/>
+    </bean>
+    <bean id="b2bOrderConfirmationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/yb2bacceleratorcore/processes/orderConfirmationEmailProcess.xml"/>
+    </bean>
+    <bean id="replenishmentOrderConfirmationEmailProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/yb2bacceleratorcore/processes/replenishmentOrderConfirmationEmailProcess.xml"/>
+    </bean>
+    <bean id="replenishmentOrderProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/yb2bacceleratorcore/processes/replenishmentOrderProcess.xml"/>
+    </bean>
+
+    <bean id="replenishmentOrderPlacedProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/yb2bacceleratorcore/processes/replenishmentOrderPlacedEmailProcess.xml"/>
+    </bean>
+
+    <bean id="quoteOrderApproveProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/yb2bacceleratorcore/processes/quoteOrderApproveEmailProcess.xml"/>
+    </bean>
+
+    <bean id="quoteOrderRejectProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/yb2bacceleratorcore/processes/quoteOrderRejectEmailProcess.xml"/>
+    </bean>
+
+    <!-- Actions -->
+    <bean id="abstractAction" class="de.hybris.platform.processengine.action.AbstractAction"  abstract="true">
+        <property name="modelService" ref="modelService"/>
+        <property name="processParameterHelper" ref="processParameterHelper"/>
+    </bean>
+
+    <bean id="sendEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction"  parent="abstractAction">
+        <property name="emailService" ref="emailService"/>
+    </bean>
+
+    <bean id="generateB2BCustomerRegistrationEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <!-- rma: fixed circular reference issue with BTG 4/29/2011 -->
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+    <bean id="generateB2BForgottenPasswordEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="ForgottenPasswordEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+    <bean id="generateB2BOrderConfirmationEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+    <bean id="generateB2BReplenishmentOrderConfirmationEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="ReplenishmentOrderConfirmationEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+    <bean id="generateB2BReplenishmentOrderPlacedEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="ReplenishmentOrderPlacedEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+    <bean id="generateB2BQuoteOrderApproveEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="QuoteOrderApproveEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+    <bean id="generateB2BQuoteOrderRejectEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="QuoteOrderRejectEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+    <bean id="removeSentEmail" class="de.hybris.platform.acceleratorservices.process.email.actions.RemoveSentEmailAction"  parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+    </bean>
+
+    <!-- Simple Suggestion Service -->
+    <alias alias="b2bSimpleSuggestionService" name="b2bDefaultSimpleSuggestionService"/>
+    <bean id="b2bDefaultSimpleSuggestionService"	class="de.hybris.platform.yb2bacceleratorcore.suggestion.impl.DefaultSimpleSuggestionService" >
+        <property name="simpleSuggestionDao" ref="b2bSimpleSuggestionDao"/>
+    </bean>
+    <alias alias="b2bSimpleSuggestionDao" name="b2bDefaultSimpleSuggestionDao"/>
+    <bean id="b2bDefaultSimpleSuggestionDao"	class="de.hybris.platform.yb2bacceleratorcore.suggestion.dao.impl.DefaultSimpleSuggestionDao" parent="abstractItemDao" >
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+
+    <bean id="b2bMccSiteUrlHelper" class="de.hybris.platform.yb2bacceleratorcore.util.MccSiteUrlHelper" >
+        <property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService"/>
+        <property name="cmsSiteService" ref="cmsSiteService"/>
+    </bean>
+
+    <!-- SALES QUOTE ACC PROCESS -->
+    <bean id="salesQuoteProcess"
+          class="de.hybris.platform.processengine.definition.ProcessDefinitionResource"
+            >
+        <property name="resource" value="classpath:/yb2bacceleratorcore/processes/b2bACCSalesquote.xml" />
+    </bean>
+
+    <alias alias="b2bQuoteBusinessProcessStrategy" name="acceleratorQuoteBusinessProcessStrategy"/>
+    <bean id="acceleratorQuoteBusinessProcessStrategy"
+          class="de.hybris.platform.b2b.strategies.impl.DefaultB2BQuoteBusinessProcessStrategy"
+          parent="defaultB2BQuoteBusinessProcessStrategy" >
+        <property name="processCode" value="accSalesQuote" />
+        <property name="processName" value="PENDING_QUOTE" />
+    </bean>
+
+    <!-- Process resourcess definition -->
+    <!-- APPROVAL PROCESS -->
+    <bean id="b2bAccApprovalProcessDefinitionResource"
+          class="de.hybris.platform.processengine.definition.ProcessDefinitionResource"
+            >
+        <property name="resource" value="classpath:/yb2bacceleratorcore/processes/b2bAccOrderApproval.xml"/>
+    </bean>
+
+    <bean id="orderPendingApprovalEmailProcessDefinitionResource"
+          class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource"
+                  value="classpath:/yb2bacceleratorcore/processes/orderPendingApprovalEmailProcess.xml"/>
+    </bean>
+
+    <bean id="orderApprovalRejectionEmailProcessDefinitionResource"
+          class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+        <property name="resource" value="classpath:/yb2bacceleratorcore/processes/orderApprovalRejectionEmailProcess.xml"/>
+    </bean>
+
+    <bean id="startWorkflowForAdmin"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.StartWorkFlowForAdmin"
+          parent="abstractProceduralB2BOrderApproveAction">
+        <property name="b2bWorkflowIntegrationService" ref="b2bWorkflowIntegrationService"/>
+        <property name="permissionResultHelper" ref="permissionResultHelper"/>
+        <property name="workflowProcessingService" ref="workflowProcessingService"/>
+        <property name="workflowService" ref="newestWorkflowService"/>
+        <property name="b2bUnitService" ref="b2bUnitService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean id="checkCreditCardOrderAction"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.CheckCreditCardOrderAction"
+          parent="abstractSimpleB2BApproveOrderDecisionAction">
+    </bean>
+
+    <bean id="b2bSetupSyncJobService" class="de.hybris.platform.yb2bacceleratorcore.setup.impl.B2BDefaultSetupSyncJobService" parent="defaultSetupSyncJobService" >
+        <property name="cronJobService" ref="cronJobService"/>
+        <property name="flexibleSearchService" ref="flexibleSearchService"/>
+    </bean>
+
+    <bean id="powertoolsCatalogSyncJobPerformable" class="de.hybris.platform.yb2bacceleratorcore.setup.MultipleCatalogsSyncJobPerformable" parent="abstractJobPerformable"  >
+        <property name="setupSyncJobService" ref="setupSyncJobService"/>
+    </bean>
+
+    <bean id="organizationOrdersReportingJob"
+          class="de.hybris.platform.yb2bacceleratorcore.btg.OrganizationOrdersReportingJob"
+
+          parent="abstractJobPerformable">
+        <property name="b2BUnitService" ref="b2bUnitService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="catalogVersionService" ref="catalogVersionService"/>
+        <property name="currencies">
+            <list>
+                <value>USD</value>
+                <value>EUR</value>
+                <value>CAD</value>
+            </list>
+        </property>
+        <property name="catalog" value="powertoolsProductCatalog"/>
+    </bean>
+
+    <bean id="organizationCategoryPurchasedReportingJob"
+          class="de.hybris.platform.yb2bacceleratorcore.btg.OrganizationOrdersReportingJob"
+
+          parent="abstractJobPerformable">
+        <property name="b2BUnitService" ref="b2bUnitService"/>
+        <property name="commonI18NService" ref="commonI18NService"/>
+        <property name="catalogVersionService" ref="catalogVersionService"/>
+        <property name="currencies">
+            <list>
+                <value>USD</value>
+                <value>EUR</value>
+                <value>CAD</value>
+            </list>
+        </property>
+        <property name="categories">
+            <list>
+                <value>1360</value>
+            </list>
+        </property>
+        <property name="catalog" value="powertoolsProductCatalog"/>
+
+    </bean>
+
+    <bean id="abstractTotalSpentByOrgOperandProvider" abstract="true"
+          class="de.hybris.platform.yb2bacceleratorcore.btg.condition.operand.valueproviders.AbstractTotalSpentByOrgOperandProvider"
+          parent="abstractOrderOperandValueProvider" />
+
+    <bean id="organizationTotalSpentInCurrencyLastYearOperandValueProvider"
+          class="de.hybris.platform.yb2bacceleratorcore.btg.condition.operand.valueproviders.OrganizationTotalSpentInCurrencyLastYearOperandValueProvider"
+          parent="abstractTotalSpentByOrgOperandProvider">
+        <property name="b2bUnitService" ref="b2bUnitService" />
+    </bean>
+
+    <bean
+            id="organizationTotalSpentInCurrencyRelativeDateOperandValueProvider"
+            class="de.hybris.platform.yb2bacceleratorcore.btg.condition.operand.valueproviders.OrganizationTotalSpentInCurrencyRelativeDateOperandValueProvider"
+            parent="abstractTotalSpentByOrgOperandProvider">
+        <property name="b2bUnitService" ref="b2bUnitService" />
+    </bean>
+
+    <bean id="b2b-orderCPendingApprovalEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.OrderPendingApprovalEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+
+    </bean>
+
+    <bean id="b2b-replenishmentOrderConfirmationEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.ReplenishmentOrderConfirmationEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+
+    <bean id="b2b-replenishmentOrderPlacedEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.ReplenishmentOrderPlacedEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+
+    <bean id="b2b-orderApprovalRejectionEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.OrderApprovalRejectionEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+
+    <bean id="abstractQuoteEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.QuoteEventListener"
+          abstract="true" parent="abstractOrderEventListener">
+        <property name="modelService" ref="modelService" />
+        <property name="orderHistoryService" ref="orderHistoryService" />
+    </bean>
+
+    <bean id="b2b-quoteApprovedEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.QuoteApprovedEventListener"
+          parent="abstractQuoteEventListener">
+        <property name="i18NService" ref="i18NService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+
+    <bean id="b2b-quoteRejectedEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.QuoteRejectedEventListener"
+          parent="abstractQuoteEventListener">
+        <property name="i18NService" ref="i18NService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+
+    <bean id="abstractMerchantEventListener" class="de.hybris.platform.yb2bacceleratorcore.event.AbstractMerchantEventListener" abstract="true" parent="abstractOrderEventListener"/>
+
+    <bean id="b2b-merchantApprovedEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.MerchantApprovedEventListener"
+          parent="abstractMerchantEventListener">
+        <property name="createSnapshot" value="true"/>
+    </bean>
+
+    <bean id="b2b-merchantRejectedEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.MerchantRejectedEventListener"
+          parent="abstractMerchantEventListener">
+        <property name="createSnapshot" value="true"/>
+    </bean>
+
+    <bean id="b2b-orderApprovedEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.OrderApprovedEventListener"
+          parent="abstractOrderEventListener">
+        <property name="createSnapshot" value="true"/>
+
+    </bean>
+
+    <bean id="b2b-orderRejectedEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.OrderRejectedEventListener"
+          parent="abstractOrderEventListener">
+        <property name="createSnapshot" value="true"/>
+    </bean>
+
+    <bean id="abstractOrderEventListener"
+          class="de.hybris.platform.yb2bacceleratorcore.event.AbstractOrderEventListener"
+          abstract="true" parent="abstractEventListener">
+        <property name="modelService" ref="modelService"/>
+        <property name="orderHistoryService" ref="orderHistoryService"/>
+        <property name="i18NService" ref="i18NService"/>
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+
+    <bean id="informOfOrderApproval"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.B2BAcceleratorInformOfOrderApproval"
+            >
+        <property name="fromAddress" value="b2b@hybris.com"/>
+        <property name="b2bEmailService" ref="b2bEmailService"/>
+    </bean>
+
+    <bean id="setBookingLineEntries"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.AcceleratorBookingLineEntries"
+          parent="abstractSimpleB2BApproveOrderDecisionAction" />
+
+    <bean id="generateB2BOrderPendingApprovalEmail"
+          class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+          parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="OrderPendingApprovalEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+    <bean id="sendOrderPendingApprovalNotification"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.SendOrderPendingApprovalNotification"
+          parent="abstractAction">
+        <property name="eventService" ref="eventService"/>
+    </bean>
+
+    <!-- actions -->
+    <bean name="cloneCartAction"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.replenishment.CloneCartAction"
+          parent="abstractAction" >
+        <property name="typeService" ref="typeService"/>
+        <property name="cartService" ref="cartService"/>
+        <property name="userService" ref="userService"/>
+        <property name="guidKeyGenerator" ref="guidKeyGenerator"/>
+    </bean>
+
+    <bean name="calculateCartAction"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.replenishment.CalculateCartAction"
+          parent="abstractAction" >
+        <property name="commerceCartService" ref="commerceCartService"/>
+        <property name="impersonationService" ref="impersonationService"/>
+    </bean>
+
+    <bean name="authorizePaymentAction"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.replenishment.AuthorizePaymentAction"
+          parent="abstractAction" >
+        <property name="commerceCheckoutService" ref="b2bCommerceCheckoutService"/>
+        <property name="impersonationService" ref="impersonationService"/>
+    </bean>
+
+    <bean name="placeOrderAction"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.replenishment.PlaceOrderAction"
+          parent="abstractAction" >
+        <property name="commerceCheckoutService" ref="b2bCommerceCheckoutService"/>
+        <property name="impersonationService" ref="impersonationService"/>
+    </bean>
+    <bean name="confirmationAction"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.replenishment.ConfirmationAction"
+          parent="abstractAction" >
+        <property name="eventService" ref="eventService"/>
+    </bean>
+
+    <bean id="sendReplenishmentOrderPlacedNotification"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.SendReplenishmentOrderPlacedNotification"
+            >
+        <property name="eventService" ref="eventService"/>
+    </bean>
+
+    <bean id="auditAutoApproval"
+          class="de.hybris.platform.b2b.process.approval.actions.SystemAuditAction"
+          parent="abstractProceduralB2BOrderApproveAuditAction">
+        <property name="permissionResultHelper" ref="permissionResultHelper"/>
+        <property name="messageKey" value="approval.process.orderapprovedautomatically"/>
+    </bean>
+
+    <bean id="auditSubmittedToMerchantForApproval"
+          class="de.hybris.platform.b2b.process.approval.actions.SystemAuditAction"
+          parent="abstractProceduralB2BOrderApproveAuditAction">
+        <property name="permissionResultHelper" ref="permissionResultHelper"/>
+        <property name="messageKey" value="approval.process.submittedtomerchant"/>
+    </bean>
+
+    <bean id="createQuoteOrderHistory"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.CreateQuoteOrderHistory"
+          parent="abstractSimpleB2BApproveOrderDecisionAction" >
+        <property name="orderHistoryService" ref="orderHistoryService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+
+    <bean id="checkOrderEntryCostCentersActive"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.CheckOrderEntryCostCentersActive"
+          parent="abstractSimpleB2BApproveOrderDecisionAction"  />
+
+    <bean id="startFulfilmentProcessAction" parent="abstractProceduralB2BOrderApproveAction"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.StartFulfilmentProcessAction"
+            >
+        <property name="businessProcessService" ref="businessProcessService"/>
+    </bean>
+
+    <!-- Send rejection notification -->
+    <bean id="sendOrderApprovalRejectionNotification"
+          class="de.hybris.platform.yb2bacceleratorcore.actions.SendOrderApprovalRejectionNotification"
+          parent="abstractAction">
+        <property name="eventService" ref="eventService"/>
+    </bean>
+
+    <bean id="generateB2BOrderApprovalRejectionEmail"
+          class="de.hybris.platform.acceleratorservices.process.email.actions.GenerateEmailAction"
+          parent="abstractAction">
+        <property name="modelService" ref="modelService"/>
+        <property name="cmsEmailPageService" ref="cmsEmailPageService"/>
+        <property name="frontendTemplateName" value="OrderApprovalRejectionEmailTemplate"/>
+        <property name="contextResolutionStrategy" ref="b2bProcessContextResolutionStrategy"/>
+        <property name="emailGenerationService" ref="emailGenerationService"/>
+    </bean>
+
+    <bean id="auditStartOfApproval"
+          class="de.hybris.platform.b2b.process.approval.actions.SystemAuditAction"
+          parent="abstractProceduralB2BOrderApproveAuditAction">
+        <property name="permissionResultHelper" ref="permissionResultHelper"/>
+        <property name="messageKey" value="approval.process.ordersubmitted"/>
+    </bean>
+
+    <bean id="auditOrderRejection"
+          class="de.hybris.platform.b2b.process.approval.actions.SystemAuditAction"
+          parent="abstractProceduralB2BOrderApproveAuditAction">
+        <property name="permissionResultHelper" ref="permissionResultHelper"/>
+        <property name="messageKey" value="approval.process.orderrejected"/>
+    </bean>
+
+    <bean id="auditOrderApproval"
+          class="de.hybris.platform.b2b.process.approval.actions.SystemAuditAction"
+          parent="abstractProceduralB2BOrderApproveAuditAction">
+        <property name="permissionResultHelper" ref="permissionResultHelper"/>
+        <property name="messageKey" value="approval.process.orderapproved"/>
+    </bean>
+
+    <!-- checkout flow configuration -->
+    <!-- We force the Single step checkout strategy. -->
+    <alias alias="b2bCheckoutFlowStrategy" name="b2bSingleStepCheckoutFlowStrategy"/>
+
+    <bean id="b2bSingleStepCheckoutFlowStrategy"
+          class="de.hybris.platform.yb2bacceleratorcore.checkout.flow.impl.FixedB2BCheckoutFlowStrategy" >
+        <property name="checkoutFlow" value="SINGLE"/>
+    </bean>
+
+    <bean id="b2bMultiStepCheckoutFlowStrategy"
+          class="de.hybris.platform.yb2bacceleratorcore.checkout.flow.impl.FixedB2BCheckoutFlowStrategy" >
+        <property name="checkoutFlow" value="MULTISTEP"/>
+    </bean>
+
+    <!--Checkout PCI Strategies -->
+    <alias alias="b2bCheckoutPciStrategy" name="configuredB2BCheckoutPciStrategy"/>
+    <bean id="configuredB2BCheckoutPciStrategy"
+          class="de.hybris.platform.yb2bacceleratorcore.checkout.pci.impl.ConfiguredB2BCheckoutPciStrategy" >
+        <!-- This strategy looks in the session to see if HOP is the chosen option.  HOP is only valid if configured in the application properties file. Defaults to wsCheckoutPciStrategy. -->
+        <property name="siteConfigService" ref="siteConfigService"/>
+
+        <!-- Default to the wsCheckoutPciStrategy -->
+        <property name="defaultCheckoutPciStrategy" ref="b2bWSCheckoutPciStrategy"/>
+    </bean>
+
+    <bean id="b2bWSCheckoutPciStrategy"
+          class="de.hybris.platform.yb2bacceleratorcore.checkout.pci.impl.FixedB2BCheckoutPciStrategy" >
+        <!-- Use the Payment extension web services to create credit card details -->
+        <property name="subscriptionPciOption" value="DEFAULT"/>
+    </bean>
+    <bean id="b2bHOPCheckoutPciStrategy"
+          class="de.hybris.platform.yb2bacceleratorcore.checkout.pci.impl.FixedB2BCheckoutPciStrategy" >
+        <!-- Use the Hosted Order Payment to create credit card details -->
+        <property name="subscriptionPciOption" value="HOP"/>
+    </bean>
+
+    <bean id="b2bSendOrderPlacedNotificationAction" class="de.hybris.platform.yb2bacceleratorcore.actions.SendOrderPlacedNotificationAction"  parent="abstractAction">
+        <property name="eventService" ref="eventService"/>
+    </bean>
+
+
+    <alias name="defaultVariantCategorySource" alias="variantCategorySource"/>
+    <bean id="defaultVariantCategorySource"
+          class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.impl.VariantCategorySource"
+          parent="defaultCategorySource">
+        <property name="productSource" ref="variantProductSource"></property>
+    </bean>
+    
+    <bean id="variantProductSource"
+          class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.impl.VariantProductSource" />
+
+    <bean id="variantProductStockLevelStatusValueProvider"
+          class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.impl.VariantProductStockLevelStatusValueProvider"
+          parent="defaultProductStockLevelStatusValueProvider">
+        <property name="productSource" ref="variantProductSource"></property>
+    </bean>
+    
+    <bean id="abstractMultidimensionalProductFieldValueProvider" abstract="true" 
+    		class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.AbstractMultidimensionalProductFieldValueProvider" 
+    		parent="abstractPropertyFieldValueProvider">
+    	<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+    </bean>
+
+    <alias name="defaultMultidimentionalProductFlagValueProvider" alias="multidimentionalProductFlagValueProvider"/>
+    <bean id="defaultMultidimentionalProductFlagValueProvider"
+          class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.impl.MultidimentionalProductFlagValueProvider"
+          parent="abstractMultidimensionalProductFieldValueProvider"/>
+
+    <alias name="defaultProductPriceRangeValueProvider" alias="productPriceRangeValueProvider"/>
+    <bean id="defaultProductPriceRangeValueProvider"
+          class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.impl.ProductPriceRangeValueProvider"
+          parent="abstractMultidimensionalProductFieldValueProvider"/>
+    
+    <alias name="defaultFirstGenericVariantProductUrlValueProvider" alias="firstGenericVariantProductUrlValueProvider"/>
+    <bean id="defaultFirstGenericVariantProductUrlValueProvider"
+          class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.impl.FirstGenericVariantProductUrlValueProvider"
+          parent="abstractMultidimensionalProductFieldValueProvider">
+        <property name="productModelUrlResolver" ref="productModelUrlResolver"/>
+        <property name="genericVariantProductModelComparator" ref="genericVariantProductModelComparator"/>
+    </bean>
+    
+    <alias name="defaultFirstVariantCategoryNameListValueProvider" alias="firstVariantCategoryNameListValueProvider"/>
+     <bean id="defaultFirstVariantCategoryNameListValueProvider"
+          class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.impl.FirstVariantCategoryNameListValueProvider"
+          parent="abstractMultidimensionalProductFieldValueProvider">
+        <property name="variantValueCategoryModelPriorityComparator" ref="variantValueCategoryModelPriorityComparator"/>
+        <property name="variantValueCategoryModelSequenceComparator" ref="variantValueCategoryModelSequenceComparator"/>
+        <property name="categoryManager" ref="solrFirstVariantCategoryManager"/>
+    </bean>
+    
+    <bean id="genericVariantProductModelComparator" 
+    	class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.entity.GenericVariantProductModelComparator">
+    	<property name="variantValueCategoryModelPriorityComparator" ref="variantValueCategoryModelPriorityComparator"/>
+    </bean>
+    
+    <bean id="variantValueCategoryModelPriorityComparator" 
+    	class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.entity.VariantValueCategoryModelPriorityComparator">
+    	<property name="categoryService" ref="categoryService"/>
+    </bean>
+    
+    <bean id="variantValueCategoryModelSequenceComparator" 
+    	class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.entity.VariantValueCategoryModelSequenceComparator" />
+    	
+    <bean id="solrFirstVariantCategoryManager"
+    	class="de.hybris.platform.yb2bacceleratorcore.search.solrfacetsearch.provider.impl.SolrFirstVariantCategoryManager">
+    	<property name="l10NService" ref="l10nService"/>
+    </bean>
+
+</beans>

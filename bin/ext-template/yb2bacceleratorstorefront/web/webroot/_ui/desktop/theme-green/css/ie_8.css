@@ -1,0 +1,14 @@
+@charset "utf-8";
+/* CSS Document */
+#header input.text {
+	padding-bottom: 4px;
+}
+
+#header button.button {
+	padding: 3px 12px 2px 12px;
+	width: 35px;
+}
+
+.span-4.last .scroller h2 {
+	width: 116px;
+}

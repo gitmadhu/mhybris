@@ -1,0 +1,53 @@
+# ImpEx for Importing Product Classifications
+
+#% impex.setLocale(Locale.ENGLISH);
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+$productCatalogName=
+
+$systemName=
+$systemVersion=
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$clAttrModifiers=system=$systemName,version=$systemVersion,translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+
+$catVer=catalogVersion(version[default='Staged'],catalog(id[default=$productCatalog]));
+$clSysVer=catalogVersion(version[default='$systemVersion'],catalog(id[default='$systemName']));
+# -------------------------------------;
+# classified products;
+# 1. assign class to category so that all ;
+#    contained products are automatically classified as such;
+UPDATE Category; $catVer[virtual=true,unique=true]; code[unique=true]; supercategories(code,$clSysVer)[mode=append];
+
+#$feature0=@color[$clAttrModifiers];
+$feature1=
+$feature2=
+$feature3=
+$feature4=
+$feature5=
+$feature6=
+$feature7=
+$feature8=
+$feature9=
+$feature10=
+$feature11=
+$feature12=
+$feature13=
+$feature14=
+$feature15=
+$feature16=	
+$feature17=			
+$feature18=
+$feature19=
+$feature20=
+$feature21=
+$feature22=
+
+# Insert Product Classifications
+															
+INSERT_UPDATE Device;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$feature9;$feature10;$feature11;$feature12;$feature13;$feature14;$feature15;$feature16;$catalogVersion
+
+INSERT_UPDATE Accessory;code[unique=true];$feature11;$feature1;$feature17;$catalogVersion
+
+INSERT_UPDATE ServicePlan;code[unique=true];$feature18;$feature19;$feature20;$feature21;$feature22;$catalogVersion

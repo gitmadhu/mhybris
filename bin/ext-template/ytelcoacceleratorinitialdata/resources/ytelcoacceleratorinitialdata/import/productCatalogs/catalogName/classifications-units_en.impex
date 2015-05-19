@@ -1,0 +1,15 @@
+# ImpEx for Importing Units
+# English Localisation
+
+# Macros / Replacement Parameter definitions
+
+$systemName=
+$systemVersion=
+$classficationCatalog=catalogVersion(catalog(id[default=$systemName]),version[default=$systemVersion]);
+
+$sysVer=systemVersion(catalog(id[default=$systemName]),version[default=$systemVersion]);
+
+# Language
+$lang=en
+
+UPDATE ClassificationAttributeUnit;code[unique=true];name[lang=$lang];$sysVer[virtual=true,unique=true]

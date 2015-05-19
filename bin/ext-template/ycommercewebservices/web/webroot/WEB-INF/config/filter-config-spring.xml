@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2014 hybris AG ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of hybris ~ ("Confidential Information"). You shall not disclose such Confidential 
+	~ Information and shall use it only in accordance with the terms of the ~ 
+	license agreement you entered into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<import resource="v1/filter-config-v1-spring.xml" />
+	<import resource="v2/filter-config-v2-spring.xml" />
+
+	<beans>
+		<bean id="commerceWebServicesFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain">
+			<constructor-arg>
+				<ref bean="commerceWebServicesFilterChainList" />
+			</constructor-arg>
+		</bean>
+
+		<alias name="defaultCommerceWebServicesFilterChainList" alias="commerceWebServicesFilterChainList" />
+		<util:list id="defaultCommerceWebServicesFilterChainList">
+			<!-- generic platform filters -->
+			<ref bean="log4jFilter" />
+			<ref bean="restSessionFilter" />
+
+			<!-- Security -->
+			<ref bean="springSecurityFilterChain" />
+		</util:list>
+		
+		<alias alias="restSessionFilter" name="defaultRestSessionFilter" />
+		<bean id="defaultRestSessionFilter" class="de.hybris.platform.ycommercewebservices.filter.RestSessionFilter">
+			<property name="sessionService" ref="sessionService" />
+		</bean>
+	</beans>
+</beans>

@@ -1,0 +1,11 @@
+# ImpEx for Importing Prices (English)
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
+$lang=en
+
+
+UPDATE SubscriptionPricePlan;name;product(code, $catalogVersion)[unique=true];$catalogVersion;currency(isocode)[default=USD,unique=true]
+
+UPDATE OneTimeChargeEntry;id[unique=true];name[lang=$lang];$catalogVersion

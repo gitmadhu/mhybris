@@ -1,0 +1,19 @@
+$catalog=powertoolsCatalog
+
+$contentCatalogs=powertoolsContentCatalog
+$productCatalog=powertoolsProductCatalog
+
+
+
+### cron job
+$cronJobIdentifier=$catalogSyncCronJob
+$performable=$catalogSyncJobPerformable
+
+### servicelayer job
+$job=job(code[default=$performable])
+
+### context setup
+$lang=sessionLanguage(isocode[default=en])
+
+INSERT_UPDATE MultipleCatalogsSyncCronJob;code[unique=true];$lang;$job;contentCatalogs(id);productCatalog(id);logToDatabase[default=false];logToFile[default=false];
+;$cronJobIdentifier;;;$contentCatalogs;$productCatalog;;;

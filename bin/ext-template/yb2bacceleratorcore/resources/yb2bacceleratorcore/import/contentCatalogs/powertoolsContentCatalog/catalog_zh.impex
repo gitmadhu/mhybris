@@ -1,0 +1,10 @@
+#
+# Import the Powertools Content Catalog
+#
+# Localization zh
+#
+$lang=zh
+$contentCatalog=powertoolsContentCatalog
+
+UPDATE ContentCatalog;id[unique=true];name[lang=$lang];
+ ;$contentCatalog;"电动工具内容目录";

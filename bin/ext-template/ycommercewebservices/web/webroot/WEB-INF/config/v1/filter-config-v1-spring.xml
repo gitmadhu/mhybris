@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2014 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="commerceWebServicesFilterChainV1" class="de.hybris.platform.servicelayer.web.PlatformFilterChain">
+		<constructor-arg>
+			<ref bean="commerceWebServicesFilterChainListV1" />
+		</constructor-arg>
+	</bean>
+
+	<alias name="defaultCommerceWebServicesFilterChainListV1" alias="commerceWebServicesFilterChainListV1" />
+	<util:list id="defaultCommerceWebServicesFilterChainListV1">
+		<!-- generic platform filters -->
+		<ref bean="log4jFilter" />
+		<ref bean="tenantActivationFilter" />
+		<ref bean="sessionFilter" />
+
+		<!-- commerceWebservices filters -->
+		<ref bean="commerceWebServicesBaseSiteFilterV1" />
+		<ref bean="commerceWebServicesSessionAttributesFilterV1" />
+		<ref bean="baseSiteCheckFilterV2" />
+
+		<!-- Security -->
+		<ref bean="springSecurityFilterChain" />
+		<ref bean="guestRoleFilterV1" />
+	</util:list>
+
+	<bean id="commerceWebServicesBaseSiteFilterV1" class="de.hybris.platform.ycommercewebservices.filter.BaseSiteFilter">
+		<property name="contextInformationLoader" ref="wsContextInformationLoaderV1" />
+	</bean>
+
+	<bean id="commerceWebServicesSessionAttributesFilterV1" class="de.hybris.platform.ycommercewebservices.filter.SessionAttributesFilter">
+		<property name="contextInformationLoader" ref="wsContextInformationLoaderV1" />
+	</bean>
+
+	<alias alias="baseSiteCheckFilterV2" name="defaultBaseSiteCheckFilterV2" />
+	<bean id="defaultBaseSiteCheckFilterV2" class="de.hybris.platform.ycommercewebservices.filter.BaseSiteCheckFilter">
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="cartService" ref="cartService" />
+	</bean>
+
+	<bean id="guestRoleFilterV1" class="de.hybris.platform.ycommercewebservices.auth.GuestRoleFilter">
+		<property name="authenticationEventPublisher">
+			<bean class="org.springframework.security.authentication.DefaultAuthenticationEventPublisher" />
+		</property>
+		<property name="userService" ref="userService" />
+		<property name="cartService" ref="cartService" />
+		<property name="guestRole" value="ROLE_GUEST" />
+	</bean>
+
+	<alias name="defaultWsContextInformationLoaderV1" alias="wsContextInformationLoaderV1" />
+	<bean id="defaultWsContextInformationLoaderV1" class="de.hybris.platform.ycommercewebservices.context.impl.DefaultContextInformationLoader">
+		<property name="baseSiteService" ref="baseSiteService" />
+		<property name="activateBaseSiteInSessionStrategy" ref="activateBaseSiteInSessionStrategy" />
+		<property name="configurationService" ref="configurationService" />
+		<property name="baseSiteResourceExceptions" ref="baseFilterResourceExceptionsV1" />
+		<property name="baseStoreService" ref="baseStoreService" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="commerceCommonI18NService" ref="commerceCommonI18NService" />
+		<property name="calculationService" ref="calculationService" />
+		<property name="cartService" ref="cartService" />
+	</bean>
+
+	<util:set id="baseFilterResourceExceptionsV1">
+		<value>logoutsuccessful</value>
+		<value>oauth</value>
+		<value>customers/current/logout</value>
+	</util:set>
+
+</beans>

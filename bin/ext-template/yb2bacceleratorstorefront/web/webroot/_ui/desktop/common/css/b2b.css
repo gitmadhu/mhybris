@@ -1,0 +1,413 @@
+.login-to-get-prices {
+	float: right;
+	margin: 10px 2px 0 0;
+}
+
+.login-to-get-prices a {
+	color: #00679F;
+}
+
+.big-price {
+	padding-bottom: 6px;
+	margin: 10px 0 15px 0;
+	border-bottom: 1px solid #ddd;
+}
+
+.volume-prices {
+	margin-top: 7px;
+	border-bottom: 1px solid #C0C1C2;
+}
+
+.volume-prices th {
+	background-color: #eee;
+	padding: 5px 5px 3px 5px;
+}
+
+.volume-prices td {
+	padding: 3px 5px;
+}
+
+.volume-prices th.volume-price-amount {
+	border-left: 1px solid #fff;
+}
+
+.login-info {
+	padding: 15px 0;
+	font-size: 1.2em;
+	line-height: 1.3em;
+}
+
+/*--checkoutsummary--*/
+.checkout_summary_flow_a {
+	left: 0;
+	width: 209px;
+}
+
+.checkout_summary_flow_b {
+	width: 276px;
+}
+
+.checkout_summary_flow_c {
+	left: 484px;
+	width: 237px;
+}
+
+#checkout_summary_deliverymode_div {
+	left: 715px;
+	width: 237px;
+}
+
+#CostCenter {
+	border: 1px solid #999999;
+	border-radius: 3px 3px 3px 3px;
+	color: #666666;
+	width: 180px;
+}
+
+#CostCenter option {
+	width: 155px;
+}
+
+#PurchaseOrderNumber {
+	border: 1px solid #bbbbbb;
+	border-radius: 3px 3px 3px 3px;
+	padding: 3px 3px 3px;
+	box-shadow: 3px 3px 4px #eeeeee inset;
+}
+
+.pon {
+	padding: 30px 0px 0px 20px;
+}
+
+.radiobuttons_paymentselection {
+	padding: 0px 0px 0px 14px;
+}
+
+/*--Buttons--*/
+#cancel-place-replenishmentOrder {
+	font-size: 1.3em;
+	margin: 5px 2px 0px 40px;
+	padding: 6px 9px;
+	font-weight: bold;
+	line-height: normal;
+	background-color: #356F70;
+	background-position: center bottom;
+	background-repeat: repeat-x;
+	border: 0 none;
+	border-radius: 3px 3px 3px 3px;
+	color: #ffffff;
+	text-shadow: 0 -1px 1px #333333;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+#cancel-quote-negotiation {
+	font-size: 1.3em;
+	margin: 5px 2px 0px 40px;
+	padding: 6px 9px;
+	font-weight: bold;
+	line-height: normal;
+	background-color: #356F70;
+	background-position: center bottom;
+	background-repeat: repeat-x;
+	border: 0 none;
+	border-radius: 3px 3px 3px 3px;
+	color: #ffffff;
+	text-shadow: 0 -1px 1px #333333;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+#terms2 {
+	padding: 3px 30px 0px 0px;
+}
+
+#scheduleReplenishmentButton {
+	background-color: #356F70;
+	margin-right: 5px;
+}
+
+#requestQuoteButton {
+	margin-right: 15px;
+	background-color: #356F70;
+}
+
+/*--datepicker--*/
+#ui-datepicker-div {
+	background-color: #fff;
+	padding: 5px 5px 5px 5px;
+	box-shadow: 2px 2px 5px #888;
+	display: none;
+}
+
+table.ui-datepicker-calendar tr td {
+	padding: 4px;
+}
+
+.ui-datepicker-next {
+	color: #356F70;
+}
+
+.ui-datepicker-next:hover {
+	color: #7fada5;
+	cursor: pointer;
+}
+
+.ui-datepicker-prev {
+	color: #356F70;
+	padding: 0px 10px 0px 0px;
+}
+
+.ui-datepicker-prev:hover {
+	color: #7fada5;
+	cursor: pointer;
+}
+
+/*--replenishment-schedule-div--*/
+.replenishmentFrequency_topic {
+	float: left;
+	padding: 0px 0px 0px 0px;
+}
+
+.replenishmentFrequency {
+	float: left;
+	width: 175px;
+	padding: 0px 17px 6px 0px;
+	border-bottom: 1px solid #DFDFDF;
+	float: left;
+	padding: 0 0 8px 0;
+	width: 138px;
+}
+
+.replenishmentFrequency label {
+	font-weight: bold;
+}
+
+.replenishmentFrequency_left {
+	float: left;
+	float: left;
+	padding: 0 0 11px 5px;
+	width: 150px;
+}
+
+.replenishmentFrequency_left label {
+	border-bottom: 1px solid #dfdfdf;
+	padding: 0px 0px 8px 0px;
+	margin-bottom: 6px;
+	font-weight: bold;
+}
+
+.scheduleform_left {
+	float: left;
+	width: 165px;
+	height: 130px;
+	border: 1px solid #dfdfdf;
+	margin: 0px 14px 0px 0px;
+	padding: 11px 0px 0px 5px;
+	background-color: #fff;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: -moz-linear-gradient(top, #fff, #f6f6f6); /* Firefox */
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f6f6f6) ); /* Safari, Chrome */
+	background: -webkit-linear-gradient(top, #fff, #f6f6f6); /* Safari, Chrome - neue Syntax! */
+	background: -o-linear-gradient(top, #fff, #f6f6f6); /* Opera */
+	background: -ms-linear-gradient(top, #fff, #f6f6f6); /* IE */
+	background: linear-gradient(top, #fff, #f6f6f6); /* W3C Standard */
+}
+
+.scheduleform {
+	float: left;
+	width: 158px;
+	height: 130px;
+	border: 1px solid #dfdfdf;
+	margin: 0px 14px 10px 0px;
+	padding: 10px 0px 0px 20px;
+	background-color: #fff;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: -moz-linear-gradient(top, #fff, #f6f6f6); /* Firefox */
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f6f6f6) ); /* Safari, Chrome */
+	background: -webkit-linear-gradient(top, #fff, #f6f6f6); /* Safari, Chrome - neue Syntax! */
+	background: -o-linear-gradient(top, #fff, #f6f6f6); /* Opera */
+	background: -ms-linear-gradient(top, #fff, #f6f6f6); /* IE */
+	background: linear-gradient(top, #fff, #f6f6f6); /* W3C Standard */
+}
+
+.scheduleform_last {
+	float: left;
+	width: 158px;
+	height: 120px;
+	border: 1px solid #dfdfdf;
+	margin: 0px 0px 10px 0px;
+	padding: 10px 0px 0px 20px;
+	background-color: #fff;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	background: -moz-linear-gradient(top, #fff, #f6f6f6); /* Firefox */
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f6f6f6) ); /* Safari, Chrome */
+	background: -webkit-linear-gradient(top, #fff, #f6f6f6); /* Safari, Chrome - neue Syntax! */
+	background: -o-linear-gradient(top, #fff, #f6f6f6); /* Opera */
+	background: -ms-linear-gradient(top, #fff, #f6f6f6); /* IE */
+	background: linear-gradient(top, #fff, #f6f6f6); /* W3C Standard */
+}
+
+.scheduleformfilled {
+	background-color: #dfdfdf;
+	border: 1px solid #a7a7a7;
+	background: -moz-linear-gradient(top, #fff, #e1e1e1); /* Firefox */
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e1e1e1) ); /* Safari, Chrome */
+	background: -webkit-linear-gradient(top, #fff, #e1e1e1); /* Safari, Chrome - neue Syntax! */
+	background: -o-linear-gradient(top, #fff, #e1e1e1); /* Opera */
+	background: -ms-linear-gradient(top, #fff, #e1e1e1); /* IE */
+	background: linear-gradient(top, #fff, #e1e1e1); /* W3C Standard */
+}
+
+.div_nWeeks1 {
+	margin: 0px 0px 0px 0px;
+	float: left;
+	width: 100px;
+	height: 90px;
+}
+
+.div_nWeeks2 {
+	padding: 0px;
+	height: 90px;
+}
+
+#replenishmentStartDate {
+	width: 134px;
+	height: 22px;
+	border: 0px;
+	padding-left: 3px;
+	margin: 10px 0px 0px 0px;
+}
+
+#nDays {
+	border: 1px solid #999999;
+	border-radius: 3px 3px 3px 3px;
+	color: #666666;
+	margin: 1px 8px 0px 0px;
+}
+
+#daysOfWeek {
+	border: 1px solid #999999;
+	border-radius: 3px 3px 3px 3px;
+	color: #666666;
+	margin: 1px 8px 0px 0px;
+}
+
+#nWeeks {
+	border: 1px solid #999999;
+	border-radius: 3px 3px 3px 3px;
+	color: #666666;
+	margin: 1px 8px 0px 0px;
+}
+
+#nthDayOfMonth {
+	border: 1px solid #999999;
+	border-radius: 3px 3px 3px 3px;
+	color: #666666;
+	margin: 1px 8px 0px 0px;
+}
+
+.label_weeks {
+	padding: 15px 0px 4px 0px;
+	float: left;
+}
+
+.label {
+	padding: 15px 0px 4px 0px;
+	width: 84px;
+}
+
+.label_small {
+	padding: 15px 0px 4px 0px;
+	width: 150px;
+}
+
+#quoteRequestDescription {
+	width: 200px;
+	border: 1px solid #bbbbbb;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 3px 3px 4px #eeeeee inset;
+	padding: 3px;
+	width: 760px;
+	line-height: 18px;
+}
+
+#header ul.language li {
+	border-left: none;
+}
+
+#header ul.language li {
+	padding: 0px 5px;
+}
+
+.updates1 {
+	width: 45px;
+}
+
+#header1 {
+	width: 100px;
+}
+
+#header3 {
+	width: 110px;
+}
+
+.myCompany .item_container_holder .item_container_holder {
+	background-color: #fff;
+	border: 1px solid #BACAD5;
+	border-radius: 4px 4px 4px 4px;
+}
+
+.paymentinfo {
+	width: 150px;
+	border: 0 none;
+}
+
+.table_budget {
+	border: 0 none;
+	width: auto;
+}
+
+.table_budget td {
+	border: 0 none;
+	padding: 0px 20px 0px 0px;
+	margin: 0px;
+	white-space: nowrap;
+}
+
+.back_button:hover {
+	text-decoration: none;
+}
+
+.cancel_button:hover {
+	text-decoration: none;
+}
+
+.b2BCustomerFormList dd span{
+	float: none;
+	display: block;
+}
+
+
+.b2BCustomerFormList dd span:before,
+.b2BCustomerFormList dd span:after {
+          content: ".";
+          display: block;
+          height: 0;
+          overflow: hidden;
+}
+
+
+.b2BCustomerFormList dd span:after {
+            clear: both;
+}
+
+.b2BCustomerFormList dd span{
+            zoom: 1; /* IE < 8 */
+}

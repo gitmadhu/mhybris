@@ -1,0 +1,31 @@
+*** Settings ***
+Resource          xml/Xml_Keywords.txt
+
+*** Test Cases ***
+Test_Xml_Equal
+    [Documentation]    test if two xml snippets are equal
+    ${actualXml}=    Set Variable    <outer id="1234">
+    								     <inner>
+    									     <id>5678</id>
+    									 </inner>
+    								 </outer>
+    ${expectedXml}=    Set Variable    <outer id="1234">
+    								       <inner>
+    									       <id>5678</id>
+    									   </inner>
+    								   </outer>    
+    verify XML "${actualXml}" equals expected XML "${expectedXml}"
+    
+Test_Xml_Equal_Ignore_Id_Nodes
+    [Documentation]    test if two xml snippets are equal while ignoring any ids
+    ${actualXml}=    Set Variable    <outer id="1234">
+    								     <inner>
+    									     <id>5678</id>
+    									 </inner>
+    								 </outer> 
+    ${expectedXml}=    Set Variable    <outer id="4321">
+    								       <inner>
+    									       <id>8765</id>
+    									   </inner>
+    								   </outer>   
+    verify XML "${actualXml}" equals expected XML "${expectedXml}" ignore ids

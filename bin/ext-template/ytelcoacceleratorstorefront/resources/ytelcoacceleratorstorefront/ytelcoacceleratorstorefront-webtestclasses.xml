@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testclasses>
+  <ytelcoacceleratorstorefront>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.security.cookie.EnhancedCookieGeneratorTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.controllers.cms.CMSLinkComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.security.impl.WebHttpSessionRequestCacheUnitTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.controllers.cms.DefaultCMSComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.controllers.cms.ProductReferencesComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.interceptors.CSRFHandlerInterceptorTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.interceptors.i18n.SetLanguageBeforeControllerHandlerTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.controllers.cms.CategoryFeatureComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.controllers.cms.MiniCartComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.facade.DefaultCheckoutFacadeIntegrationTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.controllers.cms.ProductFeatureComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.controllers.cms.ProductCarouselComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.controllers.cms.NavigationBarComponentControllerTest</testclass>
+    <testclass>de.hybris.platform.ytelcoacceleratorstorefront.web.view.UiExperienceViewResolverTest</testclass>
+  </ytelcoacceleratorstorefront>
+</testclasses>

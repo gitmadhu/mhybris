@@ -1,0 +1,69 @@
+# Import essential data for the Accelerator
+#
+# Localization de
+# 
+
+$lang=de
+
+# Languages
+UPDATE Language;isocode[unique=true];name[lang=$lang]
+;de;Deutsch;
+;en;Englisch;
+;ja;Japanisch;
+;zh;Chinesisch;
+
+
+# Currencies
+UPDATE Currency;isocode[unique=true];name[lang=$lang]
+;CAD;Canadian Dollar;
+;EUR;Euro;
+;USD;US Dollar;
+
+
+# Titles
+UPDATE Title;code[unique=true];name[lang=$lang]
+;dr;Dr.;
+;miss;Fräulein;
+;mr;Herr;
+;mrs;Frau;
+;ms;Ms;
+;rev;Rev.;
+
+
+# Credit / Debit Cards
+UPDATE CreditCardType;code[unique=true];name[lang=$lang]
+;amex;American Express;
+;diners;Diner's Club;
+;maestro;Maestro;
+;master;Mastercard;
+;mastercard_eurocard;Mastercard/Eurocard;
+;switch;Switch;
+;visa;Visa;
+
+# DistanceUnits for Storelocator 
+UPDATE DistanceUnit;code[unique=true];name[lang=$lang]
+;km;km;
+;miles;mile;
+
+# Media Formats
+UPDATE MediaFormat;qualifier[unique=true];name[lang=$lang];
+;1200Wx1200H;1200Wx1200H;
+;300Wx300H;300Wx300H;
+;30Wx30H;30Wx30H;
+;365Wx246H;365Wx246H;
+;515Wx515H;515Wx515H;
+;65Wx65H;65Wx65H;
+;96Wx96H;96Wx96H;
+
+# Tax & Tax Groups
+UPDATE UserTaxGroup;code[unique=true];name[lang=$lang]
+;ca-taxes;Kanadische Steuern;
+;us-taxes;US-Steuern;
+
+UPDATE Tax;code[unique=true];name[lang=$lang]
+;ca-sales-tax-full;Mehrwertsteuer;
+;us-sales-tax-full;Mehrwertsteuer;
+
+UPDATE ProductTaxGroup;code[unique=true];name[lang=$lang]
+;ca-sales-tax-full;Kanadische Mehrwertsteuer;
+;us-sales-tax-full;US-Mehrwertsteuer;

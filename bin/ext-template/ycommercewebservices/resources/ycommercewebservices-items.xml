@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2014 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+	<collectiontypes>
+		<collectiontype elementtype="BaseSite" code="BaseSiteCollection" autocreate="true"/>
+	</collectiontypes>
+
+	<itemtypes>
+		<itemtype code="ProductExpressUpdateCleanerCronJob" autocreate="true" generate="true" extends="CronJob"
+					 jaloclass="de.hybris.platform.ycommercewebservices.jalo.expressupdate.cron.ProductExpressUpdateCleanerCronJob">
+			<attributes>
+				<attribute qualifier="queueTimeLimit" type="java.lang.Integer">
+					<persistence type="property"/>
+					<description>Only elements older than specified value (in minutes) will be removed from the queue</description>
+					<defaultvalue>Integer.valueOf(1440)</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="OrderStatusUpdateCleanerCronJob" autocreate="true" generate="true" extends="CronJob"
+					 jaloclass="de.hybris.platform.ycommercewebservices.jalo.expressupdate.cron.OrderStatusUpdateCleanerCronJob">
+			<attributes>
+				<attribute qualifier="queueTimeLimit" type="java.lang.Integer">
+					<persistence type="property"/>
+					<description>Only elements older than specified value (in minutes) will be removed from the queue</description>
+					<defaultvalue>Integer.valueOf(1440)</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+		<itemtype code="OldCartRemovalCronJob" autocreate="true"
+					 generate="true" extends="CronJob"
+					 jaloclass="de.hybris.platform.ycommercewebservices.jalo.OldCartRemovalCronJob">
+			<attributes>
+				<attribute type="BaseSiteCollection" qualifier="sites">
+					<modifiers/>
+					<persistence type="property"/>
+					<description>BaseSites for which old carts should be removed</description>
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="cartRemovalAge">
+					<modifiers/>
+					<persistence type="property"/>
+					<defaultvalue>Integer.valueOf(2419200)</defaultvalue>
+					<description>After specified number of seconds carts will be cleaned up. Default is 28 days.</description>
+				</attribute>
+				<attribute type="java.lang.Integer" qualifier="anonymousCartRemovalAge">
+					<modifiers/>
+					<persistence type="property"/>
+					<defaultvalue>Integer.valueOf(1209600)</defaultvalue>
+					<description>After specified number of seconds carts will be cleaned up. Default is 14 days.</description>
+				</attribute>
+			</attributes>
+		</itemtype>
+
+	</itemtypes>
+</items>

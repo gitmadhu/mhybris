@@ -1,0 +1,10 @@
+$productCatalog=
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$lang=en
+
+# Insert BundleTemplates
+# - 1st level bundle templates: ;<package id>;<package name> Package
+# - 2st level bundle templates: ;<package id>_<component id>;<package name> - <component name> Component
+# - <package id> = <package name> without blanks
+# - <component id> = <component name> without blanks
+UPDATE BundleTemplate;id[unique=true];name[lang=$lang];version[default=1.0];$catalogVersion

@@ -1,0 +1,14 @@
+# ImpEx for Importing Products Stock Levels and Warehouses
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+INSERT_UPDATE Vendor;code[unique=true]
+
+INSERT_UPDATE Warehouse;code[unique=true];vendor(code);default[default=true]
+
+INSERT_UPDATE StockLevel;warehouse(code)[unique=true];productCode[unique=true];inStockStatus(code);available;maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;reserved
+
+UPDATE Product;code[unique=true];stockLevels(productCode,warehouse(code));vendors(code);$catalogVersion

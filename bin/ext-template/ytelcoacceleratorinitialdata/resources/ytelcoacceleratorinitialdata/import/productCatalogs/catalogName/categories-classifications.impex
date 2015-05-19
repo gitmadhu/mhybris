@@ -1,0 +1,33 @@
+# ImpEx for Importing Category Classifications
+
+# Macros / Replacement Parameter definitions
+
+$systemName=
+$systemVersion=
+
+INSERT_UPDATE ClassificationSystem; id[unique=true]; name[lang=en];
+
+INSERT_UPDATE ClassificationSystemversion; catalog(id)[unique=true] ; version[unique=true] ; active ; writeprincipals(uid); languages(isocode); inclPacking[virtual=true,default=true]; inclDuty[virtual=true,default=true]; inclFreight[virtual=true,default=true]; inclAssurance[virtual=true,default=true]
+
+$productCatalog=
+$productCatalogName=
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$classCatalogVersion=catalogversion(catalog(id[default=$systemName]),version[default=$systemVersion])[unique=true,default=$systemName:$systemVersion]
+$classSystemVersion=systemVersion(catalog(id[default=$systemName]),version[default=$systemVersion])[unique=true]
+$class=classificationClass(ClassificationClass.code,$classCatalogVersion)[unique=true]
+$supercategories=source(code, $classCatalogVersion)[unique=true]
+$categories=target(code, $catalogVersion)[unique=true]
+$attribute=classificationAttribute(code,$classSystemVersion)[unique=true]
+$unit=unit(code,$classSystemVersion)
+
+# Insert Classifications
+INSERT_UPDATE ClassificationClass;$classCatalogVersion;code[unique=true];allowedPrincipals(uid)[default='customergroup']
+
+
+# Insert Classification Attributes
+INSERT_UPDATE ClassificationAttribute;$classSystemVersion;code[unique=true]
+
+INSERT_UPDATE ClassAttributeAssignment;$class;$attribute;position;$unit;attributeType(code[default=string]);multiValued[default=false];range[default=false];localized[default=false];attributeValues(code,$classSystemVersion)
+
+INSERT_UPDATE ClassificationAttributeValue;code[unique=true];$classSystemVersion
+ 

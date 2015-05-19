@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 	   xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util
+		http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="commerceWebServicesFilterChain" class="de.hybris.platform.servicelayer.web.PlatformFilterChain" >
+		<constructor-arg>
+			<ref bean="commerceWebServicesFilterChainList" />
+		</constructor-arg>
+	</bean>
+
+	<alias name="defaultCommerceWebServicesFilterChainList" alias="commerceWebServicesFilterChainList" />
+	<util:list id="defaultCommerceWebServicesFilterChainList">
+		<!-- generic platform filters -->
+		<ref bean="log4jFilter" />
+		<ref bean="tenantActivationFilter"/>				
+		<ref bean="sessionFilter"/>
+	
+		<!-- commerceWebservices filters -->
+		<ref bean="commerceWebServicesBaseSiteFilter" />
+		<ref bean="commerceWebServicesSessionAttributesFilter" />
+		<ref bean="baseSiteCheckFilter" />
+
+		<!-- Security -->
+		<ref bean="springSecurityFilterChain"/>
+
+	</util:list>
+
+	<bean id="commerceWebServicesBaseSiteFilter" class="de.hybris.platform.ycommercewebservices.filter.BaseSiteFilter">
+		<property name="contextInformationLoader" ref="wsContextInformationLoader"/>
+	</bean>
+	
+	<bean id="commerceWebServicesSessionAttributesFilter" class="de.hybris.platform.ycommercewebservices.filter.SessionAttributesFilter">
+		<property name="contextInformationLoader" ref="wsContextInformationLoader"/>
+	</bean>
+	
+	<bean id="baseSiteCheckFilter" class="de.hybris.platform.ycommercewebservices.filter.BaseSiteCheckFilter">
+		<property name="cartService" ref="cartService" />
+		<property name="baseSiteService" ref="baseSiteService" />
+	</bean>
+</beans>

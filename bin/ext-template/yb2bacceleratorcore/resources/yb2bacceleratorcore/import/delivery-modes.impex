@@ -1,0 +1,39 @@
+#
+# Import Delivery Modes / Zones
+#
+#% impex.setLocale(Locale.GERMAN)
+
+# Currencies
+$usCurrency=USD
+
+# Delivery Zones
+INSERT_UPDATE Zone;code[unique=true];countries(isocode)
+;usa;US
+;ca;CA
+
+# Zone Delivery Modes
+INSERT_UPDATE ZoneDeliveryMode;code[unique=true];net;active[default=true]
+;premium-net;true;
+;standard-net;true;
+;premium-gross;false;
+;standard-gross;false;
+;free-standard-shipping;true;false;
+
+# Zone Delivery Mode Values
+
+# USA
+INSERT_UPDATE ZoneDeliveryModeValue;deliveryMode(code)[unique=true];zone(code)[default='usa'][unique=true];currency(isocode)[unique=true];value;minimum[unique=true]
+;premium-net;;$usCurrency;16,99;0,00
+;premium-gross;;$usCurrency;19,99;0,00
+;standard-net;;$usCurrency;9,99;0,00
+;standard-gross;;$usCurrency;11,99;0,00
+;free-standard-shipping;;$usCurrency;0,00;0,00
+
+# Canada
+INSERT_UPDATE ZoneDeliveryModeValue;deliveryMode(code)[unique=true];zone(code)[default='ca'][unique=true];currency(isocode)[unique=true];value;minimum[unique=true]
+;premium-net;;$usCurrency;16,99;0,00
+;premium-gross;;$usCurrency;19,99;0,00
+;standard-net;;$usCurrency;9,99;0,00
+;standard-gross;;$usCurrency;11,99;0,00
+;free-standard-shipping;;$usCurrency;0,00;0,00
+

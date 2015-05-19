@@ -1,0 +1,11 @@
+# ImpEx for Importing Product Localisations
+ 
+# Macros / Replacement Parameter definitions
+$productCatalog=
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+# Language
+$lang=en
+
+UPDATE Product;$catalogVersion;code[unique=true];name[lang=$lang];summary[lang=$lang];description[lang=$lang]

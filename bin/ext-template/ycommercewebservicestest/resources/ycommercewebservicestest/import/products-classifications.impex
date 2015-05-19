@@ -1,0 +1,1719 @@
+# ImpEx for Importing Product Classifications
+
+#% impex.setLocale(Locale.ENGLISH);
+
+# Macros / Replacement Parameter definitions
+$productCatalog=wsTestProductCatalog
+$productCatalogName=wsTest Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$clAttrModifiers=system='wsTestClassification',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+
+# Insert Product Classifications
+
+# Classification: Technical details (634)
+$feature1=@Tripod legs, 1868[$clAttrModifiers];  # Tripod legs
+$feature2=@Mounting, 1867[$clAttrModifiers];  # Mounting
+$feature3=@Colour of product, 1766[$clAttrModifiers];  # Colour of product
+$feature4=@Tripod head, 1869[$clAttrModifiers];  # Tripod head
+$feature6=@Special features, 86[$clAttrModifiers];  # Special features
+$feature7=@Material, 898[$clAttrModifiers];  # Material
+$feature8=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature6;$feature7;$feature8;$catalogVersion;
+ ;1687508;3 leg(s);Floor-standing;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;
+ ;3429337;3;<ignore>;Black;<ignore>;<ignore>;Rubber;ICEcat.biz;
+
+
+# Classification: Weight & dimensions (1095)
+$feature1=@Dimensions W x D x H, 49[$clAttrModifiers];  # Dimensions W x D x Hin millimeter (mm)
+$feature2=@Weight, 94[$clAttrModifiers];  # Weight in gram (g)
+$feature3=@Height  max , 6486[$clAttrModifiers];  # Height (max)in millimeter (mm)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$catalogVersion;
+ ;1687508;<ignore>;1700;<ignore>;
+ ;3429337;<ignore>;<ignore>;177.8;
+
+
+# Classification: Technical details (643)
+$feature1=@Tape size, 1446[$clAttrModifiers];  # Tape size in millimeter (mm)
+$feature2=@Coercive force, 2150[$clAttrModifiers];  # Coercive force in kiloAmper/metre (kA/m)
+$feature3=@Tape type, 2217[$clAttrModifiers];  # Tape type
+$feature5=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
+$feature6=@Tape thickness, 2137[$clAttrModifiers];  # Tape thickness in micron (Âµm)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature5;$feature6;$catalogVersion;
+ ;137220;6.35;105;<ignore>;ICEcat.biz;7;
+
+
+# Classification: Video (3137)
+$feature1=@Digital video capture spe, 1570[$clAttrModifiers];  # Digital video capture speed in frames per second (fps)
+$feature4=@Video capture resolution, 1597[$clAttrModifiers];  # Video capture resolution in pixels (pixels)
+$feature8=@Video compression formats, 2225[$clAttrModifiers];  # Video compression formats
+$feature10=@Frame rate, 3496[$clAttrModifiers];  # Frame rate in frames per second (fps)
+$feature11=@Resolution, 80[$clAttrModifiers];  # Resolution in pixels (pixels)
+$feature13=@Maximum resolution, 1659[$clAttrModifiers];  # Maximum resolution in pixels (pixels)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature4;$feature8;$feature10;$feature11;$feature13;$catalogVersion;
+ ;1377492;30;<ignore>;<ignore>;<ignore>;<ignore>;1280 x 1024;
+ ;280916;15;<ignore>;<ignore>;<ignore>;<ignore>;640 x 480;
+
+
+# Classification: Camera (3139)
+$feature4=@Self-timer, 765[$clAttrModifiers];  # Self-timer in seconds (s)
+$feature6=@Multi burst mode, 1297[$clAttrModifiers];  # Multi burst mode
+$feature7=@Slide show, 1294[$clAttrModifiers];  # Slide show
+$feature8=@Camera file format, 1285[$clAttrModifiers];  # Camera file format
+$feature9=@Colour depth, 1550[$clAttrModifiers];  # Colour depth
+$feature11=@Colour, 46[$clAttrModifiers];  # Colour
+$feature12=@Camera shutter speed, 1295[$clAttrModifiers];  # Camera shutter speed in seconds (s)
+$feature13=@Image stabilizer, 1578[$clAttrModifiers];  # Image stabilizer
+$feature14=@Camera playback, 1301[$clAttrModifiers];  # Camera playback
+$feature16=@Camera sensitivity, 1302[$clAttrModifiers];  # Camera sensitivity
+$feature17=@Viewing angle, horizontal, 37[$clAttrModifiers];  # Viewing angle, horizontal in degrees (Â°)
+$feature21=@Camera voice function, 1288[$clAttrModifiers];  # Camera voice function
+$feature22=@Camera movie function, 1287[$clAttrModifiers];  # Camera movie function
+$feature23=@Megapixel, 63[$clAttrModifiers];  # Megapixel in megapixel (MP)
+INSERT_UPDATE Product;code[unique=true];$feature4;$feature6;$feature7;$feature8;$feature9;$feature11;$feature12;$feature13;$feature14;$feature16;$feature17;$feature21;$feature22;$feature23;$catalogVersion;
+ ;1377492;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;66.5;<ignore>;<ignore>;<ignore>;
+ ;280916;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Image sensor (3134)
+$feature1=@Camera CCD sensor, 1283[$clAttrModifiers];  # Camera CCD sensor
+$feature2=@Optical sensor size, 1618[$clAttrModifiers];  # Optical sensor size in inch (")
+$feature3=@Sensor type, 1574[$clAttrModifiers];  # Sensor type
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$catalogVersion;
+ ;1377492;<ignore>;<ignore>;CMOS;
+ ;280916;<ignore>;<ignore>;CMOS;
+
+
+# Classification: Connectivity (1709)
+$feature1=@Interface, 21[$clAttrModifiers];  # Interface
+$feature4=@I/O ports, 470[$clAttrModifiers];  # I/O ports
+$feature5=@Interface type, 990[$clAttrModifiers];  # Interface type
+$feature6=@Video out, 1595[$clAttrModifiers];  # Video out
+$feature7=@Connection to PC, 1311[$clAttrModifiers];  # Connection to PC
+$feature8=@Cable length, 1266[$clAttrModifiers];  # Cable length in meter (m)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature4;$feature5;$feature6;$feature7;$feature8;$catalogVersion;
+ ;1377492;USB;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;280916;USB 1.1;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Colour (3553)
+$feature1=@Colour of product, 1766[$clAttrModifiers];  # Colour of product
+INSERT_UPDATE Product;code[unique=true];$feature1;$catalogVersion;
+ ;1377492;Black;
+ ;280916;Black;
+
+
+# Classification: System requirements (15)
+$feature1=@Minimum processor, 67[$clAttrModifiers];  # Minimum processor
+$feature2=@Minimum system requiremen, 861[$clAttrModifiers];  # Minimum system requirements
+$feature3=@Minimum hard disk space, 66[$clAttrModifiers];  # Minimum hard disk space in megabyte (MB)
+$feature4=@Compatible operating syst, 2507[$clAttrModifiers];  # Compatible operating systems
+$feature5=@Minimum RAM, 68[$clAttrModifiers];  # Minimum RAMin megabyte (MB)
+$feature7=@Mac compatibility, 853[$clAttrModifiers];  # Mac compatibility
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature7;$catalogVersion;
+ ;1377492;<ignore>;<ignore>;<ignore>;Windows 2000, XP, Vista;<ignore>;false;
+ ;280916;<ignore>;<ignore>;<ignore>;Windows 98/2000/XP;<ignore>;<ignore>;
+
+
+# Classification: Weight & dimensions (44)
+$feature1=@Dimensions W x D x H, 49[$clAttrModifiers];  # Dimensions W x D x Hin millimeter (mm)
+$feature2=@Depth, 1650[$clAttrModifiers];  # Depth in millimeter (mm)
+$feature3=@Weight, 94[$clAttrModifiers];  # Weight in gram (g)
+$feature4=@Height, 1464[$clAttrModifiers];  # Height in millimeter (mm)
+$feature5=@Width, 1649[$clAttrModifiers];  # Width in millimeter (mm)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$catalogVersion;
+ ;1377492;<ignore>;20.8;14;86;20;
+ ;280916;54x60x80;<ignore>;50;<ignore>;<ignore>;
+
+
+# Classification: Packaging data (3138)
+$feature1=@Box weight, 3420[$clAttrModifiers];  # Box weight in gram (g)
+$feature4=@Quantity per box, 2055[$clAttrModifiers];  # Quantity per box in pieces (pcs)
+$feature5=@Box dimensions  W x D x H, 3419[$clAttrModifiers];  # Box dimensions (W x D x H)in millimeter (mm)
+$feature6=@Package dimensions  W x D, 582[$clAttrModifiers];  # Package dimensions (W x D x H)in millimeter (mm)
+$feature7=@Package weight, 762[$clAttrModifiers];  # Package weight in gram (g)
+$feature8=@Packaging height, 3807[$clAttrModifiers];  # Packaging height in millimeter (mm)
+$feature9=@Packaging width, 3808[$clAttrModifiers];  # Packaging width in millimeter (mm)
+$feature10=@Packaging length, 4932[$clAttrModifiers];  # Packaging length in millimeter (mm)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature4;$feature5;$feature6;$feature7;$feature8;$feature9;$feature10;$catalogVersion;
+ ;280916;9500;40;795 x 345 x 425;<ignore>;190;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Technical details (624)
+$feature3=@Size, 1147[$clAttrModifiers];  # Size in inch (")
+$feature11=@Lens structure  elements/, 1865[$clAttrModifiers];  # Lens structure (elements/groups)
+$feature12=@Minimum illumination, 1581[$clAttrModifiers];  # Minimum illumination in lux (lx)
+$feature15=@Noise reduction, 2483[$clAttrModifiers];  # Noise reduction
+$feature23=@Special features, 86[$clAttrModifiers];  # Special features
+$feature24=@Lens focal range, 744[$clAttrModifiers];  # Lens focal range
+$feature26=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
+$feature28=@Aperture range, 638[$clAttrModifiers];  # Aperture range
+$feature31=@Maximum aperture, 5548[$clAttrModifiers];  # Maximum aperture
+$feature32=@Display resolution, 1585[$clAttrModifiers];  # Display resolution in pixels (pixels)
+$feature34=@Effective sensor resoluti, 1616[$clAttrModifiers];  # Effective sensor resolution in pixels (pixels)
+$feature37=@Auto focus, 1614[$clAttrModifiers];  # Auto focus
+$feature40=@Supported image formats, 2417[$clAttrModifiers];  # Supported image formats
+$feature47=@Connector s , 1496[$clAttrModifiers];  # Connector(s)
+$feature48=@Shutter Lag, 664[$clAttrModifiers];  # Shutter Lag
+$feature61=@Viewing angle, 1684[$clAttrModifiers];  # Viewing angle in degrees (Â°)
+$feature72=@Technical features, 2143[$clAttrModifiers];  # Technical features
+$feature87=@Data compression, 710[$clAttrModifiers];  # Data compression
+INSERT_UPDATE Product;code[unique=true];$feature3;$feature11;$feature12;$feature15;$feature23;$feature24;$feature26;$feature28;$feature31;$feature32;$feature34;$feature37;$feature40;$feature47;$feature48;$feature61;$feature72;$feature87;$catalogVersion;
+ ;1377492;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;280916;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Picture quality (57)
+$feature1=@Image stabilizer, 1578[$clAttrModifiers];  # Image stabilizer
+$feature2=@Megapixel, 63[$clAttrModifiers];  # Megapixel in megapixel (MP)
+$feature3=@Data compression, 710[$clAttrModifiers];  # Data compression
+$feature4=@Supported camera resoluti, 1748[$clAttrModifiers];  # Supported camera resolutions
+$feature5=@Maximum resolution, 1659[$clAttrModifiers];  # Maximum resolution in pixels (pixels)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$catalogVersion;
+ ;1382080;<ignore>;12.2;<ignore>;<ignore>;4272 x 2848;
+ ;1934793;<ignore>;10;<ignore>;(L) 3648 x 2736\n(M1) 2816 x 2112\n(M2) 2272 x 1704\n1600 x 1200\n(S) 640 x 480\n(W) 3648 x 2048;3648 x 2736;
+ ;1981415a;true;10.2;<ignore>;3648 x 2736\n3648 x 2056;3648 x 2736;
+ ;2006139;<ignore>;10.2;<ignore>;10.1 MP (3664 Ã— 2748)\n8.9 MP (3664 Ã— 2442)â€”3-2\n7.6 MP (3664 Ã— 2062)â€”16-9\n5.0 MP (2592 Ã— 1944)\n3.1 MP (2048 Ã— 1536)\n2.2 MP (1800 Ã— 1200)â€”3-2\n2.1 MP (1920 Ã— 1080)â€”16-9\n1.2 MP (1280 Ã— 960);3688 x 2770;
+ ;2053226;true;15.1;JPEG;(L) 4272x2848\n(M) 3088x2056\n(S) 2256x1504;4272 x 2848;
+ ;2053266;<ignore>;15.1;<ignore>;(L) 4272x2848\n(M) 3088x2056\n(S) 2256x1504;4272 x 2848;
+ ;2053367;true;15.1;JPEG;(L) 4272x2848\n(M) 3088x2056\n(S) 2256x1504;4272 x 2848;
+ ;3557133;true;15.1;JPEG;(L) 4272x2848\n(M) 3088x2056\n(S) 2256x1504;4272 x 2848;
+ ;816780;<ignore>;10.2;<ignore>;3880 x 2600\n3872 x 2592\n2896 x 1936\n1920 x 1280;3880 x 2600;
+
+
+# Classification: Lens system (39)
+$feature1=@Fixed focal length, 5748[$clAttrModifiers];  # Fixed focal length in millimeter (mm)
+$feature2=@Digital zoom, 48[$clAttrModifiers];  # Digital zoom in zoom factor (x)
+$feature3=@Lens, 1290[$clAttrModifiers];  # Lens in millimeter (mm)
+$feature4=@Aperture range, 638[$clAttrModifiers];  # Aperture range
+$feature5=@Number of aspheric elemen, 6204[$clAttrModifiers];  # Number of aspheric elements
+$feature6=@Number of diaphragm blade, 5547[$clAttrModifiers];  # Number of diaphragm blades
+$feature7=@Lens structure  elements/, 1865[$clAttrModifiers];  # Lens structure (elements/groups)
+$feature8=@35 mm camera lens equival, 1678[$clAttrModifiers];  # 35 mm camera lens equivalent in millimeter (mm)
+$feature9=@Focal length, 1522[$clAttrModifiers];  # Focal length in millimeter (mm)
+$feature10=@Filter size, 1615[$clAttrModifiers];  # Filter size in millimeter (mm)
+$feature11=@Combined zoom, 6571[$clAttrModifiers];  # Combined zoom in zoom factor (x)
+$feature13=@Filter, 2534[$clAttrModifiers];  # Filter
+$feature14=@Digital SLR, 3567[$clAttrModifiers];  # Digital SLR
+$feature15=@Lens focal range, 744[$clAttrModifiers];  # Lens focal range
+$feature16=@Optical zoom, 74[$clAttrModifiers];  # Optical zoom in zoom factor (x)
+$feature17=@Lens system, 576[$clAttrModifiers];  # Lens system
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$feature9;$feature10;$feature11;$feature13;$feature14;$feature15;$feature16;$feature17;$catalogVersion;
+ ;1382080;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;1.6 x;<ignore>;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;
+ ;1934793;<ignore>;4;<ignore>;f/3.0 - f/5.8;1;<ignore>;7 / 6;<ignore>;6.6 - 21.6;<ignore>;<ignore>;<ignore>;false;<ignore>;3.3;<ignore>;
+ ;1981415a;<ignore>;5;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;35 - 175;6.3 - 31.5;<ignore>;25;<ignore>;false;F3.5(W) - F5.5(T);5;<ignore>;
+ ;2006139;<ignore>;5;<ignore>;3.1 - 5.7;<ignore>;<ignore>;<ignore>;35 - 105;<ignore>;<ignore>;<ignore>;<ignore>;false;<ignore>;3;<ignore>;
+ ;2053226;<ignore>;0;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;18 - 55;<ignore>;<ignore>;<ignore>;true;<ignore>;0;EF/EF-S;
+ ;2053266;<ignore>;0;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;0;EF/EF-S;
+ ;2053367;<ignore>;0;<ignore>;f/3.5-5.6;<ignore>;<ignore>;<ignore>;<ignore>;18 - 200;<ignore>;<ignore>;<ignore>;true;<ignore>;11;EF/EF-S;
+ ;3557133;<ignore>;0;<ignore>;f/3.5-5.6;<ignore>;<ignore>;<ignore>;<ignore>;18 - 200;<ignore>;<ignore>;<ignore>;true;<ignore>;11;EF/EF-S;
+ ;816780;<ignore>;10;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;18 - 200;<ignore>;<ignore>;<ignore>;true;3.5 - 6.3;10;9 / 8;
+
+
+# Classification: Image sensor (2758)
+$feature1=@Effective sensor resoluti, 1616[$clAttrModifiers];  # Effective sensor resolution in pixels (pixels)
+$feature2=@Camera CCD sensor, 1283[$clAttrModifiers];  # Camera CCD sensor
+$feature3=@Optical sensor size, 1618[$clAttrModifiers];  # Optical sensor size in inch (")
+$feature4=@Sensor type, 1574[$clAttrModifiers];  # Sensor type
+$feature5=@Aspect ratio, 39[$clAttrModifiers];  # Aspect ratio
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$catalogVersion;
+ ;1382080;<ignore>;<ignore>;<ignore>;CMOS;3-2;
+ ;1934793;10.0;<ignore>;1/2.3;CCD;<ignore>;
+ ;1981415a;<ignore>;<ignore>;1/2.33;CCD;<ignore>;
+ ;2006139;10700000;"2.33""";<ignore>;CCD;<ignore>;
+ ;2053226;<ignore>;<ignore>;<ignore>;CMOS;3-2;
+ ;2053266;<ignore>;<ignore>;<ignore>;CMOS;3-2;
+ ;2053367;<ignore>;<ignore>;<ignore>;CMOS;3-2;
+ ;3557133;<ignore>;<ignore>;<ignore>;CMOS;3-2;
+ ;816780;<ignore>;<ignore>;<ignore>;CCD;<ignore>;
+
+
+# Classification: Focusing (2759)
+$feature1=@Normal focusing range, 3730[$clAttrModifiers];  # Normal focusing range in meter (m)
+$feature2=@Macro focusing range  tel, 3732[$clAttrModifiers];  # Macro focusing range (tele)in meter (m)
+$feature3=@Focus adjustment, 1600[$clAttrModifiers];  # Focus adjustment
+$feature4=@Camera focusing range, 1291[$clAttrModifiers];  # Camera focusing range
+$feature5=@Auto Focus  AF  illuminat, 3740[$clAttrModifiers];  # Auto Focus (AF) illuminator
+$feature6=@Macro focusing range  wid, 3731[$clAttrModifiers];  # Macro focusing range (wide)in meter (m)
+$feature7=@Auto Mode focusing range , 3734[$clAttrModifiers];  # Auto Mode focusing range (wide)in meter (m)
+$feature10=@Auto Mode focusing range , 3735[$clAttrModifiers];  # Auto Mode focusing range (tele)in meter (m)
+$feature11=@Manual focus, 3738[$clAttrModifiers];  # Manual focus
+$feature13=@Auto Focus  AF  assist be, 3748[$clAttrModifiers];  # Auto Focus (AF) assist beam
+$feature15=@Auto Focus  AF  lock, 3739[$clAttrModifiers];  # Auto Focus (AF) lock
+$feature16=@Focus, 759[$clAttrModifiers];  # Focus
+$feature17=@Closest focusing distance, 2726[$clAttrModifiers];  # Closest focusing distance in meter (m)
+$feature18=@Auto focus, 1614[$clAttrModifiers];  # Auto focus
+$feature19=@Auto focusing  AF  modes, 7365[$clAttrModifiers];  # Auto focusing (AF) modes
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature10;$feature11;$feature13;$feature15;$feature16;$feature17;$feature18;$feature19;$catalogVersion;
+ ;1382080;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;
+ ;1934793;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;0.01;true;<ignore>;
+ ;1981415a;0.8 , â?ž;0.5 , 0.8;<ignore>;<ignore>;<ignore>;0.1 , 0.8;0.1 , â?ž;0.5 , â?ž;true;<ignore>;<ignore>;<ignore>;<ignore>;true;centre weighted auto focus,multi point auto focus;
+ ;2006139;0.6;0.60 , 0.70;<ignore>;<ignore>;<ignore>;0.10 , 0.70;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;<ignore>;true;centre weighted auto focus,single auto focus,continuous auto focus,multi point auto focus;
+ ;2053226;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;true;TTL-CT-SIR;<ignore>;true;<ignore>;
+ ;2053266;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;true;TTL-CT-SIR;<ignore>;true;<ignore>;
+ ;2053367;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;true;TTL-CT-SIR;<ignore>;true;<ignore>;
+ ;3557133;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;true;TTL-CT-SIR;<ignore>;true;<ignore>;
+ ;816780;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;true;<ignore>;true;<ignore>;5;true;single auto focus,spot auto focus,continuous auto focus;
+
+
+# Classification: Light exposure (55)
+$feature1=@Light exposure rating, 694[$clAttrModifiers];  # Light exposure rating
+$feature2=@Camera shutter speed, 1295[$clAttrModifiers];  # Camera shutter speed in seconds (s)
+$feature3=@Light exposure correction, 670[$clAttrModifiers];  # Light exposure correction
+$feature4=@Light exposure control, 711[$clAttrModifiers];  # Light exposure control
+$feature5=@ISO sensitivity, 2102[$clAttrModifiers];  # ISO sensitivity
+$feature6=@Shutter Lag, 664[$clAttrModifiers];  # Shutter Lag
+$feature7=@Electronic shutter, 3729[$clAttrModifiers];  # Electronic shutter
+$feature8=@Camera sensitivity, 1302[$clAttrModifiers];  # Camera sensitivity
+$feature9=@Mechanical shutter, 3728[$clAttrModifiers];  # Mechanical shutter
+$feature10=@Light exposure type, 550[$clAttrModifiers];  # Light exposure type
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$feature9;$feature10;$catalogVersion;
+ ;1382080;<ignore>;30 - 1/4000;+/- 3 EV, 1/2;<ignore>;Auto (100-800), 100, 200, 400, 800, 1600;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1934793;<ignore>;1/60 - 1/2000;<ignore>;<ignore>;80, 100, 200, 400, 800, 1600;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981415a;<ignore>;1/8 - 1/1500;Â±2EV @ 1/3EV;<ignore>;80, 100, 200, 400, 800, 1600, 3200;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2006139;<ignore>;4 - 1/1400;<ignore>;<ignore>;80, 100, 200, 400, 800, 1600;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053226;<ignore>;30 - 1/4000;+/-2 EV - 1/3;<ignore>;100, 200, 400, 800, 1600, 3200;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053266;<ignore>;30 - 1/4000;+/-2 EV - 1/3;<ignore>;100, 200, 400, 800, 1600, 3200;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053367;<ignore>;30 - 1/4000;+/-2 EV - 1/3;<ignore>;100, 200, 400, 800, 1600, 3200;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3557133;<ignore>;30 - 1/4000;+/-2 EV - 1/3;<ignore>;100, 200, 400, 800, 1600, 3200;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;816780;<ignore>;1/4000 - 30;+/-2.0 EV, 0.3EV;<ignore>;100 / 200 / 400 / 800 / 1600;<ignore>;<ignore>;0 - 18;<ignore>;TTL;
+
+
+# Classification: Flash (2761)
+$feature1=@Flash exposure lock, 3343[$clAttrModifiers];  # Flash exposure lock
+$feature2=@Flash range  wide , 3725[$clAttrModifiers];  # Flash range (wide)in meter (m)
+$feature3=@Flash guide number, 3676[$clAttrModifiers];  # Flash guide number
+$feature5=@Flash, 463[$clAttrModifiers];  # Flash
+$feature6=@Flash modes, 7357[$clAttrModifiers];  # Flash modes
+$feature7=@Flash working distance, 2002[$clAttrModifiers];  # Flash working distance
+$feature8=@Built-in flash, 1289[$clAttrModifiers];  # Built-in flash
+$feature10=@Flash range  tele , 3726[$clAttrModifiers];  # Flash range (tele)in meter (m)
+$feature11=@Flash recharging time, 3682[$clAttrModifiers];  # Flash recharging timein seconds (s)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature5;$feature6;$feature7;$feature8;$feature10;$feature11;$catalogVersion;
+ ;1382080;<ignore>;<ignore>;<ignore>;<ignore>;Red-eye reduction,auto,manual,Flash off;<ignore>;true;<ignore>;<ignore>;
+ ;1934793;<ignore>;0.30 , 3;<ignore>;<ignore>;auto,Flash off;<ignore>;true;<ignore>;<ignore>;
+ ;1981415a;<ignore>;0.2 , 4.6;<ignore>;<ignore>;Red-eye reduction,auto;<ignore>;true;0.5 , 2.6;4;
+ ;2006139;<ignore>;0.6 , 3.5;<ignore>;<ignore>;Red-eye reduction,auto,fill-in,Flash off;<ignore>;<ignore>;0.6 , 2.0;<ignore>;
+ ;2053226;<ignore>;<ignore>;<ignore>;TTL;Red-eye reduction,auto,manual,Flash off;<ignore>;true;<ignore>;<ignore>;
+ ;2053266;<ignore>;<ignore>;<ignore>;TTL;Red-eye reduction,auto,manual,Flash off;<ignore>;true;<ignore>;<ignore>;
+ ;2053367;<ignore>;<ignore>;<ignore>;TTL;Red-eye reduction,auto,manual,Flash off;<ignore>;true;<ignore>;<ignore>;
+ ;3557133;<ignore>;<ignore>;<ignore>;TTL;Flash off,Red-eye reduction,auto,manual;<ignore>;true;<ignore>;<ignore>;
+ ;816780;<ignore>;12;<ignore>;ADI / Pre-flash TTL;Red-eye reduction,Slow synchronization,second curtain synchro,auto,manual,fill-in;<ignore>;true;<ignore>;3;
+
+
+# Classification: Memory (42)
+$feature1=@Maximum internal memory, 1246[$clAttrModifiers];  # Maximum internal memory in megabyte (MB)
+$feature2=@Maximum internal memory, 1452[$clAttrModifiers];  # Maximum internal memory in gigabyte (GB)
+$feature3=@Internal memory, 6[$clAttrModifiers];  # Internal memory in megabyte (MB)
+$feature4=@Memory slots, 672[$clAttrModifiers];  # Memory slots
+$feature5=@Storage media capacity, 481[$clAttrModifiers];  # Storage media capacity
+$feature6=@Memory type, 642[$clAttrModifiers];  # Memory type
+$feature7=@Memory upgrade, 584[$clAttrModifiers];  # Memory upgrade in gigabyte (GB)
+$feature8=@Compatible memory cards, 730[$clAttrModifiers];  # Compatible memory cards
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$catalogVersion;
+ ;1382080;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;sd;
+ ;1934793;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;sd,mmc;
+ ;1981415a;<ignore>;<ignore>;30;<ignore>;<ignore>;<ignore>;<ignore>;sd,mmc;
+ ;2006139;<ignore>;<ignore>;16;<ignore>;<ignore>;<ignore>;<ignore>;sd,sdhc;
+ ;2053226;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;sd;
+ ;2053266;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;sd;
+ ;2053367;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;sd;
+ ;3557133;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;sd;
+ ;816780;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;cf,memory stick (ms),ms pro,microdrive;
+
+
+# Classification: Video (2757)
+$feature1=@Video compression formats, 2225[$clAttrModifiers];  # Video compression formats
+$feature2=@Motion JPEG frame rate, 2413[$clAttrModifiers];  # Motion JPEG frame rate in frames per second (fps)
+$feature3=@Video capability, 2079[$clAttrModifiers];  # Video capability
+$feature4=@Video capture resolution, 1597[$clAttrModifiers];  # Video capture resolution in pixels (pixels)
+$feature5=@Video footnote, 2082[$clAttrModifiers];  # Video footnote
+$feature6=@Video modes resolution, 1922[$clAttrModifiers];  # Video modes resolution in pixels (pixels)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$catalogVersion;
+ ;1382080;<ignore>;3.5;false;<ignore>;<ignore>;<ignore>;
+ ;1934793;<ignore>;<ignore>;true;640 x 480;<ignore>;<ignore>;
+ ;1981415a;AVI (MPEG-4);30;true;1280 x 720;<ignore>;<ignore>;
+ ;2006139;VGA, QVGA;24;true;<ignore>;<ignore>;<ignore>;
+ ;2053226;<ignore>;30;true;1920 x 1080;<ignore>;<ignore>;
+ ;2053266;<ignore>;30;true;1920 x 1080;<ignore>;<ignore>;
+ ;2053367;<ignore>;30;true;1920 x 1080;<ignore>;<ignore>;
+ ;3557133;<ignore>;30;true;1920 x 1080;<ignore>;<ignore>;
+ ;816780;<ignore>;<ignore>;false;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Audio (2760)
+$feature1=@Recording of audio files, 1307[$clAttrModifiers];  # Recording of audio files
+$feature2=@Wind filter, 3228[$clAttrModifiers];  # Wind filter
+$feature3=@Audio system, 442[$clAttrModifiers];  # Audio system
+$feature4=@Voice recording, 2171[$clAttrModifiers];  # Voice recording
+$feature5=@Built-in microphone, 1025[$clAttrModifiers];  # Built-in microphone
+$feature6=@Audio recorder, 85[$clAttrModifiers];  # Audio recorder
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$catalogVersion;
+ ;1981415a;WAV;<ignore>;<ignore>;<ignore>;true;<ignore>;
+
+
+# Classification: Display (41)
+$feature3=@Field of view, 6952[$clAttrModifiers];  # Field of view in percent (%)
+$feature4=@Camera display resolution, 6205[$clAttrModifiers];  # Camera display resolution in pixels (pixels)
+$feature5=@Display, 83[$clAttrModifiers];  # Display
+$feature6=@Display diagonal, 944[$clAttrModifiers];  # Display diagonal in inch (")
+INSERT_UPDATE Product;code[unique=true];$feature3;$feature4;$feature5;$feature6;$catalogVersion;
+ ;1382080;<ignore>;230000;TFT;3;
+ ;1934793;<ignore>;<ignore>;TFT;2.5;
+ ;1981415a;<ignore>;230000;TFT;2.7;
+ ;2006139;<ignore>;<ignore>;LCD;2.7;
+ ;2053226;<ignore>;<ignore>;TFT;3;
+ ;2053266;<ignore>;<ignore>;TFT;3;
+ ;2053367;<ignore>;<ignore>;TFT;3;
+ ;3557133;<ignore>;<ignore>;TFT;3;
+ ;816780;<ignore>;<ignore>;TFT;2.5;
+
+
+# Classification: Viewfinder (3020)
+$feature1=@Camera viewfinder, 1293[$clAttrModifiers];  # Camera viewfinder
+$feature2=@Electrical viewfinder, 3274[$clAttrModifiers];  # Electrical viewfinder
+$feature3=@Optical viewfinder, 3273[$clAttrModifiers];  # Optical viewfinder
+$feature4=@Magnification, 1864[$clAttrModifiers];  # Magnification in zoom factor (x)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$catalogVersion;
+ ;2053226;<ignore>;<ignore>;<ignore>;0.87x;
+ ;2053266;<ignore>;<ignore>;<ignore>;0.87x;
+ ;2053367;<ignore>;<ignore>;<ignore>;0.87x;
+ ;3557133;<ignore>;<ignore>;<ignore>;0.87x;
+ ;816780;Spherical Acute Matte;<ignore>;<ignore>;0.83x;
+
+
+# Classification: Connectivity (56)
+$feature1=@PictBridge, 2397[$clAttrModifiers];  # PictBridge
+$feature2=@Interface, 21[$clAttrModifiers];  # Interface
+$feature4=@I/O ports, 470[$clAttrModifiers];  # I/O ports
+$feature5=@USB 2 0 ports quantity, 2308[$clAttrModifiers];  # USB 2.0 ports quantity
+$feature6=@DC-in jack, 2316[$clAttrModifiers];  # DC-in jack
+$feature7=@HDMI ports quantity, 3566[$clAttrModifiers];  # HDMI ports quantity
+$feature9=@Connection to PC, 1311[$clAttrModifiers];  # Connection to PC
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature4;$feature5;$feature6;$feature7;$feature9;$catalogVersion;
+ ;1382080;<ignore>;USB 2.0;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1934793;<ignore>;USB (Mini-B, MTP, PTP);<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981415a;<ignore>;USB 2.0;<ignore>;1;<ignore>;<ignore>;<ignore>;
+ ;2006139;true;USB;<ignore>;1;true;<ignore>;<ignore>;
+ ;2053226;<ignore>;USB;<ignore>;1;<ignore>;<ignore>;<ignore>;
+ ;2053266;<ignore>;USB;<ignore>;1;<ignore>;<ignore>;<ignore>;
+ ;2053367;<ignore>;USB;<ignore>;1;<ignore>;<ignore>;<ignore>;
+ ;3557133;<ignore>;USB;<ignore>;1;<ignore>;<ignore>;<ignore>;
+ ;816780;true;USB;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Camera (3149)
+$feature2=@Playback zoom, 2396[$clAttrModifiers];  # Playback zoom
+$feature3=@Self-timer, 765[$clAttrModifiers];  # Self-timer in seconds (s)
+$feature4=@Multi burst mode, 1297[$clAttrModifiers];  # Multi burst mode
+$feature5=@Camera resolution, 1284[$clAttrModifiers];  # Camera resolution in pixels (pixels)
+$feature6=@Colour depth, 1550[$clAttrModifiers];  # Colour depth
+$feature8=@Camera file format, 1285[$clAttrModifiers];  # Camera file format
+$feature9=@Camera playback, 1301[$clAttrModifiers];  # Camera playback
+$feature10=@Drive modes, 3341[$clAttrModifiers];  # Drive modes
+$feature11=@Live view, 5642[$clAttrModifiers];  # Live view
+$feature12=@Camera voice function, 1288[$clAttrModifiers];  # Camera voice function
+$feature13=@Camera movie function, 1287[$clAttrModifiers];  # Camera movie function
+INSERT_UPDATE Product;code[unique=true];$feature2;$feature3;$feature4;$feature5;$feature6;$feature8;$feature9;$feature10;$feature11;$feature12;$feature13;$catalogVersion;
+ ;1382080;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;JPEG;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1934793;2x - 10x;<ignore>;<ignore>;<ignore>;<ignore>;JPEG;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981415a;<ignore>;2, 10, 2+10;<ignore>;<ignore>;<ignore>;PictBridge 1.0, JPEG (DCF), EXIF 2.2, DPOF 1.1;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2006139;<ignore>;<ignore>;true;<ignore>;<ignore>;JPEG/EXIF v2.21;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053226;1.5x - 10x;<ignore>;<ignore>;<ignore>;<ignore>;JPEG / RAW;<ignore>;<ignore>;true;<ignore>;<ignore>;
+ ;2053266;1.5x - 10x;<ignore>;<ignore>;<ignore>;<ignore>;JPEG / RAW;<ignore>;<ignore>;true;<ignore>;<ignore>;
+ ;2053367;1.5x - 10x;<ignore>;<ignore>;<ignore>;<ignore>;JPEG / RAW;<ignore>;<ignore>;true;<ignore>;<ignore>;
+ ;3557133;1.5x - 10x;<ignore>;<ignore>;<ignore>;<ignore>;JPEG / RAW;<ignore>;<ignore>;true;<ignore>;<ignore>;
+ ;816780;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;Jpeg, RAW;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Energy management (1279)
+$feature1=@Power consumption, 445[$clAttrModifiers];  # Power consumption in Watt (W)
+$feature2=@Battery technology, 434[$clAttrModifiers];  # Battery technology
+$feature3=@Battery type, 908[$clAttrModifiers];  # Battery type
+$feature4=@Power management, 1376[$clAttrModifiers];  # Power management
+$feature5=@Number of batteries suppo, 1211[$clAttrModifiers];  # Number of batteries supported
+$feature6=@Battery performance, 909[$clAttrModifiers];  # Battery performance in milliAmpere * hour (mAh)
+$feature7=@Battery life  CIPA standa, 6231[$clAttrModifiers];  # Battery life (CIPA standard)in shots (shots)
+$feature8=@Battery life, 1721[$clAttrModifiers];  # Battery life in hour (h)
+$feature9=@Power supply, 1242[$clAttrModifiers];  # Power supply in Watt (W)
+$feature10=@Power requirements, 780[$clAttrModifiers];  # Power requirements
+$feature11=@Power supply type, 514[$clAttrModifiers];  # Power supply type
+$feature12=@Power source, 1390[$clAttrModifiers];  # Power source
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$feature9;$feature10;$feature11;$feature12;$catalogVersion;
+ ;1382080;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1934793;<ignore>;Alkaline;AA;<ignore>;2;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981415a;<ignore>;Lithium-Ion;SLB-10A;<ignore>;1;1050;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2006139;<ignore>;Lithium-Ion;KLIC-7001;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053226;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;400;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053266;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;400;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053367;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;400;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3557133;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;400;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;816780;<ignore>;Lithium-Ion;NP-FM55H;<ignore>;<ignore>;<ignore>;<ignore>;750;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Technical details (622)
+$feature2=@Print technology, 78[$clAttrModifiers];  # Print technology
+$feature4=@Video memory capacity, 5167[$clAttrModifiers];  # Video memory capacity
+$feature5=@Size, 1147[$clAttrModifiers];  # Size in inch (")
+$feature9=@Date imprinting, 3727[$clAttrModifiers];  # Date imprinting
+$feature12=@Resolution, 80[$clAttrModifiers];  # Resolution in pixels (pixels)
+$feature13=@Safety, 607[$clAttrModifiers];  # Safety
+$feature15=@Aperture setting, 5775[$clAttrModifiers];  # Aperture setting
+$feature16=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
+$feature20=@Still image capacity  bet, 6151[$clAttrModifiers];  # Still image capacity (better mode)
+$feature21=@Still image capacity  bes, 6150[$clAttrModifiers];  # Still image capacity (best mode)
+$feature22=@Export file formats, 774[$clAttrModifiers];  # Export file formats
+$feature23=@Picture resolution, 5035[$clAttrModifiers];  # Picture resolution
+$feature27=@Still image capacity, 6149[$clAttrModifiers];  # Still image capacity
+$feature28=@Frame rate, 3496[$clAttrModifiers];  # Frame rate in frames per second (fps)
+$feature29=@Memory per slot  maximum , 6056[$clAttrModifiers];  # Memory per slot (maximum)
+$feature31=@Type, 31[$clAttrModifiers];  # Type
+$feature36=@Supported image formats, 2417[$clAttrModifiers];  # Supported image formats
+$feature37=@Photo mode, 1817[$clAttrModifiers];  # Photo mode
+$feature38=@Tripod mountable, 1601[$clAttrModifiers];  # Tripod mountable
+$feature40=@Picture mode, 2030[$clAttrModifiers];  # Picture mode
+$feature42=@Colour control, 663[$clAttrModifiers];  # Colour control
+$feature43=@Image control functions, 866[$clAttrModifiers];  # Image control functions
+$feature47=@Shooting capacity, 2874[$clAttrModifiers];  # Shooting capacity
+$feature52=@Direct printing, 2176[$clAttrModifiers];  # Direct printing
+$feature57=@Sharpness, 3258[$clAttrModifiers];  # Sharpness
+$feature58=@Languages support, 3113[$clAttrModifiers];  # Languages support
+$feature60=@Technical features, 2143[$clAttrModifiers];  # Technical features
+$feature61=@PhotoSmart compression, 1968[$clAttrModifiers];  # PhotoSmart compression
+$feature62=@Control panel, 2084[$clAttrModifiers];  # Control panel
+$feature63=@Number of layers per pall, 1680[$clAttrModifiers];  # Number of layers per pallet
+$feature65=@LCD components, 6029[$clAttrModifiers];  # LCD components
+$feature66=@Shot-to-shot time, 3327[$clAttrModifiers];  # Shot-to-shot time
+$feature69=@Number of cartons per pal, 1679[$clAttrModifiers];  # Number of cartons per pallet
+$feature71=@Exposure type, 5998[$clAttrModifiers];  # Exposure type
+$feature73=@Upgrade type, 1633[$clAttrModifiers];  # Upgrade type
+INSERT_UPDATE Product;code[unique=true];$feature2;$feature4;$feature5;$feature9;$feature12;$feature13;$feature15;$feature16;$feature20;$feature21;$feature22;$feature23;$feature27;$feature28;$feature29;$feature31;$feature36;$feature37;$feature38;$feature40;$feature42;$feature43;$feature47;$feature52;$feature57;$feature58;$feature60;$feature61;$feature62;$feature63;$feature65;$feature66;$feature69;$feature71;$feature73;$catalogVersion;
+ ;1382080;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1934793;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981415a;<ignore>;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2006139;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;Digital camera;<ignore>;<ignore>;"1/4""";<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;true;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053226;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;Camera kit;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053266;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;Body only;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053367;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;Camera kit;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3557133;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;Camera kit;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;816780;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;English / French / German / Spanish / Italian / Portugese / Dutch / Russian / Swedish / Danish / Norwegian / Finish / Polish / Czech / Hungarian;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Operating system/software (3473)
+$feature1=@Compatible operating syst, 2507[$clAttrModifiers];  # Compatible operating systems
+$feature2=@Bundled software, 251[$clAttrModifiers];  # Bundled software
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$catalogVersion;
+ ;1382080;Windows 2000/ XP/ Vista\nOS X v10.3-10.4;<ignore>;
+ ;1934793;Windows XP SP2-3 / Vista\nMac OS X v10.4 - 10.5;<ignore>;
+ ;1981415a;Windows 2000/XP/Vista\nMac OS 10.3 +;Samsung Master\nQuick Time Player 7.5\nAdobe Reader;
+ ;2006139;Windows XP.\nMacintosh x 10.3.\n;<ignore>;
+ ;2053226;Windows / XP (SP2/SP3) / Vista\nOS X v10.4-10.5;ZoomBrowser EX / ImageBrowser;
+ ;2053266;Windows / XP (SP2/SP3) / Vista\nOS X v10.4-10.5;ZoomBrowser EX / ImageBrowser;
+ ;2053367;Windows / XP (SP2/SP3) / Vista\nOS X v10.4-10.5;ZoomBrowser EX / ImageBrowser;
+ ;3557133;Windows / XP (SP2/SP3) / Vista\nOS X v10.4-10.5;ZoomBrowser EX / ImageBrowser;
+
+
+# Classification: System requirements (26)
+$feature1=@Minimum processor, 67[$clAttrModifiers];  # Minimum processor
+$feature2=@Minimum system requiremen, 861[$clAttrModifiers];  # Minimum system requirements
+$feature3=@Minimum hard disk space, 66[$clAttrModifiers];  # Minimum hard disk space in megabyte (MB)
+$feature4=@Minimum system requiremen, 493[$clAttrModifiers];  # Minimum system requirements for Macintosh
+$feature5=@Minimum RAM, 68[$clAttrModifiers];  # Minimum RAMin megabyte (MB)
+$feature6=@Mac compatibility, 853[$clAttrModifiers];  # Mac compatibility
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$catalogVersion;
+ ;1382080;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;1934793;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;1981415a;<ignore>;<ignore>;120;<ignore>;256;true;
+ ;2006139;600 MHz;Windows XP.\nInternet explorer 6.0.\nMacintosh x 10.3\nSafari 1.1.\n\nCD-ROM\nUSB\n800 Ã— 600 16-bit \n;200;<ignore>;128;true;
+ ;2053226;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;2053266;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;2053367;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;3557133;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+
+
+# Classification: Weight & dimensions (40)
+$feature1=@Dimensions W x D x H, 49[$clAttrModifiers];  # Dimensions W x D x Hin millimeter (mm)
+$feature3=@Maximum dimensions  W x D, 669[$clAttrModifiers];  # Maximum dimensions (W x D x H)in millimeter (mm)
+$feature4=@Product weight optional  , 6120[$clAttrModifiers];  # Product weight optional (metric)
+$feature5=@Weight, 94[$clAttrModifiers];  # Weight in gram (g)
+$feature7=@Height, 1464[$clAttrModifiers];  # Height in millimeter (mm)
+$feature11=@Product dimensions when o, 5721[$clAttrModifiers];  # Product dimensions when open (LxWxD)in inch (")
+$feature17=@Depth, 1650[$clAttrModifiers];  # Depth in millimeter (mm)
+$feature18=@Width, 1649[$clAttrModifiers];  # Width in millimeter (mm)
+$feature20=@Product weight optional  , 6119[$clAttrModifiers];  # Product weight optional (imperial)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature3;$feature4;$feature5;$feature7;$feature11;$feature17;$feature18;$feature20;$catalogVersion;
+ ;1382080;<ignore>;<ignore>;<ignore>;475;97.5;<ignore>;61.9;128.8;<ignore>;
+ ;1934793;<ignore>;<ignore>;<ignore>;140;62.0;<ignore>;31.1;92.1;<ignore>;
+ ;1981415a;<ignore>;<ignore>;<ignore>;219;61.5;<ignore>;36.5;105;<ignore>;
+ ;2006139;<ignore>;<ignore>;<ignore>;115;58.5;<ignore>;19.2;95.5;<ignore>;
+ ;2053226;<ignore>;<ignore>;<ignore>;480;97.5;<ignore>;61.9;128.8;<ignore>;
+ ;2053266;<ignore>;<ignore>;<ignore>;480;97.5;<ignore>;61.9;128.8;<ignore>;
+ ;2053367;<ignore>;<ignore>;<ignore>;480;97.5;<ignore>;61.9;128.8;<ignore>;
+ ;3557133;<ignore>;<ignore>;<ignore>;480;97.5;<ignore>;61.9;128.8;<ignore>;
+ ;816780;<ignore>;<ignore>;<ignore>;545;94.7;<ignore>;71.3;133.1;<ignore>;
+
+
+# Classification: Environmental conditions (1196)
+$feature2=@Non-operating relative hu, 621[$clAttrModifiers];  # Non-operating relative humidity (non-condensing)in percent (%)
+$feature3=@Operating relative humidi, 703[$clAttrModifiers];  # Operating relative humidity range in percent (%)
+$feature4=@Recommended operating tem, 473[$clAttrModifiers];  # Recommended operating temperature range (T-T)in degrees Celcium (Â°C)
+$feature5=@Operating temperature ran, 1112[$clAttrModifiers];  # Operating temperature range (T-T)in degrees Celcium (Â°C)
+$feature6=@Storage relative humidity, 1383[$clAttrModifiers];  # Storage relative humidity range in percent (%)
+$feature8=@Recommended humidity oper, 563[$clAttrModifiers];  # Recommended humidity operating range
+$feature9=@Storage temperature range, 757[$clAttrModifiers];  # Storage temperature range (T-T)in degrees Celcium (Â°C)
+INSERT_UPDATE Product;code[unique=true];$feature2;$feature3;$feature4;$feature5;$feature6;$feature8;$feature9;$catalogVersion;
+ ;1382080;<ignore>;<ignore>;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;1934793;<ignore>;10 , 90;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;1981415a;<ignore>;5 , 85;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;2053226;<ignore>;<ignore>;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;2053266;<ignore>;<ignore>;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;2053367;<ignore>;<ignore>;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;3557133;<ignore>;<ignore>;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;816780;<ignore>;<ignore>;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Light metering (3466)
+$feature1=@Spot, 3671[$clAttrModifiers];  # Spot
+$feature2=@Centre-weighted, 3670[$clAttrModifiers];  # Centre-weighted
+$feature3=@Multi-pattern, 3668[$clAttrModifiers];  # Multi-pattern
+$feature4=@Metering, 476[$clAttrModifiers];  # Metering
+$feature5=@Evaluative, 3669[$clAttrModifiers];  # Evaluative
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$catalogVersion;
+ ;1382080;<ignore>;<ignore>;<ignore>;EV 1-20;<ignore>;
+ ;1981415a;true;true;true;<ignore>;<ignore>;
+ ;2006139;true;true;true;<ignore>;<ignore>;
+ ;816780;true;true;true;<ignore>;<ignore>;
+
+
+# Classification: Scene modes (3470)
+$feature1=@Scene modes, 7356[$clAttrModifiers];  # Scene modes
+$feature2=@Shooting modes, 1577[$clAttrModifiers];  # Shooting modes
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$catalogVersion;
+ ;1382080;Landscape,Portrait,Night portrait,Close-up (macro),Sports;<ignore>;
+ ;1934793;Landscape,Portrait,Close-up (macro),Sunset,Underwater,beach,Fireworks,party (indoor);<ignore>;
+ ;1981415a;Landscape,Night,Portrait,Children,Close-up (macro),Documents,dusk,beach,Fireworks,Backlight;<ignore>;
+ ;2006139;Landscape,Portrait,Night portrait,self-portrait,Night landscape,Children,Close-up (macro),Sunset,beach,Fireworks,Backlight,Museum,Candlelight;<ignore>;
+ ;2053226;Portrait,Close-up (macro);<ignore>;
+ ;2053266;Portrait,Close-up (macro);<ignore>;
+ ;2053367;Portrait,Close-up (macro);<ignore>;
+ ;3557133;Portrait,Close-up (macro);<ignore>;
+
+
+# Classification: Colour (2762)
+$feature1=@Colour of product, 1766[$clAttrModifiers];  # Colour of product
+INSERT_UPDATE Product;code[unique=true];$feature1;$catalogVersion;
+ ;1382080;Black;
+ ;1934793;Red;
+ ;1981415a;Silver;
+ ;2006139;Black;
+ ;2053226;Black;
+ ;2053266;Black;
+ ;2053367;Black;
+ ;3557133;Black;
+ ;816780;Black;
+
+
+# Classification: Photo effects (3471)
+$feature1=@Custom colour, 3743[$clAttrModifiers];  # Custom colour
+$feature2=@Saturation adjustment, 3720[$clAttrModifiers];  # Saturation adjustment
+$feature3=@Photo effects, 4279[$clAttrModifiers];  # Photo effects
+$feature4=@Contrast adjustment, 3719[$clAttrModifiers];  # Contrast adjustment
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$catalogVersion;
+ ;1981415a;<ignore>;true;Negative film,black&white,Sepia;true;
+ ;2006139;<ignore>;<ignore>;Sepia,black&white;<ignore>;
+
+
+# Classification: Exposure modes (3467)
+$feature1=@Manual exposure, 3673[$clAttrModifiers];  # Manual exposure
+$feature2=@Aperture priority AE, 3675[$clAttrModifiers];  # Aperture priority AE
+$feature3=@Shutter priority AE, 3674[$clAttrModifiers];  # Shutter priority AE
+$feature4=@Auto exposure, 3672[$clAttrModifiers];  # Auto exposure
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$catalogVersion;
+ ;1981415a;<ignore>;<ignore>;<ignore>;true;
+ ;2006139;<ignore>;<ignore>;<ignore>;true;
+ ;2053226;true;true;true;true;
+ ;2053266;true;true;true;true;
+ ;2053367;true;true;true;true;
+ ;3557133;true;true;true;true;
+ ;816780;true;true;true;true;
+
+
+# Classification: White balance (3468)
+$feature1=@White balance, 682[$clAttrModifiers];  # White balance
+INSERT_UPDATE Product;code[unique=true];$feature1;$catalogVersion;
+ ;1382080;Tungsten,Fluorescent,Cloudy,daylight,Shade;
+ ;1934793;auto,manual,Fluorescent,Cloudy,daylight;
+ ;1981415a;auto,Tungsten,Fluorescent,Cloudy,daylight,custom modes;
+ ;2006139;auto,Tungsten,Fluorescent,daylight,Shade;
+ ;2053226;auto,manual,Cloudy,daylight,Shade;
+ ;2053266;auto,manual,Cloudy,daylight,Shade;
+ ;2053367;auto,manual,Cloudy,daylight,Shade;
+ ;3557133;auto,manual,Cloudy,daylight,Shade;
+ ;816780;auto,Tungsten,Fluorescent,Cloudy,daylight,custom modes,flash,Shade;
+
+
+# Classification: Image editing/playback (3478)
+$feature1=@Histogram, 3779[$clAttrModifiers];  # Histogram
+$feature2=@Crop, 3777[$clAttrModifiers];  # Crop
+$feature3=@Frame, 3778[$clAttrModifiers];  # Frame
+$feature4=@Thumbnails, 3775[$clAttrModifiers];  # Thumbnails
+$feature5=@Movies, 3776[$clAttrModifiers];  # Movies
+$feature6=@Slide show, 1294[$clAttrModifiers];  # Slide show
+$feature7=@Resizing, 3773[$clAttrModifiers];  # Resizing
+$feature8=@Rotating, 3774[$clAttrModifiers];  # Rotating
+$feature9=@Album organization, 3418[$clAttrModifiers];  # Album organization
+$feature11=@Trimming, 3772[$clAttrModifiers];  # Trimming
+$feature12=@Single image, 3771[$clAttrModifiers];  # Single image
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$feature9;$feature11;$feature12;$catalogVersion;
+ ;1981415a;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;<ignore>;true;true;
+ ;2006139;true;true;<ignore>;true;<ignore>;true;<ignore>;<ignore>;<ignore>;true;true;
+ ;2053226;true;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053266;true;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2053367;true;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3557133;true;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;816780;true;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Processor (3419)
+$feature1=@Processor clock speed, 5[$clAttrModifiers];  # Processor clock speed in megahertz (MHz)
+$feature2=@Processor model, 47[$clAttrModifiers];  # Processor model
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$catalogVersion;
+ ;1382080;<ignore>;DIGIC III;
+ ;1934793;<ignore>;DIGIC III;
+ ;2053226;<ignore>;DIGIC 4;
+
+
+# Classification: Focusing (3136)
+$feature1=@Focus adjustment, 1600[$clAttrModifiers];  # Focus adjustment
+$feature2=@Camera focusing range, 1291[$clAttrModifiers];  # Camera focusing range
+$feature3=@Manual focus, 3738[$clAttrModifiers];  # Manual focus
+$feature4=@Focus, 759[$clAttrModifiers];  # Focus
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$catalogVersion;
+ ;1377492;<ignore>;0.3 - â?ž;<ignore>;<ignore>;
+
+
+# Classification: Audio (3551)
+$feature1=@Recording of audio files, 1307[$clAttrModifiers];  # Recording of audio files
+$feature2=@Built-in microphone, 1025[$clAttrModifiers];  # Built-in microphone
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$catalogVersion;
+ ;1377492;<ignore>;true;
+
+
+# Classification: Lens system (37)
+$feature1=@Digital zoom, 48[$clAttrModifiers];  # Digital zoom in zoom factor (x)
+$feature2=@Playback zoom, 2396[$clAttrModifiers];  # Playback zoom
+$feature4=@Aperture range, 638[$clAttrModifiers];  # Aperture range
+$feature6=@Closest focusing distance, 2726[$clAttrModifiers];  # Closest focusing distance in meter (m)
+$feature7=@35 mm camera lens equival, 1678[$clAttrModifiers];  # 35 mm camera lens equivalent in millimeter (mm)
+$feature8=@Focal length, 1522[$clAttrModifiers];  # Focal length in millimeter (mm)
+$feature9=@Filter size, 1615[$clAttrModifiers];  # Filter size in millimeter (mm)
+$feature10=@Megapixel, 63[$clAttrModifiers];  # Megapixel in megapixel (MP)
+$feature11=@Lens focal range, 744[$clAttrModifiers];  # Lens focal range
+$feature12=@Optical zoom, 74[$clAttrModifiers];  # Optical zoom in zoom factor (x)
+$feature13=@Lens system, 576[$clAttrModifiers];  # Lens system
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature4;$feature6;$feature7;$feature8;$feature9;$feature10;$feature11;$feature12;$feature13;$catalogVersion;
+ ;1934406;120;<ignore>;1.8 , 2.2;<ignore>;42 , 497;3.2 , 32;30;2.36;<ignore>;10;Carl Zeiss Vario-Sonnar T*;
+
+
+# Classification: Image sensor (2972)
+$feature1=@Optical sensor resolution, 1617[$clAttrModifiers];  # Optical sensor resolution in pixels (pixels)
+$feature2=@Effective sensor resoluti, 1616[$clAttrModifiers];  # Effective sensor resolution in pixels (pixels)
+$feature3=@Optical sensor size, 1618[$clAttrModifiers];  # Optical sensor size in inch (")
+$feature4=@Sensor type, 1574[$clAttrModifiers];  # Sensor type
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$catalogVersion;
+ ;1934406;2360000;1990000;1/5.0;Exmor CMOS Sensor;
+
+
+# Classification: Display (21)
+$feature1=@Display, 83[$clAttrModifiers];  # Display
+$feature2=@Display diagonal, 944[$clAttrModifiers];  # Display diagonal in inch (")
+$feature3=@Display resolution, 1585[$clAttrModifiers];  # Display resolution in pixels (pixels)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$catalogVersion;
+ ;1934406;LCD;2.7;211200;
+
+
+# Classification: Video (2912)
+$feature1=@Digital video capture spe, 1570[$clAttrModifiers];  # Digital video capture speed in frames per second (fps)
+$feature2=@Video compression formats, 2225[$clAttrModifiers];  # Video compression formats
+$feature3=@Video capture resolution, 1597[$clAttrModifiers];  # Video capture resolution in pixels (pixels)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$catalogVersion;
+ ;1934406;<ignore>;<ignore>;1920 x 1080;
+
+
+# Classification: Technical details (631)
+$feature1=@Tripod mountable, 1601[$clAttrModifiers];  # Tripod mountable
+$feature2=@Camcorder tape type, 3265[$clAttrModifiers];  # Camcorder tape type
+$feature3=@Self-timer, 765[$clAttrModifiers];  # Self-timer in seconds (s)
+$feature4=@Camera shutter speed, 1295[$clAttrModifiers];  # Camera shutter speed in seconds (s)
+$feature5=@Image stabilizer, 1578[$clAttrModifiers];  # Image stabilizer
+$feature6=@Shooting modes, 1577[$clAttrModifiers];  # Shooting modes
+$feature7=@Night mode, 2681[$clAttrModifiers];  # Night mode
+$feature11=@Interface, 21[$clAttrModifiers];  # Interface
+$feature12=@Minimum illumination, 1581[$clAttrModifiers];  # Minimum illumination in lux (lx)
+$feature13=@Noise reduction, 2483[$clAttrModifiers];  # Noise reduction
+$feature15=@Resolution, 80[$clAttrModifiers];  # Resolution in pixels (pixels)
+$feature16=@Special features, 86[$clAttrModifiers];  # Special features
+$feature17=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
+$feature19=@Camera playback, 1301[$clAttrModifiers];  # Camera playback
+$feature20=@Metering, 476[$clAttrModifiers];  # Metering
+$feature21=@Fader, 2326[$clAttrModifiers];  # Fader
+$feature25=@Additional accessories, 1305[$clAttrModifiers];  # Additional accessories
+$feature26=@Power consumption, 445[$clAttrModifiers];  # Power consumption in Watt (W)
+$feature28=@Photo mode, 1817[$clAttrModifiers];  # Photo mode
+$feature29=@On Screen Display  OSD , 3064[$clAttrModifiers];  # On Screen Display (OSD)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature11;$feature12;$feature13;$feature15;$feature16;$feature17;$feature19;$feature20;$feature21;$feature25;$feature26;$feature28;$feature29;$catalogVersion;
+ ;1934406;<ignore>;Flash memory;<ignore>;1/2 - 1/1000;true;<ignore>;false;<ignore>;5;true;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;true;<ignore>;3.5;true;true;
+
+
+# Classification: Storage media (2911)
+$feature2=@Hard disk drive capacity, 7[$clAttrModifiers];  # Hard disk drive capacity in gigabyte (GB)
+$feature4=@Compatible memory cards, 730[$clAttrModifiers];  # Compatible memory cards
+INSERT_UPDATE Product;code[unique=true];$feature2;$feature4;$catalogVersion;
+ ;1934406;<ignore>;Memory Stick, Memory Stick Duo;
+
+
+# Classification: Weight & dimensions (38)
+$feature1=@Dimensions W x D x H, 49[$clAttrModifiers];  # Dimensions W x D x Hin millimeter (mm)
+$feature2=@Depth, 1650[$clAttrModifiers];  # Depth in millimeter (mm)
+$feature3=@Weight, 94[$clAttrModifiers];  # Weight in gram (g)
+$feature5=@Height, 1464[$clAttrModifiers];  # Height in millimeter (mm)
+$feature6=@Width, 1649[$clAttrModifiers];  # Width in millimeter (mm)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature5;$feature6;$catalogVersion;
+ ;1934406;<ignore>;107;280;60;55;
+
+
+# Classification: Energy management (1707)
+$feature1=@Battery technology, 434[$clAttrModifiers];  # Battery technology
+$feature2=@Battery type, 908[$clAttrModifiers];  # Battery type
+$feature4=@Battery performance, 909[$clAttrModifiers];  # Battery performance in milliAmpere * hour (mAh)
+$feature5=@Battery life  CIPA standa, 6231[$clAttrModifiers];  # Battery life (CIPA standard)in shots (shots)
+$feature6=@Battery life, 1721[$clAttrModifiers];  # Battery life in hour (h)
+$feature7=@Power requirements, 780[$clAttrModifiers];  # Power requirements
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature4;$feature5;$feature6;$feature7;$catalogVersion;
+ ;1934406;<ignore>;NP-FH60;<ignore>;<ignore>;1.5;<ignore>;
+
+
+# Classification: Still image (3479)
+$feature1=@Still image capture resol, 1598[$clAttrModifiers];  # Still image capture resolutions
+$feature2=@Supported image formats, 2417[$clAttrModifiers];  # Supported image formats
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$catalogVersion;
+ ;1934406;2304 x 1728;<ignore>;
+
+
+# Classification: Memory (19)
+$feature1=@Recording speed, 1582[$clAttrModifiers];  # Recording speed
+$feature2=@Internal memory, 6[$clAttrModifiers];  # Internal memory in megabyte (MB)
+$feature3=@Flash memory, 538[$clAttrModifiers];  # Flash memory in megabyte (MB)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$catalogVersion;
+ ;1934406;"HD ; FH (1920x1080i, 16Mbps) / HQ (9Mbps) / SP (7Mbps) / LP (5Mbps) , SD ; HQ (9Mbps) / SP (6Mbps) / LP (3Mbps)";8000;<ignore>
+
+
+# Classification: Connectivity (2858)
+$feature1=@PictBridge, 2397[$clAttrModifiers];  # PictBridge
+$feature2=@Component video  YPbPr/YC, 3562[$clAttrModifiers];  # Component video (YPbPr/YCbCr) out
+$feature3=@USB 2 0 ports quantity, 2308[$clAttrModifiers];  # USB 2.0 ports quantity
+$feature4=@DC-in jack, 2316[$clAttrModifiers];  # DC-in jack
+$feature5=@Video out, 1595[$clAttrModifiers];  # Video out
+$feature6=@Microphone, line-in jack, 2314[$clAttrModifiers];  # Microphone, line-in jack
+$feature7=@Audio output, 1786[$clAttrModifiers];  # Audio output
+$feature8=@Composite video out, 3016[$clAttrModifiers];  # Composite video out
+$feature14=@I/O ports, 470[$clAttrModifiers];  # I/O ports
+$feature15=@HDMI ports quantity, 3566[$clAttrModifiers];  # HDMI ports quantity
+$feature16=@S-Video out, 3200[$clAttrModifiers];  # S-Video out
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$feature14;$feature15;$feature16;$catalogVersion;
+ ;1934406;true;1;1;<ignore>;1;false;1;<ignore>;<ignore>;1;1;
+
+
+# Classification: Operating system/software (3480)
+$feature1=@Compatible operating syst, 2507[$clAttrModifiers];  # Compatible operating systems
+$feature2=@Bundled software, 251[$clAttrModifiers];  # Bundled software
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$catalogVersion;
+ ;1934406;<ignore>;  \n\nPicture Motion Browser;
+
+
+# Classification: Focusing (2973)
+$feature1=@Normal focusing range, 3730[$clAttrModifiers];  # Normal focusing range in meter (m)
+$feature2=@Focus adjustment, 1600[$clAttrModifiers];  # Focus adjustment
+$feature3=@Auto focus, 1614[$clAttrModifiers];  # Auto focus
+$feature4=@Manual focus, 3738[$clAttrModifiers];  # Manual focus
+$feature5=@Focus, 759[$clAttrModifiers];  # Focus
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$catalogVersion;
+ ;1934406;<ignore>;<ignore>;true;true;<ignore>;
+
+
+# Classification: White balance (3474)
+$feature1=@Indoor white balance, 5572[$clAttrModifiers];  # Indoor white balance
+$feature2=@Outdoor white balance, 5571[$clAttrModifiers];  # Outdoor white balance
+$feature3=@Onepush white balance, 5573[$clAttrModifiers];  # Onepush white balance
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$catalogVersion;
+ ;1934406;true;true;true;
+
+
+# Classification: Scene modes (3476)
+$feature1=@Twilight, 3751[$clAttrModifiers];  # Twilight
+$feature2=@Spotlight, 5574[$clAttrModifiers];  # Spotlight
+$feature3=@Sports, 3708[$clAttrModifiers];  # Sports
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$catalogVersion;
+ ;1934406;true;true;<ignore>;
+
+
+# Classification: Audio (2910)
+$feature2=@Wind filter, 3228[$clAttrModifiers];  # Wind filter
+$feature4=@Built-in speakers, 2433[$clAttrModifiers];  # Built-in speakers
+$feature5=@Audio system, 442[$clAttrModifiers];  # Audio system
+$feature6=@Built-in microphone, 1025[$clAttrModifiers];  # Built-in microphone
+INSERT_UPDATE Product;code[unique=true];$feature2;$feature4;$feature5;$feature6;$catalogVersion;
+ ;1934406;<ignore>;true;Dolby Digital 2ch;true;
+
+
+# Classification: Colour (2928)
+$feature1=@Colour of product, 1766[$clAttrModifiers];  # Colour of product
+INSERT_UPDATE Product;code[unique=true];$feature1;$catalogVersion;
+ ;1934406;Red;
+
+
+# Classification: Viewfinder (3021)
+$feature2=@Camera viewfinder, 1293[$clAttrModifiers];  # Camera viewfinder
+INSERT_UPDATE Product;code[unique=true];$feature2;$catalogVersion;
+ ;1934406;false;
+
+
+# Classification: Flash (2974)
+$feature1=@Flash, 463[$clAttrModifiers];  # Flash
+$feature2=@Built-in flash, 1289[$clAttrModifiers];  # Built-in flash
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$catalogVersion;
+ ;1934406;<ignore>;false;
+
+
+# Classification: Photo effects (3475)
+$feature2=@Pastel, 3752[$clAttrModifiers];  # Pastel
+$feature3=@Photo effects, 4279[$clAttrModifiers];  # Photo effects
+$feature4=@Art, 3749[$clAttrModifiers];  # Art
+INSERT_UPDATE Product;code[unique=true];$feature2;$feature3;$feature4;$catalogVersion;
+ ;1934406;true;<ignore>;<ignore>;
+
+
+# Classification: Camera (3527)
+$feature1=@Progressive scan, 3221[$clAttrModifiers];  # Progressive scan
+INSERT_UPDATE Product;code[unique=true];$feature1;$catalogVersion;
+ ;1934406;false;
+
+
+# Classification: Packaging content (3910)
+$feature1=@Cables included, 1830[$clAttrModifiers];  # Cables included
+$feature2=@AC adapter bundled, 1230[$clAttrModifiers];  # AC adapter bundled
+$feature3=@Additional accessories, 1305[$clAttrModifiers];  # Additional accessories
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$catalogVersion;
+ ;2006139;<ignore>;true;<ignore>;
+
+
+# Classification: Picture quality (57)
+$feature1=@Image stabilizer, 1578[$clAttrModifiers];  # Image stabilizer
+$feature2=@Megapixel, 63[$clAttrModifiers];  # Megapixel in megapixel (MP)
+$feature3=@Data compression, 710[$clAttrModifiers];  # Data compression
+$feature4=@Supported camera resoluti, 1748[$clAttrModifiers];  # Supported camera resolutions
+$feature5=@Maximum resolution, 1659[$clAttrModifiers];  # Maximum resolution in pixels (pixels)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$catalogVersion;
+ ;1225694;<ignore>;10.5;<ignore>;3888x2592\n3888x2592\n2816x1880\n2816x1880\n1936x1288\n1936x1288\n3888x2592\n1936x1288;3888 x 2592;
+ ;1715477;<ignore>;25.7;<ignore>;6048 x 4032\n6048 x 4032\n4400 x 2936\n3024 x 2016;6048 x 4032;
+ ;1934795;<ignore>;10;<ignore>;(L) 3648 x 2736\n(M1) 2816 x 2112\n(M2) 2272 x 1704\n1600 x 1200\n(S) 640 x 480\n(W) 3648 x 2048;3648 x 2736;
+ ;1981412;true;10.2;<ignore>;3648 x 2736\n3648 x 2056;3648 x 2736;
+ ;1981413;true;10.2;<ignore>;3648 x 2736\n3648 x 2056;3648 x 2736;
+ ;1981414;true;10.2;<ignore>;3648 x 2736\n3648 x 2056;3648 x 2736;
+ ;2054947;true;15.1;JPEG;(L) 4272x2848\n(M) 3088x2056\n(S) 2256x1504;4272 x 2848;
+ ;3555166;true;15.1;JPEG;(L) 4272x2848\n(M) 3088x2056\n(S) 2256x1504;4272 x 2848;
+ ;3708646;true;15.1;JPEG;(L) 4272x2848\n(M) 3088x2056\n(S) 2256x1504;4272 x 2848;
+ ;3958110;false;15.1;JPEG;(L) 4272x2848\n(M) 3088x2056\n(S) 2256x1504;4272 x 2848;
+ ;4808175;false;15.1;JPEG;(L) 4272x2848\n(M) 3088x2056\n(S) 2256x1504;4272 x 2848;
+ ;4812254;true;15.1;<ignore>;(L) 4272x2848\n(M) 3088x2056\n(S) 2256x1504;4272 x 2848;
+ ;5473115;true;15.1;JPEG;(L) 4272x2848\n(M) 3088x2056\n(S) 2256x1504;4272 x 2848;
+
+
+# Classification: Lens system (39)
+$feature1=@Fixed focal length, 5748[$clAttrModifiers];  # Fixed focal length in millimeter (mm)
+$feature2=@Digital zoom, 48[$clAttrModifiers];  # Digital zoom in zoom factor (x)
+$feature3=@Lens, 1290[$clAttrModifiers];  # Lens in millimeter (mm)
+$feature4=@Aperture range, 638[$clAttrModifiers];  # Aperture range
+$feature5=@Number of aspheric elemen, 6204[$clAttrModifiers];  # Number of aspheric elements
+$feature6=@Number of diaphragm blade, 5547[$clAttrModifiers];  # Number of diaphragm blades
+$feature7=@Lens structure  elements/, 1865[$clAttrModifiers];  # Lens structure (elements/groups)
+$feature8=@35 mm camera lens equival, 1678[$clAttrModifiers];  # 35 mm camera lens equivalent in millimeter (mm)
+$feature9=@Focal length, 1522[$clAttrModifiers];  # Focal length in millimeter (mm)
+$feature10=@Filter size, 1615[$clAttrModifiers];  # Filter size in millimeter (mm)
+$feature11=@Combined zoom, 6571[$clAttrModifiers];  # Combined zoom in zoom factor (x)
+$feature13=@Filter, 2534[$clAttrModifiers];  # Filter
+$feature14=@Digital SLR, 3567[$clAttrModifiers];  # Digital SLR
+$feature15=@Lens focal range, 744[$clAttrModifiers];  # Lens focal range
+$feature16=@Optical zoom, 74[$clAttrModifiers];  # Optical zoom in zoom factor (x)
+$feature17=@Lens system, 576[$clAttrModifiers];  # Lens system
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$feature9;$feature10;$feature11;$feature13;$feature14;$feature15;$feature16;$feature17;$catalogVersion;
+ ;1225694;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;
+ ;1715477;<ignore>;0;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;0;<ignore>;
+ ;1934795;<ignore>;4;<ignore>;f/3.0 - f/5.8;1;<ignore>;7 / 6;<ignore>;6.6 - 21.6;<ignore>;<ignore>;<ignore>;false;<ignore>;3.3;<ignore>;
+ ;1981412;<ignore>;5;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;35 - 175;6.3 - 31.5;<ignore>;25;<ignore>;false;F3.5(W) - F5.5(T);5;<ignore>;
+ ;1981413;<ignore>;5;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;35 - 175;6.3 - 31.5;<ignore>;25;<ignore>;false;F3.5(W) - F5.5(T);5;<ignore>;
+ ;1981414;<ignore>;5;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;35 - 175;6.3 - 31.5;<ignore>;25;<ignore>;false;F3.5(W) - F5.5(T);5;<ignore>;
+ ;2054947;<ignore>;0;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;18 - 55;<ignore>;<ignore>;<ignore>;true;<ignore>;0;EF/EF-S;
+ ;3555166;<ignore>;0;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;18 - 55;<ignore>;<ignore>;<ignore>;true;<ignore>;0;EF/EF-S;
+ ;3708646;<ignore>;0;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;18 - 55;<ignore>;<ignore>;<ignore>;true;<ignore>;0;EF/EF-S;
+ ;3958110;<ignore>;0;<ignore>;-;<ignore>;<ignore>;<ignore>;-;-;<ignore>;<ignore>;true;true;<ignore>;0;EF/EF-S;
+ ;4808175;<ignore>;0;<ignore>;-;<ignore>;<ignore>;<ignore>;-;-;<ignore>;<ignore>;true;true;<ignore>;0;EF/EF-S;
+ ;4812254;<ignore>;0;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;18 - 55;<ignore>;<ignore>;<ignore>;true;<ignore>;0;EF/EF-S;
+ ;5473115;<ignore>;0;<ignore>;f/3.5 - 5.6;<ignore>;6;11/9;29 - 88;18 - 55;58;<ignore>;true;true;<ignore>;0;EF/EF-S;
+
+
+# Classification: Focusing (2759)
+$feature1=@Normal focusing range, 3730[$clAttrModifiers];  # Normal focusing range in meter (m)
+$feature2=@Macro focusing range  tel, 3732[$clAttrModifiers];  # Macro focusing range (tele)in meter (m)
+$feature3=@Focus adjustment, 1600[$clAttrModifiers];  # Focus adjustment
+$feature4=@Camera focusing range, 1291[$clAttrModifiers];  # Camera focusing range
+$feature5=@Auto Focus  AF  illuminat, 3740[$clAttrModifiers];  # Auto Focus (AF) illuminator
+$feature6=@Macro focusing range  wid, 3731[$clAttrModifiers];  # Macro focusing range (wide)in meter (m)
+$feature7=@Auto Mode focusing range , 3734[$clAttrModifiers];  # Auto Mode focusing range (wide)in meter (m)
+$feature10=@Auto Mode focusing range , 3735[$clAttrModifiers];  # Auto Mode focusing range (tele)in meter (m)
+$feature11=@Manual focus, 3738[$clAttrModifiers];  # Manual focus
+$feature13=@Auto Focus  AF  assist be, 3748[$clAttrModifiers];  # Auto Focus (AF) assist beam
+$feature15=@Auto Focus  AF  lock, 3739[$clAttrModifiers];  # Auto Focus (AF) lock
+$feature16=@Focus, 759[$clAttrModifiers];  # Focus
+$feature17=@Closest focusing distance, 2726[$clAttrModifiers];  # Closest focusing distance in meter (m)
+$feature18=@Auto focus, 1614[$clAttrModifiers];  # Auto focus
+$feature19=@Auto focusing  AF  modes, 7365[$clAttrModifiers];  # Auto focusing (AF) modes
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature10;$feature11;$feature13;$feature15;$feature16;$feature17;$feature18;$feature19;$catalogVersion;
+ ;1225694;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;TTL-CT-SIR;<ignore>;true;<ignore>;
+ ;1715477;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;true;<ignore>;<ignore>;<ignore>;spot auto focus,single auto focus,continuous auto focus;
+ ;1934795;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;0.01;true;<ignore>;
+ ;1981412;0.8 , â?ž;0.5 , 0.8;<ignore>;<ignore>;<ignore>;0.1 , 0.8;0.1 , â?ž;0.5 , â?ž;true;<ignore>;<ignore>;<ignore>;<ignore>;true;centre weighted auto focus,multi point auto focus;
+ ;1981413;0.8 , â?ž;0.5 , 0.8;<ignore>;<ignore>;<ignore>;0.1 , 0.8;0.1 , â?ž;0.5 , â?ž;true;<ignore>;<ignore>;<ignore>;<ignore>;true;centre weighted auto focus,multi point auto focus;
+ ;1981414;0.8 , â?ž;0.5 , 0.8;<ignore>;<ignore>;<ignore>;0.1 , 0.8;0.1 , â?ž;0.5 , â?ž;true;<ignore>;<ignore>;<ignore>;<ignore>;true;centre weighted auto focus,multi point auto focus;
+ ;2054947;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;TTL-CT-SIR;<ignore>;true;selective auto focus;
+ ;3555166;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;TTL-CT-SIR;<ignore>;true;selective auto focus;
+ ;3708646;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;TTL-CT-SIR;<ignore>;true;selective auto focus;
+ ;3958110;<ignore>;<ignore>;<ignore>;EV -0.5 -18;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;TTL-CT-SIR;<ignore>;true;Single Auto Focus,Selective Auto Focus;
+ ;4808175;<ignore>;<ignore>;<ignore>;EV -0.5 -18;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;TTL-CT-SIR;<ignore>;true;Single Auto Focus,Selective Auto Focus;
+ ;4812254;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;TTL-CT-SIR;<ignore>;true;selective auto focus;
+ ;5473115;<ignore>;<ignore>;<ignore>;EV -0.5 -18;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;TTL-CT-SIR;0.25;true;Single Auto Focus,Selective Auto Focus;
+
+
+# Classification: Light exposure (55)
+$feature1=@Light exposure rating, 694[$clAttrModifiers];  # Light exposure rating
+$feature2=@Camera shutter speed, 1295[$clAttrModifiers];  # Camera shutter speed in seconds (s)
+$feature3=@Light exposure correction, 670[$clAttrModifiers];  # Light exposure correction
+$feature4=@Light exposure control, 711[$clAttrModifiers];  # Light exposure control
+$feature5=@ISO sensitivity, 2102[$clAttrModifiers];  # ISO sensitivity
+$feature6=@Shutter Lag, 664[$clAttrModifiers];  # Shutter Lag
+$feature7=@Electronic shutter, 3729[$clAttrModifiers];  # Electronic shutter
+$feature8=@Camera sensitivity, 1302[$clAttrModifiers];  # Camera sensitivity
+$feature9=@Mechanical shutter, 3728[$clAttrModifiers];  # Mechanical shutter
+$feature10=@Light exposure type, 550[$clAttrModifiers];  # Light exposure type
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$feature9;$feature10;$catalogVersion;
+ ;1225694;<ignore>;30-1/8000 ;<ignore>;<ignore>;Auto (100-800), 100-1600 ;<ignore>;<ignore>;<ignore>;<ignore>;+/- 2 EV;
+ ;1715477;<ignore>;1/8000 - 30;<ignore>;<ignore>;200 - 3200;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1934795;<ignore>;1/60 - 1/2000;<ignore>;<ignore>;80, 100, 200, 400, 800, 1600;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981412;<ignore>;1/8 - 1/1500;Â±2EV @ 1/3EV;<ignore>;80, 100, 200, 400, 800, 1600, 3200;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981413;<ignore>;1/8 - 1/1500;Â±2EV @ 1/3EV;<ignore>;80, 100, 200, 400, 800, 1600, 3200;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981414;<ignore>;1/8 - 1/1500;Â±2EV @ 1/3EV;<ignore>;80, 100, 200, 400, 800, 1600, 3200;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2054947;<ignore>;30 - 1/4000;+/-2 EV - 1/3;<ignore>;100, 200, 400, 800, 1600, 3200;<ignore>;true;<ignore>;<ignore>;<ignore>;
+ ;3555166;<ignore>;30 - 1/4000;+/-2 EV - 1/3;<ignore>;100, 200, 400, 800, 1600, 3200;<ignore>;true;<ignore>;<ignore>;<ignore>;
+ ;3708646;<ignore>;30 - 1/4000;+/-2 EV - 1/3;<ignore>;100, 200, 400, 800, 1600, 3200;<ignore>;true;<ignore>;<ignore>;<ignore>;
+ ;3958110;<ignore>;30 - 1/4000;+/-2 EV - 1/3;<ignore>;Auto,100,200,400,800,1600,3200;<ignore>;true;<ignore>;<ignore>;<ignore>;
+ ;4808175;<ignore>;30 - 1/4000;+/-2 EV - 1/3;<ignore>;Auto,100,200,400,800,1600,3200;<ignore>;true;<ignore>;<ignore>;<ignore>;
+ ;4812254;<ignore>;30 - 1/4000;+/-2 EV - 1/3;<ignore>;100, 200, 400, 800, 1600, 3200;<ignore>;true;<ignore>;<ignore>;<ignore>;
+ ;5473115;<ignore>;30 - 1/4000;+/-2 EV - 1/3;<ignore>;Auto,100,200,400,800,1600,3200;<ignore>;true;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Flash (2761)
+$feature1=@Flash exposure lock, 3343[$clAttrModifiers];  # Flash exposure lock
+$feature2=@Flash range  wide , 3725[$clAttrModifiers];  # Flash range (wide)in meter (m)
+$feature3=@Flash guide number, 3676[$clAttrModifiers];  # Flash guide number
+$feature5=@Flash, 463[$clAttrModifiers];  # Flash
+$feature6=@Flash modes, 7357[$clAttrModifiers];  # Flash modes
+$feature7=@Flash working distance, 2002[$clAttrModifiers];  # Flash working distance
+$feature8=@Built-in flash, 1289[$clAttrModifiers];  # Built-in flash
+$feature10=@Flash range  tele , 3726[$clAttrModifiers];  # Flash range (tele)in meter (m)
+$feature11=@Flash recharging time, 3682[$clAttrModifiers];  # Flash recharging timein seconds (s)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature5;$feature6;$feature7;$feature8;$feature10;$feature11;$catalogVersion;
+ ;1225694;true;<ignore>;<ignore>;<ignore>;Red-eye reduction,second curtain synchro,auto,manual,Flash off;<ignore>;true;<ignore>;<ignore>;
+ ;1715477;<ignore>;<ignore>;<ignore>;<ignore>;Slow synchronization,auto,fill-in,Flash off;<ignore>;false;<ignore>;<ignore>;
+ ;1934795;<ignore>;0.30 , 3;<ignore>;<ignore>;auto,Flash off;<ignore>;true;<ignore>;<ignore>;
+ ;1981412;<ignore>;0.2 , 4.6;<ignore>;<ignore>;Red-eye reduction,auto;<ignore>;true;0.5 , 2.6;4;
+ ;1981413;<ignore>;0.2 , 4.6;<ignore>;<ignore>;Red-eye reduction,auto;<ignore>;true;0.5 , 2.6;4;
+ ;1981414;<ignore>;0.2 , 4.6;<ignore>;<ignore>;Red-eye reduction,auto;<ignore>;true;0.5 , 2.6;4;
+ ;2054947;true;<ignore>;<ignore>;TTL;Red-eye reduction,second curtain synchro,auto,manual,Flash off;<ignore>;true;<ignore>;<ignore>;
+ ;3555166;true;<ignore>;<ignore>;TTL;Red-eye reduction,second curtain synchro,auto,manual,Flash off;<ignore>;true;<ignore>;<ignore>;
+ ;3708646;true;<ignore>;<ignore>;TTL;Red-eye reduction,second curtain synchro,auto,manual,Flash off;<ignore>;true;<ignore>;<ignore>;
+ ;3958110;true;<ignore>;13;TTL;Auto,Manual,Flash off,Red-eye reduction,Second curtain synchro;<ignore>;true;<ignore>;3;
+ ;4808175;true;<ignore>;13;TTL;Auto,Manual,Flash off,Red-eye reduction,Second curtain synchro;<ignore>;true;<ignore>;3;
+ ;4812254;true;<ignore>;<ignore>;TTL;Red-eye reduction,second curtain synchro,auto,manual,Flash off;<ignore>;true;<ignore>;<ignore>;
+ ;5473115;true;<ignore>;13;TTL;Auto,Manual,Flash off,Red-eye reduction,Second curtain synchro;<ignore>;true;<ignore>;3;
+
+
+# Classification: Memory (42)
+$feature1=@Maximum internal memory, 1246[$clAttrModifiers];  # Maximum internal memory in megabyte (MB)
+$feature2=@Maximum internal memory, 1452[$clAttrModifiers];  # Maximum internal memory in gigabyte (GB)
+$feature3=@Internal memory, 6[$clAttrModifiers];  # Internal memory in megabyte (MB)
+$feature4=@Memory slots, 672[$clAttrModifiers];  # Memory slots
+$feature5=@Storage media capacity, 481[$clAttrModifiers];  # Storage media capacity
+$feature6=@Memory type, 642[$clAttrModifiers];  # Memory type
+$feature7=@Memory upgrade, 584[$clAttrModifiers];  # Memory upgrade in gigabyte (GB)
+$feature8=@Compatible memory cards, 730[$clAttrModifiers];  # Compatible memory cards
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$catalogVersion;
+ ;1225694;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;cf;
+ ;1715477;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;cf,memory stick (ms),microdrive;
+ ;1934795;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;sd,mmc;
+ ;1981412;<ignore>;<ignore>;30;<ignore>;<ignore>;<ignore>;<ignore>;sd,mmc;
+ ;1981413;<ignore>;<ignore>;30;<ignore>;<ignore>;<ignore>;<ignore>;sd,mmc;
+ ;1981414;<ignore>;<ignore>;30;<ignore>;<ignore>;<ignore>;<ignore>;sd,mmc;
+ ;2054947;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;sd,sdhc;
+ ;3555166;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;sd,sdhc;
+ ;3708646;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;sd,sdhc;
+ ;3958110;<ignore>;<ignore>;-;<ignore>;<ignore>;<ignore>;<ignore>;sd,sdhc;
+ ;4808175;<ignore>;<ignore>;-;<ignore>;<ignore>;<ignore>;<ignore>;sd,sdhc;
+ ;4812254;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;sd,sdhc;
+ ;5473115;<ignore>;<ignore>;-;<ignore>;<ignore>;<ignore>;<ignore>;sd,sdhc;
+
+
+# Classification: Display (41)
+$feature3=@Field of view, 6952[$clAttrModifiers];  # Field of view in percent (%)
+$feature4=@Camera display resolution, 6205[$clAttrModifiers];  # Camera display resolution in pixels (pixels)
+$feature5=@Display, 83[$clAttrModifiers];  # Display
+$feature6=@Display diagonal, 944[$clAttrModifiers];  # Display diagonal in inch (")
+INSERT_UPDATE Product;code[unique=true];$feature3;$feature4;$feature5;$feature6;$catalogVersion;
+ ;1225694;<ignore>;230000;TFT;3;
+ ;1715477;<ignore>;921.600;Xtra Fine LCD;3;
+ ;1934795;<ignore>;<ignore>;TFT;2.5;
+ ;1981412;<ignore>;230000;TFT;2.7;
+ ;1981413;<ignore>;230000;TFT;2.7;
+ ;1981414;<ignore>;230000;TFT;2.7;
+ ;2054947;100;920000;TFT;3;
+ ;3555166;100;920000;TFT;3;
+ ;3708646;100;920000;TFT;3;
+ ;3958110;100;920000;TFT;3;
+ ;4808175;100;920000;TFT;3;
+ ;4812254;100;920000;TFT;3;
+ ;5473115;100;920000;TFT;3;
+
+
+# Classification: Viewfinder (3020)
+$feature1=@Camera viewfinder, 1293[$clAttrModifiers];  # Camera viewfinder
+$feature2=@Electrical viewfinder, 3274[$clAttrModifiers];  # Electrical viewfinder
+$feature3=@Optical viewfinder, 3273[$clAttrModifiers];  # Optical viewfinder
+$feature4=@Magnification, 1864[$clAttrModifiers];  # Magnification in zoom factor (x)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$catalogVersion;
+ ;1715477;<ignore>;<ignore>;<ignore>;0.74x;
+ ;2054947;Pentamirror;true;<ignore>;0.87x;
+ ;3555166;Pentamirror;true;<ignore>;0.87x;
+ ;3708646;Pentamirror;true;<ignore>;0.87x;
+ ;3958110;Pentamirror;true;<ignore>;0.87x;
+ ;4808175;Pentamirror;true;<ignore>;0.87x;
+ ;4812254;Pentamirror;true;<ignore>;0.87x;
+ ;5473115;Pentamirror;true;<ignore>;0.87x;
+
+
+# Classification: Connectivity (56)
+$feature1=@PictBridge, 2397[$clAttrModifiers];  # PictBridge
+$feature2=@Interface, 21[$clAttrModifiers];  # Interface
+$feature4=@I/O ports, 470[$clAttrModifiers];  # I/O ports
+$feature5=@USB 2 0 ports quantity, 2308[$clAttrModifiers];  # USB 2.0 ports quantity
+$feature6=@DC-in jack, 2316[$clAttrModifiers];  # DC-in jack
+$feature7=@HDMI ports quantity, 3566[$clAttrModifiers];  # HDMI ports quantity
+$feature9=@Connection to PC, 1311[$clAttrModifiers];  # Connection to PC
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature4;$feature5;$feature6;$feature7;$feature9;$catalogVersion;
+ ;1225694;true;<ignore>;PAL/ NTSC;1;<ignore>;<ignore>;<ignore>;
+ ;1715477;true;USB 2.0;<ignore>;<ignore>;<ignore>;1;<ignore>;
+ ;1934795;<ignore>;USB (Mini-B, MTP, PTP);<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981412;<ignore>;USB 2.0;<ignore>;1;<ignore>;<ignore>;<ignore>;
+ ;1981413;<ignore>;USB 2.0;<ignore>;1;<ignore>;<ignore>;<ignore>;
+ ;1981414;<ignore>;USB 2.0;<ignore>;1;<ignore>;<ignore>;<ignore>;
+ ;2054947;true;USB 2.0, Video out (PAL/ NTSC);<ignore>;1;<ignore>;1;<ignore>;
+ ;3555166;true;USB 2.0, Video out (PAL/ NTSC);<ignore>;1;<ignore>;1;<ignore>;
+ ;3708646;true;USB 2.0, Video out (PAL/ NTSC);<ignore>;1;<ignore>;1;<ignore>;
+ ;3958110;true;USB 2.0, Video out (PAL/ NTSC);<ignore>;1;<ignore>;1;<ignore>;
+ ;4808175;true;USB 2.0, Video out (PAL/ NTSC);<ignore>;1;<ignore>;1;<ignore>;
+ ;4812254;true;USB 2.0, AV out (PAL/ NTSC);<ignore>;1;<ignore>;1;<ignore>;
+ ;5473115;true;USB 2.0, Video out (PAL/ NTSC);<ignore>;1;<ignore>;1;<ignore>;
+
+
+# Classification: Camera (3149)
+$feature2=@Playback zoom, 2396[$clAttrModifiers];  # Playback zoom
+$feature3=@Self-timer, 765[$clAttrModifiers];  # Self-timer in seconds (s)
+$feature4=@Multi burst mode, 1297[$clAttrModifiers];  # Multi burst mode
+$feature5=@Camera resolution, 1284[$clAttrModifiers];  # Camera resolution in pixels (pixels)
+$feature6=@Colour depth, 1550[$clAttrModifiers];  # Colour depth
+$feature8=@Camera file format, 1285[$clAttrModifiers];  # Camera file format
+$feature9=@Camera playback, 1301[$clAttrModifiers];  # Camera playback
+$feature10=@Drive modes, 3341[$clAttrModifiers];  # Drive modes
+$feature11=@Live view, 5642[$clAttrModifiers];  # Live view
+$feature12=@Camera voice function, 1288[$clAttrModifiers];  # Camera voice function
+$feature13=@Camera movie function, 1287[$clAttrModifiers];  # Camera movie function
+INSERT_UPDATE Product;code[unique=true];$feature2;$feature3;$feature4;$feature5;$feature6;$feature8;$feature9;$feature10;$feature11;$feature12;$feature13;$catalogVersion;
+ ;1225694;<ignore>;2, 10;<ignore>;<ignore>;<ignore>;JPEG;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1715477;<ignore>;10 / 2;<ignore>;<ignore>;<ignore>;JPEG, RAW;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1934795;2x - 10x;<ignore>;<ignore>;<ignore>;<ignore>;JPEG;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981412;<ignore>;2, 10, 2+10;<ignore>;<ignore>;<ignore>;PictBridge 1.0, JPEG (DCF), EXIF 2.2, DPOF 1.1;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981413;<ignore>;2, 10, 2+10;<ignore>;<ignore>;<ignore>;PictBridge 1.0, JPEG (DCF), EXIF 2.2, DPOF 1.1;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981414;<ignore>;2, 10, 2+10;<ignore>;<ignore>;<ignore>;PictBridge 1.0, JPEG (DCF), EXIF 2.2, DPOF 1.1;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2054947;1.5x - 10x;<ignore>;<ignore>;<ignore>;<ignore>;JPEG / RAW;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3555166;1.5x - 10x;<ignore>;<ignore>;<ignore>;<ignore>;JPEG / RAW;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3708646;1.5x - 10x;<ignore>;<ignore>;<ignore>;<ignore>;JPEG / RAW;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3958110;1.5x - 10x;2 / 10;<ignore>;<ignore>;<ignore>;JPEG, Exif 2.21, RAW, DPOF 1.1;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;4808175;1.5x - 10x;2 / 10;<ignore>;<ignore>;<ignore>;JPEG, Exif 2.21, RAW, DPOF 1.1;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;4812254;1.5x - 10x;<ignore>;<ignore>;<ignore>;<ignore>;JPEG / RAW;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;5473115;1.5x - 10x;2 / 10;<ignore>;<ignore>;<ignore>;JPEG, Exif 2.21, RAW, DPOF 1.1;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Technical details (622)
+$feature2=@Print technology, 78[$clAttrModifiers];  # Print technology
+$feature4=@Video memory capacity, 5167[$clAttrModifiers];  # Video memory capacity
+$feature5=@Size, 1147[$clAttrModifiers];  # Size in inch (")
+$feature9=@Date imprinting, 3727[$clAttrModifiers];  # Date imprinting
+$feature12=@Resolution, 80[$clAttrModifiers];  # Resolution in pixels (pixels)
+$feature13=@Safety, 607[$clAttrModifiers];  # Safety
+$feature15=@Aperture setting, 5775[$clAttrModifiers];  # Aperture setting
+$feature16=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
+$feature20=@Still image capacity  bet, 6151[$clAttrModifiers];  # Still image capacity (better mode)
+$feature21=@Still image capacity  bes, 6150[$clAttrModifiers];  # Still image capacity (best mode)
+$feature22=@Export file formats, 774[$clAttrModifiers];  # Export file formats
+$feature23=@Picture resolution, 5035[$clAttrModifiers];  # Picture resolution
+$feature27=@Still image capacity, 6149[$clAttrModifiers];  # Still image capacity
+$feature28=@Frame rate, 3496[$clAttrModifiers];  # Frame rate in frames per second (fps)
+$feature29=@Memory per slot  maximum , 6056[$clAttrModifiers];  # Memory per slot (maximum)
+$feature31=@Type, 31[$clAttrModifiers];  # Type
+$feature36=@Supported image formats, 2417[$clAttrModifiers];  # Supported image formats
+$feature37=@Photo mode, 1817[$clAttrModifiers];  # Photo mode
+$feature38=@Tripod mountable, 1601[$clAttrModifiers];  # Tripod mountable
+$feature40=@Picture mode, 2030[$clAttrModifiers];  # Picture mode
+$feature42=@Colour control, 663[$clAttrModifiers];  # Colour control
+$feature43=@Image control functions, 866[$clAttrModifiers];  # Image control functions
+$feature47=@Shooting capacity, 2874[$clAttrModifiers];  # Shooting capacity
+$feature52=@Direct printing, 2176[$clAttrModifiers];  # Direct printing
+$feature57=@Sharpness, 3258[$clAttrModifiers];  # Sharpness
+$feature58=@Languages support, 3113[$clAttrModifiers];  # Languages support
+$feature60=@Technical features, 2143[$clAttrModifiers];  # Technical features
+$feature61=@PhotoSmart compression, 1968[$clAttrModifiers];  # PhotoSmart compression
+$feature62=@Control panel, 2084[$clAttrModifiers];  # Control panel
+$feature63=@Number of layers per pall, 1680[$clAttrModifiers];  # Number of layers per pallet
+$feature65=@LCD components, 6029[$clAttrModifiers];  # LCD components
+$feature66=@Shot-to-shot time, 3327[$clAttrModifiers];  # Shot-to-shot time
+$feature69=@Number of cartons per pal, 1679[$clAttrModifiers];  # Number of cartons per pallet
+$feature71=@Exposure type, 5998[$clAttrModifiers];  # Exposure type
+$feature73=@Upgrade type, 1633[$clAttrModifiers];  # Upgrade type
+INSERT_UPDATE Product;code[unique=true];$feature2;$feature4;$feature5;$feature9;$feature12;$feature13;$feature15;$feature16;$feature20;$feature21;$feature22;$feature23;$feature27;$feature28;$feature29;$feature31;$feature36;$feature37;$feature38;$feature40;$feature42;$feature43;$feature47;$feature52;$feature57;$feature58;$feature60;$feature61;$feature62;$feature63;$feature65;$feature66;$feature69;$feature71;$feature73;$catalogVersion;
+ ;1225694;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1715477;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1934795;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981412;<ignore>;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981413;<ignore>;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981414;<ignore>;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2054947;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;30;<ignore>;Digital camera;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3555166;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;30;<ignore>;Digital camera;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3708646;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;30;<ignore>;Digital camera;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3958110;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;30;<ignore>;Body only;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;EN, DE, FR, NL, DK, FI, IT, NO, SE,  ES, CHI, JA, RU, PT, KO, GR, PO, CZ, HU, TU, AR, UA, RO;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;4808175;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;30;<ignore>;Body only;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;EN, DE, FR, NL, DK, FI, IT, NO, SE,  ES, CHI, JA, RU, PT, KO, GR, PO, CZ, HU, TU, AR, UA, RO;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;4812254;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;30;<ignore>;Digital camera;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;5473115;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;30;<ignore>;Digital camera;JPG;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;EN, DE, FR, NL, DK, FI, IT, NO, SE,  ES, CHI, JA, RU, PT, KO, GR, PO, CZ, HU, TU, AR, UA, RO;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Weight & dimensions (40)
+$feature1=@Dimensions W x D x H, 49[$clAttrModifiers];  # Dimensions W x D x Hin millimeter (mm)
+$feature3=@Maximum dimensions  W x D, 669[$clAttrModifiers];  # Maximum dimensions (W x D x H)in millimeter (mm)
+$feature4=@Product weight optional  , 6120[$clAttrModifiers];  # Product weight optional (metric)
+$feature5=@Weight, 94[$clAttrModifiers];  # Weight in gram (g)
+$feature7=@Height, 1464[$clAttrModifiers];  # Height in millimeter (mm)
+$feature11=@Product dimensions when o, 5721[$clAttrModifiers];  # Product dimensions when open (LxWxD)in inch (")
+$feature17=@Depth, 1650[$clAttrModifiers];  # Depth in millimeter (mm)
+$feature18=@Width, 1649[$clAttrModifiers];  # Width in millimeter (mm)
+$feature20=@Product weight optional  , 6119[$clAttrModifiers];  # Product weight optional (imperial)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature3;$feature4;$feature5;$feature7;$feature11;$feature17;$feature18;$feature20;$catalogVersion;
+ ;1225694;<ignore>;<ignore>;<ignore>;740;73.5;<ignore>;107.8 ;145.5;<ignore>;
+ ;1715477;<ignore>;<ignore>;<ignore>;850;116.9;<ignore>;81.9;156.3;<ignore>;
+ ;1934795;<ignore>;<ignore>;<ignore>;140;62.0;<ignore>;31.1;92.1;<ignore>;
+ ;1981412;<ignore>;<ignore>;<ignore>;219;61.5;<ignore>;36.5;105;<ignore>;
+ ;1981413;<ignore>;<ignore>;<ignore>;219;61.5;<ignore>;36.5;105;<ignore>;
+ ;1981414;<ignore>;<ignore>;<ignore>;219;61.5;<ignore>;36.5;105;<ignore>;
+ ;2054947;<ignore>;<ignore>;<ignore>;480;97.5;<ignore>;61.9;128.8;<ignore>;
+ ;3555166;<ignore>;<ignore>;<ignore>;480;97.5;<ignore>;61.9;128.8;<ignore>;
+ ;3708646;<ignore>;<ignore>;<ignore>;480;97.5;<ignore>;61.9;128.8;<ignore>;
+ ;3958110;128.8 x 61.9 x 97.5;<ignore>;<ignore>;480;97.5;<ignore>;61.9;128.8;<ignore>;
+ ;4808175;128.8 x 61.9 x 97.5;<ignore>;<ignore>;480;97.5;<ignore>;61.9;128.8;<ignore>;
+ ;4812254;<ignore>;<ignore>;<ignore>;480;97.5;<ignore>;61.9;128.8;<ignore>;
+ ;5473115;128.8 x 61.9 x 97.5;<ignore>;<ignore>;480;97.5;<ignore>;61.9;128.8;<ignore>;
+
+
+# Classification: Operating system/software (3473)
+$feature1=@Compatible operating syst, 2507[$clAttrModifiers];  # Compatible operating systems
+$feature2=@Bundled software, 251[$clAttrModifiers];  # Bundled software
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$catalogVersion;
+ ;1225694;Windows 2000 (SP4) / XP (SP2) / Vista ;ZoomBrowser EX\nImageBrowser\nPhotoStitch\nEOS Utility \nPicture Style Editor;
+ ;1934795;Windows XP SP2-3 / Vista\nMac OS X v10.4 - 10.5;<ignore>;
+ ;1981412;Windows 2000/XP/Vista\nMac OS 10.3 +;Samsung Master\nQuick Time Player 7.5\nAdobe Reader;
+ ;1981413;Windows 2000/XP/Vista\nMac OS 10.3 +;Samsung Master\nQuick Time Player 7.5\nAdobe Reader;
+ ;1981414;Windows 2000/XP/Vista\nMac OS 10.3 +;Samsung Master\nQuick Time Player 7.5\nAdobe Reader;
+ ;2054947;Win / XP (SP2/SP3) / Vista\nMac OS X v10.4-10.5;ZoomBrowser EX / ImageBrowser\nDigital Photo Professional\nPhotoStitch\nEOS Utility;
+ ;3555166;Win / XP (SP2/SP3) / Vista\nMac OS X v10.4-10.5;ZoomBrowser EX / ImageBrowser\nDigital Photo Professional\nPhotoStitch\nEOS Utility;
+ ;3708646;Win / XP (SP2/SP3) / Vista\nMac OS X v10.4-10.5;ZoomBrowser EX / ImageBrowser\nDigital Photo Professional\nPhotoStitch\nEOS Utility;
+ ;3958110;Win / XP (SP2/SP3) / Vista\nMac OS X v10.4-10.5;ZoomBrowser EX / ImageBrowser\nDigital Photo Professional\nPhotoStitch\nEOS Utility;
+ ;4808175;Win / XP (SP2/SP3) / Vista\nMac OS X v10.4-10.5;ZoomBrowser EX / ImageBrowser\nDigital Photo Professional\nPhotoStitch\nEOS Utility;
+ ;4812254;Win / XP (SP2/SP3) / Vista\nMac OS X v10.4-10.5;ZoomBrowser EX / ImageBrowser\nDigital Photo Professional\nPhotoStitch\nEOS Utility;
+ ;5473115;Win / XP (SP2/SP3) / Vista\nMac OS X v10.4-10.5;ZoomBrowser EX / ImageBrowser\nDigital Photo Professional\nPhotoStitch\nEOS Utility;
+
+
+# Classification: Energy management (1296)
+$feature2=@Output voltage, 1467[$clAttrModifiers];  # Output voltage in Volt (V)
+$feature3=@Number of battery cells, 1226[$clAttrModifiers];  # Number of battery cells in pieces (pcs)
+$feature4=@Input voltage, 1466[$clAttrModifiers];  # Input voltage in Volt (V)
+$feature5=@Battery type, 908[$clAttrModifiers];  # Battery type
+$feature6=@Number of batteries suppo, 1211[$clAttrModifiers];  # Number of batteries supported
+$feature8=@Battery performance, 909[$clAttrModifiers];  # Battery performance in milliAmpere * hour (mAh)
+INSERT_UPDATE Product;code[unique=true];$feature2;$feature3;$feature4;$feature5;$feature6;$feature8;$catalogVersion;
+ ;278688;100-240;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Technical details (708)
+$feature1=@Battery voltage, 4858[$clAttrModifiers];  # Battery voltage in Volt (V)
+$feature4=@Size, 1147[$clAttrModifiers];  # Size in inch (")
+$feature14=@Output current, 3378[$clAttrModifiers];  # Output current in Ampere (A)
+$feature15=@Power requirements, 780[$clAttrModifiers];  # Power requirements
+$feature16=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
+$feature18=@Case or master carton qua, 777[$clAttrModifiers];  # Case or master carton quantity in pieces (pcs)
+$feature19=@Recharge indicator, 4033[$clAttrModifiers];  # Recharge indicator
+$feature20=@Package dimensions  W x D, 582[$clAttrModifiers];  # Package dimensions (W x D x H)in millimeter (mm)
+$feature30=@Depth, 1650[$clAttrModifiers];  # Depth in millimeter (mm)
+$feature32=@Capacity, 1237[$clAttrModifiers];  # Capacity in Watt (W)
+$feature38=@Minimum system requiremen, 861[$clAttrModifiers];  # Minimum system requirements
+$feature39=@Input frequency, 2935[$clAttrModifiers];  # Input frequency in Hertz (Hz)
+$feature40=@Package weight, 762[$clAttrModifiers];  # Package weight in gram (g)
+$feature42=@AC adapter bundled, 1230[$clAttrModifiers];  # AC adapter bundled
+$feature43=@Packaging height, 3807[$clAttrModifiers];  # Packaging height in millimeter (mm)
+$feature44=@Packaging width, 3808[$clAttrModifiers];  # Packaging width in millimeter (mm)
+$feature51=@Batteries included, 4949[$clAttrModifiers];  # Batteries included
+$feature53=@Width, 1649[$clAttrModifiers];  # Width in millimeter (mm)
+$feature60=@Cable length, 1266[$clAttrModifiers];  # Cable length in meter (m)
+$feature64=@Compatibility, 890[$clAttrModifiers];  # Compatibility
+$feature66=@Height, 1464[$clAttrModifiers];  # Height in millimeter (mm)
+$feature68=@Number of layers per pall, 1680[$clAttrModifiers];  # Number of layers per pallet
+$feature70=@Cables included, 1830[$clAttrModifiers];  # Cables included
+$feature72=@Number of cartons per pal, 1679[$clAttrModifiers];  # Number of cartons per pallet
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature4;$feature14;$feature15;$feature16;$feature18;$feature19;$feature20;$feature30;$feature32;$feature38;$feature39;$feature40;$feature42;$feature43;$feature44;$feature51;$feature53;$feature60;$feature64;$feature66;$feature68;$feature70;$feature72;$catalogVersion;
+ ;278688;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;P Series;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Image sensor (2758)
+$feature1=@Effective sensor resoluti, 1616[$clAttrModifiers];  # Effective sensor resolution in pixels (pixels)
+$feature2=@Camera CCD sensor, 1283[$clAttrModifiers];  # Camera CCD sensor
+$feature3=@Optical sensor size, 1618[$clAttrModifiers];  # Optical sensor size in inch (")
+$feature4=@Sensor type, 1574[$clAttrModifiers];  # Sensor type
+$feature5=@Aspect ratio, 39[$clAttrModifiers];  # Aspect ratio
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$catalogVersion;
+ ;1225694;10100000;<ignore>;<ignore>;CMOS;3-2;
+ ;1715477;<ignore>;<ignore>;<ignore>;CMOS;<ignore>;
+ ;1934795;10.0;<ignore>;1/2.3;CCD;<ignore>;
+ ;1981412;<ignore>;<ignore>;1/2.33;CCD;<ignore>;
+ ;1981413;<ignore>;<ignore>;1/2.33;CCD;<ignore>;
+ ;1981414;<ignore>;<ignore>;1/2.33;CCD;<ignore>;
+ ;2054947;<ignore>;<ignore>;<ignore>;CMOS;3-2;
+ ;3555166;<ignore>;<ignore>;<ignore>;CMOS;3-2;
+ ;3708646;<ignore>;<ignore>;<ignore>;CMOS;3-2;
+ ;3958110;<ignore>;<ignore>;-;CMOS;3-2;
+ ;4808175;<ignore>;<ignore>;-;CMOS;3-2;
+ ;4812254;<ignore>;<ignore>;<ignore>;CMOS;3-2;
+ ;5473115;<ignore>;<ignore>;-;CMOS;3-2;
+
+
+# Classification: Video (2757)
+$feature1=@Video compression formats, 2225[$clAttrModifiers];  # Video compression formats
+$feature2=@Motion JPEG frame rate, 2413[$clAttrModifiers];  # Motion JPEG frame rate in frames per second (fps)
+$feature3=@Video capability, 2079[$clAttrModifiers];  # Video capability
+$feature4=@Video capture resolution, 1597[$clAttrModifiers];  # Video capture resolution in pixels (pixels)
+$feature5=@Video footnote, 2082[$clAttrModifiers];  # Video footnote
+$feature6=@Video modes resolution, 1922[$clAttrModifiers];  # Video modes resolution in pixels (pixels)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$catalogVersion;
+ ;1225694;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;
+ ;1715477;<ignore>;50;true;1920 x 1080;<ignore>;<ignore>;
+ ;1934795;<ignore>;<ignore>;true;640 x 480;<ignore>;<ignore>;
+ ;1981412;AVI (MPEG-4);30;true;1280 x 720;<ignore>;<ignore>;
+ ;1981413;AVI (MPEG-4);30;true;1280 x 720;<ignore>;<ignore>;
+ ;1981414;AVI (MPEG-4);30;true;1280 x 720;<ignore>;<ignore>;
+ ;2054947;<ignore>;30;true;1920 x 1080;<ignore>;<ignore>;
+ ;3555166;<ignore>;30;true;1920 x 1080;<ignore>;<ignore>;
+ ;3708646;<ignore>;30;true;1920 x 1080;<ignore>;<ignore>;
+ ;3958110;MOV;30;true;1920 x 1080;<ignore>;<ignore>;
+ ;4808175;MOV;30;true;1920 x 1080;<ignore>;<ignore>;
+ ;4812254;<ignore>;30;true;1920 x 1080;<ignore>;<ignore>;
+ ;5473115;MOV;30;true;1920 x 1080;<ignore>;<ignore>;
+
+
+# Classification: Colour (2762)
+$feature1=@Colour of product, 1766[$clAttrModifiers];  # Colour of product
+INSERT_UPDATE Product;code[unique=true];$feature1;$catalogVersion;
+ ;1225694;Black;
+ ;1715477;Black;
+ ;1934795;Black;
+ ;1981412;Black;
+ ;1981413;Grey;
+ ;1981414;Pink;
+ ;2054947;Black;
+ ;3555166;Black;
+ ;3708646;Black;
+ ;3958110;Black;
+ ;4808175;Black;
+ ;4812254;Black;
+ ;5473115;Black;
+
+
+# Classification: Energy management (1279)
+$feature1=@Power consumption, 445[$clAttrModifiers];  # Power consumption in Watt (W)
+$feature2=@Battery technology, 434[$clAttrModifiers];  # Battery technology
+$feature3=@Battery type, 908[$clAttrModifiers];  # Battery type
+$feature4=@Power management, 1376[$clAttrModifiers];  # Power management
+$feature5=@Number of batteries suppo, 1211[$clAttrModifiers];  # Number of batteries supported
+$feature6=@Battery performance, 909[$clAttrModifiers];  # Battery performance in milliAmpere * hour (mAh)
+$feature7=@Battery life  CIPA standa, 6231[$clAttrModifiers];  # Battery life (CIPA standard)in shots (shots)
+$feature8=@Battery life, 1721[$clAttrModifiers];  # Battery life in hour (h)
+$feature9=@Power supply, 1242[$clAttrModifiers];  # Power supply in Watt (W)
+$feature10=@Power requirements, 780[$clAttrModifiers];  # Power requirements
+$feature11=@Power supply type, 514[$clAttrModifiers];  # Power supply type
+$feature12=@Power source, 1390[$clAttrModifiers];  # Power source
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$feature9;$feature10;$feature11;$feature12;$catalogVersion;
+ ;1225694;<ignore>;Lithium-Ion;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;800;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1715477;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;880;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1934795;<ignore>;Alkaline;AA;<ignore>;2;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981412;<ignore>;Lithium-Ion;SLB-10A;<ignore>;1;1050;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981413;<ignore>;Lithium-Ion;SLB-10A;<ignore>;1;1050;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1981414;<ignore>;Lithium-Ion;SLB-10A;<ignore>;1;1050;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;2054947;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;400;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3555166;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;400;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3708646;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;400;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;3958110;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;400;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;4808175;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;400;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;4812254;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;400;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;5473115;<ignore>;Lithium-Ion;LP-E5;<ignore>;<ignore>;<ignore>;400;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: System requirements (26)
+$feature1=@Minimum processor, 67[$clAttrModifiers];  # Minimum processor
+$feature2=@Minimum system requiremen, 861[$clAttrModifiers];  # Minimum system requirements
+$feature3=@Minimum hard disk space, 66[$clAttrModifiers];  # Minimum hard disk space in megabyte (MB)
+$feature4=@Minimum system requiremen, 493[$clAttrModifiers];  # Minimum system requirements for Macintosh
+$feature5=@Minimum RAM, 68[$clAttrModifiers];  # Minimum RAMin megabyte (MB)
+$feature6=@Mac compatibility, 853[$clAttrModifiers];  # Mac compatibility
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$catalogVersion;
+ ;1934795;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;1981412;<ignore>;<ignore>;120;<ignore>;256;true;
+ ;1981413;<ignore>;<ignore>;120;<ignore>;256;true;
+ ;1981414;<ignore>;<ignore>;120;<ignore>;256;true;
+ ;2054947;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;3555166;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;3708646;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;3958110;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;4808175;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;4812254;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;5473115;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;
+
+
+# Classification: Scene modes (3470)
+$feature1=@Scene modes, 7356[$clAttrModifiers];  # Scene modes
+$feature2=@Shooting modes, 1577[$clAttrModifiers];  # Shooting modes
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$catalogVersion;
+ ;1225694;Landscape,Portrait,Night portrait,Close-up (macro),Sports;<ignore>;
+ ;1715477;Sunset,Landscape,Night,Portrait;<ignore>;
+ ;1934795;Sunset,Underwater,beach,Fireworks,party (indoor),Landscape,Portrait,Close-up (macro);<ignore>;
+ ;1981412;Landscape,Night,Portrait,Children,Close-up (macro),Documents,dusk,beach,Fireworks,Backlight;<ignore>;
+ ;1981413;Landscape,Night,Portrait,Children,Close-up (macro),Documents,dusk,beach,Fireworks,Backlight;<ignore>;
+ ;1981414;Backlight,Landscape,Night,Portrait,Children,Close-up (macro),Documents,dusk,beach,Fireworks;<ignore>;
+ ;2054947;Landscape,Portrait,Night portrait,Close-up (macro);<ignore>;
+ ;3555166;Landscape,Portrait,Night portrait,Close-up (macro);<ignore>;
+ ;3708646;Landscape,Portrait,Night portrait,Close-up (macro);<ignore>;
+ ;3958110;Close-up (macro),Landscape,Night portrait,Portrait,Sports;<ignore>;
+ ;4808175;Close-up (macro),Landscape,Night portrait,Portrait,Sports;<ignore>;
+ ;4812254;Landscape,Portrait,Night portrait,Close-up (macro);<ignore>;
+ ;5473115;Close-up (macro),Landscape,Night portrait,Portrait,Sports;<ignore>;
+
+
+# Classification: Memory (829)
+$feature1=@Transfer rate, 2329[$clAttrModifiers];  # Transfer rate in megabyte per second (MB/s)
+$feature5=@Internal memory, 6[$clAttrModifiers];  # Internal memory in megabyte (MB)
+$feature8=@Read speed, 1644[$clAttrModifiers];  # Read speed in megabyte per second (MB/s)
+$feature9=@Flash card type, 2305[$clAttrModifiers];  # Flash card type
+$feature10=@X-speed rating, 6563[$clAttrModifiers];  # X-speed rating
+$feature12=@Write speed, 1645[$clAttrModifiers];  # Write speed in megabyte per second (MB/s)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature5;$feature8;$feature9;$feature10;$feature12;$catalogVersion;
+ ;872912a;<ignore>;2048;<ignore>;Secure Digital (SD);<ignore>;<ignore>;
+
+
+# Classification: Weight & dimensions (854)
+$feature1=@Dimensions W x D x H, 49[$clAttrModifiers];  # Dimensions W x D x Hin millimeter (mm)
+$feature2=@Depth, 1650[$clAttrModifiers];  # Depth in millimeter (mm)
+$feature3=@Weight, 94[$clAttrModifiers];  # Weight in gram (g)
+$feature5=@Height, 1464[$clAttrModifiers];  # Height in millimeter (mm)
+$feature6=@Width, 1649[$clAttrModifiers];  # Width in millimeter (mm)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature5;$feature6;$catalogVersion;
+ ;872912a;20 x 32 x 2.1;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Technical details (834)
+$feature3=@Size, 1147[$clAttrModifiers];  # Size in inch (")
+$feature11=@Special features, 86[$clAttrModifiers];  # Special features
+$feature15=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
+$feature17=@Form factor, 771[$clAttrModifiers];  # Form factor
+$feature21=@Plug and Play, 775[$clAttrModifiers];  # Plug and Play
+$feature32=@Write protection switch, 4321[$clAttrModifiers];  # Write protection switch
+$feature41=@AC adapter bundled, 1230[$clAttrModifiers];  # AC adapter bundled
+$feature45=@Memory adapter included, 3461[$clAttrModifiers];  # Memory adapter included
+$feature57=@Cable length, 1266[$clAttrModifiers];  # Cable length in meter (m)
+$feature60=@Warranty, 1448[$clAttrModifiers];  # Warranty
+$feature63=@Technical features, 2143[$clAttrModifiers];  # Technical features
+$feature64=@USB 2 0 ports quantity, 2308[$clAttrModifiers];  # USB 2.0 ports quantity
+$feature77=@Cables included, 1830[$clAttrModifiers];  # Cables included
+INSERT_UPDATE Product;code[unique=true];$feature3;$feature11;$feature15;$feature17;$feature21;$feature32;$feature41;$feature45;$feature57;$feature60;$feature63;$feature64;$feature77;$catalogVersion;
+ ;872912a;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Energy management (851)
+$feature1=@Power consumption, 445[$clAttrModifiers];  # Power consumption in Watt (W)
+$feature3=@Input voltage, 1466[$clAttrModifiers];  # Input voltage in Volt (V)
+$feature4=@Power management, 1376[$clAttrModifiers];  # Power management
+$feature8=@Power requirements, 780[$clAttrModifiers];  # Power requirements
+$feature9=@Expansion voltage, 1359[$clAttrModifiers];  # Expansion voltage in Volt (V)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature3;$feature4;$feature8;$feature9;$catalogVersion;
+ ;872912a;<ignore>;3.3;<ignore>;<ignore>;<ignore>
+
+
+# Classification: Light metering (3466)
+$feature1=@Spot, 3671[$clAttrModifiers];  # Spot
+$feature2=@Centre-weighted, 3670[$clAttrModifiers];  # Centre-weighted
+$feature3=@Multi-pattern, 3668[$clAttrModifiers];  # Multi-pattern
+$feature4=@Metering, 476[$clAttrModifiers];  # Metering
+$feature5=@Evaluative, 3669[$clAttrModifiers];  # Evaluative
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$catalogVersion;
+ ;1225694;true;true;<ignore>;<ignore>;true;
+ ;1715477;<ignore>;<ignore>;<ignore>;TTL;<ignore>;
+ ;1981412;true;true;true;<ignore>;<ignore>;
+ ;1981413;true;true;true;<ignore>;<ignore>;
+ ;1981414;true;true;true;<ignore>;<ignore>;
+ ;2054947;true;true;true;<ignore>;true;
+ ;3555166;true;true;true;<ignore>;true;
+ ;3708646;true;true;true;<ignore>;true;
+ ;3958110;true;true;true;<ignore>;true;
+ ;4808175;true;true;true;<ignore>;true;
+ ;4812254;true;true;true;<ignore>;true;
+ ;5473115;true;true;true;<ignore>;true;
+
+
+# Classification: Technical details (696)
+$feature3=@Size, 1147[$clAttrModifiers];  # Size in inch (")
+$feature16=@Power requirements, 780[$clAttrModifiers];  # Power requirements
+$feature17=@Compatible products, 2190[$clAttrModifiers];  # Compatible products
+$feature18=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
+$feature20=@Form factor, 771[$clAttrModifiers];  # Form factor
+$feature21=@Package dimensions  W x D, 582[$clAttrModifiers];  # Package dimensions (W x D x H)in millimeter (mm)
+$feature26=@Power consumption, 445[$clAttrModifiers];  # Power consumption in Watt (W)
+$feature29=@Depth, 1650[$clAttrModifiers];  # Depth in millimeter (mm)
+$feature31=@Power management, 1376[$clAttrModifiers];  # Power management
+$feature38=@Minimum system requiremen, 861[$clAttrModifiers];  # Minimum system requirements
+$feature39=@Maximum dimensions  W x D, 669[$clAttrModifiers];  # Maximum dimensions (W x D x H)in millimeter (mm)
+$feature40=@Package weight, 762[$clAttrModifiers];  # Package weight in gram (g)
+$feature42=@Packaging height, 3807[$clAttrModifiers];  # Packaging height in millimeter (mm)
+$feature43=@Packaging width, 3808[$clAttrModifiers];  # Packaging width in millimeter (mm)
+$feature52=@Width, 1649[$clAttrModifiers];  # Width in millimeter (mm)
+$feature59=@Power supply type, 514[$clAttrModifiers];  # Power supply type
+$feature63=@Height, 1464[$clAttrModifiers];  # Height in millimeter (mm)
+$feature68=@Number of layers per pall, 1680[$clAttrModifiers];  # Number of layers per pallet
+$feature70=@Product dimensions when o, 5721[$clAttrModifiers];  # Product dimensions when open (LxWxD)in inch (")
+$feature75=@Number of cartons per pal, 1679[$clAttrModifiers];  # Number of cartons per pallet
+INSERT_UPDATE Product;code[unique=true];$feature3;$feature16;$feature17;$feature18;$feature20;$feature21;$feature26;$feature29;$feature31;$feature38;$feature39;$feature40;$feature42;$feature43;$feature52;$feature59;$feature63;$feature68;$feature70;$feature75;$catalogVersion;
+ ;482105;<ignore>;<ignore>;<ignore>;ICEcat.biz;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: System requirements (1706)
+$feature1=@Minimum processor, 67[$clAttrModifiers];  # Minimum processor
+$feature2=@Minimum system requiremen, 861[$clAttrModifiers];  # Minimum system requirements
+$feature3=@Minimum hard disk space, 66[$clAttrModifiers];  # Minimum hard disk space in megabyte (MB)
+$feature4=@Compatible operating syst, 2507[$clAttrModifiers];  # Compatible operating systems
+$feature5=@Minimum RAM, 68[$clAttrModifiers];  # Minimum RAMin megabyte (MB)
+$feature6=@Compatibility, 890[$clAttrModifiers];  # Compatibility
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$catalogVersion;
+ ;872912a;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;SD Spec Ver 1.1, SDMI;
+
+
+# Classification: Energy management (1468)
+$feature1=@Battery voltage, 4858[$clAttrModifiers];  # Battery voltage in Volt (V)
+$feature2=@Output voltage, 1467[$clAttrModifiers];  # Output voltage in Volt (V)
+$feature3=@Input voltage, 1466[$clAttrModifiers];  # Input voltage in Volt (V)
+$feature6=@Number of battery cells, 1226[$clAttrModifiers];  # Number of battery cells in pieces (pcs)
+$feature7=@Battery technology, 434[$clAttrModifiers];  # Battery technology
+$feature8=@Battery type, 908[$clAttrModifiers];  # Battery type
+$feature9=@Output current, 3378[$clAttrModifiers];  # Output current in Ampere (A)
+$feature11=@Number of batteries suppo, 1211[$clAttrModifiers];  # Number of batteries supported
+$feature12=@Capacity, 1237[$clAttrModifiers];  # Capacity in Watt (W)
+$feature15=@Battery performance, 909[$clAttrModifiers];  # Battery performance in milliAmpere * hour (mAh)
+$feature20=@Battery life, 1721[$clAttrModifiers];  # Battery life in hour (h)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature6;$feature7;$feature8;$feature9;$feature11;$feature12;$feature15;$feature20;$catalogVersion;
+ ;482105;<ignore>;<ignore>;<ignore>;<ignore>;Lithium-Ion;<ignore>;<ignore>;<ignore>;11.5;1600;<ignore>;
+
+
+# Classification: Weight & dimensions (877)
+$feature1=@Dimensions W x D x H, 49[$clAttrModifiers];  # Dimensions W x D x Hin millimeter (mm)
+$feature2=@Weight, 94[$clAttrModifiers];  # Weight in gram (g)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$catalogVersion;
+ ;482105;8.2 x 55.6 x 20.5;78;
+
+
+# Classification: Exposure modes (3467)
+$feature1=@Manual exposure, 3673[$clAttrModifiers];  # Manual exposure
+$feature2=@Aperture priority AE, 3675[$clAttrModifiers];  # Aperture priority AE
+$feature3=@Shutter priority AE, 3674[$clAttrModifiers];  # Shutter priority AE
+$feature4=@Auto exposure, 3672[$clAttrModifiers];  # Auto exposure
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$catalogVersion;
+ ;1225694;true;<ignore>;<ignore>;true;
+ ;1715477;true;true;true;true;
+ ;1981412;<ignore>;<ignore>;<ignore>;true;
+ ;1981413;<ignore>;<ignore>;<ignore>;true;
+ ;1981414;<ignore>;<ignore>;<ignore>;true;
+ ;2054947;true;true;true;true;
+ ;3555166;true;true;true;true;
+ ;3708646;true;true;true;true;
+ ;3958110;true;true;true;true;
+ ;4808175;true;true;true;true;
+ ;4812254;true;true;true;true;
+ ;5473115;true;true;true;true;
+
+
+# Classification: White balance (3468)
+$feature1=@White balance, 682[$clAttrModifiers];  # White balance
+INSERT_UPDATE Product;code[unique=true];$feature1;$catalogVersion;
+ ;1225694;auto,manual,Tungsten,Fluorescent,Cloudy,daylight,flash,Shade;
+ ;1715477;auto,Tungsten,Fluorescent,Cloudy,daylight,flash,Shade;
+ ;1934795;auto,manual,Fluorescent,Cloudy,daylight;
+ ;1981412;auto,Tungsten,Fluorescent,Cloudy,daylight,custom modes;
+ ;1981413;auto,Tungsten,Fluorescent,Cloudy,daylight,custom modes;
+ ;1981414;custom modes,auto,Tungsten,Fluorescent,Cloudy,daylight;
+ ;2054947;auto,manual,Tungsten,Fluorescent,Cloudy,daylight,custom modes,flash,Shade;
+ ;3555166;auto,manual,Tungsten,Fluorescent,Cloudy,daylight,custom modes,flash,Shade;
+ ;3708646;auto,manual,Tungsten,Fluorescent,Cloudy,daylight,custom modes,flash,Shade;
+ ;3958110;Auto,Manual,Tungsten,Fluorescent,Cloudy,Daylight,Shade,Flash,Custom modes;
+ ;4808175;Auto,Manual,Tungsten,Fluorescent,Cloudy,Daylight,Shade,Flash,Custom modes;
+ ;4812254;auto,manual,Tungsten,Fluorescent,Cloudy,daylight,custom modes,flash,Shade;
+ ;5473115;Auto,Manual,Tungsten,Fluorescent,Cloudy,Daylight,Shade,Flash,Custom modes;
+
+
+# Classification: Environmental conditions (1196)
+$feature2=@Non-operating relative hu, 621[$clAttrModifiers];  # Non-operating relative humidity (non-condensing)in percent (%)
+$feature3=@Operating relative humidi, 703[$clAttrModifiers];  # Operating relative humidity range in percent (%)
+$feature4=@Recommended operating tem, 473[$clAttrModifiers];  # Recommended operating temperature range (T-T)in degrees Celcium (Â°C)
+$feature5=@Operating temperature ran, 1112[$clAttrModifiers];  # Operating temperature range (T-T)in degrees Celcium (Â°C)
+$feature6=@Storage relative humidity, 1383[$clAttrModifiers];  # Storage relative humidity range in percent (%)
+$feature8=@Recommended humidity oper, 563[$clAttrModifiers];  # Recommended humidity operating range
+$feature9=@Storage temperature range, 757[$clAttrModifiers];  # Storage temperature range (T-T)in degrees Celcium (Â°C)
+INSERT_UPDATE Product;code[unique=true];$feature2;$feature3;$feature4;$feature5;$feature6;$feature8;$feature9;$catalogVersion;
+ ;1225694;<ignore>;85;0,40;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1715477;<ignore>;<ignore>;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;1934795;<ignore>;10 , 90;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;1981412;<ignore>;5 , 85;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;1981413;<ignore>;5 , 85;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;1981414;<ignore>;5 , 85;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;2054947;<ignore>;0 , 85;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;3555166;<ignore>;0 , 85;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;3708646;<ignore>;0 , 85;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;3958110;<ignore>;0 , 85;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;4808175;<ignore>;0 , 85;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;4812254;<ignore>;0 , 85;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+ ;5473115;<ignore>;0 , 85;<ignore>;0 , 40;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Photo effects (3471)
+$feature1=@Custom colour, 3743[$clAttrModifiers];  # Custom colour
+$feature2=@Saturation adjustment, 3720[$clAttrModifiers];  # Saturation adjustment
+$feature3=@Photo effects, 4279[$clAttrModifiers];  # Photo effects
+$feature4=@Contrast adjustment, 3719[$clAttrModifiers];  # Contrast adjustment
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$catalogVersion;
+ ;1715477;<ignore>;<ignore>;Vivid,black&white,Neutral,Sepia;<ignore>;
+ ;1981412;<ignore>;true;Negative film,black&white,Sepia;true;
+ ;1981413;<ignore>;true;Negative film,black&white,Sepia;true;
+ ;1981414;<ignore>;true;Negative film,black&white,Sepia;true;
+ ;2054947;<ignore>;<ignore>;Neutral;<ignore>;
+ ;3555166;<ignore>;<ignore>;Neutral;<ignore>;
+ ;3708646;<ignore>;<ignore>;Neutral;<ignore>;
+ ;3958110;<ignore>;<ignore>;Neutral;<ignore>;
+ ;4808175;<ignore>;<ignore>;Neutral;<ignore>;
+ ;4812254;<ignore>;<ignore>;Neutral;<ignore>;
+ ;5473115;<ignore>;<ignore>;Neutral;<ignore>;
+
+
+# Classification: Image editing/playback (3478)
+$feature1=@Histogram, 3779[$clAttrModifiers];  # Histogram
+$feature2=@Crop, 3777[$clAttrModifiers];  # Crop
+$feature3=@Frame, 3778[$clAttrModifiers];  # Frame
+$feature4=@Thumbnails, 3775[$clAttrModifiers];  # Thumbnails
+$feature5=@Movies, 3776[$clAttrModifiers];  # Movies
+$feature6=@Slide show, 1294[$clAttrModifiers];  # Slide show
+$feature7=@Resizing, 3773[$clAttrModifiers];  # Resizing
+$feature8=@Rotating, 3774[$clAttrModifiers];  # Rotating
+$feature9=@Album organization, 3418[$clAttrModifiers];  # Album organization
+$feature11=@Trimming, 3772[$clAttrModifiers];  # Trimming
+$feature12=@Single image, 3771[$clAttrModifiers];  # Single image
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$feature7;$feature8;$feature9;$feature11;$feature12;$catalogVersion;
+ ;1225694;true;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;1715477;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;<ignore>;<ignore>;<ignore>;
+ ;1981412;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;<ignore>;true;true;
+ ;1981413;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;<ignore>;true;true;
+ ;1981414;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;true;true;true;<ignore>;true;true;
+ ;2054947;true;<ignore>;<ignore>;<ignore>;true;true;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;3555166;true;<ignore>;<ignore>;<ignore>;true;true;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;3708646;true;<ignore>;<ignore>;<ignore>;true;true;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;3958110;true;<ignore>;<ignore>;<ignore>;true;true;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;4808175;true;<ignore>;<ignore>;<ignore>;true;true;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;4812254;true;<ignore>;<ignore>;<ignore>;true;true;<ignore>;<ignore>;<ignore>;<ignore>;true;
+ ;5473115;true;<ignore>;<ignore>;<ignore>;true;true;<ignore>;<ignore>;<ignore>;<ignore>;true;
+
+
+# Classification: Audio (2760)
+$feature1=@Recording of audio files, 1307[$clAttrModifiers];  # Recording of audio files
+$feature2=@Wind filter, 3228[$clAttrModifiers];  # Wind filter
+$feature3=@Audio system, 442[$clAttrModifiers];  # Audio system
+$feature4=@Voice recording, 2171[$clAttrModifiers];  # Voice recording
+$feature5=@Built-in microphone, 1025[$clAttrModifiers];  # Built-in microphone
+$feature6=@Audio recorder, 85[$clAttrModifiers];  # Audio recorder
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature5;$feature6;$catalogVersion;
+ ;1981412;WAV;<ignore>;<ignore>;<ignore>;true;<ignore>;
+ ;1981413;WAV;<ignore>;<ignore>;<ignore>;true;<ignore>;
+ ;1981414;WAV;<ignore>;<ignore>;<ignore>;true;<ignore>;
+ ;3958110;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;4808175;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+ ;5473115;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;<ignore>;
+
+
+# Classification: Packaging data (2590)
+$feature4=@Package dimensions  W x D, 582[$clAttrModifiers];  # Package dimensions (W x D x H)in millimeter (mm)
+$feature5=@Package weight, 762[$clAttrModifiers];  # Package weight in gram (g)
+$feature7=@Packaging height, 3807[$clAttrModifiers];  # Packaging height in millimeter (mm)
+$feature8=@Packaging width, 3808[$clAttrModifiers];  # Packaging width in millimeter (mm)
+$feature9=@Packaging length, 4932[$clAttrModifiers];  # Packaging length in millimeter (mm)
+INSERT_UPDATE Product;code[unique=true];$feature4;$feature5;$feature7;$feature8;$feature9;$catalogVersion;
+ ;872912a;<ignore>;<ignore>;181;122;14;
+
+
+# Classification: Processor (3419)
+$feature1=@Processor clock speed, 5[$clAttrModifiers];  # Processor clock speed in megahertz (MHz)
+$feature2=@Processor model, 47[$clAttrModifiers];  # Processor model
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$catalogVersion;
+ ;1225694;<ignore>;DIGIC III;
+ ;1934795;<ignore>;DIGIC III;
+ ;2054947;<ignore>;DIGIC 4;
+ ;3555166;<ignore>;DIGIC 4;
+ ;3708646;<ignore>;DIGIC 4;
+ ;3958110;<ignore>;DIGIC 4;
+ ;4808175;<ignore>;DIGIC 4;
+ ;4812254;<ignore>;DIGIC 4;
+ ;5473115;<ignore>;DIGIC 4;
+
+
+# Classification: Material (3912)
+$feature1=@Material, 898[$clAttrModifiers];  # Material
+INSERT_UPDATE Product;code[unique=true];$feature1;$catalogVersion;
+ ;2054947;Metal/Plastic;
+ ;3555166;Metal/Plastic;
+ ;3708646;Metal/Plastic;
+ ;3958110;Metal/Plastic;
+ ;4808175;Metal/Plastic;
+ ;4812254;Metal/Plastic;
+ ;5473115;Metal/Plastic;
+

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2000-2013 hybris AG
+ All rights reserved.
+
+ This software is the confidential and proprietary information of hybris
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with hybris.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	
+
+	
+	<!-- accelerator Image Format Mappings -->
+	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping"/>
+	<bean id="acceleratorImageFormatMapping" parent="defaultImageFormatMapping">
+		<property name="mapping">
+			<map>
+				<entry key="superZoom" value="1200Wx1200H"/>
+				<entry key="zoom" value="515Wx515H"/>
+				<entry key="store" value="365Wx246H"/>
+				<entry key="product" value="300Wx300H"/>
+				<entry key="thumbnail" value="96Wx96H"/>
+				<entry key="cartIcon" value="65Wx65H"/>
+				<entry key="styleSwatch" value="30Wx30H"/>
+			</map>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductPrimaryImagePopulator" alias="productPrimaryImagePopulator" />
+	<bean id="acceleratorProductPrimaryImagePopulator" parent="defaultProductPrimaryImagePopulator">
+		<property name="imageFormats">
+			<list>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+				<value>cartIcon</value>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="acceleratorProductGalleryImagesPopulator" alias="productGalleryImagesPopulator" />
+	<bean id="acceleratorProductGalleryImagesPopulator" parent="defaultProductGalleryImagesPopulator">
+		<property name="imageFormats">
+			<list>
+				<value>zoom</value>
+				<value>product</value>
+				<value>thumbnail</value>
+			</list>
+		</property>
+	</bean>
+	
+	<alias alias="emailContextFactory" name="acceleratorEmailContextFactory"/>
+	<bean id="acceleratorEmailContextFactory" parent="defaultEmailContextFactory" >
+		<property name="emailContextVariables">
+			<map merge="true">
+				<entry key="themeResourceUrl-telco" value="{baseUrl}/_ui/{theme}"/>
+			</map>
+		</property>
+	</bean>
+		
+
+	
+	<alias name="telcoProductFacade" alias="productFacade"/>
+	<alias name="defaultTelcoProductfacade" alias="telcoProductFacade"/>
+	<bean id="defaultTelcoProductfacade" class="de.hybris.platform.ytelcoacceleratorfacades.product.impl.DefaultTelcoProductFacade" parent="defaultProductFacade">
+	    <property name="compatibilityService" ref="compatibilityService" />
+	    <property name="bundleRuleService" ref="bundleRuleService" />
+	</bean>
+
+    <alias name="defaultSearchProductReviewPopulator" alias="searchProductReviewPopulator"/>
+    <bean id="defaultSearchProductReviewPopulator" class="de.hybris.platform.ytelcoacceleratorfacades.converters.populator.SearchProductReviewPopulator"  />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+		<property name="add" ref="searchProductReviewPopulator"/>
+	</bean> 
+
+	<alias name="defaultProductBundleTabsPopulator" alias="productBundleTabsPopulator" />
+	<bean id="defaultProductBundleTabsPopulator" abstract="true" class="de.hybris.platform.ytelcoacceleratorfacades.converters.populator.AbstractProductBundleTabsPopulator" scope="prototype">
+	     <property name="commonI18NService" ref="commonI18NService"/>	 
+	     <property name="bundleTemplateService" ref="bundleTemplateService"/>	 
+	     <property name="bundleRuleService" ref="bundleRuleService"/>	 
+	     <property name="bundleTemplateConverter" ref="bundleTemplateConverter"/>	 
+	     <property name="productConverter" ref="productConverter"/>	 	
+	     <property name="priceDataFactory" ref="priceDataFactory"/>	 	
+	     <property name="productPricePopulator" ref="productPricePopulator"/>	
+	     <property name="termOfServiceFrequencyConverter" ref="termOfServiceFrequencyConverter" />     	
+	     <property name="productDescriptionPopulator" ref="productDescriptionPopulator" />   	
+	     <property name="productClassificationPopulator" ref="productClassificationPopulator" />      
+	     <property name="subscriptionProductBasicPopulator" ref="subscriptionProductBasicPopulator" />
+	     <property name="subscriptionProductEntitlementPopulator" ref="subscriptionProductEntitlementPopulator" />
+	     <property name="commercePriceService" ref="subscriptionCommercePriceService"/>
+	     <property name="subscriptionProductPricePopulator" ref="subscriptionProductPricePlanPopulator"/>
+	</bean>
+	
+	<alias name="defaultDeviceBundleTabsPopulator" alias="deviceBundleTabsPopulator" />
+	<bean id="defaultDeviceBundleTabsPopulator" class="de.hybris.platform.ytelcoacceleratorfacades.converters.populator.DeviceBundleTabsPopulator" parent="productBundleTabsPopulator" scope="prototype"/>
+	
+	<alias name="defaultSubscriptionProductBundleTabsPopulator" alias="subscriptionProductBundleTabsPopulator" />
+	<bean id="defaultSubscriptionProductBundleTabsPopulator" class="de.hybris.platform.ytelcoacceleratorfacades.converters.populator.SubscriptionProductBundleTabsPopulator" parent="productBundleTabsPopulator" scope="prototype"/>
+	
+	<alias name="defaultPlanBundleTabsPopulator" alias="planBundleTabsPopulator" />
+	<bean id="defaultPlanBundleTabsPopulator" parent="subscriptionProductBundleTabsPopulator" scope="prototype">
+		 <property name="typeClassName" value="de.hybris.platform.ytelcoacceleratorcore.model.ServicePlanModel" />
+	</bean>
+	
+	<alias name="defaultAddOnBundleTabsPopulator" alias="addOnBundleTabsPopulator" />
+	<bean id="defaultAddOnBundleTabsPopulator" parent="subscriptionProductBundleTabsPopulator" scope="prototype">
+		 <property name="typeClassName" value="de.hybris.platform.ytelcoacceleratorcore.model.ServiceAddOnModel" />
+	</bean>
+
+	<alias name="defaultTelcoProductConfiguredPopulator" alias="productConfiguredPopulator" />
+	<bean id="defaultTelcoProductConfiguredPopulator"  parent="defaultProductConfiguredPopulator">
+		<property name="populators">
+			<map key-type="de.hybris.platform.commercefacades.product.ProductOption" merge="true">
+				<entry key="DEVICE_BUNDLE_TABS" value-ref="deviceBundleTabsPopulator" />
+				<entry key="SERVICE_PLAN_BUNDLE_TABS" value-ref="planBundleTabsPopulator" />
+				<entry key="SERVICE_ADDON_BUNDLE_TABS" value-ref="addOnBundleTabsPopulator" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="bundleBoxData" class="de.hybris.platform.ytelcoacceleratorfacades.data.BundleBoxData" scope="prototype"/>
+	
+	<alias name="defaultBundleBoxConverter"	alias="bundleBoxConverter"/>
+	<bean id="defaultBundleBoxConverter" parent="abstractPopulatingConverter" >
+		<lookup-method name="createTarget" bean="bundleBoxData"/>
+		<property name="populators">
+			<list>
+				<ref bean="bundleBoxPopulator"/>
+			</list>
+		</property>
+	</bean>	
+
+	<alias name="defaultBundleBoxPopulator"	alias="bundleBoxPopulator"/>
+	<bean id="defaultBundleBoxPopulator" class="de.hybris.platform.ytelcoacceleratorfacades.converters.populator.BundleBoxPopulator"  >
+		<property name="bundleBoxEntryConverter" ref="bundleBoxEntryConverter"/>
+		<property name="bundleTemplateConverter" ref="bundleTemplateConverter"/>
+	</bean>
+	
+	<bean id="bundleBoxEntryData" class="de.hybris.platform.ytelcoacceleratorfacades.data.BundleBoxEntryData" scope="prototype"/>
+	
+	<alias name="defaultBundleBoxEntryConverter" alias="bundleBoxEntryConverter"/>
+	<bean id="defaultBundleBoxEntryConverter" parent="abstractPopulatingConverter" >
+		<lookup-method name="createTarget" bean="bundleBoxEntryData"/>
+		<property name="populators">
+			<list>
+				<ref bean="bundleBoxEntryPopulator"/>
+			</list>
+		</property>
+	</bean>	
+
+	<alias name="defaultBundleBoxEntryPopulator" alias="bundleBoxEntryPopulator"/>
+	<bean id="defaultBundleBoxEntryPopulator" class="de.hybris.platform.ytelcoacceleratorfacades.converters.populator.BundleBoxEntryPopulator"  >
+		<property name="productConverter" ref="productConverter"/>
+		<property name="productConfiguredPopulator"	ref="productConfiguredPopulator"/>		
+	</bean>
+	
+	<alias name="defaultBundleTemplateAddOnsPopulator" alias="bundleTemplateAddOnsPopulator" />
+	<bean id="defaultBundleTemplateAddOnsPopulator" class="de.hybris.platform.ytelcoacceleratorfacades.converters.populator.BundleTemplateServiceAddOnsBundleBoxesPopulator" >
+		<property name="bundleBoxConverter" ref="bundleBoxConverter"/>
+		<property name="bundleTemplateConverter" ref="bundleTemplateConverter"/>
+		<property name="bundleCommerceCartService" ref="bundleCommerceCartService"/>
+		<property name="bundleTemplateService" ref="bundleTemplateService"/>
+		<property name="productService" ref="productService"/>
+		<property name="bundleRuleService" ref="bundleRuleService"/>	
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>	 	
+		<property name="telcoOrderEntryConverter" ref="orderEntryConverter"/>	
+		<property name="guidedSellingService" ref="guidedSellingService"/>
+	</bean> 
+	
+	<alias name="defaultDashboardPopulator" alias="dashboardPopulator" />
+	<bean id="defaultDashboardPopulator" class="de.hybris.platform.ytelcoacceleratorfacades.converters.populator.DashboardPopulator" >
+		<property name="bundleCommerceCartService" ref="bundleCommerceCartService"/>
+		<property name="bundleTemplateConverter" ref="bundleTemplateConverter"/>
+	    <property name="telcoOrderEntryConverter" ref="orderEntryConverter" />
+	</bean> 
+	
+	<alias alias="guidedSellingFacade" name="defaultGuidedSellingFacade"/>
+	<bean id="defaultGuidedSellingFacade" class="de.hybris.platform.ytelcoacceleratorfacades.bundle.impl.DefaultGuidedSellingFacade" >
+		<property name="bundleTemplateService" ref="bundleTemplateService"/>
+		<property name="bundleRuleService" ref="bundleRuleService"/>		
+		<property name="productService" ref="productService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>	 	
+		<property name="bundleTemplateAddOnsPopulator" ref="bundleTemplateAddOnsPopulator"/>
+		<property name="dashboardPopulator" ref="dashboardPopulator"/>
+		<property name="bundleCommerceCartService" ref="bundleCommerceCartService"/>
+		<property name="cartService" ref="cartService"/>
+		<property name="productSearchFacade" ref="productSearchFacade"/>
+		<property name="guidedSellingService" ref="guidedSellingService" />		
+		<property name="commercePriceService" ref="subscriptionCommercePriceService" />
+	</bean>
+
+	<!-- append telco specific populator to the default commerceSearchQueryPageableConverter-->
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchQueryPageableConverter"/>
+		<property name="add" ref="commerceTelcoSearchSolrQueryPopulator"/>
+	</bean>
+
+	<alias name="defaultCommerceTelcoSearchSolrQueryPopulator" alias="commerceTelcoSearchSolrQueryPopulator"/>
+	<bean id="defaultCommerceTelcoSearchSolrQueryPopulator" class="de.hybris.platform.ytelcoacceleratorfacades.search.solrfacetsearch.populators.GuidedSellingSearchSolrQueryPopulator" />
+
+	<alias name="defaultTelcoProductTypePopulator" alias="telcoProductTypePopulator" />
+	<bean id="defaultTelcoProductTypePopulator" class="de.hybris.platform.ytelcoacceleratorfacades.product.converters.populator.TelcoProductTypePopulator" />
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productBasicPopulatorList"/>
+		<property name="add" ref="telcoProductTypePopulator"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,59 @@
+$passwordEncoding=md5
+$defaultPassword=12341234
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+# Sample customers
+INSERT_UPDATE Customer;originalUid[unique=true];uid[unique=true];title(code);name;description;sessionLanguage(isocode);sessionCurrency(isocode);groups(uid);$setPassword;&userId
+;zohan@customer.com;zohan@customer.com;mr;Zohan;Ticket collector;en;USD;customergroup;;user1
+
+# Sample customer addresses
+INSERT_UPDATE Address;&addId;owner(&userId)[unique=true];streetname[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+;addr1;user1;10 Yamashita-cho;231-8540;false;Yokohama;JP;true;true;true;true;Zohan;Agent;zohan@customer.com;MALE;;+48 32 44 00 810;mr;;Hybris;;
+
+# Set default payment and shipping addresses for sample customers
+UPDATE Customer;uid[unique=true];defaultPaymentAddress(&addId);defaultShipmentAddress(&addId)
+;zohan@customer.com;addr1;addr1
+
+INSERT_UPDATE Order;code[unique=true];user(uid);date[dateformat=dd.MM.yyyy HH:mm];currency(isocode);net;deliveryMode(code[default='premium-gross']);paymentMode(code);Discounts(code);calculated;site(uid);store(uid);status(code)
+;zohan-00-1;zohan@customer.com;01.04.2011 15:10;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+;zohan-00-2;zohan@customer.com;01.04.2011 15:12;USD;false;;advance;;false;electronics;electronics;CREATED
+"#%   impex.getLastImportedItem().setDeliveryAddress(impex.getLastImportedItem().getUser().getDefaultDeliveryAddress());impex.getLastImportedItem().setPaymentAddress(impex.getLastImportedItem().getUser().getDefaultPaymentAddress());";
+"#%   impex.getLastImportedItem().calculate();";
+
+INSERT_UPDATE OrderEntry;order(code)[unique=true];product(code,catalogVersion(catalog(id),version))[unique=true];quantity;calculated;unit(code);entryNumber;
+;zohan-00-1;1934793:electronicsProductCatalog:Online;4;false;pieces;0
+;zohan-00-1;816323:electronicsProductCatalog:Online;1;false;pieces;1
+;zohan-00-1;1320808:electronicsProductCatalog:Online;2;false;pieces;2
+;zohan-00-2;1934793:electronicsProductCatalog:Online;3;false;pieces;0
+;zohan-00-2;816323:electronicsProductCatalog:Online;1;false;pieces;1
+;zohan-00-2;1320808:electronicsProductCatalog:Online;2;false;pieces;2
+
+INSERT_UPDATE CommentType;code[unique=true];name;domain[unique=true](code);metaType(code)
+;customerNote;Customer Note;ticketSystemDomain;CsCustomerEvent
+;customerEmail;Customer Email;ticketSystemDomain;CsCustomerEvent
+;ticketCreationEvent;Ticket Created Event;ticketSystemDomain;CsCustomerEvent
+;ticketResolutionEvent;Ticket Resolved Event;ticketSystemDomain;CsTicketResolutionEvent
+;ticketChangeEvent;Ticket Changed Event;ticketSystemDomain;CsTicketEvent;
+
+INSERT_UPDATE CsAgentGroup;uid[unique=true];ticketstores(uid);defaultAssignee(uid)
+;zohanAgentGroup;;
+
+INSERT_UPDATE CsCustomerEvent;code[unique=true];author[unique=true](uid);component[unique=true](code);commentType[unique=true](code);subject;text
+;0001000-create;csagent;ticketSystem;ticketCreationEvent;'';'Ticket Created note';
+;0002000-create;csagent;ticketSystem;ticketCreationEvent;'';'Ticket Created note';
+;0003000-create;csagent;ticketSystem;customerEmail;'';'Ticket email note';
+;0004000-create;csagent;ticketSystem;ticketCreationEvent;'';'Ticket Created problem';
+;0005000-create;csagent;ticketSystem;ticketChangeEvent;'';'Ticket Changed problem';
+;0006000-create;csagent;ticketSystem;ticketCreationEvent;'';'Ticket Created incident';
+;0007000-create;csagent;ticketSystem;ticketCreationEvent;'';'Ticket Created note';
+
+INSERT_UPDATE CsTicket;state[default='Open'](code);ticketID[unique=true];customer(uid);order(code);category(code);priority(code);assignedAgent(uid);assignedGroup(uid);headline;comments(code);resolution(code);
+;;0001000;zohan@customer.com;zohan-00-1;Incident;High;csagent;fraudAgentGroup;'Order 00-1 Incident';0001000-create;
+;;0002000;zohan@customer.com;zohan-00-1;Note;High;csagent;fraudAgentGroup;'Order 00-1 note';0002000-create;
+;;0003000;zohan@customer.com;zohan-00-2;Incident;Medium;csagent;fraudAgentGroup;'Order 00-2 Incident';0003000-create;
+;;0004000;zohan@customer.com;zohan-00-2;Note;High;csagent;zohanAgentGroup;'Order 00-2 note';0004000-create;
+;;0005000;zohan@customer.com;;Fraud;High;csagent;fraudAgentGroup;'Possible Zohan customer fraud detected';0005000-create;
+;;0006000;zohan@customer.com;;Incident;Low;csagent;zohanAgentGroup;'Customer incident';0006000-create;
+;;0007000;zohan@customer.com;;Problem;Low;csagent;fraudAgentGroup;'Customer Zohan problem';0007000-create;

@@ -1,0 +1,14 @@
+#
+# Import Delivery Modes / Zones
+#
+
+# Language
+$lang=zh
+
+# Zone Delivery Modes
+UPDATE ZoneDeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
+ ;free-standard-shipping;"标准送货方式";"3-5 个工作日"
+ ;premium-gross;"高级送货方式";"1-2 个工作日"
+ ;premium-net;"高级送货方式";"1-2 个工作日"
+ ;standard-gross;"标准送货方式";"3-5 个工作日"
+ ;standard-net;"标准送货方式";"3-5 个工作日"

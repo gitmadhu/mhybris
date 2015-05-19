@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2014 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+	<!-- data setup -->
+	<bean id="yCommerceWebServicesTestSetup"
+		class="de.hybris.platform.ycommercewebservicestest.setup.YCommerceWebServicesTestSetup">
+		<property name="importService" ref="importService" />
+		<property name="solrIndexerService" ref="wsSetupSolrIndexerService" />
+		<property name="synchronizationService" ref="wsSetupSynchronizationService" />
+	</bean>
+
+	<!--Beans needed for sample data used in groovy tests -->
+	<bean id="wsTestCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="1" />
+		<!-- '1' is the root icecat category -->
+	</bean>
+	<bean id="wsTestBrandCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="brands" />
+		<!-- 'brands' is the root of the brands hierarchy -->
+	</bean>
+
+	<bean id="wsTestCategoryCodeValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="categorySource" ref="wsTestCategorySource" />
+	</bean>
+
+	<bean id="wsTestBrandCategoryCodeValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="categorySource" ref="wsTestBrandCategorySource" />
+	</bean>
+
+	<bean id="wsTestCategoryNameValueProvider"
+		class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryNameValueProvider"
+		parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider" />
+		<property name="commonI18NService" ref="commonI18NService" />
+		<property name="categorySource" ref="wsTestCategorySource" />
+	</bean>
+
+	<bean id="wsSetupSolrIndexerService"
+		class="de.hybris.platform.ycommercewebservicestest.setup.SolrIndexerService">
+		<property name="modelService" ref="modelService" />
+		<property name="cronJobService" ref="cronJobService" />
+	</bean>
+
+	<bean id="wsSetupSynchronizationService"
+		class="de.hybris.platform.ycommercewebservicestest.setup.SynchronizationService">
+		<property name="modelService" ref="modelService" />
+	</bean>
+
+	<!--End of beans needed for sample data used in groovy tests -->
+
+	<beans profile="test">
+		<alias alias="geoServiceWrapperMock" name="mockedGeoServiceWrapper" />
+		<alias alias="geoServiceWrapper" name="mockedGeoServiceWrapper" />
+		<bean id="mockedGeoServiceWrapper"
+			class="de.hybris.platform.ycommercewebservicestest.storelocator.impl.MockedGeoServiceWrapper" parent="defaultCommerceMockGeoWebServiceWrapper">
+			<constructor-arg>
+				<map>
+					<entry key="wstestlocation">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="35.6894875" />
+							<constructor-arg index="1" value="139.6917064" />
+						</bean>
+					</entry>
+					<entry key="tokio">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="35.6894875" />
+							<constructor-arg index="1" value="139.6917064" />
+						</bean>
+					</entry>
+					<entry key="tokyo">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="35.6894875" />
+							<constructor-arg index="1" value="139.6917064" />
+						</bean>
+					</entry>
+					<entry key="munich">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="48.1374300" />
+							<constructor-arg index="1" value="11.5754900" />
+						</bean>
+					</entry>
+					<entry key="choshi">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="35.7409" />
+							<constructor-arg index="1" value="140.8064" />
+						</bean>
+					</entry>
+					<entry key="chiba">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="35.617" />
+							<constructor-arg index="1" value="140.1023" />
+						</bean>
+					</entry>
+					<entry key="yokosuka">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="35.2853" />
+							<constructor-arg index="1" value="139.664" />
+						</bean>
+					</entry>
+					<entry key="yokohama">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="35.443708" />
+							<constructor-arg index="1" value="139.638026" />
+						</bean>
+					</entry>
+					<entry key="osaka">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="34.698823" />
+							<constructor-arg index="1" value="135.498235" />
+						</bean>
+					</entry>
+					<entry key="nagoya">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="35.167306" />
+							<constructor-arg index="1" value="136.896583" />
+						</bean>
+					</entry>
+					<entry key="sapporo">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="43.06356" />
+							<constructor-arg index="1" value="141.340771" />
+						</bean>
+					</entry>
+					<entry key="kobe">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="34.694741" />
+							<constructor-arg index="1" value="135.186095" />
+						</bean>
+					</entry>
+					<entry key="fukuoka">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="33.590355" />
+							<constructor-arg index="1" value="130.401716" />
+						</bean>
+					</entry>
+					<entry key="kawasaki">
+						<bean class="de.hybris.platform.storelocator.impl.DefaultGPS">
+							<constructor-arg index="0" value="35.531106" />
+							<constructor-arg index="1" value="139.696071" />
+						</bean>
+					</entry>					
+				</map>
+			</constructor-arg>
+		</bean>
+
+        <!-- Address Verification Services -->
+        <alias alias="addressVerificationService" name="mockAddressVerificationService"/>
+        <bean id="mockAddressVerificationService"
+              class="de.hybris.platform.commerceservices.address.impl.MockAddressVerificationService">
+            <property name="baseStoreService" ref="baseStoreService"/>
+        </bean>
+
+        <alias alias="orderCodeIdentificationStrategy" name="defaultOrderCodeIdentificationStrategy"/>
+        <bean id="defaultOrderCodeIdentificationStrategy" class="de.hybris.platform.ycommercewebservices.strategies.impl.DefaultOrderCodeIdentificationStrategy">
+            <property name="idPattern" value="[0-9a-f]{40}"/>
+            <property name="failIfNotFound" value="false"/>
+        </bean>
+
+	</beans>
+
+</beans>

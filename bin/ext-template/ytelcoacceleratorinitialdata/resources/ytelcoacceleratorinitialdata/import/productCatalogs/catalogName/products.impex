@@ -1,0 +1,21 @@
+# ImpEx for Importing Products
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=supercategories(code, $catalogVersion)
+$approved=approvalstatus(code)[default='check']
+$soldIndividuallyFlag=soldIndividually[default=true]
+
+# Insert Devices
+INSERT_UPDATE Device;code[unique=true];$supercategories;manufacturerName;manufacturerAID;description[lang=en];unit(code)[default=pieces];ean;variantType(code);$approved;$catalogVersion;$soldIndividuallyFlag
+
+#Insert Accessories
+INSERT_UPDATE Accessory;code[unique=true];$supercategories;manufacturerName;manufacturerAID;description[lang=en];unit(code)[default=pieces];ean;variantType(code);$catalogVersion
+
+#Insert Service Plans (Plans)
+INSERT_UPDATE ServicePlan;code[unique=true];$supercategories;manufacturerAID;subscriptionTerm(id);unit(code)[default=pieces];$approved;$catalogVersion
+
+#Insert AddOn Services
+INSERT_UPDATE ServiceAddOn;code[unique=true];$supercategories;manufacturerAID;unit(code)[default=pieces];ean;$approved;$catalogVersion;subscriptionTerm(id)[default='monthly']

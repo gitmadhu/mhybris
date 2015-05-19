@@ -1,0 +1,16 @@
+/* Product detail page vertical scroller */
+
+#thumbnail_scroller_container
+{
+	height: 340px;	
+}
+
+#thumbnail_scroller_content, #colorbox_scroller_content
+{
+	margin: 0 0 0 23px !important;	
+}
+
+#colorbox_scroller_container
+{
+ 	
+}

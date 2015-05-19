@@ -1,0 +1,22 @@
+# ImpEx for Importing Product Reviews
+ 
+# Macros / Replacement Parameter definitions
+$catalog-Online=Online
+$product-catalog=wsTestProductCatalog
+$productCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$product-catalog]),CatalogVersion.version[default=$catalog-Online])[default=$product-catalog:$catalog-Online]
+
+$passwordEncoding=md5
+$defaultPassword=password
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Online'])[unique=true,default=$productCatalog:Online]
+
+# Reviews from Customers
+
+INSERT_UPDATE Customer;groups(uid);uid[unique=true];name;$setPassword;customerId
+;"customergroup";"wstestreviewer1@hybris.com";"Kenneth Reviewer";;"wstestreviewer1@hybris.com";
+;"customergroup";"wstestreviewer2@hybris.com";"Ken Reviewer";;"wstestreviewer2@hybris.com";
+
+INSERT_UPDATE CustomerReview;product(code, $productCV)[unique=true]; rating; user(uid)[unique=true];headline;comment;approvalStatus(code)[default='approved'];language(isocode)[default='en']
+;280916;5;wstestreviewer1@hybris.com;This is a fantastic product, did everything I wanted it to do.;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.;
+;280916;4;wstestreviewer2@hybris.com;A good solid product, worthy of a purchase.;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas ut est. Donec suscipit. Donec eget diam vitae purus condentum adipiscing. Suspendisse lorem diam, cursus non,aliquam et, blandit ac, orci. Phasellus malesuada orci sit amet lorem. Sed egestas tortor eget ipsum. Cras mattis,lorem sit amet congue condimentum, nibh tellus sodales augue, ac euismod lectus arcu eu purus. Mauris tellus ligula,molestie vel, cursus at, eleifend ut, diam. Integer felis. Morbi sapien massa, iaculis id, convallis in, laoreet id, leo.Nullam id metus. Suspendisse turpis tellus, fermentum mollis, scelerisque fermentum, hendrerit sed, mi. Pellentesque bibendum.Mauris sit amet dolor. Praesent ullamcorper accumsan purus. Aliquam erat volutpat. Vivamus a sapien sed dui faucibus porttito.;

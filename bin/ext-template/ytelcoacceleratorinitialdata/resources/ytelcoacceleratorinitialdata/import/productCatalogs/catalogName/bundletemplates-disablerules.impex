@@ -1,0 +1,5 @@
+$productCatalog=
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$ruleType=ruleType(code)[default='ANY']
+
+INSERT_UPDATE DisableProductBundleRule;id[unique=true];$catalogVersion;bundleTemplate(id,version[default=1.0],$catalogVersion);conditionalProducts(code,$catalogVersion);targetProducts(code,$catalogVersion);$ruleType

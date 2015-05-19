@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ [y] hybris Platform
+  ~
+  ~ Copyright (c) 2000-2014 hybris AG
+  ~ All rights reserved.
+  ~
+  ~ This software is the confidential and proprietary information of hybris
+  ~ ("Confidential Information"). You shall not disclose such Confidential
+  ~ Information and shall use it only in accordance with the terms of the
+  ~ license agreement you entered into with hybris.
+  -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd">
+
+	<http pattern="/v1/**" entry-point-ref="oauthAuthenticationEntryPointV1" access-decision-manager-ref="webSecurityAccessDecisionManager"
+		xmlns="http://www.springframework.org/schema/security">
+
+		<anonymous username="anonymous" granted-authority="ROLE_ANONYMOUS" />
+		<session-management session-authentication-strategy-ref="fixation" />
+
+		<intercept-url pattern="/**/cart/address/**" requires-channel="https" />
+		<intercept-url pattern="/**/cart/deliverymodes/**" requires-channel="https" />
+		<intercept-url pattern="/**/cart/authorize/**" requires-channel="https" />
+		<intercept-url pattern="/**/cart/placeorder/**" requires-channel="https" />
+		<intercept-url pattern="/**/cart/paymentinfo/**" requires-channel="https" />
+		<intercept-url pattern="/**/cart/restore/**" requires-channel="https" />
+		<intercept-url pattern="/**/cart/voucher/**" requires-channel="https" />
+		<intercept-url pattern="/**/cart/promotion/**" access="CLIENT_TRUSTED_CLIENT" requires-channel="https" />
+		<intercept-url pattern="/**/orders/**" requires-channel="https" />
+		<intercept-url pattern="/**/customers/**" requires-channel="https" />
+		<intercept-url pattern="/**/customergroups/**" requires-channel="https" />
+		<intercept-url pattern="/**/promotions/**" requires-channel="https" />
+		<intercept-url pattern="/**/vouchers/**" requires-channel="https" />
+		<intercept-url pattern="/**/products/export/**" requires-channel="https" />
+		<intercept-url pattern="/**/products/expressUpdate/**" requires-channel="https" />
+
+		<port-mappings>
+			<port-mapping http="#{configurationService.configuration.getProperty('tomcat.http.port')}" https="#{configurationService.configuration.getProperty('tomcat.ssl.port')}" />
+		</port-mappings>
+
+		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
+		<custom-filter ref="hybrisUserFilter" after="LAST" />
+		<access-denied-handler ref="oauthAccessDeniedHandlerV1" />
+	</http>
+
+	<bean id="oauthAuthenticationEntryPointV1" parent="oauthAuthenticationEntryPoint">
+		<property name="exceptionRenderer" ref="oAuth2ExceptionRendererV1" />
+	</bean>
+
+	<bean id="oauthAccessDeniedHandlerV1" parent="oauthAccessDeniedHandler">
+		<property name="exceptionRenderer" ref="oAuth2ExceptionRendererV1" />
+	</bean>
+
+	<bean id="oAuth2ExceptionRendererV1" parent="oAuth2ExceptionRenderer">
+		<property name="messageConverters" ref="messageConvertersV1" />
+	</bean>
+</beans>

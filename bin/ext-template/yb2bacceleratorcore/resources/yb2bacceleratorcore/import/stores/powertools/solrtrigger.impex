@@ -1,0 +1,11 @@
+#
+# Import the Solr CronJob Trigger configuration for the Powertools store
+#
+
+INSERT_UPDATE Trigger;cronJob(code)[unique=true];second;minute;hour;day;month;year;relative;active;maxAcceptableDelay
+
+# Run the full-powertoolsIndex-cronJob at 3:05 AM every day
+;full-powertoolsIndex-cronJob;0;5;3;-1;-1;-1;false;false;-1
+
+# Run the update-powertoolsIndex-cronJob every 1 minutes
+;update-powertoolsIndex-cronJob;0;1;-1;-1;-1;-1;true;false;-1

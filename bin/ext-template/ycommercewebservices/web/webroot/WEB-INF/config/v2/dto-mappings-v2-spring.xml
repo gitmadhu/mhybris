@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ~ [y] hybris Platform ~ ~ Copyright (c) 2000-2014 hybris AG ~ All rights 
+	reserved. ~ ~ This software is the confidential and proprietary information 
+	of hybris ~ ("Confidential Information"). You shall not disclose such Confidential 
+	~ Information and shall use it only in accordance with the terms of the ~ 
+	license agreement you entered into with hybris. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Orika : DataMapper -->
+	<alias alias="dataMapper" name="defaultDataMapper"/>
+	<bean id="defaultDataMapper" class="de.hybris.platform.commercewebservicescommons.mapping.impl.DefaultDataMapper">
+		<property name="fieldSetBuilder" ref="fieldSetBuilder"/>
+	</bean>
+
+	<!-- Orika : Filters -->
+	<bean class="de.hybris.platform.ycommercewebservices.mapping.filters.GeneralFieldFilter">
+		<property name="fieldSelectionStrategy" ref="fieldSelectionStrategy"/>
+	</bean>
+
+	<!-- Orika : Mappers -->
+	<bean class="de.hybris.platform.ycommercewebservices.mapping.mappers.AddressValidationDataMapper"
+	      parent="abstractCustomMapper"/>
+	<bean class="de.hybris.platform.ycommercewebservices.mapping.mappers.SpellingSuggestionMapper"
+	      parent="abstractCustomMapper"/>
+	<bean class="de.hybris.platform.ycommercewebservices.mapping.mappers.CCPaymentInfoDataMapper"
+	      parent="abstractCustomMapper"/>
+
+	<!-- Orika : Converters -->
+	<bean class="de.hybris.platform.ycommercewebservices.mapping.converters.StockLevelStatusConverter"/>
+	<bean class="de.hybris.platform.ycommercewebservices.mapping.converters.OrderStatusConverter"/>
+	<bean class="de.hybris.platform.ycommercewebservices.mapping.converters.ConsignmentStatusConverter"/>
+	<bean class="de.hybris.platform.ycommercewebservices.mapping.converters.DeliveryStatusConverter"/>
+	<bean class="de.hybris.platform.ycommercewebservices.mapping.converters.ProductReferenceTypeEnumConverter"/>
+
+	<!-- Field Mappings -->
+	<bean name="fieldMapper"
+	      class="de.hybris.platform.commercewebservicescommons.mapping.config.FieldMapper"
+	      abstract="true"/>
+
+	<!-- Field Mappings : User -->
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.user.UserSignUpWsDTO"/>
+		<property name="destClass"
+		          value="de.hybris.platform.commercefacades.user.data.RegisterData"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="uid" value="login"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass"
+		          value="de.hybris.platform.commercefacades.user.data.CustomerData"/>
+		<property name="destClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="defaultShippingAddress" value="defaultAddress"/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Field Mappings : Catalog -->
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass"
+		          value="de.hybris.platform.commercefacades.catalog.data.CatalogVersionData"/>
+		<property name="destClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.catalog.CatalogVersionWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="categoriesHierarchyData" value="categories"/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Field Mappings : Cart -->
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass"
+		          value="de.hybris.platform.commercefacades.order.data.CartModificationDataList"/>
+		<property name="destClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.order.CartModificationListWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="cartModificationList" value="cartModifications"/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Field Mappings : Product -->
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass"
+		          value="de.hybris.platform.commercefacades.product.data.PromotionResultData"/>
+		<property name="destClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.product.PromotionResultWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="promotionData" value="promotion"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass"
+		          value="de.hybris.platform.commerceservices.search.facetdata.ProductSearchPageData"/>
+		<property name="destClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.search.facetdata.ProductSearchPageWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="results" value="products"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass"
+		          value="de.hybris.platform.commercefacades.storefinder.data.StoreFinderStockSearchPageData"/>
+		<property name="destClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.store.StoreFinderStockSearchPageWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="results" value="stores"/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Field Mappings : Stores -->
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass"
+		          value="de.hybris.platform.commerceservices.storefinder.data.StoreFinderSearchPageData"/>
+		<property name="destClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.store.StoreFinderSearchPageWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="results" value="stores"/>
+			</map>
+		</property>
+	</bean>
+
+	<!-- Field Mappings : Search -->
+
+	<bean parent="fieldMapper">
+		<property name="sourceClass"
+		          value="de.hybris.platform.commerceservices.search.pagedata.PaginationData"/>
+		<property name="destClass"
+		          value="de.hybris.platform.commercewebservicescommons.dto.search.pagedata.PaginationWsDTO"/>
+		<property name="fieldMapping">
+			<map>
+				<entry key="totalNumberOfResults" value="totalResults"/>
+				<entry key="numberOfPages" value="totalPages"/>
+			</map>
+		</property>
+	</bean>
+</beans>

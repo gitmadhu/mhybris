@@ -1,0 +1,10 @@
+$productCatalog=
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+INSERT_UPDATE BundleTemplateStatus;id[unique=true];status(code)[default=approved];$catalogVersion
+
+# Insert BundleTemplates
+INSERT_UPDATE BundleTemplate;id[unique=true];parentTemplate(id, version[default=1.0], $catalogVersion);version[default=1.0][unique=true];status(id, $catalogVersion);$catalogVersion;
+
+# Bundle dependencies
+UPDATE BundleTemplate;id[unique=true];version[default=1.0][unique=true];requiredBundleTemplates(id,version[default=1.0],$catalogVersion);$catalogVersion

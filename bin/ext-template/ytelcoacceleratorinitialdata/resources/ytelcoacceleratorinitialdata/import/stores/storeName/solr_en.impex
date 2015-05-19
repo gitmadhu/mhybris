@@ -1,0 +1,27 @@
+# ImpEx for SOLR Configuration
+
+# English localisation
+
+$version=
+$lang=en
+$facetSearchConfigName=
+$productCatalog=
+$catalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$productCatalog]),CatalogVersion.version[default=$version])[default=$productCatalog:$version]
+$contentCatalog=
+$contentCatalogVersion=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=$version])[default=$contentCatalog:$version]
+
+UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
+
+#
+# Add additional sample solr index configuration
+#
+
+# Synonyms
+INSERT_UPDATE SolrSynonymConfig;facetSearchConfig(name)[unique=true];language(isocode)[unique=true, default=$lang];synonymFrom[unique=true];synonymTo
+
+# Keyword Redirects
+INSERT_UPDATE SolrFacetSearchKeywordRedirect;facetSearchConfig(name)[unique=true];language(isocode)[unique=true, default=$lang];keyword[unique=true];matchType(code)[unique=true];ignoreCase[default=true];redirect(&redirectRefID)
+
+INSERT_UPDATE SolrURIRedirect;url[unique=true];&redirectRefID
+
+INSERT_UPDATE SolrPageRedirect;redirectItem(uid,$contentCatalogVersion)[unique=true];&redirectRefID

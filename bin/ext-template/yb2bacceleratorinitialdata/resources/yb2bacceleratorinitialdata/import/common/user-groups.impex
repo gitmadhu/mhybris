@@ -1,0 +1,33 @@
+#
+# Import Customers
+# 
+$b2bgroup=b2bgroup
+$b2bcustomergroup=b2bcustomergroup
+$customergroup=customergroup
+
+$passwordEncoding=md5
+$defaultPassword=12341234
+$setPassword=@password[translator=de.hybris.platform.impex.jalo.translators.ConvertPlaintextToEncodedUserPasswordTranslator][default='$passwordEncoding:$defaultPassword']
+
+
+INSERT_UPDATE B2BUnit;&CustID;uid[unique=true,allownull=true];groups(uid);active[allownull=true];reportingOrganization(uid);approvalProcessCode;Approvers(uid);Addresses(&addId);
+
+INSERT_UPDATE Address;&addId;owner(&CustID)[unique=true];streetname[unique=true];postalcode[unique=true];duplicate[unique=true];town;country(isocode);billingAddress;contactAddress;shippingAddress;unloadingAddress;firstname;lastname;email;gender(code);middlename;phone1;title(code);url;company;fax;department
+
+INSERT_UPDATE B2BCustomer;uid[unique=true,allownull=true];$setPassword;Approvers(uid);active[allownull=true];email[allownull=true];ldapaccount[allownull=true];loginDisabled[allownull=true];name;groups(uid);sessionCurrency(isocode);
+
+INSERT_UPDATE B2BBudget;Unit(uid)[allownull=true];active[allownull=true];budget;code[unique=true,allownull=true];currency(isocode)[allownull=true];dateRange[dateformat=dd.MM.yyyy hh:mm:ss,allownull=true];name[lang=de];name[lang=en];
+
+INSERT_UPDATE B2BCostCenter;Unit(uid)[allownull=true];active[allownull=true];code[unique=true,allownull=true];currency(isocode)[allownull=true];name[lang=de];name[lang=en];budgets(code);
+
+INSERT_UPDATE B2BBudgetExceededPermission;Unit(uid)[allownull=true];active[allownull=true];code[unique=true,allownull=true];
+
+INSERT_UPDATE B2BOrderThresholdPermission;Unit(uid)[allownull=true];active[allownull=true];code[unique=true,allownull=true];currency(isocode)[allownull=true];threshold[allownull=true];
+
+INSERT_UPDATE B2BOrderThresholdTimespanPermission;Unit(uid)[allownull=true];active[allownull=true];code[unique=true,allownull=true];currency(isocode)[allownull=true];range(code,itemtype(code))[allownull=true];threshold[allownull=true];
+
+# Create B2BUserGroups
+INSERT_UPDATE B2BUserGroup;Unit(uid)[allownull=true];uid[unique=true,allownull=true];members(uid);permissions(code)[collection-delimiter=|]
+
+# Add Permissions to B2BCustomer
+UPDATE B2BCUSTOMER;uid[unique=true];permissions(code)[collection-delimiter=|];

@@ -1,0 +1,50 @@
+#
+# Import the CMS content for the Powertools site emails
+#
+# Localization zh
+#
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$emailResource=jar:de.hybris.platform.yb2bacceleratorcore.setup.CoreSystemSetup&/yb2bacceleratorcore/import/contentCatalogs/$contentCatalog/emails
+
+# Language
+$lang=zh
+
+# CMS components velocity templates
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+ ;powertools-BannerComponent-template;CMSBannerComponent 模板;$emailResource/email-bannerComponentTemplate.vm;
+ ;powertools-CMSImageComponent-template;CMSImageComponent 模板;$emailResource/email-cmsImageComponentTemplate.vm;
+ ;powertools-CMSLinkComponent-template;CMSLinkComponent 模板;$emailResource/email-cmsLinkComponentTemplate.vm;
+ ;powertools-CMSParagraphComponent-template;CMSParagraphComponent 模板;$emailResource/email-cmsParagraphComponentTemplate.vm;
+ ;powertools-SimpleBannerComponent-template;CMSSimpleBannerComponent 模板;$emailResource/email-bannerComponentTemplate.vm;
+
+# Email velocity templates
+UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+ ;powertools_Email_Customer_Registration_Body;顾客注册 Body 邮件;$emailResource/email-customerRegistrationBody.vm;
+ ;powertools_Email_Customer_Registration_Subject;顾客注册邮件主题;$emailResource/email-customerRegistrationSubject.vm;
+ ;powertools_Email_Forgotten_Password_Body;忘记密码 Body 邮件;$emailResource/email-forgottenPasswordBody.vm;
+ ;powertools_Email_Forgotten_Password_Subject;忘记密码邮件主题;$emailResource/email-forgottenPasswordSubject.vm;
+ ;powertools_Email_Order_ApprovalRejection_Body;订单审批拒绝的 Body 邮件;$emailResource/email-orderApprovalRejectionBody.vm;
+ ;powertools_Email_Order_ApprovalRejection_Subject;订单审批拒绝的邮件主题;$emailResource/email-orderApprovalRejectionSubject.vm;
+ ;powertools_Email_Order_Confirmation_Body;订单确认 Body 邮件;$emailResource/email-orderConfirmationBody.vm;
+ ;powertools_Email_Order_Confirmation_Subject;订单确认邮件主题;$emailResource/email-orderConfirmationSubject.vm;
+ ;powertools_Email_Order_PendingApproval_Body;等待批准订单的 Body 邮件;$emailResource/email-orderPendingApprovalBody.vm;
+ ;powertools_Email_Order_PendingApproval_Subject;等待批准订单的邮件主题;$emailResource/email-orderPendingApprovalSubject.vm;
+ ;powertools_Email_Quote_Order_Approve_Body;报价单批准 Body 邮件;$emailResource/email-quoteOrderApprovalBody.vm;
+ ;powertools_Email_Quote_Order_Approve_Subject;报价单批准邮件主题;$emailResource/email-quoteOrderApprovalSubject.vm;
+ ;powertools_Email_Quote_Order_Reject_Body;报价单拒绝 Body 邮件;$emailResource/email-quoteOrderRejectionBody.vm;
+ ;powertools_Email_Quote_Order_Reject_Subject;报价单拒绝邮件主题;$emailResource/email-quoteOrderRejectionSubject.vm;
+ ;powertools_Email_Replenishment_Order_Confirmation_Body;订单确认 Body 邮件;$emailResource/email-replenishmentOrderConfirmationBody.vm;
+ ;powertools_Email_Replenishment_Order_Confirmation_Subject;订单确认邮件主题;$emailResource/email-replenishmentOrderConfirmationSubject.vm;
+ ;powertools_Email_Replenishment_Order_Placed_Body;订单确认邮件主题;$emailResource/email-replenishmentOrderPlacedBody.vm;
+ ;powertools_Email_Replenishment_Order_Placed_Subject;订单确认邮件主题;$emailResource/email-replenishmentOrderPlacedSubject.vm;
+
+# Email Pages
+UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+ ;;CustomerRegistrationEmail;customerservices@hybris.com;"客服团队"
+ ;;ForgottenPasswordEmail;customerservices@hybris.com;"客服团队"
+ ;;OrderApprovalRejectionEmail;customerservices@hybris.com;"客服团队"
+ ;;OrderConfirmationEmail;customerservices@hybris.com;"客服团队"
+ ;;OrderPendingApprovalEmail;customerservices@hybris.com;"客服团队"
+ ;;ReplenishmentOrderConfirmationEmail;customerservices@hybris.com;"客服团队"
+ ;;ReplenishmentOrderPlacedEmail;customerservices@hybris.com;"客服团队"

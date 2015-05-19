@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editor>
+
+	<group qualifier="ClassificationNotBlankConstraint" visible="true" initially-opened="true">
+		<label key="config.general.mandatorydata" />
+		<property qualifier="ClassificationNotBlankConstraint.id" />		
+		<property qualifier="ClassificationNotBlankConstraint.type" />
+		<property qualifier="ClassificationNotBlankConstraint.category" />
+		<property qualifier="ClassificationNotBlankConstraint.classification" />
+		<property qualifier="ClassificationNotBlankConstraint.active" />
+		<property qualifier="ClassificationNotBlankConstraint.severity" />
+		<property qualifier="ClassificationNotBlankConstraint.defaultMessage" />	
+		<property qualifier="ClassificationNotBlankConstraint.message" />
+	</group>
+
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label key="cockpit.config.label.Other" />
+		<property qualifier="ClassificationNotBlankConstraint.target"/>
+		<property qualifier="ClassificationNotBlankConstraint.constraintGroups" >
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>defaultEmptyLabelKey</name>
+				<value>ea.constrain_group_default_label</value>
+			</parameter>
+		</property>		
+		<property qualifier="ClassificationNotBlankConstraint.annotation"/>	
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+	</group>
+	
+</editor>

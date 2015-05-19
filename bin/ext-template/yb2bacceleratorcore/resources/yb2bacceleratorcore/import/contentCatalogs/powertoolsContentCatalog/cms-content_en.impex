@@ -1,0 +1,30 @@
+# Import the CMS content for the Powertools site
+#
+$contentCatalog=powertoolsContentCatalog
+$contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
+$lang=en
+
+# Content Pages
+UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+ ;;account;Your Account;
+ ;;add-edit-address;Add/Edit Address;
+ ;;address-book;Address Book;
+ ;;cartPage;Your Shopping Cart;
+ ;;checkout-login;Proceed to Checkout;
+ ;;homepage;Homepage;
+ ;;login;Login;
+ ;;multiStepCheckoutPage;Checkout;
+ ;;my-quotes;My Quotes;
+ ;;my-replenishment-orders;My Replenishment Orders;
+ ;;notFound;Not Found;
+ ;;order;Order Details;
+ ;;orderConfirmationPage;Order Confirmation;
+ ;;orders;Order History;
+ ;;payment-details;Payment Details;
+ ;;profile;Profile;
+ ;;searchAdvancedEmpty;Advanced Search;
+ ;;searchEmpty;No Results;
+ ;;singleStepCheckoutSummaryPage;Checkout;
+ ;;storefinderPage;StoreFinder;
+ ;;termsAndConditions;Terms and Conditions;
+ ;;updatePassword;Update Forgotten Password;

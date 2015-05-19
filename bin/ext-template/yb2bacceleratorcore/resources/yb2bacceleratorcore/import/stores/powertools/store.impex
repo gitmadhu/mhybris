@@ -1,0 +1,30 @@
+# 
+# Create the Powertools BaseStore
+#
+
+$productCatalog=powertoolsProductCatalog
+$classificationCatalog=PowertoolsClassification
+$currencies=USD
+$net=true
+$storeUid=powertools
+$defaultCurrency=USD
+$languages=en,de,ja,zh
+$defaultLanguage=en
+$deliveryCountries=US,CA
+$submitOrderProcessCode=order-process
+$paymentProvider=Mockup
+
+INSERT_UPDATE PromotionGroup;Identifier[unique=true];
+;powertoolsPromoGrp;
+
+# Base Store
+INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;taxGroup(code);storelocatorDistanceUnit(code);defaultCurrency(isocode);languages(isocode);defaultLanguage(isocode);deliveryCountries(isocode);submitOrderProcessCode;paymentProvider;
+;$storeUid;$productCatalog,$classificationCatalog;$currencies;$net;us-taxes;miles;$defaultCurrency;$languages;$defaultLanguage;$deliveryCountries;$submitOrderProcessCode;$paymentProvider;
+
+INSERT_UPDATE BaseStore2DeliveryModeRel;source(uid)[unique=true];target(code)[unique=true]
+;powertools;premium-net
+;powertools;standard-net
+;powertools;premium-gross
+;powertools;standard-gross
+;powertools;free-standard-shipping
+

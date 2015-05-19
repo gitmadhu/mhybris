@@ -1,0 +1,13 @@
+# ImpEx for Importing Supplier Media
+
+# Macros / Replacement Parameter definitions
+$productCatalog=
+$storeName=
+
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$thumbnail=thumbnail(code, $catalogVersion)
+$siteResource=jar:de.hybris.platform.yacceleratorinitialdata.setup.InitialDataSystemSetup&/yacceleratorinitialdata/import/store/$storeName
+
+INSERT_UPDATE Media;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion
+
+UPDATE Category;code[unique=true];$thumbnail;allowedPrincipals(uid)[default='customergroup'];$catalogVersion

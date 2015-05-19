@@ -1,0 +1,43 @@
+# ImPex for Importing Product Media into wsTest Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=wsTestProductCatalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$thumbnail=thumbnail(code, $catalogVersion)
+$picture=picture(code, $catalogVersion)
+$thumbnails=thumbnails(code, $catalogVersion)
+$detail=detail(code, $catalogVersion)
+$normal=normal(code, $catalogVersion)
+$others=others(code, $catalogVersion)
+$data_sheet=data_sheet(code, $catalogVersion)
+$medias=medias(code, $catalogVersion)
+$galleryImages=galleryImages(qualifier, $catalogVersion)
+$siteResource=jar:de.hybris.platform.ycommercewebservices.constants.YcommercewebservicesConstants&/ycommercewebservicestest/import
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
+;1200Wx1200H;/1200Wx1200H/872912a_2420.jpg;$siteResource/images/1200Wx1200H/872912a_2420.jpg;;;images
+;1200Wx1200H;/1200Wx1200H/872912a_5768.jpg;$siteResource/images/1200Wx1200H/872912a_5768.jpg;;;images
+;515Wx515H;/515Wx515H/872912a-146.jpg;$siteResource/images/515Wx515H/872912a-146.jpg;;;images
+;515Wx515H;/515Wx515H/872912a_2420.jpg;$siteResource/images/515Wx515H/872912a_2420.jpg;;;images
+;515Wx515H;/515Wx515H/872912a_5768.jpg;$siteResource/images/515Wx515H/872912a_5768.jpg;;;images
+;300Wx300H;/300Wx300H/872912a-146.jpg;$siteResource/images/300Wx300H/872912a-146.jpg;;;images
+;300Wx300H;/300Wx300H/872912a_2420.jpg;$siteResource/images/300Wx300H/872912a_2420.jpg;;;images
+;300Wx300H;/300Wx300H/872912a_5768.jpg;$siteResource/images/300Wx300H/872912a_5768.jpg;;;images
+;96Wx96H;/96Wx96H/872912a-146.jpg;$siteResource/images/96Wx96H/872912a-146.jpg;;;images
+;96Wx96H;/96Wx96H/872912a_2420.jpg;$siteResource/images/96Wx96H/872912a_2420.jpg;;;images
+;96Wx96H;/96Wx96H/872912a_5768.jpg;$siteResource/images/96Wx96H/872912a_5768.jpg;;;images
+;65Wx65H;/65Wx65H/872912a-146.jpg;$siteResource/images/65Wx65H/872912a-146.jpg;;;images
+;65Wx65H;/65Wx65H/872912a_2420.jpg;$siteResource/images/65Wx65H/872912a_2420.jpg;;;images
+;65Wx65H;/65Wx65H/872912a_5768.jpg;$siteResource/images/65Wx65H/872912a_5768.jpg;;;images
+;30Wx30H;/30Wx30H/872912a-146.jpg;$siteResource/images/30Wx30H/872912a-146.jpg;;;images
+;30Wx30H;/30Wx30H/872912a_2420.jpg;$siteResource/images/30Wx30H/872912a_2420.jpg;;;images
+;30Wx30H;/30Wx30H/872912a_5768.jpg;$siteResource/images/30Wx30H/872912a_5768.jpg;;;images
+
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
+;872912a-146;/515Wx515H/872912a-146.jpg,/300Wx300H/872912a-146.jpg,/96Wx96H/872912a-146.jpg,/65Wx65H/872912a-146.jpg,/30Wx30H/872912a-146.jpg;
+;872912a_5768;/1200Wx1200H/872912a_5768.jpg,/515Wx515H/872912a_5768.jpg,/300Wx300H/872912a_5768.jpg,/96Wx96H/872912a_5768.jpg,/65Wx65H/872912a_5768.jpg,/30Wx30H/872912a_5768.jpg;
+;872912a_2420;/1200Wx1200H/872912a_2420.jpg,/515Wx515H/872912a_2420.jpg,/300Wx300H/872912a_2420.jpg,/96Wx96H/872912a_2420.jpg,/65Wx65H/872912a_2420.jpg,/30Wx30H/872912a_2420.jpg;
+
+UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
+;872912a;/300Wx300H/872912a-146.jpg;/96Wx96H/872912a-146.jpg;/1200Wx1200H/872912a_2420.jpg,/1200Wx1200H/872912a_5768.jpg;/515Wx515H/872912a-146.jpg,/515Wx515H/872912a_2420.jpg,/515Wx515H/872912a_5768.jpg,/65Wx65H/872912a-146.jpg,/65Wx65H/872912a_2420.jpg,/65Wx65H/872912a_5768.jpg,/30Wx30H/872912a-146.jpg,/30Wx30H/872912a_2420.jpg,/30Wx30H/872912a_5768.jpg;/300Wx300H/872912a-146.jpg,/300Wx300H/872912a_2420.jpg,/300Wx300H/872912a_5768.jpg;/96Wx96H/872912a-146.jpg,/96Wx96H/872912a_2420.jpg,/96Wx96H/872912a_5768.jpg;872912a-146,872912a_2420,872912a_5768;
