@@ -15,7 +15,6 @@ ext-integration
 ext-platform-optional
 ext-print
 ext-supportability
-ext-template
 data
 log
 temp
@@ -44,5 +43,4 @@ config/licence/
 config/solr/embedded/solr.xml
 addons
 addonsrc
-
 bin/.DS_Store
